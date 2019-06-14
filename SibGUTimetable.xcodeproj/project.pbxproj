@@ -1,0 +1,608 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC022B3D7C000567A37 /* AppDelegate.swift */; };
+		A8011EC322B3D7C000567A37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC222B3D7C000567A37 /* ViewController.swift */; };
+		A8011EC622B3D7C000567A37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8011EC422B3D7C000567A37 /* Main.storyboard */; };
+		A8011EC922B3D7C000567A37 /* SibGUTimetable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC722B3D7C000567A37 /* SibGUTimetable.xcdatamodeld */; };
+		A8011ECB22B3D7C100567A37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8011ECA22B3D7C100567A37 /* Assets.xcassets */; };
+		A8011ECE22B3D7C100567A37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8011ECC22B3D7C100567A37 /* LaunchScreen.storyboard */; };
+		A8011ED922B3D7C100567A37 /* SibGUTimetableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011ED822B3D7C100567A37 /* SibGUTimetableTests.swift */; };
+		A8011EE422B3D7C100567A37 /* SibGUTimetableUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011EE322B3D7C100567A37 /* SibGUTimetableUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A8011ED522B3D7C100567A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8011EB522B3D7C000567A37 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8011EBC22B3D7C000567A37;
+			remoteInfo = SibGUTimetable;
+		};
+		A8011EE022B3D7C100567A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8011EB522B3D7C000567A37 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8011EBC22B3D7C000567A37;
+			remoteInfo = SibGUTimetable;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A8011EBD22B3D7C000567A37 /* SibGUTimetable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SibGUTimetable.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8011EC022B3D7C000567A37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A8011EC222B3D7C000567A37 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A8011EC522B3D7C000567A37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A8011EC822B3D7C000567A37 /* SibGUTimetable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SibGUTimetable.xcdatamodel; sourceTree = "<group>"; };
+		A8011ECA22B3D7C100567A37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A8011ECD22B3D7C100567A37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A8011ECF22B3D7C100567A37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8011ED422B3D7C100567A37 /* SibGUTimetableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SibGUTimetableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8011ED822B3D7C100567A37 /* SibGUTimetableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SibGUTimetableTests.swift; sourceTree = "<group>"; };
+		A8011EDA22B3D7C100567A37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8011EDF22B3D7C100567A37 /* SibGUTimetableUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SibGUTimetableUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8011EE322B3D7C100567A37 /* SibGUTimetableUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SibGUTimetableUITests.swift; sourceTree = "<group>"; };
+		A8011EE522B3D7C100567A37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A8011EBA22B3D7C000567A37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8011ED122B3D7C100567A37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8011EDC22B3D7C100567A37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A8011EB422B3D7C000567A37 = {
+			isa = PBXGroup;
+			children = (
+				A8011EBF22B3D7C000567A37 /* SibGUTimetable */,
+				A8011ED722B3D7C100567A37 /* SibGUTimetableTests */,
+				A8011EE222B3D7C100567A37 /* SibGUTimetableUITests */,
+				A8011EBE22B3D7C000567A37 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A8011EBE22B3D7C000567A37 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A8011EBD22B3D7C000567A37 /* SibGUTimetable.app */,
+				A8011ED422B3D7C100567A37 /* SibGUTimetableTests.xctest */,
+				A8011EDF22B3D7C100567A37 /* SibGUTimetableUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A8011EBF22B3D7C000567A37 /* SibGUTimetable */ = {
+			isa = PBXGroup;
+			children = (
+				A8011EC022B3D7C000567A37 /* AppDelegate.swift */,
+				A8011EC222B3D7C000567A37 /* ViewController.swift */,
+				A8011EC422B3D7C000567A37 /* Main.storyboard */,
+				A8011ECA22B3D7C100567A37 /* Assets.xcassets */,
+				A8011ECC22B3D7C100567A37 /* LaunchScreen.storyboard */,
+				A8011ECF22B3D7C100567A37 /* Info.plist */,
+				A8011EC722B3D7C000567A37 /* SibGUTimetable.xcdatamodeld */,
+			);
+			path = SibGUTimetable;
+			sourceTree = "<group>";
+		};
+		A8011ED722B3D7C100567A37 /* SibGUTimetableTests */ = {
+			isa = PBXGroup;
+			children = (
+				A8011ED822B3D7C100567A37 /* SibGUTimetableTests.swift */,
+				A8011EDA22B3D7C100567A37 /* Info.plist */,
+			);
+			path = SibGUTimetableTests;
+			sourceTree = "<group>";
+		};
+		A8011EE222B3D7C100567A37 /* SibGUTimetableUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A8011EE322B3D7C100567A37 /* SibGUTimetableUITests.swift */,
+				A8011EE522B3D7C100567A37 /* Info.plist */,
+			);
+			path = SibGUTimetableUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A8011EBC22B3D7C000567A37 /* SibGUTimetable */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A8011EE822B3D7C100567A37 /* Build configuration list for PBXNativeTarget "SibGUTimetable" */;
+			buildPhases = (
+				A8011EB922B3D7C000567A37 /* Sources */,
+				A8011EBA22B3D7C000567A37 /* Frameworks */,
+				A8011EBB22B3D7C000567A37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SibGUTimetable;
+			productName = SibGUTimetable;
+			productReference = A8011EBD22B3D7C000567A37 /* SibGUTimetable.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A8011ED322B3D7C100567A37 /* SibGUTimetableTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A8011EEB22B3D7C100567A37 /* Build configuration list for PBXNativeTarget "SibGUTimetableTests" */;
+			buildPhases = (
+				A8011ED022B3D7C100567A37 /* Sources */,
+				A8011ED122B3D7C100567A37 /* Frameworks */,
+				A8011ED222B3D7C100567A37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A8011ED622B3D7C100567A37 /* PBXTargetDependency */,
+			);
+			name = SibGUTimetableTests;
+			productName = SibGUTimetableTests;
+			productReference = A8011ED422B3D7C100567A37 /* SibGUTimetableTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A8011EDE22B3D7C100567A37 /* SibGUTimetableUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A8011EEE22B3D7C100567A37 /* Build configuration list for PBXNativeTarget "SibGUTimetableUITests" */;
+			buildPhases = (
+				A8011EDB22B3D7C100567A37 /* Sources */,
+				A8011EDC22B3D7C100567A37 /* Frameworks */,
+				A8011EDD22B3D7C100567A37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A8011EE122B3D7C100567A37 /* PBXTargetDependency */,
+			);
+			name = SibGUTimetableUITests;
+			productName = SibGUTimetableUITests;
+			productReference = A8011EDF22B3D7C100567A37 /* SibGUTimetableUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A8011EB522B3D7C000567A37 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = Alexandr;
+				TargetAttributes = {
+					A8011EBC22B3D7C000567A37 = {
+						CreatedOnToolsVersion = 10.2;
+					};
+					A8011ED322B3D7C100567A37 = {
+						CreatedOnToolsVersion = 10.2;
+						TestTargetID = A8011EBC22B3D7C000567A37;
+					};
+					A8011EDE22B3D7C100567A37 = {
+						CreatedOnToolsVersion = 10.2;
+						TestTargetID = A8011EBC22B3D7C000567A37;
+					};
+				};
+			};
+			buildConfigurationList = A8011EB822B3D7C000567A37 /* Build configuration list for PBXProject "SibGUTimetable" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A8011EB422B3D7C000567A37;
+			productRefGroup = A8011EBE22B3D7C000567A37 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A8011EBC22B3D7C000567A37 /* SibGUTimetable */,
+				A8011ED322B3D7C100567A37 /* SibGUTimetableTests */,
+				A8011EDE22B3D7C100567A37 /* SibGUTimetableUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A8011EBB22B3D7C000567A37 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8011ECE22B3D7C100567A37 /* LaunchScreen.storyboard in Resources */,
+				A8011ECB22B3D7C100567A37 /* Assets.xcassets in Resources */,
+				A8011EC622B3D7C000567A37 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8011ED222B3D7C100567A37 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8011EDD22B3D7C100567A37 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A8011EB922B3D7C000567A37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8011EC322B3D7C000567A37 /* ViewController.swift in Sources */,
+				A8011EC922B3D7C000567A37 /* SibGUTimetable.xcdatamodeld in Sources */,
+				A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8011ED022B3D7C100567A37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8011ED922B3D7C100567A37 /* SibGUTimetableTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8011EDB22B3D7C100567A37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8011EE422B3D7C100567A37 /* SibGUTimetableUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A8011ED622B3D7C100567A37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8011EBC22B3D7C000567A37 /* SibGUTimetable */;
+			targetProxy = A8011ED522B3D7C100567A37 /* PBXContainerItemProxy */;
+		};
+		A8011EE122B3D7C100567A37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8011EBC22B3D7C000567A37 /* SibGUTimetable */;
+			targetProxy = A8011EE022B3D7C100567A37 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A8011EC422B3D7C000567A37 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A8011EC522B3D7C000567A37 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A8011ECC22B3D7C100567A37 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A8011ECD22B3D7C100567A37 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A8011EE622B3D7C100567A37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A8011EE722B3D7C100567A37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A8011EE922B3D7C100567A37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YG4U6S73S9;
+				INFOPLIST_FILE = SibGUTimetable/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sanya.SibGUTimetable;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A8011EEA22B3D7C100567A37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YG4U6S73S9;
+				INFOPLIST_FILE = SibGUTimetable/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sanya.SibGUTimetable;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A8011EEC22B3D7C100567A37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YG4U6S73S9;
+				INFOPLIST_FILE = SibGUTimetableTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sanya.SibGUTimetableTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SibGUTimetable.app/SibGUTimetable";
+			};
+			name = Debug;
+		};
+		A8011EED22B3D7C100567A37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YG4U6S73S9;
+				INFOPLIST_FILE = SibGUTimetableTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sanya.SibGUTimetableTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SibGUTimetable.app/SibGUTimetable";
+			};
+			name = Release;
+		};
+		A8011EEF22B3D7C100567A37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YG4U6S73S9;
+				INFOPLIST_FILE = SibGUTimetableUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sanya.SibGUTimetableUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SibGUTimetable;
+			};
+			name = Debug;
+		};
+		A8011EF022B3D7C100567A37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YG4U6S73S9;
+				INFOPLIST_FILE = SibGUTimetableUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sanya.SibGUTimetableUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SibGUTimetable;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A8011EB822B3D7C000567A37 /* Build configuration list for PBXProject "SibGUTimetable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8011EE622B3D7C100567A37 /* Debug */,
+				A8011EE722B3D7C100567A37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A8011EE822B3D7C100567A37 /* Build configuration list for PBXNativeTarget "SibGUTimetable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8011EE922B3D7C100567A37 /* Debug */,
+				A8011EEA22B3D7C100567A37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A8011EEB22B3D7C100567A37 /* Build configuration list for PBXNativeTarget "SibGUTimetableTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8011EEC22B3D7C100567A37 /* Debug */,
+				A8011EED22B3D7C100567A37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A8011EEE22B3D7C100567A37 /* Build configuration list for PBXNativeTarget "SibGUTimetableUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8011EEF22B3D7C100567A37 /* Debug */,
+				A8011EF022B3D7C100567A37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A8011EC722B3D7C000567A37 /* SibGUTimetable.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A8011EC822B3D7C000567A37 /* SibGUTimetable.xcdatamodel */,
+			);
+			currentVersion = A8011EC822B3D7C000567A37 /* SibGUTimetable.xcdatamodel */;
+			path = SibGUTimetable.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = A8011EB522B3D7C000567A37 /* Project object */;
+}
