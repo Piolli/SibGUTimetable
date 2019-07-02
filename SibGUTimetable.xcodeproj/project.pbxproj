@@ -7,14 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6097B719C65E514D27B48132 /* Pods_SibGUTimetableUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6171F10FE805AF1C7BA5BD53 /* Pods_SibGUTimetableUITests.framework */; };
+		96147595C3636E42C0F1E1A4 /* Pods_SibGUTimetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA73E05C76CA07255943DC6E /* Pods_SibGUTimetable.framework */; };
 		A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC022B3D7C000567A37 /* AppDelegate.swift */; };
 		A8011EC322B3D7C000567A37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC222B3D7C000567A37 /* ViewController.swift */; };
-		A8011EC622B3D7C000567A37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8011EC422B3D7C000567A37 /* Main.storyboard */; };
 		A8011EC922B3D7C000567A37 /* SibGUTimetable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC722B3D7C000567A37 /* SibGUTimetable.xcdatamodeld */; };
 		A8011ECB22B3D7C100567A37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8011ECA22B3D7C100567A37 /* Assets.xcassets */; };
 		A8011ECE22B3D7C100567A37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8011ECC22B3D7C100567A37 /* LaunchScreen.storyboard */; };
 		A8011ED922B3D7C100567A37 /* SibGUTimetableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011ED822B3D7C100567A37 /* SibGUTimetableTests.swift */; };
 		A8011EE422B3D7C100567A37 /* SibGUTimetableUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011EE322B3D7C100567A37 /* SibGUTimetableUITests.swift */; };
+		A83977A222C8C9040047549F /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83977A122C8C9040047549F /* CalendarViewModel.swift */; };
+		A83977A422C8D1810047549F /* CalendarPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83977A322C8D1810047549F /* CalendarPageViewModel.swift */; };
+		A84176E122C4DC6B008511A8 /* CalendarPageViewContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84176E022C4DC6B008511A8 /* CalendarPageViewContentDelegate.swift */; };
+		A89BE9D022CB268800289340 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89BE9CF22CB268800289340 /* CalendarHeaderView.swift */; };
+		A8A5636722C25972002559F8 /* ScrollableCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A5636622C25972002559F8 /* ScrollableCalendarView.swift */; };
+		A8A5636922C25AF3002559F8 /* CalendarPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A5636822C25AF3002559F8 /* CalendarPageViewController.swift */; };
+		A8A5636B22C25B8D002559F8 /* CalendarPageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A5636A22C25B8D002559F8 /* CalendarPageContentViewController.swift */; };
+		A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */; };
+		D60A521E49E599E56CC36265 /* Pods_SibGUTimetableTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A161EF1AAC4CC928AB0BD83 /* Pods_SibGUTimetableTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,10 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6171F10FE805AF1C7BA5BD53 /* Pods_SibGUTimetableUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SibGUTimetableUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A161EF1AAC4CC928AB0BD83 /* Pods_SibGUTimetableTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SibGUTimetableTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8011EBD22B3D7C000567A37 /* SibGUTimetable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SibGUTimetable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8011EC022B3D7C000567A37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8011EC222B3D7C000567A37 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A8011EC522B3D7C000567A37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A8011EC822B3D7C000567A37 /* SibGUTimetable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SibGUTimetable.xcdatamodel; sourceTree = "<group>"; };
 		A8011ECA22B3D7C100567A37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8011ECD22B3D7C100567A37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +60,21 @@
 		A8011EDF22B3D7C100567A37 /* SibGUTimetableUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SibGUTimetableUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8011EE322B3D7C100567A37 /* SibGUTimetableUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SibGUTimetableUITests.swift; sourceTree = "<group>"; };
 		A8011EE522B3D7C100567A37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A83977A122C8C9040047549F /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		A83977A322C8D1810047549F /* CalendarPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPageViewModel.swift; sourceTree = "<group>"; };
+		A84176E022C4DC6B008511A8 /* CalendarPageViewContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPageViewContentDelegate.swift; sourceTree = "<group>"; };
+		A89BE9CF22CB268800289340 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
+		A8A5636622C25972002559F8 /* ScrollableCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableCalendarView.swift; sourceTree = "<group>"; };
+		A8A5636822C25AF3002559F8 /* CalendarPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPageViewController.swift; sourceTree = "<group>"; };
+		A8A5636A22C25B8D002559F8 /* CalendarPageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPageContentViewController.swift; sourceTree = "<group>"; };
+		A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarParser.swift; sourceTree = "<group>"; };
+		C4E942E396A03AE669B83590 /* Pods-SibGUTimetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SibGUTimetable.debug.xcconfig"; path = "Target Support Files/Pods-SibGUTimetable/Pods-SibGUTimetable.debug.xcconfig"; sourceTree = "<group>"; };
+		D09BD375C1F9D8578E9F09CA /* Pods-SibGUTimetableUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SibGUTimetableUITests.release.xcconfig"; path = "Target Support Files/Pods-SibGUTimetableUITests/Pods-SibGUTimetableUITests.release.xcconfig"; sourceTree = "<group>"; };
+		DA73E05C76CA07255943DC6E /* Pods_SibGUTimetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SibGUTimetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF20B978A749E4F7EB205060 /* Pods-SibGUTimetableTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SibGUTimetableTests.release.xcconfig"; path = "Target Support Files/Pods-SibGUTimetableTests/Pods-SibGUTimetableTests.release.xcconfig"; sourceTree = "<group>"; };
+		E5BC7D6F075E095023E1F1F4 /* Pods-SibGUTimetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SibGUTimetable.release.xcconfig"; path = "Target Support Files/Pods-SibGUTimetable/Pods-SibGUTimetable.release.xcconfig"; sourceTree = "<group>"; };
+		E767CB62819BE6611B282C88 /* Pods-SibGUTimetableTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SibGUTimetableTests.debug.xcconfig"; path = "Target Support Files/Pods-SibGUTimetableTests/Pods-SibGUTimetableTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F7F86C01122598779E503086 /* Pods-SibGUTimetableUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SibGUTimetableUITests.debug.xcconfig"; path = "Target Support Files/Pods-SibGUTimetableUITests/Pods-SibGUTimetableUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96147595C3636E42C0F1E1A4 /* Pods_SibGUTimetable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D60A521E49E599E56CC36265 /* Pods_SibGUTimetableTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +98,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6097B719C65E514D27B48132 /* Pods_SibGUTimetableUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E56705CF29021D3536095EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA73E05C76CA07255943DC6E /* Pods_SibGUTimetable.framework */,
+				8A161EF1AAC4CC928AB0BD83 /* Pods_SibGUTimetableTests.framework */,
+				6171F10FE805AF1C7BA5BD53 /* Pods_SibGUTimetableUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		25A3ECD16E5995F1D003F2A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C4E942E396A03AE669B83590 /* Pods-SibGUTimetable.debug.xcconfig */,
+				E5BC7D6F075E095023E1F1F4 /* Pods-SibGUTimetable.release.xcconfig */,
+				E767CB62819BE6611B282C88 /* Pods-SibGUTimetableTests.debug.xcconfig */,
+				DF20B978A749E4F7EB205060 /* Pods-SibGUTimetableTests.release.xcconfig */,
+				F7F86C01122598779E503086 /* Pods-SibGUTimetableUITests.debug.xcconfig */,
+				D09BD375C1F9D8578E9F09CA /* Pods-SibGUTimetableUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A8011EB422B3D7C000567A37 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +135,8 @@
 				A8011ED722B3D7C100567A37 /* SibGUTimetableTests */,
 				A8011EE222B3D7C100567A37 /* SibGUTimetableUITests */,
 				A8011EBE22B3D7C000567A37 /* Products */,
+				25A3ECD16E5995F1D003F2A0 /* Pods */,
+				1E56705CF29021D3536095EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,12 +154,12 @@
 			isa = PBXGroup;
 			children = (
 				A8011EC022B3D7C000567A37 /* AppDelegate.swift */,
-				A8011EC222B3D7C000567A37 /* ViewController.swift */,
-				A8011EC422B3D7C000567A37 /* Main.storyboard */,
-				A8011ECA22B3D7C100567A37 /* Assets.xcassets */,
-				A8011ECC22B3D7C100567A37 /* LaunchScreen.storyboard */,
 				A8011ECF22B3D7C100567A37 /* Info.plist */,
-				A8011EC722B3D7C000567A37 /* SibGUTimetable.xcdatamodeld */,
+				A8011EF322B3D7FF00567A37 /* Controllers */,
+				A8011EF222B3D7F600567A37 /* View */,
+				A8011EF122B3D7E800567A37 /* Model */,
+				A8A5636C22C264FD002559F8 /* ViewModel */,
+				A8011EF422B3D8BC00567A37 /* Resources */,
 			);
 			path = SibGUTimetable;
 			sourceTree = "<group>";
@@ -128,6 +182,69 @@
 			path = SibGUTimetableUITests;
 			sourceTree = "<group>";
 		};
+		A8011EF122B3D7E800567A37 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A8011EF222B3D7F600567A37 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A8A5636522C2588B002559F8 /* Calendar */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A8011EF322B3D7FF00567A37 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A8011EC222B3D7C000567A37 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A8011EF422B3D8BC00567A37 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A8011ECC22B3D7C100567A37 /* LaunchScreen.storyboard */,
+				A8011ECA22B3D7C100567A37 /* Assets.xcassets */,
+				A8011EC722B3D7C000567A37 /* SibGUTimetable.xcdatamodeld */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A84176E222C4F14C008511A8 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A84176E022C4DC6B008511A8 /* CalendarPageViewContentDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		A8A5636522C2588B002559F8 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				A8A5636622C25972002559F8 /* ScrollableCalendarView.swift */,
+				A8A5636822C25AF3002559F8 /* CalendarPageViewController.swift */,
+				A8A5636A22C25B8D002559F8 /* CalendarPageContentViewController.swift */,
+				A84176E222C4F14C008511A8 /* Protocols */,
+				A89BE9CF22CB268800289340 /* CalendarHeaderView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		A8A5636C22C264FD002559F8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A83977A122C8C9040047549F /* CalendarViewModel.swift */,
+				A83977A322C8D1810047549F /* CalendarPageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +252,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8011EE822B3D7C100567A37 /* Build configuration list for PBXNativeTarget "SibGUTimetable" */;
 			buildPhases = (
+				356180C57A53D8FAFB1114F0 /* [CP] Check Pods Manifest.lock */,
 				A8011EB922B3D7C000567A37 /* Sources */,
 				A8011EBA22B3D7C000567A37 /* Frameworks */,
 				A8011EBB22B3D7C000567A37 /* Resources */,
+				8BDA001D2349BEA39EB4845E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -152,6 +271,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8011EEB22B3D7C100567A37 /* Build configuration list for PBXNativeTarget "SibGUTimetableTests" */;
 			buildPhases = (
+				E87FA226666410F80039CFEF /* [CP] Check Pods Manifest.lock */,
 				A8011ED022B3D7C100567A37 /* Sources */,
 				A8011ED122B3D7C100567A37 /* Frameworks */,
 				A8011ED222B3D7C100567A37 /* Resources */,
@@ -170,6 +290,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8011EEE22B3D7C100567A37 /* Build configuration list for PBXNativeTarget "SibGUTimetableUITests" */;
 			buildPhases = (
+				CE6ECD32F01730BA12B5190A /* [CP] Check Pods Manifest.lock */,
 				A8011EDB22B3D7C100567A37 /* Sources */,
 				A8011EDC22B3D7C100567A37 /* Frameworks */,
 				A8011EDD22B3D7C100567A37 /* Resources */,
@@ -234,7 +355,6 @@
 			files = (
 				A8011ECE22B3D7C100567A37 /* LaunchScreen.storyboard in Resources */,
 				A8011ECB22B3D7C100567A37 /* Assets.xcassets in Resources */,
-				A8011EC622B3D7C000567A37 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +374,97 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		356180C57A53D8FAFB1114F0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SibGUTimetable-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8BDA001D2349BEA39EB4845E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SibGUTimetable/Pods-SibGUTimetable-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SibGUTimetable/Pods-SibGUTimetable-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE6ECD32F01730BA12B5190A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SibGUTimetableUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E87FA226666410F80039CFEF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SibGUTimetableTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A8011EB922B3D7C000567A37 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -261,7 +472,15 @@
 			files = (
 				A8011EC322B3D7C000567A37 /* ViewController.swift in Sources */,
 				A8011EC922B3D7C000567A37 /* SibGUTimetable.xcdatamodeld in Sources */,
+				A8A5636922C25AF3002559F8 /* CalendarPageViewController.swift in Sources */,
+				A83977A422C8D1810047549F /* CalendarPageViewModel.swift in Sources */,
+				A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */,
+				A89BE9D022CB268800289340 /* CalendarHeaderView.swift in Sources */,
 				A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */,
+				A84176E122C4DC6B008511A8 /* CalendarPageViewContentDelegate.swift in Sources */,
+				A83977A222C8C9040047549F /* CalendarViewModel.swift in Sources */,
+				A8A5636722C25972002559F8 /* ScrollableCalendarView.swift in Sources */,
+				A8A5636B22C25B8D002559F8 /* CalendarPageContentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +516,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A8011EC422B3D7C000567A37 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A8011EC522B3D7C000567A37 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A8011ECC22B3D7C100567A37 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -434,11 +645,13 @@
 		};
 		A8011EE922B3D7C100567A37 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4E942E396A03AE669B83590 /* Pods-SibGUTimetable.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YG4U6S73S9;
 				INFOPLIST_FILE = SibGUTimetable/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,11 +665,13 @@
 		};
 		A8011EEA22B3D7C100567A37 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5BC7D6F075E095023E1F1F4 /* Pods-SibGUTimetable.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YG4U6S73S9;
 				INFOPLIST_FILE = SibGUTimetable/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -470,6 +685,7 @@
 		};
 		A8011EEC22B3D7C100567A37 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E767CB62819BE6611B282C88 /* Pods-SibGUTimetableTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -491,6 +707,7 @@
 		};
 		A8011EED22B3D7C100567A37 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF20B978A749E4F7EB205060 /* Pods-SibGUTimetableTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -512,6 +729,7 @@
 		};
 		A8011EEF22B3D7C100567A37 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7F86C01122598779E503086 /* Pods-SibGUTimetableUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -532,6 +750,7 @@
 		};
 		A8011EF022B3D7C100567A37 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D09BD375C1F9D8578E9F09CA /* Pods-SibGUTimetableUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
