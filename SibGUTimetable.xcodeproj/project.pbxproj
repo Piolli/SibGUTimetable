@@ -16,13 +16,29 @@
 		A8011ECE22B3D7C100567A37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8011ECC22B3D7C100567A37 /* LaunchScreen.storyboard */; };
 		A8011ED922B3D7C100567A37 /* SibGUTimetableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011ED822B3D7C100567A37 /* SibGUTimetableTests.swift */; };
 		A8011EE422B3D7C100567A37 /* SibGUTimetableUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011EE322B3D7C100567A37 /* SibGUTimetableUITests.swift */; };
+		A8209F1922D70A7200E1BAF6 /* TimetableLessonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8209F1822D70A7200E1BAF6 /* TimetableLessonViewModel.swift */; };
+		A8209F2C22D719D000E1BAF6 /* TimetablePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8209F2B22D719D000E1BAF6 /* TimetablePageViewController.swift */; };
+		A8209F2E22D71A1400E1BAF6 /* TimetableScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8209F2D22D71A1400E1BAF6 /* TimetableScheduleViewModel.swift */; };
 		A83977A222C8C9040047549F /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83977A122C8C9040047549F /* CalendarViewModel.swift */; };
 		A83977A422C8D1810047549F /* CalendarPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83977A322C8D1810047549F /* CalendarPageViewModel.swift */; };
 		A84176E122C4DC6B008511A8 /* CalendarPageViewContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84176E022C4DC6B008511A8 /* CalendarPageViewContentDelegate.swift */; };
+		A8537EBD22EC494B005183C7 /* Schedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EB522EC494B005183C7 /* Schedule+CoreDataClass.swift */; };
+		A8537EBE22EC494B005183C7 /* Schedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EB622EC494B005183C7 /* Schedule+CoreDataProperties.swift */; };
+		A8537EBF22EC494B005183C7 /* Lesson+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EB722EC494B005183C7 /* Lesson+CoreDataClass.swift */; };
+		A8537EC022EC494B005183C7 /* Lesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EB822EC494B005183C7 /* Lesson+CoreDataProperties.swift */; };
+		A8537EC122EC494B005183C7 /* Week+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EB922EC494B005183C7 /* Week+CoreDataClass.swift */; };
+		A8537EC222EC494B005183C7 /* Week+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EBA22EC494B005183C7 /* Week+CoreDataProperties.swift */; };
+		A8537EC322EC494B005183C7 /* Day+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EBB22EC494B005183C7 /* Day+CoreDataClass.swift */; };
+		A8537EC422EC494B005183C7 /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EBC22EC494B005183C7 /* Day+CoreDataProperties.swift */; };
+		A8537EC822EC4FE9005183C7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EC722EC4FE9005183C7 /* Logger.swift */; };
+		A8537ECA22EC5524005183C7 /* TimetableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EC922EC5524005183C7 /* TimetableError.swift */; };
 		A89BE9D022CB268800289340 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89BE9CF22CB268800289340 /* CalendarHeaderView.swift */; };
+		A89DDCA422D704F500769EAA /* TimetableDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89DDCA322D704F500769EAA /* TimetableDayViewModel.swift */; };
 		A8A5636722C25972002559F8 /* ScrollableCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A5636622C25972002559F8 /* ScrollableCalendarView.swift */; };
 		A8A5636922C25AF3002559F8 /* CalendarPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A5636822C25AF3002559F8 /* CalendarPageViewController.swift */; };
 		A8A5636B22C25B8D002559F8 /* CalendarPageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A5636A22C25B8D002559F8 /* CalendarPageContentViewController.swift */; };
+		A8E3BC4C22D1F7A7006E1B65 /* TimetableLessonPageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonPageContentViewController.swift */; };
+		A8E3BC4E22D1F7FC006E1B65 /* TimetableLessonViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E3BC4D22D1F7FC006E1B65 /* TimetableLessonViewCell.swift */; };
 		A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */; };
 		D60A521E49E599E56CC36265 /* Pods_SibGUTimetableTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A161EF1AAC4CC928AB0BD83 /* Pods_SibGUTimetableTests.framework */; };
 /* End PBXBuildFile section */
@@ -60,13 +76,29 @@
 		A8011EDF22B3D7C100567A37 /* SibGUTimetableUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SibGUTimetableUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8011EE322B3D7C100567A37 /* SibGUTimetableUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SibGUTimetableUITests.swift; sourceTree = "<group>"; };
 		A8011EE522B3D7C100567A37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8209F1822D70A7200E1BAF6 /* TimetableLessonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLessonViewModel.swift; sourceTree = "<group>"; };
+		A8209F2B22D719D000E1BAF6 /* TimetablePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetablePageViewController.swift; sourceTree = "<group>"; };
+		A8209F2D22D71A1400E1BAF6 /* TimetableScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableScheduleViewModel.swift; sourceTree = "<group>"; };
 		A83977A122C8C9040047549F /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		A83977A322C8D1810047549F /* CalendarPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPageViewModel.swift; sourceTree = "<group>"; };
 		A84176E022C4DC6B008511A8 /* CalendarPageViewContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPageViewContentDelegate.swift; sourceTree = "<group>"; };
+		A8537EB522EC494B005183C7 /* Schedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A8537EB622EC494B005183C7 /* Schedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A8537EB722EC494B005183C7 /* Lesson+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lesson+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A8537EB822EC494B005183C7 /* Lesson+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lesson+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A8537EB922EC494B005183C7 /* Week+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A8537EBA22EC494B005183C7 /* Week+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A8537EBB22EC494B005183C7 /* Day+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A8537EBC22EC494B005183C7 /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A8537EC722EC4FE9005183C7 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		A8537EC922EC5524005183C7 /* TimetableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableError.swift; sourceTree = "<group>"; };
 		A89BE9CF22CB268800289340 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
+		A89DDCA322D704F500769EAA /* TimetableDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableDayViewModel.swift; sourceTree = "<group>"; };
 		A8A5636622C25972002559F8 /* ScrollableCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableCalendarView.swift; sourceTree = "<group>"; };
 		A8A5636822C25AF3002559F8 /* CalendarPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPageViewController.swift; sourceTree = "<group>"; };
 		A8A5636A22C25B8D002559F8 /* CalendarPageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPageContentViewController.swift; sourceTree = "<group>"; };
+		A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonPageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLessonPageContentViewController.swift; sourceTree = "<group>"; };
+		A8E3BC4D22D1F7FC006E1B65 /* TimetableLessonViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLessonViewCell.swift; sourceTree = "<group>"; };
 		A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarParser.swift; sourceTree = "<group>"; };
 		C4E942E396A03AE669B83590 /* Pods-SibGUTimetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SibGUTimetable.debug.xcconfig"; path = "Target Support Files/Pods-SibGUTimetable/Pods-SibGUTimetable.debug.xcconfig"; sourceTree = "<group>"; };
 		D09BD375C1F9D8578E9F09CA /* Pods-SibGUTimetableUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SibGUTimetableUITests.release.xcconfig"; path = "Target Support Files/Pods-SibGUTimetableUITests/Pods-SibGUTimetableUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +192,8 @@
 				A8011EF122B3D7E800567A37 /* Model */,
 				A8A5636C22C264FD002559F8 /* ViewModel */,
 				A8011EF422B3D8BC00567A37 /* Resources */,
+				A8537EC722EC4FE9005183C7 /* Logger.swift */,
+				A8537EC922EC5524005183C7 /* TimetableError.swift */,
 			);
 			path = SibGUTimetable;
 			sourceTree = "<group>";
@@ -185,6 +219,7 @@
 		A8011EF122B3D7E800567A37 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A8209F1A22D7107500E1BAF6 /* Manual Generated */,
 				A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */,
 			);
 			path = Model;
@@ -193,6 +228,7 @@
 		A8011EF222B3D7F600567A37 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A8E3BC4A22D1F73C006E1B65 /* Timetable */,
 				A8A5636522C2588B002559F8 /* Calendar */,
 			);
 			path = View;
@@ -214,6 +250,21 @@
 				A8011EC722B3D7C000567A37 /* SibGUTimetable.xcdatamodeld */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		A8209F1A22D7107500E1BAF6 /* Manual Generated */ = {
+			isa = PBXGroup;
+			children = (
+				A8537EB522EC494B005183C7 /* Schedule+CoreDataClass.swift */,
+				A8537EB622EC494B005183C7 /* Schedule+CoreDataProperties.swift */,
+				A8537EB722EC494B005183C7 /* Lesson+CoreDataClass.swift */,
+				A8537EB822EC494B005183C7 /* Lesson+CoreDataProperties.swift */,
+				A8537EB922EC494B005183C7 /* Week+CoreDataClass.swift */,
+				A8537EBA22EC494B005183C7 /* Week+CoreDataProperties.swift */,
+				A8537EBB22EC494B005183C7 /* Day+CoreDataClass.swift */,
+				A8537EBC22EC494B005183C7 /* Day+CoreDataProperties.swift */,
+			);
+			path = "Manual Generated";
 			sourceTree = "<group>";
 		};
 		A84176E222C4F14C008511A8 /* Protocols */ = {
@@ -241,8 +292,21 @@
 			children = (
 				A83977A122C8C9040047549F /* CalendarViewModel.swift */,
 				A83977A322C8D1810047549F /* CalendarPageViewModel.swift */,
+				A89DDCA322D704F500769EAA /* TimetableDayViewModel.swift */,
+				A8209F1822D70A7200E1BAF6 /* TimetableLessonViewModel.swift */,
+				A8209F2D22D71A1400E1BAF6 /* TimetableScheduleViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A8E3BC4A22D1F73C006E1B65 /* Timetable */ = {
+			isa = PBXGroup;
+			children = (
+				A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonPageContentViewController.swift */,
+				A8E3BC4D22D1F7FC006E1B65 /* TimetableLessonViewCell.swift */,
+				A8209F2B22D719D000E1BAF6 /* TimetablePageViewController.swift */,
+			);
+			path = Timetable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -471,15 +535,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8011EC322B3D7C000567A37 /* ViewController.swift in Sources */,
+				A8209F1922D70A7200E1BAF6 /* TimetableLessonViewModel.swift in Sources */,
+				A8537EC022EC494B005183C7 /* Lesson+CoreDataProperties.swift in Sources */,
+				A8537EC122EC494B005183C7 /* Week+CoreDataClass.swift in Sources */,
 				A8011EC922B3D7C000567A37 /* SibGUTimetable.xcdatamodeld in Sources */,
 				A8A5636922C25AF3002559F8 /* CalendarPageViewController.swift in Sources */,
 				A83977A422C8D1810047549F /* CalendarPageViewModel.swift in Sources */,
+				A8537EBF22EC494B005183C7 /* Lesson+CoreDataClass.swift in Sources */,
 				A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */,
+				A8537ECA22EC5524005183C7 /* TimetableError.swift in Sources */,
+				A8537EC822EC4FE9005183C7 /* Logger.swift in Sources */,
+				A8209F2E22D71A1400E1BAF6 /* TimetableScheduleViewModel.swift in Sources */,
+				A8537EBE22EC494B005183C7 /* Schedule+CoreDataProperties.swift in Sources */,
 				A89BE9D022CB268800289340 /* CalendarHeaderView.swift in Sources */,
+				A8537EC322EC494B005183C7 /* Day+CoreDataClass.swift in Sources */,
+				A8537EC422EC494B005183C7 /* Day+CoreDataProperties.swift in Sources */,
+				A89DDCA422D704F500769EAA /* TimetableDayViewModel.swift in Sources */,
 				A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */,
+				A8537EBD22EC494B005183C7 /* Schedule+CoreDataClass.swift in Sources */,
+				A8537EC222EC494B005183C7 /* Week+CoreDataProperties.swift in Sources */,
+				A8E3BC4E22D1F7FC006E1B65 /* TimetableLessonViewCell.swift in Sources */,
 				A84176E122C4DC6B008511A8 /* CalendarPageViewContentDelegate.swift in Sources */,
 				A83977A222C8C9040047549F /* CalendarViewModel.swift in Sources */,
+				A8E3BC4C22D1F7A7006E1B65 /* TimetableLessonPageContentViewController.swift in Sources */,
 				A8A5636722C25972002559F8 /* ScrollableCalendarView.swift in Sources */,
+				A8209F2C22D719D000E1BAF6 /* TimetablePageViewController.swift in Sources */,
 				A8A5636B22C25B8D002559F8 /* CalendarPageContentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -651,7 +731,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YG4U6S73S9;
 				INFOPLIST_FILE = SibGUTimetable/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -671,7 +751,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YG4U6S73S9;
 				INFOPLIST_FILE = SibGUTimetable/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

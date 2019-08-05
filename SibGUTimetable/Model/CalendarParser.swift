@@ -23,16 +23,45 @@ class CalendarParser {
         let dayInMonth: Int
     }
     
-    var months: [CalendarMonth] = []
+    let calendar = Calendar(identifier: .iso8601)
     
     let today: CalendarDay
+    
+    
+    var months: [CalendarMonth] = []
+    
+    var date = Date()
+    
+    //Return the number of week as a number like 0 or 1
+    var currentNumberOfWeek: Int {
+        //        let date = Date()
+//        let dateComponents = calendar.dateComponents(in: .current, from: date)
+//
+//        let numberWeekOfYear = dateComponents.weekOfYear!
+//
+//        return numberWeekOfYear
+        return 0
+    }
+    
+    //Return the number of day in week like 'monday' = 0, 'tuesday' = 1
+    var currentDayOfWeek: Int {
+        //        let date = Date()
+//        let dateComponents = calendar.dateComponents(in: .current, from: date)
+//
+//        return dateComponents.weekday! // 4
+        
+        return calendar.dateComponents([.weekdayOrdinal], from: Date()).weekdayOrdinal!
+    }
+    
+    
+    
+    
     
     //TD: refactor
     private init() {
         
         let today = Date()
         
-        let calendar = Calendar.current
         let todayComponents = calendar.dateComponents(in: .current, from: today)
         let month = todayComponents.month!
         let monthName = calendar.monthSymbols[month-1]
@@ -58,5 +87,7 @@ class CalendarParser {
         dump(months)
         dump(self.today)
     }
+    
+    
     
 }

@@ -12,16 +12,22 @@ import SnapKit
 
 class ScrollableCalendarView: UIViewController {
     
+
     // MARK: Constants
-    
-    var estimatedStayedCalendarHeight: CGFloat!
-    
-    //Containts page view controller
+    let headerView = CalendarHeaderView()
     let containerView = UIView()
     
     
     // MARK: Variables
     var containerViewHeightConstraint: Constraint!
+    
+    var estimatedStayedCalendarHeight: CGFloat!
+    
+    var viewIsExpanded = false
+    
+    #warning("DEBUG")
+    var superviewOriginY: CGFloat = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +38,6 @@ class ScrollableCalendarView: UIViewController {
 //        view.layer.cornerRadius = 8
         
         baseInit()
-        
-        
-    
-        
     }
     
     var previousState: UIGestureRecognizer.State?
@@ -44,9 +46,7 @@ class ScrollableCalendarView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //Attach superview to pan recognizer
-        let recognizer = UIPanGestureRecognizer(target: self, action: #selector(panRecognizer(_:)))
-        self.view.superview?.addGestureRecognizer(recognizer)
+        
         
 //        print("Before animation\n", self.containerView.frame, self.view.superview?.frame)
 //        UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations: {
@@ -66,16 +66,33 @@ class ScrollableCalendarView: UIViewController {
 //        }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        //Attach superview to pan recognizer
+        let recognizer = UIPanGestureRecognizer(target: self, action: #selector(panRecognizer(_:)))
+        self.view.superview?.addGestureRecognizer(recognizer)
+        
+        #warning("DEBUG")
+        superviewOriginY = self.view.superview!.frame.origin.y
+    }
+    
     func baseInit() {
         
 //        addHeader()
         
-//        view.addSubview(containerView)
+
+        //        view.addSubview(containerView)
 //
 //        containerView.snp.makeConstraints { (make) in
 //            make.topMargin.leftMargin.rightMargin.equalToSuperview()
 //            containerViewHeightConstraint = make.bottom.equalTo(0).constraint
 //        }
+        
+        headerView.snp.makeConstraints { (make) in
+            make.height.equalTo(CalendarPageContentViewController.Constansts.headerViewHeight)
+        }
+        
+        
+        
         
         let vStack = UIStackView()
         self.view.addSubview(vStack)
@@ -86,9 +103,6 @@ class ScrollableCalendarView: UIViewController {
         vStack.snp.makeConstraints { (make) in
             make.edges.equalTo(self.view)
         }
-        
-        
-        
         
         let pageViewController = CalendarPageViewController()
         addChild(pageViewController)
@@ -107,16 +121,11 @@ class ScrollableCalendarView: UIViewController {
         vStack.addArrangedSubview(headerView)
         vStack.addArrangedSubview(containerView)
         
-    }
-    
-    let headerView = CalendarHeaderView()
-    func addHeader() {
         
-        self.view.addSubview(headerView)
-        headerView.snp.makeConstraints { (make) in
-            make.left.top.right.equalToSuperview()
-            make.height.equalTo(CalendarPageContentViewController.Constansts.headerViewHeight)
-        }
+        //Attach prev & next buttons to pageViewController
+        headerView.nextMonthButton.addTarget(pageViewController, action: #selector(pageViewController.forwardPage), for: .touchUpInside)
+        
+        headerView.previousMonthButton.addTarget(pageViewController, action: #selector(pageViewController.backwardPage), for: .touchUpInside)
     }
     
     //Calculate not covered collection header view height
@@ -133,41 +142,82 @@ extension ScrollableCalendarView {
     
     @objc func panRecognizer(_ pan: UIPanGestureRecognizer) {
         
+        guard let superview = self.view.superview else { return }
+        
         defer {
             pan.setTranslation(.zero, in: self.view)
         }
         
         let dy = pan.translation(in: self.view).y
+        print("DY: \(dy)")
+        
+        calculateStayedCalendarHeight(cellSize: CalendarPageContentViewController.Constansts.cellWH, minimumLineSpacing: CalendarPageContentViewController.Constansts.minimumLineSpacing, headerViewHeight: CalendarPageContentViewController.Constansts.headerViewHeight)
+        
+//        if superview.frame.origin.y < superviewOriginY {
+//            superview.transform = .identity
+//        } else if superview.frame.origin.y >= (superview.frame.origin.y + estimatedStayedCalendarHeight) {
+//            return
+//        }
+        
+        switch pan.state {
+        case .began:
+            completeState()
+        case .changed:
+            superview.transform = superview.transform.translatedBy(x: 0, y: dy)
+            print("superview.frame \(superview.frame)")
+            completeState()
+        case .ended:
+            completeState()
+        default:
+            break
+        }
+
+        
+        
+//        let dy = pan.translation(in: self.view).y
+//        superview.transform = superview.transform.translatedBy(x: 0, y: dy)
+        
+        //Only 3rd states: began, changed & ended
+        
+                if previousState == nil {
+                    previousState = pan.state
+                } else if(previousState?.rawValue == pan.state.rawValue) {
+                    return
+                } else {
+                    previousState = pan.state
+                }
+
+
+                switch pan.state {
+                case .possible:
+                    print("possible")
+                case .began:
+                    print("began")
+                case .changed:
+                    print("changed")
+                case .ended:
+                    print("ended")
+                case .cancelled:
+                    print("cancelled")
+                case .failed:
+                    print("failed")
+                default:
+                    print("default")
+                }
+    }
     
-        self.view.superview?.transform = self.view.superview?.transform.translatedBy(x: 0, y: dy) ?? .identity
+    func completeState() {
+        guard let superview = self.view.superview else { return }
         
-        //Only 2th states: began, changed & ended
-        
-//                if previousState == nil {
-//                    previousState = pan.state
-//                } else if(previousState?.rawValue == pan.state.rawValue) {
-//                    return
-//                } else {
-//                    previousState = pan.state
-//                }
-//
-//
-//                switch pan.state {
-//                case .possible:
-//                    print("possible")
-//                case .began:
-//                    print("began")
-//                case .changed:
-//                    print("changed")
-//                case .ended:
-//                    print("ended")
-//                case .cancelled:
-//                    print("cancelled")
-//                case .failed:
-//                    print("failed")
-//                default:
-//                    print("default")
-//                }
+//        if viewIsExpanded {
+//            UIView.animate(withDuration: 0.6) {
+//                superview.frame.origin.y = self.estimatedStayedCalendarHeight
+//            }
+//        } else {
+//            UIView.animate(withDuration: 0.6) {
+//                superview.frame.origin.y = 0
+//            }
+//        }
     }
     
 }
@@ -176,17 +226,27 @@ extension ScrollableCalendarView {
 // MARK: - CalendarPageViewContentChanged
 extension ScrollableCalendarView : CalendarPageViewContentChanged {
     
+    func pageViewContentChangedTo(newMonth: CalendarParser.CalendarMonth) {
+        #warning("Change to viewModel")
+        headerView.selectedMonthLabel.text = newMonth.name
+    }
+    
     func pageViewContentCollectionHeightChanged(collectionViewHeight: CGFloat) {
         print("pageViewContentCollectionHeightChanged(\(collectionViewHeight))")
-//        self.view.superview?.frame.size.height = collectionViewHeight
-        if let f = self.view.superview?.frame {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+            self.view.superview?.frame.size.height = collectionViewHeight
+        }, completion: nil)
+        
+//        if let f = self.view.superview?.frame {
 //            self.view.superview!.frame = CGRect(x: f.origin.x, y: f.origin.y, width: f.width, height: collectionViewHeight);
 //            self.view.superview!.layoutIfNeeded()
-        }
+//        }
         
 //        self.containerViewHeightConstraint.update(inset: collectionViewHeight)
         
     }
+    
+    
     
     
 }

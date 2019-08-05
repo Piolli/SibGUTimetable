@@ -9,18 +9,76 @@
 import UIKit
 import CoreData
 
+class SomeError : Error, LocalizedError {
+    var localizedDescription: String {
+        return NSLocalizedString("Something error", comment: "Wrong")
+    }
+    
+    var errorDescription: String? {
+        return "ERROR DESCRIPTION"
+    }
+    
+    
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    
+    
     var window: UIWindow?
+    
+    static var context: NSManagedObjectContext {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            Logger.logMessage(message: "AppDelegate is nil", error: TimetableError.anotherError, type: .error)
+            fatalError("AppDelegate is nil and context too")
+        }
+    
+        let context = appDelegate.persistentContainer.viewContext
+        
+        return context
+    }
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let mainController = ViewController()
-        window?.rootViewController = mainController
+//        let mainController = ViewController()
+        
+        UITabBar.appearance().tintColor = .red
+        UITabBar.appearance().barTintColor = .white
+        
+        //UINavigationController
+        
+        
+        
+        //UITabBarController
+        let mainController = UITabBarController()
+        mainController.tabBar.shadowImage = UIImage()
+//        mainController.tabBar.barStyle = .blackTranslucent
+        
+        let vc1 = ViewController()
+        vc1.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 0)
+        
+        let vc2 = ViewController()
+        vc2.view.backgroundColor = .purple
+        vc2.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: 1)
+        
+        let vc3 = UIViewController()
+        vc3.view.backgroundColor = .blue
+        vc3.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 2)
+        
+        mainController.viewControllers = [vc1, vc2, vc3]
+        
+        let navigationController = UINavigationController(rootViewController: mainController)
+
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
+    }
+    
+    fileprivate func putInNavigationController(_ vc: ViewController) -> UINavigationController {
+        let navigationController = UINavigationController(rootViewController: vc)
+        return navigationController
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

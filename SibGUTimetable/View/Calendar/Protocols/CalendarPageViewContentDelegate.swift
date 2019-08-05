@@ -11,5 +11,9 @@ import UIKit
 
 // MARK: Observer for dynamic height of collection view
 protocol CalendarPageViewContentChanged {
+    
     func pageViewContentCollectionHeightChanged(collectionViewHeight: CGFloat)
+    
+    func pageViewContentChangedTo(newMonth: CalendarParser.CalendarMonth)
+    
 }

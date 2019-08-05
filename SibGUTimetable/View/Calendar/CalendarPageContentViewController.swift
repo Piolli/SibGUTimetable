@@ -12,10 +12,17 @@ import SnapKit
 class CalendarPageContentViewController: UICollectionViewController {
     
     struct Constansts {
-        static let cellSize = CGSize(width: 45, height: 45)
+        static var cellWH: CGFloat = 10
+        static var cellSize: CGSize {
+            return CGSize(width: Constansts.cellWH, height: Constansts.cellWH)
+        }
+        
+        static let cellsInRow = 7
+        
         static let sectionInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-        static let minimumLineSpacing: CGFloat = 10
-        static let headerViewHeight: CGFloat = 38
+        static let minimumLineSpacing: CGFloat = 8
+        static let minimumInteritemSpacing: CGFloat = 8
+        static let headerViewHeight: CGFloat = 58
         
         private init() { }
     }
@@ -27,6 +34,7 @@ class CalendarPageContentViewController: UICollectionViewController {
         
         collectionLayout.itemSize = Constansts.cellSize
         collectionLayout.sectionInset = Constansts.sectionInsets
+        collectionLayout.minimumInteritemSpacing = Constansts.minimumInteritemSpacing
         collectionLayout.minimumLineSpacing = Constansts.minimumLineSpacing
         
         return collectionLayout
@@ -53,18 +61,27 @@ class CalendarPageContentViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+//        collectionLayout.itemSize = Constansts.cellSize®
         
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        collectionView.isScrollEnabled = false
+        
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.setCollectionViewLayout(collectionLayout, animated: false)
         
-        //TD: Add header view
-        
-        
         view.backgroundColor = .lightGray
         collectionView.backgroundColor = .lightGray
+    }
+    
+    override func viewWillLayoutSubviews() {
+        //Calculate itemSize in collectionView
+        guard let collectionView = collectionView, let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        let marginsAndInsets = flowLayout.sectionInset.left + flowLayout.sectionInset.right + collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right + flowLayout.minimumInteritemSpacing * CGFloat(Constansts.cellsInRow - 1)
+        let itemWidth = ((collectionView.bounds.size.width - marginsAndInsets) / CGFloat(Constansts.cellsInRow)).rounded(.down)
+        flowLayout.itemSize =  CGSize(width: itemWidth, height: itemWidth)
     }
 
 }
@@ -82,7 +99,7 @@ extension CalendarPageContentViewController {
         //TODO: create view cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         
-        //        cell.backgroundColor = .blue
+//                cell.backgroundColor = .blue
         cell.contentView.backgroundColor = UIColor(red: 0.319, green: 0.561, blue: 0.955, alpha: 1.000)
         cell.contentView.layer.cornerRadius = min(cell.contentView.frame.width, cell.contentView.frame.height) / 2
         let label = UILabel()

@@ -9,7 +9,45 @@
 import UIKit
 
 class CalendarHeaderView: UIView {
+    
+    let previousMonthButton: UIButton = {
+        let button = UIButton(type: .roundedRect)
+        
+        #warning("ONLY DEBUG")
+        button.setTitle("<<<", for: .normal)
+        
+        return button
+    }()
+    
 
+    let nextMonthButton: UIButton = {
+        let button = UIButton(type: .roundedRect)
+        
+        #warning("ONLY DEBUG")
+        button.setTitle(">>>", for: .normal)
+        
+        return button
+    }()
+    
+    let selectedMonthLabel: UILabel = {
+        let label = UILabel()
+        #warning("ONLY DEBUG")
+        label.text = "October"
+        label.font = label.font.withSize(20)
+        return label
+    }()
+    
+    let roundedRectangleView: UIView = {
+        let roundedRectangle = UIView()
+        roundedRectangle.backgroundColor = .darkGray
+        roundedRectangle.layer.cornerRadius = 4
+        roundedRectangle.snp.makeConstraints { (make) in
+            make.height.equalTo(8)
+            make.width.equalTo(10)
+        }
+        return roundedRectangle
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         baseInit()
@@ -23,40 +61,40 @@ class CalendarHeaderView: UIView {
     func baseInit() {
         backgroundColor = .lightGray
         
+        //Contains [previousMonthButton] [selectedMonthLabel] [nextMonthButton]
         let hStack = UIStackView()
         hStack.axis = .horizontal
         hStack.alignment = .center
-        hStack.distribution = .fillEqually
+        hStack.distribution = .fillProportionally
         hStack.spacing = 22
-        self.addSubview(hStack)
         
-        hStack.snp.makeConstraints { (make) in
+        hStack.addArrangedSubview(previousMonthButton)
+        hStack.addArrangedSubview(selectedMonthLabel)
+        hStack.addArrangedSubview(nextMonthButton)
+
+//        self.addSubview(hStack)
+//        hStack.snp.makeConstraints { (make) in
+//            make.margins.equalToSuperview()
+//        }
+        
+        //Contains [roundedView] [hStack]
+        let vStack = UIStackView()
+        vStack.axis = .vertical
+        vStack.alignment = .center
+        vStack.distribution = .equalCentering
+        vStack.spacing = 10
+        
+        self.addSubview(vStack)
+        vStack.snp.makeConstraints { (make) in
             make.margins.equalToSuperview()
         }
         
-        let leftButton = UIButton(type: .roundedRect)
-        let rightButton = UIButton(type: .roundedRect)
+        vStack.addArrangedSubview(roundedRectangleView)
+        vStack.addArrangedSubview(hStack)
         
-    
-        let roundedRectangle = UIView()
-        roundedRectangle.backgroundColor = .darkGray
-        roundedRectangle.layer.cornerRadius = 4
-        roundedRectangle.snp.makeConstraints { (make) in
-            make.height.equalTo(8)
-            make.width.equalTo(10)
-        }
-        
-        hStack.addArrangedSubview(leftButton)
-        hStack.addArrangedSubview(roundedRectangle)
-        hStack.addArrangedSubview(rightButton)
-        
-        
-        rightButton.setTitle("Right", for: .normal)
-        rightButton.setTitleColor(.blue, for: .normal)
-//        rightButton.backgroundColor = .purple
-        
-        leftButton.setTitle("Left", for: .normal)
-        leftButton.setTitleColor(.blue, for: .normal)
+//        hStack.addArrangedSubview(previousMonthButton)
+//        hStack.addArrangedSubview(vStack)
+//        hStack.addArrangedSubview(nextMonthButton)
     }
 
 }
