@@ -19,7 +19,7 @@ class CalendarViewModel {
     }
     
     func monthIndexOfCurrentDate() -> Int {
-        return CalendarParser.shared.today.monthIndex-1
+        return CalendarParser.shared.today.monthIndex - 1
     }
     
     func calendarPageViewModelFor(index: Int) -> CalendarPageViewModel {

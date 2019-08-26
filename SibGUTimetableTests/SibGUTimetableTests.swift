@@ -19,15 +19,23 @@ class SibGUTimetableTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    
+    func testMonthToDate() {
+        let date1 = CalendarParser.CalendarMonth(name: "asd", index: 8, countDays: 10).toDate(withDay: 7) //2 : 1
+        print(CalendarParser.shared.currentDayOfWeek(date: date1))
+        print(CalendarParser.shared.currentNumberOfWeek(date: date1))
+        
+        let date2 = CalendarParser.CalendarMonth(name: "asd", index: 7, countDays: 10).toDate(withDay: 29) //0 : 0
+        print(CalendarParser.shared.currentDayOfWeek(date: date2))
+        print(CalendarParser.shared.currentNumberOfWeek(date: date2))
+    }
     
     func testWeeks() {
         let parser = CalendarParser.shared
         
-        let myDate = getDateFromComponents(year: 2019, month: 7, day: 22)
-        let myDate1 = getDateFromComponents(year: 2019, month: 7, day: 25)
-        let myDate2 = getDateFromComponents(year: 2019, month: 7, day: 27)
-        let myDate3 = getDateFromComponents(year: 2019, month: 7, day: 29)
+        let myDate =  getDateFromComponents(year: 2019, month: 8, day: 5) //1 : 0
+        let myDate1 = getDateFromComponents(year: 2019, month: 8, day: 10)//1 : 5
+        let myDate2 = getDateFromComponents(year: 2019, month: 8, day: 11)//1 : 6
+        let myDate3 = getDateFromComponents(year: 2019, month: 8, day: 14)//0 : 2
         
         print(myDate.dayNumberOfWeek())
         print(myDate1.dayNumberOfWeek())

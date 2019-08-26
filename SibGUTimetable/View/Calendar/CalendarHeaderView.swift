@@ -61,40 +61,45 @@ class CalendarHeaderView: UIView {
     func baseInit() {
         backgroundColor = .lightGray
         
-        //Contains [previousMonthButton] [selectedMonthLabel] [nextMonthButton]
-        let hStack = UIStackView()
-        hStack.axis = .horizontal
-        hStack.alignment = .center
-        hStack.distribution = .fillProportionally
-        hStack.spacing = 22
-        
-        hStack.addArrangedSubview(previousMonthButton)
-        hStack.addArrangedSubview(selectedMonthLabel)
-        hStack.addArrangedSubview(nextMonthButton)
-
-//        self.addSubview(hStack)
-//        hStack.snp.makeConstraints { (make) in
-//            make.margins.equalToSuperview()
-//        }
-        
-        //Contains [roundedView] [hStack]
-        let vStack = UIStackView()
-        vStack.axis = .vertical
-        vStack.alignment = .center
-        vStack.distribution = .equalCentering
-        vStack.spacing = 10
-        
-        self.addSubview(vStack)
-        vStack.snp.makeConstraints { (make) in
-            make.margins.equalToSuperview()
+        addSubview(selectedMonthLabel)
+        selectedMonthLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
         }
         
-        vStack.addArrangedSubview(roundedRectangleView)
-        vStack.addArrangedSubview(hStack)
-        
+//        //Contains [previousMonthButton] [selectedMonthLabel] [nextMonthButton]
+//        let hStack = UIStackView()
+//        hStack.axis = .horizontal
+//        hStack.alignment = .center
+//        hStack.distribution = .fillProportionally
+//        hStack.spacing = 22
+//
 //        hStack.addArrangedSubview(previousMonthButton)
-//        hStack.addArrangedSubview(vStack)
+//        hStack.addArrangedSubview(selectedMonthLabel)
 //        hStack.addArrangedSubview(nextMonthButton)
+//
+////        self.addSubview(hStack)
+////        hStack.snp.makeConstraints { (make) in
+////            make.margins.equalToSuperview()
+////        }
+//
+//        //Contains [roundedView] [hStack]
+//        let vStack = UIStackView()
+//        vStack.axis = .vertical
+//        vStack.alignment = .center
+//        vStack.distribution = .equalCentering
+//        vStack.spacing = 10
+//
+//        self.addSubview(vStack)
+//        vStack.snp.makeConstraints { (make) in
+//            make.margins.equalToSuperview()
+//        }
+//
+//        vStack.addArrangedSubview(roundedRectangleView)
+//        vStack.addArrangedSubview(hStack)
+//
+////        hStack.addArrangedSubview(previousMonthButton)
+////        hStack.addArrangedSubview(vStack)
+////        hStack.addArrangedSubview(nextMonthButton)
     }
 
 }

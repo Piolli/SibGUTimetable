@@ -34,6 +34,9 @@ class TimetableLessonViewCell: UITableViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
+//        label.font = label.font.withSize(14)
+//        label.setContentHuggingPriority(UILayoutPriority(rawValue: 200), for: .horizontal)
+        label.numberOfLines = 5
         label.text = "Разработка корпоративных приложений"
         return label
     }()
@@ -51,10 +54,14 @@ class TimetableLessonViewCell: UITableViewCell {
     }()
     
     
+    override func layoutSubviews() {
+//        self.contentView.layoutMargins = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.contentView.layoutMargins = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
+        
         
         self.contentView.addSubview(timeRangeLabel)
         self.contentView.addSubview(typeLabel)
@@ -71,38 +78,32 @@ class TimetableLessonViewCell: UITableViewCell {
         }
         
         let vStack = UIStackView(arrangedSubviews: [nameLabel, teacherLabel, officeLabel])
+//        vStack.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .vertical)
         self.contentView.addSubview(vStack)
         vStack.axis = .vertical
+//        vStack.distribution = .equalSpacing
         vStack.snp.makeConstraints { (make) in
             make.topMargin.equalTo(timeRangeLabel).offset(20)
             make.leftMargin.rightMargin.bottomMargin.equalTo(self.contentView)
         }
-        
-        
+ 
         
         initAppearance()
     }
     
     func initAppearance() {
-        
+        //Parent view
         self.layer.cornerRadius = 8
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.darkGray.cgColor
-        self.layer.shadowOffset = CGSize(width: 1, height: -1)
-//        self.backgroundColor = .lightGray
-        self.layer.shadowOpacity = 0.5
+        self.layer.masksToBounds = true
+//        self.layer.shadowColor = UIColor.darkGray.cgColor
+//        self.layer.shadowOffset = CGSize(width: 1, height: -1)
 
-//        // add shadow on cell
-//        backgroundColor = .clear // very important
-//        layer.masksToBounds = true
-//        layer.shadowOpacity = 0.23
-//        layer.shadowRadius = 4
-//        layer.shadowOffset = CGSize(width: 0, height: 0)
-//        layer.shadowColor = UIColor.black.cgColor
-//
-//        // add corner radius on `contentView`
-//        contentView.backgroundColor = .white
-//        contentView.layer.cornerRadius = 8
+//        //INNER VIEW
+//        self.contentView.layer.shadowColor = UIColor.darkGray.cgColor
+//        self.contentView.layer.shadowRadius = 4
+//        self.contentView.layer.shadowOpacity = 0.5
+//        self.contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
+//        self.contentView.layer.shadowPath = UIBezierPath(roundedRect: self.contentView.frame, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 4, height: 4)).cgPath
     }
     
     required init?(coder aDecoder: NSCoder) {

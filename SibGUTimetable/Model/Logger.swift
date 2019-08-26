@@ -10,6 +10,8 @@ import Foundation
 import os
 
 class Logger {
+
+    fileprivate static let startDate = Date()
     
     enum LogType: String {
         case
@@ -32,12 +34,17 @@ class Logger {
         
     }
     
+    static func logMessageInfo(message: String, file: String = #file, line: Int = #line, function: String = #function) {
+        
+        self.logMessage(message: message, error: nil, file: file, type: .info, line: line, function: function)
+        
+    }
+    
     private static func printMessage(_ message: String, logType: LogType, macrosInfo: String) {
-        let time = Date().timeIntervalSince1970
+        let time = ""//Date().timeIntervalSince(self.startDate)
         
         var resultMessage = "|\(logType.rawValue)| \(String(time)), \(message) <\(macrosInfo)>"
     
-        
         print(resultMessage)
     }
 

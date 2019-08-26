@@ -10,7 +10,7 @@ import UIKit
 
 class TimetableLessonPageContentViewController: UITableViewController {
     
-    var viewModel: TimetableDayViewModel?
+    var viewModel: TimetableDayViewModel!
     
     var index = 0
 
@@ -19,6 +19,23 @@ class TimetableLessonPageContentViewController: UITableViewController {
 
         tableView.register(TimetableLessonViewCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = .none
+        
+        if viewModel?.countOflessons == 0 {
+            let free = UILabel()
+            free.text = "No Lessons Today"
+            free.font = free.font.withSize(24)
+            tableView.addSubview(free)
+            free.snp.makeConstraints { (make) in
+                make.centerX.equalToSuperview()
+                make.top.equalTo(30)
+            }
+//            tableView.backgroundView = free
+        }
+        
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 100.0
+        
+        
     }
 
     // MARK: - Table view data source
@@ -32,6 +49,7 @@ class TimetableLessonPageContentViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TimetableLessonViewCell
         
         cell.viewModel = viewModel?.lessonViewModel(at: indexPath)
+        
     
 //        cell.backgroundColor = .blue
 

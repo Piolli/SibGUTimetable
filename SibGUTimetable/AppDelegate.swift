@@ -17,8 +17,6 @@ class SomeError : Error, LocalizedError {
     var errorDescription: String? {
         return "ERROR DESCRIPTION"
     }
-    
-    
 }
 
 @UIApplicationMain
@@ -52,31 +50,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         //UITabBarController
-        let mainController = UITabBarController()
-        mainController.tabBar.shadowImage = UIImage()
+        let tabBarController = UITabBarController()
+        tabBarController.tabBar.shadowImage = UIImage()
 //        mainController.tabBar.barStyle = .blackTranslucent
         
         let vc1 = ViewController()
         vc1.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 0)
+        let navC1 = putInNavigationController(vc1)
         
         let vc2 = ViewController()
         vc2.view.backgroundColor = .purple
         vc2.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: 1)
+        let navC2 = putInNavigationController(vc2)
         
         let vc3 = UIViewController()
         vc3.view.backgroundColor = .blue
         vc3.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 2)
+        let navC3 = putInNavigationController(vc3)
         
-        mainController.viewControllers = [vc1, vc2, vc3]
+        tabBarController.viewControllers = [navC1, navC2, navC3]
         
-        let navigationController = UINavigationController(rootViewController: mainController)
+//        let navigationController = UINavigationController(rootViewController: mainController)
 
-        window?.rootViewController = navigationController
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         return true
     }
     
-    fileprivate func putInNavigationController(_ vc: ViewController) -> UINavigationController {
+    fileprivate func putInNavigationController(_ vc: UIViewController) -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: vc)
         return navigationController
     }

@@ -28,6 +28,8 @@ class CalendarPageContentViewController: UICollectionViewController {
     }
     
     var viewModel: CalendarPageViewModel!
+    
+    weak var delegate: CalendarContentViewDelegate?
 
     let collectionLayout: UICollectionViewFlowLayout = {
         let collectionLayout = UICollectionViewFlowLayout()
@@ -47,6 +49,8 @@ class CalendarPageContentViewController: UICollectionViewController {
     var minimumLineSpacing: CGFloat {
         return collectionLayout.minimumLineSpacing
     }
+    
+    var selectedIndexPath: IndexPath?
     
 
     init() {
@@ -69,11 +73,12 @@ class CalendarPageContentViewController: UICollectionViewController {
         
         collectionView.isScrollEnabled = false
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(CalendarDayViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.setCollectionViewLayout(collectionLayout, animated: false)
         
         view.backgroundColor = .lightGray
         collectionView.backgroundColor = .lightGray
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -82,6 +87,8 @@ class CalendarPageContentViewController: UICollectionViewController {
         let marginsAndInsets = flowLayout.sectionInset.left + flowLayout.sectionInset.right + collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right + flowLayout.minimumInteritemSpacing * CGFloat(Constansts.cellsInRow - 1)
         let itemWidth = ((collectionView.bounds.size.width - marginsAndInsets) / CGFloat(Constansts.cellsInRow)).rounded(.down)
         flowLayout.itemSize =  CGSize(width: itemWidth, height: itemWidth)
+        //Update auto resizing cell size
+        Constansts.cellWH = itemWidth
     }
 
 }
@@ -91,29 +98,40 @@ class CalendarPageContentViewController: UICollectionViewController {
 extension CalendarPageContentViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.month.countDays
+        return viewModel.countOfLeadingAndMonthDays
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        //TODO: create view cell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CalendarDayViewCell
         
-//                cell.backgroundColor = .blue
-        cell.contentView.backgroundColor = UIColor(red: 0.319, green: 0.561, blue: 0.955, alpha: 1.000)
-        cell.contentView.layer.cornerRadius = min(cell.contentView.frame.width, cell.contentView.frame.height) / 2
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        cell.contentView.addSubview(label)
-        label.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor).isActive = true
-        label.textColor = .white
-        label.text = "\(indexPath.row + 1)"
-        
-        // Configure the cell
+        if viewModel.indexPathIsMonthDay(indexPath: indexPath) {
+            cell.dayNumberLabel.text = viewModel.dayNumber(for: indexPath)
+        } else {
+            cell.isEmpty = true
+        }
         
         return cell
     }
+}
+
+
+//MARK: - CollectionView Deleagate
+extension CalendarPageContentViewController {
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.cellWasSelectedWith(month: viewModel.month, day: indexPath.row + 1)
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.isSelected = true
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? CalendarDayViewCell {
+            if !cell.isEmpty {
+                cell.isSelected = false
+            }
+        }
+    }
     
 }

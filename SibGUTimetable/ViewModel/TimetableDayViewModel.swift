@@ -10,14 +10,16 @@ import Foundation
 
 class TimetableDayViewModel {
     
-    private let day: Day!
+    private let day: Day
+    private(set) var date: Date
     
     var header: String {
         return day.header!
     }
     
-    init(day: Day) {
+    init(day: Day, date: Date) {
         self.day = day
+        self.date = date
     }
     
     var countOflessons: Int {

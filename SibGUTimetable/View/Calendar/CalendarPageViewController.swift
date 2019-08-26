@@ -16,7 +16,7 @@ class CalendarPageViewController: UIPageViewController {
     // MARK: delegates
     
     //TD: WEAK?
-    var pageContentDelegate: CalendarPageViewContentChanged? {
+    weak var pageContentDelegate: CalendarPageViewContentChanged? {
         didSet {
 //            pageContentDelegate?.pageViewContentCollectionHeightChanged(collectionViewHeight: (produceViewController(at: 0)!).collectionView?.contentSize.height ?? 0)
         }
@@ -25,6 +25,8 @@ class CalendarPageViewController: UIPageViewController {
     // MARK: Variables
     
     private var currentIndex = 0
+    
+    private var currentDay = 0
     
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
@@ -43,7 +45,9 @@ class CalendarPageViewController: UIPageViewController {
         dataSource = self
         delegate = self
         
-        setViewControllers([produceViewController(at: 0)!], direction: .forward, animated: true, completion: nil)
+        let currentMonthPosition = viewModel.monthIndexOfCurrentDate()
+        
+        setViewControllers([produceViewController(at: currentMonthPosition)!], direction: .forward, animated: true, completion: nil)
         
         
     }
@@ -58,7 +62,8 @@ class CalendarPageViewController: UIPageViewController {
         let pageContent = CalendarPageContentViewController()
         pageContent.viewModel = viewModel.calendarPageViewModelFor(index: index)
         pageContent.index = index
-        pageContentDelegate?.pageViewContentChangedTo(newMonth: pageContent.viewModel.month)
+        pageContent.delegate = self
+//        pageContentDelegate?.pageViewContentChangedTo(newMonth: pageContent.viewModel.month)
         
         return pageContent
     }
@@ -86,6 +91,8 @@ class CalendarPageViewController: UIPageViewController {
             currentIndex += 1
         }
     }
+    
+    
 
 }
 
@@ -108,6 +115,7 @@ extension CalendarPageViewController : UIPageViewControllerDataSource {
 
 extension CalendarPageViewController : UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+//        dump(previousViewControllers)
         if completed {
             if let selectedPageContentView = pageViewController.viewControllers?.first as? CalendarPageContentViewController {
                 
@@ -119,10 +127,21 @@ extension CalendarPageViewController : UIPageViewControllerDelegate {
                 pageContentDelegate?.pageViewContentCollectionHeightChanged(collectionViewHeight: contentHeight + CalendarPageContentViewController.Constansts.headerViewHeight)
                 
                 pageContentDelegate?.pageViewContentChangedTo(newMonth: selectedPageContentView.viewModel.month)
+                
+                currentIndex = selectedPageContentView.index
             }
         }
-        
     }
+
+}
+
+
+//MARK: - CalendarContentViewDelegate
+extension CalendarPageViewController : CalendarContentViewDelegate {
     
+    func cellWasSelectedWith(month: CalendarParser.CalendarMonth, day: Int) {
+        pageContentDelegate?.pageViewContentCellDidSelected(month: month, day: day)
+        currentDay = day
+    }
     
 }

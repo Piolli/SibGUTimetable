@@ -8,150 +8,94 @@
 
 import UIKit
 import CoreData
+import SnapKit
+import FSCalendar
 
 class ViewController: UIViewController {
+    
+    var tabBarHeight: CGFloat {
+        return (self.tabBarController?.tabBar.frame.size.height ?? 0)
+    }
 
-    let containerView = UIView()
+    fileprivate weak var calendar: FSCalendar!
+    let scrollableCalendar = ScrollableCalendarView()
+    let timetablePageViewController = TimetablePageViewController()
+    
+    fileprivate lazy var scopeGesture: UIPanGestureRecognizer = {
+        [unowned self] in
+        let panGesture = UIPanGestureRecognizer(target: self.calendar, action: #selector(self.calendar.handleScopeGesture(_:)))
+        panGesture.minimumNumberOfTouches = 1
+        panGesture.maximumNumberOfTouches = 2
+        return panGesture
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        
         self.navigationItem.title = "Расписание группы БПИ16-01"
         self.navigationItem.largeTitleDisplayMode = .always
         
-        navigationController!.navigationItem.title = "Расписание группы БПИ16-01"
-        
         initAppearance()
+        addCalendar()
+
         addTimetablePageViewController()
-        print("TabBar height (viewDidLoad): \(self.tabBarController?.tabBar.frame.size.height)")
-//        addCalendarContainerView()
-//        addCalendarContainerView()
-        
         //Test core data
 //        let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //        let context = appDelegate.persistentContainer.viewContext
-//        
-//        let fetch = NSFetchRequest<TESTENTITY>(entityName: "TESTENTITY")
-//        do {
-//            let result = try context.fetch(fetch)[0] as TESTENTITY
-//            print(result.score)
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-        
-        //Save entity
-//        let entity = TESTENTITY(context: context)
-//        entity.id = UUID()
-//        entity.name = "Sample test name"
-//
-//        do {
-//            try context.save()
-//        }
-//        catch { print(error.localizedDescription) }
-//
-//        appDelegate.saveContext()
-        
     }
-    
+
+    private func addCalendar() {
+        let calendar = FSCalendar()
+        //Set monday for start week
+        calendar.firstWeekday = 2
+
+        view.addSubview(calendar)
+        calendar.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.height.equalTo(300)
+        }
+        calendar.dataSource = self
+        calendar.delegate = self
+
+        self.calendar = calendar
+        self.calendar.select(Date())
+        self.calendar.addGestureRecognizer(self.scopeGesture)
+        self.calendar.setScope(.week, animated: false)
+    }
+
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        calendar.snp.updateConstraints { (make) in
+            make.height.equalTo(bounds.height)
+            // Do other updates
+        }
+        self.view.layoutIfNeeded()
+    }
+
     func addTimetablePageViewController() {
         let containerView = UIView()
         view.addSubview(containerView)
         containerView.snp.makeConstraints { (make) in
             make.leftMargin.rightMargin.bottomMargin.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.top.equalTo(calendar.snp_bottom)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(tabBarHeight)
         }
         
         containerView.backgroundColor = .red
         containerView.clipsToBounds = true
         containerView.layer.cornerRadius = 8
-        
-//        getDayViewModel()
-        
-        let timetablePageViewController = TimetablePageViewController()
+
+
         timetablePageViewController.viewModel = TimetableScheduleViewModel.TESTScheduleViewModel()
         addViewControllerToContainerView(viewController: timetablePageViewController, containerView: containerView)
-    }
-    
-//    func getDayViewModel() -> TimetableDayViewModel {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context = appDelegate.persistentContainer.viewContext
-//        
-//        let day = Day(context: context)
-//        
-//        let lesson1 = Lesson(context: context)
-//        
-//        lesson1.name = "Programming languages"
-//        lesson1.office = "L318"
-//        lesson1.type = "Practice"
-//        
-//        day.header = "Sunday"
-//        day.addToLessons(lesson1)
-//
-//        do {
-//            try context.save()
-//        }
-//        catch { print(error.localizedDescription) }
-//
-//        appDelegate.saveContext()
-//        
-//        return TimetableDayViewModel(day: day)
-//    }
-    
-    func loadCoreDataViewModel() -> TimetableDayViewModel? {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let fetch = NSFetchRequest<Day>(entityName: "Day")
-        do {
-            let result = try context.fetch(fetch)[0] as Day
-            return TimetableDayViewModel(day: result)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        return nil
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("TabBar height (viewDidAppear): \(self.tabBarController?.tabBar.frame.size.height)")
-        addCalendarContainerView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("TabBar height (viewWillAppear): \(self.tabBarController?.tabBar.frame.size.height)")
-//        addCalendarContainerView()
-    }
 
-    func addCalendarContainerView() {
-        
-        view.addSubview(containerView)
-        
-        containerView.snp.makeConstraints { (make) in
-            make.bottom.equalTo((-1.0 ) * (self.tabBarController?.tabBar.frame.size.height ?? 600))
-            make.leftMargin.equalToSuperview()
-            make.rightMargin.equalToSuperview()
-            make.height.equalTo(400)
+        //Attach day in timetable and day in calendar
+        timetablePageViewController.newSelectedDate = { nextDate in
+            self.calendar.select(nextDate, scrollToDate: true)
         }
-        
-        containerView.backgroundColor = .red
-        containerView.clipsToBounds = true
-        containerView.layer.cornerRadius = 8
-        
-        let scrollableCalendar = ScrollableCalendarView()
-        addChild(scrollableCalendar)
-        containerView.addSubview(scrollableCalendar.view)
-        
-        scrollableCalendar.view.snp.makeConstraints { (make) in
-            make.edges.equalTo(containerView)
-        }
-        
-        scrollableCalendar.didMove(toParent: self)
     }
-    
-    
     
     func addViewControllerToContainerView(viewController: UIViewController, containerView: UIView) {
         addChild(viewController)
@@ -171,5 +115,14 @@ class ViewController: UIViewController {
     
 }
 
-//TODO: create calendar model and view model (months in year)
-//TODO: create calendar content view model (day in month)
+extension ViewController : FSCalendarDataSource {
+    
+}
+
+extension ViewController : FSCalendarDelegate {
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        Logger.logMessageInfo(message: "Did select date: \(date)")
+        timetablePageViewController.select(date: date)
+    }
+}
+
