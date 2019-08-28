@@ -12,7 +12,7 @@ class TimetableLessonPageContentViewController: UITableViewController {
     
     var viewModel: TimetableDayViewModel!
     
-    var index = 0
+    var date: Date!
 
     override func viewDidLoad() {
         super.viewDidLoad()

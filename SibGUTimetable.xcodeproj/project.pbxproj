@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		609530D6831E2DBBD2A1D1C3 /* FSCalendar + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6095332493044377CF1705DF /* FSCalendar + Ext.swift */; };
+		60953E2F9CE8749238040627 /* TimetablePageViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6095322281714670A637E162 /* TimetablePageViewDelegate.swift */; };
+		60953F8DFEE1CE6C6A0575A4 /* Date + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609533396D1049D91B806AC2 /* Date + Ext.swift */; };
 		6097B719C65E514D27B48132 /* Pods_SibGUTimetableUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6171F10FE805AF1C7BA5BD53 /* Pods_SibGUTimetableUITests.framework */; };
 		96147595C3636E42C0F1E1A4 /* Pods_SibGUTimetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA73E05C76CA07255943DC6E /* Pods_SibGUTimetable.framework */; };
 		A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC022B3D7C000567A37 /* AppDelegate.swift */; };
@@ -63,6 +66,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6095322281714670A637E162 /* TimetablePageViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetablePageViewDelegate.swift; sourceTree = "<group>"; };
+		6095332493044377CF1705DF /* FSCalendar + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FSCalendar + Ext.swift"; sourceTree = "<group>"; };
+		609533396D1049D91B806AC2 /* Date + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date + Ext.swift"; sourceTree = "<group>"; };
 		6171F10FE805AF1C7BA5BD53 /* Pods_SibGUTimetableUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SibGUTimetableUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A161EF1AAC4CC928AB0BD83 /* Pods_SibGUTimetableTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SibGUTimetableTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8011EBD22B3D7C000567A37 /* SibGUTimetable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SibGUTimetable.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +171,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		60953798CC0FB3F8AB4A7B0F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6095332493044377CF1705DF /* FSCalendar + Ext.swift */,
+				609533396D1049D91B806AC2 /* Date + Ext.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		A8011EB422B3D7C000567A37 = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +213,7 @@
 				A8A5636C22C264FD002559F8 /* ViewModel */,
 				A8011EF422B3D8BC00567A37 /* Resources */,
 				A8537EC922EC5524005183C7 /* TimetableError.swift */,
+				60953798CC0FB3F8AB4A7B0F /* Extension */,
 			);
 			path = SibGUTimetable;
 			sourceTree = "<group>";
@@ -313,6 +329,7 @@
 				A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonPageContentViewController.swift */,
 				A8E3BC4D22D1F7FC006E1B65 /* TimetableLessonViewCell.swift */,
 				A8209F2B22D719D000E1BAF6 /* TimetablePageViewController.swift */,
+				6095322281714670A637E162 /* TimetablePageViewDelegate.swift */,
 			);
 			path = Timetable;
 			sourceTree = "<group>";
@@ -573,6 +590,9 @@
 				A8A5636722C25972002559F8 /* ScrollableCalendarView.swift in Sources */,
 				A8209F2C22D719D000E1BAF6 /* TimetablePageViewController.swift in Sources */,
 				A8A5636B22C25B8D002559F8 /* CalendarPageContentViewController.swift in Sources */,
+				60953E2F9CE8749238040627 /* TimetablePageViewDelegate.swift in Sources */,
+				609530D6831E2DBBD2A1D1C3 /* FSCalendar + Ext.swift in Sources */,
+				60953F8DFEE1CE6C6A0575A4 /* Date + Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

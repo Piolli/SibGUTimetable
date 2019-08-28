@@ -46,6 +46,7 @@ class Logger {
         var resultMessage = "|\(logType.rawValue)| \(String(time)), \(message) <\(macrosInfo)>"
     
         print(resultMessage)
+        print("------------------------------------------------------------------")
     }
 
     

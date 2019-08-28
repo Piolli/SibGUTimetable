@@ -12,57 +12,68 @@ import SnapKit
 import FSCalendar
 
 class ViewController: UIViewController {
-    
-    var tabBarHeight: CGFloat {
-        return (self.tabBarController?.tabBar.frame.size.height ?? 0)
-    }
 
-    fileprivate weak var calendar: FSCalendar!
-    let scrollableCalendar = ScrollableCalendarView()
-    let timetablePageViewController = TimetablePageViewController()
+    fileprivate weak var calendarView: FSCalendar!
+
+    lazy var timetablePageViewController: TimetablePageViewController = {
+        let vc = TimetablePageViewController()
+        vc.pageViewDelegate = self
+        return vc
+    }()
     
     fileprivate lazy var scopeGesture: UIPanGestureRecognizer = {
         [unowned self] in
-        let panGesture = UIPanGestureRecognizer(target: self.calendar, action: #selector(self.calendar.handleScopeGesture(_:)))
+        let panGesture = UIPanGestureRecognizer(target: self.calendarView, action: #selector(self.calendarView.handleScopeGesture(_:)))
         panGesture.minimumNumberOfTouches = 1
         panGesture.maximumNumberOfTouches = 2
         return panGesture
     }()
+
+    var tabBarHeight: CGFloat {
+        return (self.tabBarController?.tabBar.frame.size.height ?? 0)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
+        initNavigationItem()
+        initAppearance()
+
+        addCalendar()
+        addTimetablePageViewController()
+    }
+
+    private func initNavigationItem() {
         self.navigationItem.title = "Расписание группы БПИ16-01"
         self.navigationItem.largeTitleDisplayMode = .always
-        
-        initAppearance()
-        addCalendar()
 
-        addTimetablePageViewController()
-        //Test core data
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context = appDelegate.persistentContainer.viewContext
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector())
     }
 
     private func addCalendar() {
         let calendar = FSCalendar()
+        view.addSubview(calendar)
+
         //Set monday for start week
         calendar.firstWeekday = 2
 
-        view.addSubview(calendar)
+        makeCalendarConstraints(calendar: calendar)
+
+        calendar.dataSource = self
+        calendar.delegate = self
+
+        self.calendarView = calendar
+        self.calendarView.select(Date())
+        self.calendarView.addGestureRecognizer(self.scopeGesture)
+        self.calendarView.setScope(.week, animated: false)
+    }
+
+    private func makeCalendarConstraints(calendar: FSCalendar) {
         calendar.snp.makeConstraints { (make) in
             make.width.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.height.equalTo(300)
         }
-        calendar.dataSource = self
-        calendar.delegate = self
-
-        self.calendar = calendar
-        self.calendar.select(Date())
-        self.calendar.addGestureRecognizer(self.scopeGesture)
-        self.calendar.setScope(.week, animated: false)
     }
 
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
@@ -73,30 +84,30 @@ class ViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
 
-    func addTimetablePageViewController() {
-        let containerView = UIView()
-        view.addSubview(containerView)
+    private func makeTimetableConstraints(containerView: UIView) {
         containerView.snp.makeConstraints { (make) in
             make.leftMargin.rightMargin.bottomMargin.equalToSuperview()
 //            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
-            make.top.equalTo(calendar.snp_bottom)
+            make.top.equalTo(calendarView.snp_bottom)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(tabBarHeight)
         }
-        
+    }
+
+    func addTimetablePageViewController() {
+        let containerView = UIView()
+        view.addSubview(containerView)
+
+        makeTimetableConstraints(containerView: containerView)
+
         containerView.backgroundColor = .red
         containerView.clipsToBounds = true
         containerView.layer.cornerRadius = 8
 
-
         timetablePageViewController.viewModel = TimetableScheduleViewModel.TESTScheduleViewModel()
-        addViewControllerToContainerView(viewController: timetablePageViewController, containerView: containerView)
 
-        //Attach day in timetable and day in calendar
-        timetablePageViewController.newSelectedDate = { nextDate in
-            self.calendar.select(nextDate, scrollToDate: true)
-        }
+        addViewControllerToContainerView(viewController: timetablePageViewController, containerView: containerView)
     }
-    
+
     func addViewControllerToContainerView(viewController: UIViewController, containerView: UIView) {
         addChild(viewController)
         containerView.addSubview(viewController.view)
@@ -109,20 +120,26 @@ class ViewController: UIViewController {
     }
     
     fileprivate func initAppearance() {
-        //Init base appearance
         self.view.backgroundColor = .white
     }
-    
-}
-
-extension ViewController : FSCalendarDataSource {
     
 }
 
 extension ViewController : FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         Logger.logMessageInfo(message: "Did select date: \(date)")
-        timetablePageViewController.select(date: date)
+        timetablePageViewController.select(at: calendar.selectedDate!)
     }
+}
+
+extension ViewController :  TimetablePageViewControllerDelegate {
+    func pageViewDidMoved(state: TimetablePageViewController.PageViewMoveState) {
+        Logger.logMessageInfo(message: "pageViewDidMoved state: \(state)")
+        self.calendarView.moveTo(state: state)
+    }
+}
+
+extension ViewController : FSCalendarDataSource {
+
 }
 

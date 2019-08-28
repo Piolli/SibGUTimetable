@@ -10,27 +10,16 @@ import UIKit
 
 class TimetablePageViewController: UIPageViewController {
 
-    var newSelectedDate: ((Date) -> ())?
-//
-//    var selectedDate: Date = Date() {
-//        willSet {
-//            let week = CalendarParser.shared.currentNumberOfWeek(date: newValue)
-//            let day = CalendarParser.shared.currentDayOfWeek(date: newValue)
-//
-//            let newPosition = week * 7 + day
-//            if let selectedViewController = produceViewController(at: newPosition) {
-//                Logger.logMessageInfo(message: "newPosition is \(newPosition)")
-//                self.currentIndex = newPosition
-//                setViewControllers([selectedViewController], direction: .forward, animated: true, completion: nil)
-//            }
-//        }
-//    }
+    enum PageViewMoveState: Int {
+        case forward = 1
+        case backward = -1
+    }
 
-//    func selectFollowingDate(_ isForward: Bool) {
-//        let diffDay = isForward ? 1 : -1
-//        self.selectedDate = Calendar.current.date(byAdding: .day, value: diffDay, to: self.selectedDate)!
-//        newSelectedDate?(self.selectedDate)
-//    }
+    var viewModel: TimetableScheduleViewModel?
+
+    var newSelectedDate: ((Date) -> ())?
+
+    var pageViewDelegate: TimetablePageViewControllerDelegate?
 
     //This property sets by calendar
     fileprivate var selectedDate: Date = Date() {
@@ -39,42 +28,14 @@ class TimetablePageViewController: UIPageViewController {
         }
     }
 
-    func moveContentPage(isForward: Bool) {
-        let diffDay = isForward ? 1 : -1
-        self.selectedDate = Calendar.current.date(byAdding: .day, value: diffDay, to: self.selectedDate)!
-    }
-
     //Calendar call func for select day with lessons
-    func select(date: Date) {
-        let week = CalendarParser.shared.currentNumberOfWeek(date: date)
-        let day = CalendarParser.shared.currentDayOfWeek(date: date)
-
-        let newPosition = week * 7 + day
-        if let selectedViewController = produceViewController(at: newPosition) {
-            Logger.logMessageInfo(message: "newPosition is \(newPosition)")
-//            self.currentIndex = newPosition
-            self.selectedDate = date
+    func select(at date: Date) {
+        if let selectedViewController = produceViewController(at: date) {
+            Logger.logMessageInfo(message: "new selected Date is \(date)")
+            self.selectedDate = selectedViewController.viewModel.date
             setViewControllers([selectedViewController], direction: .forward, animated: true, completion: nil)
         }
     }
-
-//    private var currentIndex: Int = 0 {
-//        willSet  {
-//            guard abs(newValue - self.currentIndex) == 1 else {
-//                Logger.logMessageInfo(message: "Select not following or previous day")
-//                return
-//            }
-//            let isForwardDirectionPaged = (newValue - self.currentIndex) > 0
-////            selectFollowingDate(isForwardDirectionPaged)
-//            Logger.logMessageInfo(message: """
-//                                           isForwardDirectionPaged: \(isForwardDirectionPaged)
-//                                            newValue: \(newValue)
-//                                             self.currentIndex: \(self.currentIndex)
-//                                           """)
-//        }
-//    }
-    
-    var viewModel: TimetableScheduleViewModel?
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: options)
@@ -89,48 +50,39 @@ class TimetablePageViewController: UIPageViewController {
 
         dataSource = self
         delegate = self
-        
-        
-        if let startDayPosition = viewModel?.startPageViewPosition, let selectedViewController = produceViewController(at: startDayPosition) {
-            Logger.logMessageInfo(message: "startDayPosition is \(startDayPosition)")
-//            self.currentIndex = startDayPosition
-            self.selectedDate = selectedViewController.viewModel.date
-            setViewControllers([selectedViewController], direction: .forward, animated: true, completion: nil)
-        }
 
+        select(at: Date())
     }
-
     
-    func produceViewController(at index: Int) -> TimetableLessonPageContentViewController? {
-//        if index < 0 || index >= countOfPages() {
-//            return nil
-//        }
-
-        #warning("DELETE")
-        let index = abs(index)
-
+    func produceViewController(at date: Date) -> TimetableLessonPageContentViewController? {
         let pageContent = TimetableLessonPageContentViewController()
         
-        pageContent.viewModel = viewModel?.dayViewModel(at: index)
-        pageContent.index = index
+        pageContent.viewModel = viewModel?.getDayViewModel(at: date)
+        pageContent.date = date
 
+        Logger.logMessageInfo(message: "produce with date: \(date)")
         
         return pageContent
-    }
-    
-    func countOfPages() -> Int {
-        return 56 * 2 //14
     }
 
 }
 
 extension TimetablePageViewController : UIPageViewControllerDelegate {
+
+    //Calls after moving page content left/right
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed {
             if let selectedPageContentView = pageViewController.viewControllers?.first as? TimetableLessonPageContentViewController {
-//                currentIndex = selectedPageContentView.index
-                self.selectedDate = selectedPageContentView.viewModel!.date
-                newSelectedDate?(self.selectedDate)
+                let newSelectedDate = selectedPageContentView.viewModel!.date
+
+                //If forward move
+                if newSelectedDate > self.selectedDate {
+                    pageViewDelegate?.pageViewDidMoved(state: .forward)
+                } else if newSelectedDate < self.self.selectedDate {
+                    pageViewDelegate?.pageViewDidMoved(state: .backward)
+                }
+
+                self.selectedDate = newSelectedDate
             }
         }
     }
@@ -139,23 +91,21 @@ extension TimetablePageViewController : UIPageViewControllerDelegate {
 extension TimetablePageViewController : UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
 
-        var index = (viewController as! TimetableLessonPageContentViewController).index
-        Logger.logMessageInfo(message: "index-1: \(index)")
-//        moveContentPage(isForward: false)
-        index -= 1
+        var date = (viewController as! TimetableLessonPageContentViewController).date
+        date = date!.previousDateByDay()
 
-        return produceViewController(at: index)
+        return produceViewController(at: date!)
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
 
-        var index = (viewController as! TimetableLessonPageContentViewController).index
-//        moveContentPage(isForward: true)
-        Logger.logMessageInfo(message: "index+1: \(index)")
-        index += 1
+        var date = (viewController as! TimetableLessonPageContentViewController).date
+        date = date!.followingDateByDay()
 
-        return produceViewController(at: index)
+        return produceViewController(at: date!)
     }
     
     
 }
+
+

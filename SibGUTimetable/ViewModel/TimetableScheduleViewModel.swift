@@ -14,10 +14,6 @@ class TimetableScheduleViewModel {
     private let schedule: Schedule
     let groupName: String
 
-    //slide to -2 months
-    let fakeTodayDate = Calendar.current.date(byAdding: .day, value: -60, to: Date())!
-
-
     #if DEBUG
     static func TESTScheduleViewModel() -> TimetableScheduleViewModel {
         let json =
@@ -41,44 +37,60 @@ class TimetableScheduleViewModel {
         self.schedule = schedule
         self.groupName = groupName
         
-        //Organize days for display in page view schedule.
-        
     }
     
     var countOfDays: Int {
-        var daysSum = 0
-        
-        schedule.weeks?.forEach({ (week) in
-            daysSum += (week as! Week).days!.count
-        })
-        
-        return daysSum
+        return 30 * 4
     }
     
-    var startPageViewPosition: Int {
-        return CalendarParser.shared.currentNumberOfWeek() * 7 + CalendarParser.shared.currentDayOfWeek()
+    var startPageViewDate: Date {
+        return Date()
     }
     
-    func day(at index: Int) -> Day {
-        var dayNumber = index % countOfDays
-        var numberOfWeek = 0
-        
-        if (dayNumber - 6) > 0 {
-            numberOfWeek = 1
-        }
-        
-        dayNumber %= 7
-        
-        let day = (schedule.weeks![numberOfWeek] as! Week).days![dayNumber] as! Day
+    func getDay(at date: Date) -> Day {
+        let weekIndex = CalendarParser.shared.currentNumberOfWeek(date: date)
+        let dayIndex = CalendarParser.shared.currentDayOfWeek(date: date)
+
+        let day = (schedule.weeks![weekIndex] as! Week).days![dayIndex] as! Day
         return day
+
+//        var dayNumber = index % countOfDays
+//        var numberOfWeek = 0
+//
+//        if (dayNumber - 6) > 0 {
+//            numberOfWeek = 1
+//        }
+//
+//        dayNumber %= 7
+//
+//        let day = (schedule.weeks![numberOfWeek] as! Week).days![dayNumber] as! Day
+//        return day
     }
-    
-    func dayViewModel(at index: Int) -> TimetableDayViewModel {
-        //Calculate date from index and start date
-        //index - startPageViewPosition - start day in list may not be today, index - startPageViewPosition = 0 if today
-        let dayDate = Calendar.current.date(byAdding: .day, value: index - 60, to: self.fakeTodayDate)!
-        return TimetableDayViewModel(day: day(at: index), date: dayDate)
+
+    func getDayViewModel(at date: Date) -> TimetableDayViewModel {
+        return TimetableDayViewModel(day: getDay(at: date), date: date)
     }
+
+    //FULL REPLACE CODE!!!
+
+//    func dayViewModel(at index: Int) -> TimetableDayViewModel {
+//        //Calculate date from index and start date
+//        //index - startPageViewPosition - start day in list may not be today, index - startPageViewPosition = 0 if today
+//        let dayDate = Calendar.current.date(byAdding: .day, value: index, to: self.fakeTodayDate)!
+//        return TimetableDayViewModel(day: day(at: index), date: dayDate)
+//    }
+//
+//    func dateToPosition(date: Date) throws -> Int {
+//        for i in 0...112 {
+//            if let calculateDate = Calendar.current.date(byAdding: .day, value: i, to: self.fakeTodayDate) {
+//                if calculateDate == date {
+//                    return i
+//                }
+//            }
+//        }
+//
+//        throw TimetableError.anotherError
+//    }
 
     
 }
