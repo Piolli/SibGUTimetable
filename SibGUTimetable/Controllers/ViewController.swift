@@ -44,10 +44,15 @@ class ViewController: UIViewController {
     }
 
     private func initNavigationItem() {
-        self.navigationItem.title = "Расписание группы БПИ16-01"
-        self.navigationItem.largeTitleDisplayMode = .always
+        self.navigationItem.title = "БПИ16-01"
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector())
+        self.navigationItem.largeTitleDisplayMode = .always
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сегодня", style: .plain, target: self, action: #selector(todayButtonDidTapped(_:)))
+    }
+    
+    @objc func todayButtonDidTapped(_ sender: Any) {
+        self.calendarView.selectToday()
+        updateTimetableFromSelectedDateCalendarView()
     }
 
     private func addCalendar() {
@@ -99,11 +104,12 @@ class ViewController: UIViewController {
 
         makeTimetableConstraints(containerView: containerView)
 
-        containerView.backgroundColor = .red
+//        containerView.backgroundColor = .red
         containerView.clipsToBounds = true
         containerView.layer.cornerRadius = 8
 
-        timetablePageViewController.viewModel = TimetableScheduleViewModel.TESTScheduleViewModel()
+//        timetablePageViewController.viewModel = TimetableScheduleViewModel.TESTScheduleViewModel()
+        updateTimetableFromSelectedDateCalendarView()
 
         addViewControllerToContainerView(viewController: timetablePageViewController, containerView: containerView)
     }
@@ -127,15 +133,35 @@ class ViewController: UIViewController {
 
 extension ViewController : FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        Logger.logMessageInfo(message: "Did select date: \(date)")
-        timetablePageViewController.select(at: calendar.selectedDate!)
+        Logger.logMessageInfo(message: "Did select date: \(calendar.selectedDate)")
+        updateTimetableFrom(date: calendar.selectedDate)
     }
+
+    private func updateTimetableFrom(date: Date?) {
+        guard let date = date else {
+            return
+        }
+
+        timetablePageViewController.select(at: date)
+        setVisibilityTodayButton(isVisible: self.calendarView.isSelectedDateEqualsToday)
+    }
+
+    private func updateTimetableFromSelectedDateCalendarView() {
+        self.updateTimetableFrom(date: self.calendarView.selectedDate)
+    }
+
+    private func setVisibilityTodayButton(isVisible: Bool) {
+        //if date is today then isVisible = false, that date == today is true
+        self.navigationItem.rightBarButtonItem?.isEnabled = !isVisible
+    }
+
 }
 
 extension ViewController :  TimetablePageViewControllerDelegate {
     func pageViewDidMoved(state: TimetablePageViewController.PageViewMoveState) {
         Logger.logMessageInfo(message: "pageViewDidMoved state: \(state)")
         self.calendarView.moveTo(state: state)
+        setVisibilityTodayButton(isVisible: self.calendarView.isSelectedDateEqualsToday)
     }
 }
 

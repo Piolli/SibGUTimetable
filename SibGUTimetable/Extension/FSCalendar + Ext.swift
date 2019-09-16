@@ -18,4 +18,13 @@ extension FSCalendar {
 
         select(newSelectedDate, scrollToDate: true)
     }
+    
+    func selectToday() {
+        self.select(self.today, scrollToDate: true)
+    }
+
+    var isSelectedDateEqualsToday: Bool {
+        Logger.logMessageInfo(message: "isSelectedDateEqualsToday is \(self.selectedDate) == \(self.today)")
+        return self.selectedDate == self.today
+    }
 }

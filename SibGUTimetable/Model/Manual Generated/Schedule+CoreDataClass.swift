@@ -26,7 +26,7 @@ public class Schedule: NSManagedObject, Decodable {
         
         self.group_name = try values.decode(String.self, forKey: .group_name)
         
-        let weeksArray =   try values.decode([Week].self, forKey: .weeks)
+        let weeksArray = try values.decode([Week].self, forKey: .weeks)
         
         weeksArray.forEach { (week) in
             self.addToWeeks(week)

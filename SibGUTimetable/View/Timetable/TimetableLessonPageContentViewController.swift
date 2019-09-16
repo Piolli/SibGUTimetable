@@ -10,7 +10,7 @@ import UIKit
 
 class TimetableLessonPageContentViewController: UITableViewController {
     
-    var viewModel: TimetableDayViewModel!
+    var viewModel: TimetableDayViewModel?
     
     var date: Date!
 
