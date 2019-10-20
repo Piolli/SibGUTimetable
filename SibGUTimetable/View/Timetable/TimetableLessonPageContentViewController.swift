@@ -35,7 +35,6 @@ class TimetableLessonPageContentViewController: UITableViewController {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100.0
         
-        
     }
 
     // MARK: - Table view data source

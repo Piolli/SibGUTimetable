@@ -56,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let vc1 = ViewController()
         vc1.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 0)
+        UITabBarItem(title: "Timetable", image: nil, tag: 0)
         let navC1 = putInNavigationController(vc1)
         
         let vc2 = ViewController()
