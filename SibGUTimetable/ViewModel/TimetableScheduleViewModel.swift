@@ -30,7 +30,6 @@ class TimetableScheduleViewModel {
     
     init?(schedule: Schedule) {
         guard let groupName = schedule.group_name, let weeks = schedule.weeks else {
-            Logger.logMessage(error: TimetableError.anotherError)
             return nil
         }
         
@@ -39,7 +38,6 @@ class TimetableScheduleViewModel {
         
     }
 
-    
     var countOfDays: Int {
         return 30 * 4
     }
@@ -54,44 +52,10 @@ class TimetableScheduleViewModel {
 
         let day = (schedule.weeks![weekIndex] as! Week).days![dayIndex] as! Day
         return day
-
-//        var dayNumber = index % countOfDays
-//        var numberOfWeek = 0
-//
-//        if (dayNumber - 6) > 0 {
-//            numberOfWeek = 1
-//        }
-//
-//        dayNumber %= 7
-//
-//        let day = (schedule.weeks![numberOfWeek] as! Week).days![dayNumber] as! Day
-//        return day
     }
 
     func getDayViewModel(at date: Date) -> TimetableDayViewModel {
         return TimetableDayViewModel(day: getDay(at: date), date: date)
     }
-
-    //FULL REPLACE CODE!!!
-
-//    func dayViewModel(at index: Int) -> TimetableDayViewModel {
-//        //Calculate date from index and start date
-//        //index - startPageViewPosition - start day in list may not be today, index - startPageViewPosition = 0 if today
-//        let dayDate = Calendar.current.date(byAdding: .day, value: index, to: self.fakeTodayDate)!
-//        return TimetableDayViewModel(day: day(at: index), date: dayDate)
-//    }
-//
-//    func dateToPosition(date: Date) throws -> Int {
-//        for i in 0...112 {
-//            if let calculateDate = Calendar.current.date(byAdding: .day, value: i, to: self.fakeTodayDate) {
-//                if calculateDate == date {
-//                    return i
-//                }
-//            }
-//        }
-//
-//        throw TimetableError.anotherError
-//    }
-
     
 }

@@ -38,7 +38,6 @@
 		A8537EC322EC494B005183C7 /* Day+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EBB22EC494B005183C7 /* Day+CoreDataClass.swift */; };
 		A8537EC422EC494B005183C7 /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EBC22EC494B005183C7 /* Day+CoreDataProperties.swift */; };
 		A8537EC822EC4FE9005183C7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EC722EC4FE9005183C7 /* Logger.swift */; };
-		A8537ECA22EC5524005183C7 /* TimetableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EC922EC5524005183C7 /* TimetableError.swift */; };
 		A86DBB96231EA66100D46164 /* ScheduleParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86DBB95231EA66100D46164 /* ScheduleParsingTests.swift */; };
 		A872CA38235C6D970040BB69 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = A8D4A54A235C65020093FE61 /* schedule.json */; };
 		A872CA3A235C8B940040BB69 /* MockNetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A872CA39235C8B940040BB69 /* MockNetworkSession.swift */; };
@@ -118,7 +117,6 @@
 		A8537EBB22EC494B005183C7 /* Day+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A8537EBC22EC494B005183C7 /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A8537EC722EC4FE9005183C7 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		A8537EC922EC5524005183C7 /* TimetableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableError.swift; sourceTree = "<group>"; };
 		A86DBB95231EA66100D46164 /* ScheduleParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleParsingTests.swift; sourceTree = "<group>"; };
 		A872CA39235C8B940040BB69 /* MockNetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkSession.swift; sourceTree = "<group>"; };
 		A872CA3B235C92680040BB69 /* FileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLoader.swift; sourceTree = "<group>"; };
@@ -249,7 +247,6 @@
 				A8011EF122B3D7E800567A37 /* Model */,
 				A8A5636C22C264FD002559F8 /* ViewModel */,
 				A8011EF422B3D8BC00567A37 /* Resources */,
-				A8537EC922EC5524005183C7 /* TimetableError.swift */,
 				60953798CC0FB3F8AB4A7B0F /* Extension */,
 				60953CBBBE2DB765E8C3A7CA /* Repository */,
 			);
@@ -725,7 +722,6 @@
 				A83977A422C8D1810047549F /* CalendarPageViewModel.swift in Sources */,
 				A8537EBF22EC494B005183C7 /* Lesson+CoreDataClass.swift in Sources */,
 				A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */,
-				A8537ECA22EC5524005183C7 /* TimetableError.swift in Sources */,
 				A8537EC822EC4FE9005183C7 /* Logger.swift in Sources */,
 				A8209F2E22D71A1400E1BAF6 /* TimetableScheduleViewModel.swift in Sources */,
 				A8537EBE22EC494B005183C7 /* Schedule+CoreDataProperties.swift in Sources */,

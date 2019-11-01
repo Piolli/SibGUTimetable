@@ -9,26 +9,12 @@
 import UIKit
 import CoreData
 
-class SomeError : Error, LocalizedError {
-    var localizedDescription: String {
-        return NSLocalizedString("Something error", comment: "Wrong")
-    }
-    
-    var errorDescription: String? {
-        return "ERROR DESCRIPTION"
-    }
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    
-    
     var window: UIWindow?
     
     static var context: NSManagedObjectContext {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            Logger.logMessage(message: "AppDelegate is nil", error: TimetableError.anotherError, type: .error)
             fatalError("AppDelegate is nil and context too")
         }
     
@@ -40,39 +26,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-//        let mainController = ViewController()
         
         UITabBar.appearance().tintColor = .red
         UITabBar.appearance().barTintColor = .white
         
-        //UINavigationController
-        
-        
-        
         //UITabBarController
         let tabBarController = UITabBarController()
         tabBarController.tabBar.shadowImage = UIImage()
-//        mainController.tabBar.barStyle = .blackTranslucent
         
         let vc1 = ViewController()
-        vc1.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 0)
-        UITabBarItem(title: "Timetable", image: nil, tag: 0)
+        vc1.tabBarItem = UITabBarItem(title: "News feed", image: UIImage(named: "tab_bar_item_news_feed"), tag: 0)
         let navC1 = putInNavigationController(vc1)
         
         let vc2 = ViewController()
-        vc2.view.backgroundColor = .purple
-        vc2.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: 1)
+        vc2.tabBarItem = UITabBarItem(title: "Timetable", image: UIImage(named: "tab_bar_item_timetable"), tag: 1)
+        
         let navC2 = putInNavigationController(vc2)
         
         let vc3 = UIViewController()
-        vc3.view.backgroundColor = .blue
-        vc3.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 2)
+        vc3.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "tab_bar_item_settings"), tag: 2)
         let navC3 = putInNavigationController(vc3)
         
         tabBarController.viewControllers = [navC1, navC2, navC3]
+        tabBarController.selectedIndex = 1
         
-//        let navigationController = UINavigationController(rootViewController: mainController)
-
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         return true
@@ -83,27 +60,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return navigationController
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        // Saves changes in the application's managed object context before the application terminates.
+        
         self.saveContext()
     }
 
