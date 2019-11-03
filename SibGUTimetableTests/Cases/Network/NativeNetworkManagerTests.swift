@@ -13,7 +13,7 @@ import RxSwift
 class NativeNetworkManagerTests: XCTestCase {
 
     var sut: NetworkManager!
-    let dispableBag = DisposeBag()
+    let disposeBag = DisposeBag()
     
     let validURL = "http://127.0.0.1:5000/rasp/2weeks/group/%D0%91%D0%9F%D0%9816-01"
     let invalidURL = ""
@@ -88,14 +88,5 @@ class NativeNetworkManagerTests: XCTestCase {
         
         wait(for: [expect], timeout: 1.0)
     }
-    
-    func testLocalSchedule() {
-        let schedule = FileLoader.shared.getLocalSchedule()
-        
-        XCTAssertNotNil(schedule)
-        XCTAssertEqual(schedule.group_name, "БПИ16-01")
-        XCTAssertEqual(schedule.weeks!.count, 2)
-        XCTAssertEqual((schedule.weeks!.firstObject as! Week).days?.count, 7)
-        XCTAssertEqual((schedule.weeks!.lastObject as! Week).days?.count, 7)
-    }
+
 }

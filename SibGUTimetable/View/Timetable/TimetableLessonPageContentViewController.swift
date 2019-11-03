@@ -43,15 +43,9 @@ class TimetableLessonPageContentViewController: UITableViewController {
         return viewModel?.countOflessons ?? 0
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TimetableLessonViewCell
-        
         cell.viewModel = viewModel?.lessonViewModel(at: indexPath)
-        
-    
-//        cell.backgroundColor = .blue
-
         return cell
     }
 

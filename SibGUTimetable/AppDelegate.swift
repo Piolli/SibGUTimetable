@@ -30,20 +30,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = .red
         UITabBar.appearance().barTintColor = .white
         
-        //UITabBarController
         let tabBarController = UITabBarController()
         tabBarController.tabBar.shadowImage = UIImage()
         
-        let vc1 = ViewController()
+        let vc1 = UIViewController()
+        vc1.title = "In progress"
+        vc1.view.backgroundColor = .white
         vc1.tabBarItem = UITabBarItem(title: "News feed", image: UIImage(named: "tab_bar_item_news_feed"), tag: 0)
         let navC1 = putInNavigationController(vc1)
         
         let vc2 = ViewController()
         vc2.tabBarItem = UITabBarItem(title: "Timetable", image: UIImage(named: "tab_bar_item_timetable"), tag: 1)
-        
         let navC2 = putInNavigationController(vc2)
         
         let vc3 = UIViewController()
+        vc3.title = "In progress"
+        vc3.view.backgroundColor = .white
         vc3.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "tab_bar_item_settings"), tag: 2)
         let navC3 = putInNavigationController(vc3)
         

@@ -84,7 +84,6 @@ class ViewController: UIViewController {
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         calendar.snp.updateConstraints { (make) in
             make.height.equalTo(bounds.height)
-            // Do other updates
         }
         self.view.layoutIfNeeded()
     }
@@ -104,11 +103,9 @@ class ViewController: UIViewController {
 
         makeTimetableConstraints(containerView: containerView)
 
-//        containerView.backgroundColor = .red
         containerView.clipsToBounds = true
         containerView.layer.cornerRadius = 8
 
-//        timetablePageViewController.viewModel = TimetableScheduleViewModel.TESTScheduleViewModel()
         updateTimetableFromSelectedDateCalendarView()
 
         addViewControllerToContainerView(viewController: timetablePageViewController, containerView: containerView)

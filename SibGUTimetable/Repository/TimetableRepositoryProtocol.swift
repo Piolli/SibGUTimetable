@@ -7,10 +7,7 @@ import Foundation
 import RxSwift
 
 protocol TimetableRepositoryProtocol {
-
-//    func getSchedule(completion: @escaping ((Schedule) -> ()))
     
     func getSchedule() -> Observable<Schedule>
-
 
 }

@@ -23,13 +23,14 @@ class FileLoader {
         return filePath
     }
     
-    func getLocalSchedule() -> Schedule {
+    func getLocalSchedule() -> Schedule? {
         let jsonFilePath = getPath(ofFile: "schedule.json")
-        let scheduleJson = try! String(contentsOfFile: jsonFilePath)
-        
-        let decoder = JSONDecoder()
-        let schedule = try! decoder.decode(Schedule.self, from: scheduleJson.data(using: .utf8)!)
-        return schedule
+        if let scheduleJson = try? String(contentsOfFile: jsonFilePath) {
+            let decoder = JSONDecoder()
+            let schedule = try! decoder.decode(Schedule.self, from: scheduleJson.data(using: .utf8)!)
+            return schedule
+        }
+        return nil
     }
     
 }
