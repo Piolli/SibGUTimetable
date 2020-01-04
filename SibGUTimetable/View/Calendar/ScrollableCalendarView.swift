@@ -12,8 +12,6 @@ import SnapKit
 
 class ScrollableCalendarView: UIViewController {
     
-    
-
     // MARK: Constants
     let headerView = CalendarHeaderView()
     let pageControllerContainerView = UIView()

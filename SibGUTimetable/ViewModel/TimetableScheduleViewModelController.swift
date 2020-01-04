@@ -9,12 +9,14 @@ import RxRelay
 
 class TimetableScheduleViewModelController {
 
+    internal init(repository: TimetableRepositoryProtocol) {
+        self.repository = repository
+    }
+    
+
     let repository: TimetableRepositoryProtocol
     var viewModel: BehaviorRelay<TimetableScheduleViewModel?> = BehaviorRelay(value: nil)
 
-    init(repository: TimetableRepositoryProtocol) {
-        self.repository = repository
-    }
 
     func fetchData() {
         repository.getSchedule().subscribe { [weak self] (schedule) in

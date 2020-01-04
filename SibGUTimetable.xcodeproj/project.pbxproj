@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1197A53123BE20E0008737B2 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = 1197A53023BE20E0008737B2 /* schedule.json */; };
+		1197A53223BE501A008737B2 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = 1197A53023BE20E0008737B2 /* schedule.json */; };
+		11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C523C0507400CA52C2 /* Coordinator.swift */; };
+		11EA09C823C050B500CA52C2 /* TTPageViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C723C050B500CA52C2 /* TTPageViewCoordinator.swift */; };
+		11EA09CA23C0512F00CA52C2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C923C0512F00CA52C2 /* AppCoordinator.swift */; };
 		609530D6831E2DBBD2A1D1C3 /* FSCalendar + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6095332493044377CF1705DF /* FSCalendar + Ext.swift */; };
 		60953201621C1FC9AD6239EC /* TimetableScheduleViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609533084061D3F5C983CC07 /* TimetableScheduleViewModelController.swift */; };
 		60953995244668EE378EFDBF /* TimetableRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60953F5405BA4E4523BB8045 /* TimetableRepositoryProtocol.swift */; };
@@ -38,7 +43,6 @@
 		A8537EC322EC494B005183C7 /* Day+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EBB22EC494B005183C7 /* Day+CoreDataClass.swift */; };
 		A8537EC422EC494B005183C7 /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EBC22EC494B005183C7 /* Day+CoreDataProperties.swift */; };
 		A8537EC822EC4FE9005183C7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EC722EC4FE9005183C7 /* Logger.swift */; };
-		A872CA38235C6D970040BB69 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = A8D4A54A235C65020093FE61 /* schedule.json */; };
 		A872CA3A235C8B940040BB69 /* MockNetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A872CA39235C8B940040BB69 /* MockNetworkSession.swift */; };
 		A872CA3C235C92680040BB69 /* FileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A872CA3B235C92680040BB69 /* FileLoader.swift */; };
 		A87BD39E22FADE7700F3866D /* CalendarContentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87BD39D22FADE7700F3866D /* CalendarContentViewDelegate.swift */; };
@@ -54,11 +58,9 @@
 		A8D2299A235C4E7000FE98BE /* BuiltinNetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D22999235C4E7000FE98BE /* BuiltinNetworkSession.swift */; };
 		A8D2299E235C503C00FE98BE /* URLSession + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D2299D235C503C00FE98BE /* URLSession + Ext.swift */; };
 		A8D4A548235C53C90093FE61 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D4A547235C53C90093FE61 /* NetworkResult.swift */; };
-		A8D4A54B235C65020093FE61 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = A8D4A54A235C65020093FE61 /* schedule.json */; };
 		A8E3BC4C22D1F7A7006E1B65 /* TimetableLessonPageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonPageContentViewController.swift */; };
 		A8E3BC4E22D1F7FC006E1B65 /* TimetableLessonViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E3BC4D22D1F7FC006E1B65 /* TimetableLessonViewCell.swift */; };
 		A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */; };
-		A8F80DD52337A6DD001442A9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F80DD42337A6DD001442A9 /* NetworkManager.swift */; };
 		A8F80DD72337B12D001442A9 /* NativeNetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F80DD62337B12D001442A9 /* NativeNetworkManagerTests.swift */; };
 		D60A521E49E599E56CC36265 /* Pods_SibGUTimetableTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A161EF1AAC4CC928AB0BD83 /* Pods_SibGUTimetableTests.framework */; };
 /* End PBXBuildFile section */
@@ -81,6 +83,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1197A53023BE20E0008737B2 /* schedule.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schedule.json; sourceTree = "<group>"; };
+		11EA09C523C0507400CA52C2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		11EA09C723C050B500CA52C2 /* TTPageViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTPageViewCoordinator.swift; sourceTree = "<group>"; };
+		11EA09C923C0512F00CA52C2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6095322281714670A637E162 /* TimetablePageViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetablePageViewDelegate.swift; sourceTree = "<group>"; };
 		609533084061D3F5C983CC07 /* TimetableScheduleViewModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableScheduleViewModelController.swift; sourceTree = "<group>"; };
 		6095332493044377CF1705DF /* FSCalendar + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FSCalendar + Ext.swift"; sourceTree = "<group>"; };
@@ -133,11 +139,9 @@
 		A8D22999235C4E7000FE98BE /* BuiltinNetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuiltinNetworkSession.swift; sourceTree = "<group>"; };
 		A8D2299D235C503C00FE98BE /* URLSession + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession + Ext.swift"; sourceTree = "<group>"; };
 		A8D4A547235C53C90093FE61 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
-		A8D4A54A235C65020093FE61 /* schedule.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = schedule.json; path = "/Users/alexandr/Desktop/SibGUTimetable/SibGUTimetableTests/Helper Files/schedule.json"; sourceTree = "<absolute>"; };
 		A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonPageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLessonPageContentViewController.swift; sourceTree = "<group>"; };
 		A8E3BC4D22D1F7FC006E1B65 /* TimetableLessonViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLessonViewCell.swift; sourceTree = "<group>"; };
 		A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarParser.swift; sourceTree = "<group>"; };
-		A8F80DD42337A6DD001442A9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A8F80DD62337B12D001442A9 /* NativeNetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeNetworkManagerTests.swift; sourceTree = "<group>"; };
 		C4E942E396A03AE669B83590 /* Pods-SibGUTimetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SibGUTimetable.debug.xcconfig"; path = "Target Support Files/Pods-SibGUTimetable/Pods-SibGUTimetable.debug.xcconfig"; sourceTree = "<group>"; };
 		D09BD375C1F9D8578E9F09CA /* Pods-SibGUTimetableUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SibGUTimetableUITests.release.xcconfig"; path = "Target Support Files/Pods-SibGUTimetableUITests/Pods-SibGUTimetableUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -176,6 +180,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11EA09C423C0506100CA52C2 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				11EA09C523C0507400CA52C2 /* Coordinator.swift */,
+				11EA09C723C050B500CA52C2 /* TTPageViewCoordinator.swift */,
+				11EA09C923C0512F00CA52C2 /* AppCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		1E56705CF29021D3536095EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +257,7 @@
 		A8011EBF22B3D7C000567A37 /* SibGUTimetable */ = {
 			isa = PBXGroup;
 			children = (
+				11EA09C423C0506100CA52C2 /* Coordinator */,
 				A8F80DD32337A6AA001442A9 /* Network */,
 				A8011EC022B3D7C000567A37 /* AppDelegate.swift */,
 				A8011ECF22B3D7C100567A37 /* Info.plist */,
@@ -435,7 +450,7 @@
 		A8D4A549235C64DC0093FE61 /* Helper Files */ = {
 			isa = PBXGroup;
 			children = (
-				A8D4A54A235C65020093FE61 /* schedule.json */,
+				1197A53023BE20E0008737B2 /* schedule.json */,
 			);
 			path = "Helper Files";
 			sourceTree = "<group>";
@@ -455,7 +470,6 @@
 			isa = PBXGroup;
 			children = (
 				A8D2299F235C506B00FE98BE /* Extension */,
-				A8F80DD42337A6DD001442A9 /* NetworkManager.swift */,
 				A8D22997235C4DEF00FE98BE /* NetworkSession.swift */,
 				A8D22999235C4E7000FE98BE /* BuiltinNetworkSession.swift */,
 				A8D4A547235C53C90093FE61 /* NetworkResult.swift */,
@@ -574,7 +588,7 @@
 			files = (
 				A8011ECE22B3D7C100567A37 /* LaunchScreen.storyboard in Resources */,
 				A8011ECB22B3D7C100567A37 /* Assets.xcassets in Resources */,
-				A872CA38235C6D970040BB69 /* schedule.json in Resources */,
+				1197A53223BE501A008737B2 /* schedule.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,7 +596,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8D4A54B235C65020093FE61 /* schedule.json in Resources */,
+				1197A53123BE20E0008737B2 /* schedule.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,20 +638,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SibGUTimetableUITests/Pods-SibGUTimetableUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
-				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-SibGUTimetableUITests/Pods-SibGUTimetableUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-SibGUTimetableUITests/Pods-SibGUTimetableUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -650,24 +655,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SibGUTimetable/Pods-SibGUTimetable-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-SibGUTimetable/Pods-SibGUTimetable-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-SibGUTimetable/Pods-SibGUTimetable-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -730,7 +722,9 @@
 				A8537EC022EC494B005183C7 /* Lesson+CoreDataProperties.swift in Sources */,
 				A8537EC122EC494B005183C7 /* Week+CoreDataClass.swift in Sources */,
 				A8011EC922B3D7C000567A37 /* SibGUTimetable.xcdatamodeld in Sources */,
+				11EA09CA23C0512F00CA52C2 /* AppCoordinator.swift in Sources */,
 				A8A5636922C25AF3002559F8 /* CalendarPageViewController.swift in Sources */,
+				11EA09C823C050B500CA52C2 /* TTPageViewCoordinator.swift in Sources */,
 				A83977A422C8D1810047549F /* CalendarPageViewModel.swift in Sources */,
 				A8537EBF22EC494B005183C7 /* Lesson+CoreDataClass.swift in Sources */,
 				A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */,
@@ -743,11 +737,11 @@
 				A8D2299A235C4E7000FE98BE /* BuiltinNetworkSession.swift in Sources */,
 				A82CC63422FAF5DE0095A489 /* CalendarDayViewCell.swift in Sources */,
 				A8537EC422EC494B005183C7 /* Day+CoreDataProperties.swift in Sources */,
-				A8F80DD52337A6DD001442A9 /* NetworkManager.swift in Sources */,
 				A89DDCA422D704F500769EAA /* TimetableDayViewModel.swift in Sources */,
 				A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */,
 				A8537EBD22EC494B005183C7 /* Schedule+CoreDataClass.swift in Sources */,
 				A8537EC222EC494B005183C7 /* Week+CoreDataProperties.swift in Sources */,
+				11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */,
 				A8E3BC4E22D1F7FC006E1B65 /* TimetableLessonViewCell.swift in Sources */,
 				A84176E122C4DC6B008511A8 /* CalendarPageViewContentDelegate.swift in Sources */,
 				A83977A222C8C9040047549F /* CalendarViewModel.swift in Sources */,

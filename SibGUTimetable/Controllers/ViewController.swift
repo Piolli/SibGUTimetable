@@ -12,6 +12,8 @@ import SnapKit
 import FSCalendar
 
 class ViewController: UIViewController {
+    
+    var coordinator: TabTTPageViewCoordinator!
 
     fileprivate weak var calendarView: FSCalendar!
 
@@ -35,7 +37,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         initNavigationItem()
         initAppearance()
 
@@ -154,7 +156,7 @@ extension ViewController : FSCalendarDelegate {
 
 }
 
-extension ViewController :  TimetablePageViewControllerDelegate {
+extension ViewController : TimetablePageViewControllerDelegate {
     func pageViewDidMoved(state: TimetablePageViewController.PageViewMoveState) {
         Logger.logMessageInfo(message: "pageViewDidMoved state: \(state)")
         self.calendarView.moveTo(state: state)
