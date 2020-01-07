@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TimetableLessonViewModel {
+class TTLessonViewModel {
     
     let lesson: Lesson
     

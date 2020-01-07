@@ -8,7 +8,7 @@ import FSCalendar
 
 extension FSCalendar {
 
-    func moveTo(state: TimetablePageViewController.PageViewMoveState) {
+    func moveTo(state: TTPageViewController.PageViewMoveState) {
         guard let selectedDate = self.selectedDate else {
             Logger.logMessageInfo(message: "FSCalendar selectedDate is null")
             return

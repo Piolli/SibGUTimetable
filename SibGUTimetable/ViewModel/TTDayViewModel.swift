@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TimetableDayViewModel {
+class TTDayViewModel {
     
     private let day: Day
     private(set) var date: Date
@@ -26,9 +26,9 @@ class TimetableDayViewModel {
         return day.lessons?.count ?? 0
     }
     
-    func lessonViewModel(at indexPath: IndexPath) -> TimetableLessonViewModel {
+    func lessonViewModel(at indexPath: IndexPath) -> TTLessonViewModel {
         let lesson = day.lessons?.array[indexPath.row] as! Lesson
-        return TimetableLessonViewModel(lesson: lesson)
+        return TTLessonViewModel(lesson: lesson)
     }
     
 }

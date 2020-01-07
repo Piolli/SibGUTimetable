@@ -11,9 +11,9 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class FakeLocalTimetableRepository: TimetableRepository {
+class FakeLocalTTRepository: CoreDataTTRepository {
 
-    override func getSchedule() -> Observable<Schedule> {
+    override func getSchedule() -> Observable<Timetable> {
         return Observable.create { (observer) -> Disposable in
             if let localSchedule = FileLoader.shared.getLocalSchedule() {
                 observer.onNext(localSchedule)

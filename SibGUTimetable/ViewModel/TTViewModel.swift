@@ -9,12 +9,12 @@
 import Foundation
 import os
 
-class TimetableScheduleViewModel {
+class TTViewModel {
     
-    private let schedule: Schedule
+    private let schedule: Timetable
     let groupName: String
     
-    init?(schedule: Schedule) {
+    init?(schedule: Timetable) {
         guard let groupName = schedule.group_name, let weeks = schedule.weeks else {
             return nil
         }
@@ -39,8 +39,8 @@ class TimetableScheduleViewModel {
         return day
     }
 
-    func getDayViewModel(at date: Date) -> TimetableDayViewModel {
-        return TimetableDayViewModel(day: getDay(at: date), date: date)
+    func getDayViewModel(at date: Date) -> TTDayViewModel {
+        return TTDayViewModel(day: getDay(at: date), date: date)
     }
     
 }

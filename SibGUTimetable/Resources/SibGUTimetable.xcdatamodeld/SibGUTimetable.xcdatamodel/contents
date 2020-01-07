@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.98" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Day" representedClassName="Day" syncable="YES">
-        <attribute name="header" attributeType="String" syncable="YES"/>
-        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="lessons" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Lesson" syncable="YES"/>
+        <attribute name="header" attributeType="String"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="lessons" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Lesson"/>
     </entity>
     <entity name="Lesson" representedClassName="Lesson" syncable="YES">
-        <attribute name="end_time" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="office" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="start_time" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="teacher" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="end_time" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="office" optional="YES" attributeType="String"/>
+        <attribute name="start_time" optional="YES" attributeType="String"/>
+        <attribute name="teacher" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Schedule" representedClassName="Schedule" syncable="YES">
-        <attribute name="group_name" attributeType="String" syncable="YES"/>
-        <relationship name="weeks" optional="YES" toMany="YES" maxCount="2" deletionRule="Nullify" ordered="YES" destinationEntity="Week" syncable="YES"/>
+    <entity name="Timetable" representedClassName="Timetable" syncable="YES">
+        <attribute name="group_name" attributeType="String"/>
+        <relationship name="weeks" optional="YES" toMany="YES" maxCount="2" deletionRule="Nullify" ordered="YES" destinationEntity="Week"/>
     </entity>
     <entity name="Week" representedClassName="Week" syncable="YES">
-        <attribute name="number_week" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Day" syncable="YES"/>
+        <attribute name="number_week" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Day"/>
     </entity>
     <elements>
         <element name="Day" positionX="-54" positionY="36" width="128" height="90"/>
         <element name="Lesson" positionX="-373.75390625" positionY="44.83984375" width="128" height="135"/>
-        <element name="Schedule" positionX="-338.8828125" positionY="220.7890625" width="128" height="75"/>
+        <element name="Timetable" positionX="-338.8828125" positionY="220.7890625" width="128" height="73"/>
         <element name="Week" positionX="-71.99609375" positionY="224.6953125" width="128" height="75"/>
     </elements>
 </model>

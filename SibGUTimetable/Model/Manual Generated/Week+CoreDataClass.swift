@@ -19,15 +19,10 @@ public class Week: NSManagedObject, Decodable {
     }
     
     public convenience required init(from decoder: Decoder) throws {
-        
         self.init(context: AppDelegate.context)
-        
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        
         self.number_week = try values.decode(Int16.self, forKey: .number_week)
-        
-        let daysArray =   try values.decode([Day].self, forKey: .days)
-        
+        let daysArray = try values.decode([Day].self, forKey: .days)
         daysArray.forEach { (day) in
             self.addToDays(day)
         }

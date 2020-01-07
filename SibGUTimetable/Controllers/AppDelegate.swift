@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITabBar.appearance().tintColor = .red
         UITabBar.appearance().barTintColor = .white
+        
+        FirebaseApp.configure()
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+            AnalyticsParameterItemID: "id-12398103",
+            AnalyticsParameterItemName: "title",
+            AnalyticsParameterContentType: "cont"
+        ])
+        
         
 //        let tabBarController = UITabBarController()
 //        tabBarController.tabBar.shadowImage = UIImage()

@@ -7,22 +7,20 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class TimetableScheduleViewModelController {
+class TTViewModelController {
 
-    internal init(repository: TimetableRepositoryProtocol) {
+    let repository: TTRepository
+    var viewModel: BehaviorRelay<TTViewModel?> = BehaviorRelay(value: nil)
+
+    internal init(repository: TTRepository) {
         self.repository = repository
     }
-    
-
-    let repository: TimetableRepositoryProtocol
-    var viewModel: BehaviorRelay<TimetableScheduleViewModel?> = BehaviorRelay(value: nil)
-
 
     func fetchData() {
         repository.getSchedule().subscribe { [weak self] (schedule) in
             if let schedule = schedule.element {
                 Logger.logMessageInfo(message: "get schedule with \(schedule.group_name) \(schedule.weeks?.count)")
-                self?.viewModel.accept(TimetableScheduleViewModel(schedule: schedule))
+                self?.viewModel.accept(TTViewModel(schedule: schedule))
             }
         }
     }

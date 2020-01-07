@@ -6,8 +6,8 @@
 import Foundation
 
 //Responsible for communicate with calendar view
-protocol TimetablePageViewControllerDelegate {
+protocol TTPageViewControllerDelegate {
 
-    func pageViewDidMoved(state: TimetablePageViewController.PageViewMoveState)
+    func pageViewDidMoved(state: TTPageViewController.PageViewMoveState)
 
 }

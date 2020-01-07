@@ -17,8 +17,8 @@ class ViewController: UIViewController {
 
     fileprivate weak var calendarView: FSCalendar!
 
-    lazy var timetablePageViewController: TimetablePageViewController = {
-        let vc = TimetablePageViewController()
+    lazy var timetablePageViewController: TTPageViewController = {
+        let vc = TTPageViewController()
         vc.pageViewDelegate = self
         return vc
     }()
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
 
         makeCalendarConstraints(calendar: calendar)
 
-        calendar.dataSource = self
+//        calendar.dataSource = self
         calendar.delegate = self
 
         self.calendarView = calendar
@@ -142,29 +142,25 @@ extension ViewController : FSCalendarDelegate {
         }
 
         timetablePageViewController.select(at: date)
-        setVisibilityTodayButton(isVisible: self.calendarView.isSelectedDateEqualsToday)
+        updateTodayButtonVisibility()
     }
 
     private func updateTimetableFromSelectedDateCalendarView() {
         self.updateTimetableFrom(date: self.calendarView.selectedDate)
     }
 
-    private func setVisibilityTodayButton(isVisible: Bool) {
+    private func updateTodayButtonVisibility() {
         //if date is today then isVisible = false, that date == today is true
-        self.navigationItem.rightBarButtonItem?.isEnabled = !isVisible
+        navigationItem.rightBarButtonItem?.isEnabled = !calendarView.isSelectedDateEqualsToday
     }
 
 }
 
-extension ViewController : TimetablePageViewControllerDelegate {
-    func pageViewDidMoved(state: TimetablePageViewController.PageViewMoveState) {
+extension ViewController : TTPageViewControllerDelegate {
+    func pageViewDidMoved(state: TTPageViewController.PageViewMoveState) {
         Logger.logMessageInfo(message: "pageViewDidMoved state: \(state)")
-        self.calendarView.moveTo(state: state)
-        setVisibilityTodayButton(isVisible: self.calendarView.isSelectedDateEqualsToday)
+        calendarView.moveTo(state: state)
+        updateTodayButtonVisibility()
     }
-}
-
-extension ViewController : FSCalendarDataSource {
-    
 }
 

@@ -6,10 +6,10 @@
 import Foundation
 import RxSwift
 
-class TimetableRepository : TimetableRepositoryProtocol {
+class CoreDataTTRepository : TTRepository {
     
-    func getSchedule() -> Observable<Schedule> {
-        return PublishSubject<Schedule>.create { (observer) -> Disposable in
+    func getSchedule() -> Observable<Timetable> {
+        return PublishSubject<Timetable>.create { (observer) -> Disposable in
             //TODO: make network request
             return Disposables.create()
         }.subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))

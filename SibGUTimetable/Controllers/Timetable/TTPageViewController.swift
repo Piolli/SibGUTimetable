@@ -9,19 +9,16 @@
 import UIKit
 import RxSwift
 
-class TimetablePageViewController: UIPageViewController {
+class TTPageViewController: UIPageViewController {
 
     enum PageViewMoveState: Int {
         case forward = 1
         case backward = -1
     }
 
-    fileprivate var viewModelController: TimetableScheduleViewModelController!
-
+    var viewModelController: TTViewModelController!
     var newSelectedDate: ((Date) -> ())?
-
-    var pageViewDelegate: TimetablePageViewControllerDelegate?
-    
+    var pageViewDelegate: TTPageViewControllerDelegate?
     var isUpdatingSchedule = false
 
     //This property sets by calendar
@@ -32,8 +29,8 @@ class TimetablePageViewController: UIPageViewController {
     }
 
     func initViewModelController() {
-        self.viewModelController = TimetableScheduleViewModelController(
-            repository: FakeLocalTimetableRepository()
+        self.viewModelController = TTViewModelController(
+            repository: FakeLocalTTRepository()
         )
         
         self.viewModelController.viewModel
@@ -47,7 +44,7 @@ class TimetablePageViewController: UIPageViewController {
     
     func updateSchedule() {
         isUpdatingSchedule = true
-        self.viewModelController.fetchData()
+        viewModelController.fetchData()
     }
 
     //Calendar call func for select day with lessons
@@ -88,8 +85,8 @@ class TimetablePageViewController: UIPageViewController {
         delegate = self
     }
 
-    func produceViewController(at date: Date) -> TimetableLessonPageContentViewController? {
-        let pageContent = TimetableLessonPageContentViewController()
+    func produceViewController(at date: Date) -> TTPageContentController? {
+        let pageContent = TTPageContentController()
 
         pageContent.viewModel = viewModelController?.viewModel.value?.getDayViewModel(at: date)
         pageContent.date = date
@@ -101,11 +98,11 @@ class TimetablePageViewController: UIPageViewController {
 
 }
 
-extension TimetablePageViewController : UIPageViewControllerDelegate {
+extension TTPageViewController : UIPageViewControllerDelegate {
     //Calls after moving page content left/right
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed {
-            if let selectedPageContentView = pageViewController.viewControllers?.first as? TimetableLessonPageContentViewController {
+            if let selectedPageContentView = pageViewController.viewControllers?.first as? TTPageContentController {
                 let newSelectedDate = selectedPageContentView.viewModel!.date
 
                 //If it was forward move
@@ -121,10 +118,10 @@ extension TimetablePageViewController : UIPageViewControllerDelegate {
     }
 }
 
-extension TimetablePageViewController : UIPageViewControllerDataSource {
+extension TTPageViewController : UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
 
-        guard let viewController = viewController as? TimetableLessonPageContentViewController else {
+        guard let viewController = viewController as? TTPageContentController else {
             Logger.logMessageInfo(message: "viewControllerBefore is nil")
             return nil
         }
@@ -141,7 +138,7 @@ extension TimetablePageViewController : UIPageViewControllerDataSource {
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
 
-        guard let viewController = viewController as? TimetableLessonPageContentViewController else {
+        guard let viewController = viewController as? TTPageContentController else {
             Logger.logMessageInfo(message: "viewControllerBefore is nil")
             return nil
         }

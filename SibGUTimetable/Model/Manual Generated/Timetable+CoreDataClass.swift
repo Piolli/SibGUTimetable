@@ -1,18 +1,16 @@
 //
-//  Schedule+CoreDataClass.swift
-//  SibGUTimetable
+//  Timetable+CoreDataClass.swift
+//  
 //
-//  Created by Alexandr on 27/07/2019.
-//  Copyright © 2019 Alexandr. All rights reserved.
+//  Created by Александр Камышев on 05.01.2020.
 //
 //
 
 import Foundation
 import CoreData
 
-@objc(Schedule)
-public class Schedule: NSManagedObject, Decodable {
-    
+@objc(Timetable)
+public class Timetable: NSManagedObject, Decodable {
     enum CodingKeys: String, CodingKey {
         case group_name
         case weeks
@@ -32,5 +30,4 @@ public class Schedule: NSManagedObject, Decodable {
             self.addToWeeks(week)
         }
     }
-    
 }

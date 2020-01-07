@@ -1,9 +1,8 @@
 //
-//  Schedule+CoreDataProperties.swift
-//  SibGUTimetable
+//  Timetable+CoreDataProperties.swift
+//  
 //
-//  Created by Alexandr on 01/08/2019.
-//  Copyright © 2019 Alexandr. All rights reserved.
+//  Created by Александр Камышев on 05.01.2020.
 //
 //
 
@@ -11,10 +10,10 @@ import Foundation
 import CoreData
 
 
-extension Schedule {
+extension Timetable {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Schedule> {
-        return NSFetchRequest<Schedule>(entityName: "Schedule")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Timetable> {
+        return NSFetchRequest<Timetable>(entityName: "Timetable")
     }
 
     @NSManaged public var group_name: String?
@@ -23,7 +22,7 @@ extension Schedule {
 }
 
 // MARK: Generated accessors for weeks
-extension Schedule {
+extension Timetable {
 
     @objc(insertObject:inWeeksAtIndex:)
     @NSManaged public func insertIntoWeeks(_ value: Week, at idx: Int)

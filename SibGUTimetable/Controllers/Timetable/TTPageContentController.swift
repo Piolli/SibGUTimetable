@@ -8,16 +8,16 @@
 
 import UIKit
 
-class TimetableLessonPageContentViewController: UITableViewController {
+class TTPageContentController: UITableViewController {
     
-    var viewModel: TimetableDayViewModel?
+    var viewModel: TTDayViewModel?
     
     var date: Date!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.register(TimetableLessonViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TTLessonView.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = .none
         
         if viewModel?.countOflessons == 0 {
@@ -44,7 +44,7 @@ class TimetableLessonPageContentViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TimetableLessonViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TTLessonView
         cell.viewModel = viewModel?.lessonViewModel(at: indexPath)
         return cell
     }

@@ -6,8 +6,8 @@
 import Foundation
 import RxSwift
 
-protocol TimetableRepositoryProtocol {
+protocol TTRepository {
     
-    func getSchedule() -> Observable<Schedule>
+    func getSchedule() -> Observable<Timetable>
 
 }

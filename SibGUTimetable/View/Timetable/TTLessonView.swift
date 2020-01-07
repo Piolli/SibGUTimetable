@@ -8,9 +8,9 @@
 
 import UIKit
 
-class TimetableLessonViewCell: UITableViewCell {
+class TTLessonView: UITableViewCell {
     
-    var viewModel: TimetableLessonViewModel? {
+    var viewModel: TTLessonViewModel? {
         didSet {
             nameLabel.text = self.viewModel?.title
             timeRangeLabel.text = self.viewModel?.timeRange
