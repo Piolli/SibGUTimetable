@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1141FA5B23C9F07900796667 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1141FA5A23C9F07900796667 /* GoogleService-Info.plist */; };
+		1141FA5C23C9F07900796667 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1141FA5A23C9F07900796667 /* GoogleService-Info.plist */; };
+		1141FA5D23C9F07900796667 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1141FA5A23C9F07900796667 /* GoogleService-Info.plist */; };
+		1141FA5F23CA09BB00796667 /* APIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141FA5E23CA09BB00796667 /* APIServer.swift */; };
+		1141FA6523CA0F3300796667 /* NativeServerAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141FA6423CA0F3300796667 /* NativeServerAPITests.swift */; };
 		118F0C1023C24500003BCEF2 /* Timetable+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118F0C0F23C24500003BCEF2 /* Timetable+CoreDataClass.swift */; };
 		118F0C1223C24507003BCEF2 /* Timetable+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118F0C1123C24507003BCEF2 /* Timetable+CoreDataProperties.swift */; };
-		118F0C1423C24EA9003BCEF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 118F0C1323C24EA9003BCEF2 /* GoogleService-Info.plist */; };
-		118F0C1523C24EA9003BCEF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 118F0C1323C24EA9003BCEF2 /* GoogleService-Info.plist */; };
-		118F0C1623C24EA9003BCEF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 118F0C1323C24EA9003BCEF2 /* GoogleService-Info.plist */; };
 		1197A53123BE20E0008737B2 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = 1197A53023BE20E0008737B2 /* schedule.json */; };
 		1197A53223BE501A008737B2 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = 1197A53023BE20E0008737B2 /* schedule.json */; };
 		11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C523C0507400CA52C2 /* Coordinator.swift */; };
@@ -48,8 +50,6 @@
 		A88C2D48236D69E300CBE473 /* FakeLocalTTRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88C2D47236D69E300CBE473 /* FakeLocalTTRepository.swift */; };
 		A89DDCA422D704F500769EAA /* TTDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89DDCA322D704F500769EAA /* TTDayViewModel.swift */; };
 		A8AFAA6A236EDCAA00E0AB6D /* TimetableRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AFAA69236EDCAA00E0AB6D /* TimetableRepositoryTests.swift */; };
-		A8D22998235C4DEF00FE98BE /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D22997235C4DEF00FE98BE /* NetworkSession.swift */; };
-		A8D2299A235C4E7000FE98BE /* BuiltinNetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D22999235C4E7000FE98BE /* BuiltinNetworkSession.swift */; };
 		A8D2299E235C503C00FE98BE /* URLSession + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D2299D235C503C00FE98BE /* URLSession + Ext.swift */; };
 		A8D4A548235C53C90093FE61 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D4A547235C53C90093FE61 /* NetworkResult.swift */; };
 		A8E3BC4C22D1F7A7006E1B65 /* TTPageContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E3BC4B22D1F7A7006E1B65 /* TTPageContentController.swift */; };
@@ -77,9 +77,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1141FA5A23C9F07900796667 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1141FA5E23CA09BB00796667 /* APIServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServer.swift; sourceTree = "<group>"; };
+		1141FA6423CA0F3300796667 /* NativeServerAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeServerAPITests.swift; sourceTree = "<group>"; };
 		118F0C0F23C24500003BCEF2 /* Timetable+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timetable+CoreDataClass.swift"; sourceTree = "<group>"; };
 		118F0C1123C24507003BCEF2 /* Timetable+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timetable+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		118F0C1323C24EA9003BCEF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1197A53023BE20E0008737B2 /* schedule.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schedule.json; sourceTree = "<group>"; };
 		11EA09C523C0507400CA52C2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		11EA09C723C050B500CA52C2 /* TTPageViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTPageViewCoordinator.swift; sourceTree = "<group>"; };
@@ -121,8 +123,6 @@
 		A88C2D47236D69E300CBE473 /* FakeLocalTTRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLocalTTRepository.swift; sourceTree = "<group>"; };
 		A89DDCA322D704F500769EAA /* TTDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTDayViewModel.swift; sourceTree = "<group>"; };
 		A8AFAA69236EDCAA00E0AB6D /* TimetableRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimetableRepositoryTests.swift; path = SibGUTimetableTests/Cases/Network/TimetableRepositoryTests.swift; sourceTree = SOURCE_ROOT; };
-		A8D22997235C4DEF00FE98BE /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
-		A8D22999235C4E7000FE98BE /* BuiltinNetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuiltinNetworkSession.swift; sourceTree = "<group>"; };
 		A8D2299D235C503C00FE98BE /* URLSession + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession + Ext.swift"; sourceTree = "<group>"; };
 		A8D4A547235C53C90093FE61 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		A8E3BC4B22D1F7A7006E1B65 /* TTPageContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTPageContentController.swift; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 		A8011EB422B3D7C000567A37 = {
 			isa = PBXGroup;
 			children = (
-				118F0C1323C24EA9003BCEF2 /* GoogleService-Info.plist */,
+				1141FA5A23C9F07900796667 /* GoogleService-Info.plist */,
 				A8011EBF22B3D7C000567A37 /* SibGUTimetable */,
 				A8011ED722B3D7C100567A37 /* SibGUTimetableTests */,
 				A8011EE222B3D7C100567A37 /* SibGUTimetableUITests */,
@@ -406,6 +406,7 @@
 		A8D4A545235C53260093FE61 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				1141FA6423CA0F3300796667 /* NativeServerAPITests.swift */,
 				A8F80DD62337B12D001442A9 /* NativeNetworkManagerTests.swift */,
 			);
 			path = Network;
@@ -440,9 +441,8 @@
 			isa = PBXGroup;
 			children = (
 				A8D2299F235C506B00FE98BE /* Extension */,
-				A8D22997235C4DEF00FE98BE /* NetworkSession.swift */,
-				A8D22999235C4E7000FE98BE /* BuiltinNetworkSession.swift */,
 				A8D4A547235C53C90093FE61 /* NetworkResult.swift */,
+				1141FA5E23CA09BB00796667 /* APIServer.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -557,7 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8011ECE22B3D7C100567A37 /* LaunchScreen.storyboard in Resources */,
-				118F0C1423C24EA9003BCEF2 /* GoogleService-Info.plist in Resources */,
+				1141FA5B23C9F07900796667 /* GoogleService-Info.plist in Resources */,
 				A8011ECB22B3D7C100567A37 /* Assets.xcassets in Resources */,
 				1197A53223BE501A008737B2 /* schedule.json in Resources */,
 			);
@@ -568,7 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1197A53123BE20E0008737B2 /* schedule.json in Resources */,
-				118F0C1523C24EA9003BCEF2 /* GoogleService-Info.plist in Resources */,
+				1141FA5C23C9F07900796667 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,7 +576,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				118F0C1623C24EA9003BCEF2 /* GoogleService-Info.plist in Resources */,
+				1141FA5D23C9F07900796667 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,7 +702,6 @@
 				A8537EC822EC4FE9005183C7 /* Logger.swift in Sources */,
 				A8209F2E22D71A1400E1BAF6 /* TTViewModel.swift in Sources */,
 				A8537EC322EC494B005183C7 /* Day+CoreDataClass.swift in Sources */,
-				A8D2299A235C4E7000FE98BE /* BuiltinNetworkSession.swift in Sources */,
 				A8537EC422EC494B005183C7 /* Day+CoreDataProperties.swift in Sources */,
 				A89DDCA422D704F500769EAA /* TTDayViewModel.swift in Sources */,
 				A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */,
@@ -720,8 +719,8 @@
 				118F0C1023C24500003BCEF2 /* Timetable+CoreDataClass.swift in Sources */,
 				60953F8DFEE1CE6C6A0575A4 /* Date + Ext.swift in Sources */,
 				60953995244668EE378EFDBF /* TTRepository.swift in Sources */,
-				A8D22998235C4DEF00FE98BE /* NetworkSession.swift in Sources */,
 				60953CAAB0C4B89192F73D4F /* CoreDataTTRepository.swift in Sources */,
+				1141FA5F23CA09BB00796667 /* APIServer.swift in Sources */,
 				60953201621C1FC9AD6239EC /* TTViewModelController.swift in Sources */,
 				A88C2D48236D69E300CBE473 /* FakeLocalTTRepository.swift in Sources */,
 			);
@@ -735,6 +734,7 @@
 				A8F80DD72337B12D001442A9 /* NativeNetworkManagerTests.swift in Sources */,
 				A8AFAA6A236EDCAA00E0AB6D /* TimetableRepositoryTests.swift in Sources */,
 				A872CA3A235C8B940040BB69 /* MockNetworkSession.swift in Sources */,
+				1141FA6523CA0F3300796667 /* NativeServerAPITests.swift in Sources */,
 				A872CA3C235C92680040BB69 /* FileLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -904,7 +904,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = alexandr.kamyshev.SibGUTimetable;
+				PRODUCT_BUNDLE_IDENTIFIER = a.kamyshev.SibGUTimetable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -925,7 +925,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = alexandr.kamyshev.SibGUTimetable;
+				PRODUCT_BUNDLE_IDENTIFIER = a.kamyshev.SibGUTimetable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -8,6 +8,7 @@ import RxSwift
 
 protocol TTRepository {
     
-    func getSchedule() -> Observable<Timetable>
-
+    func getSchedule() -> Single<Timetable>
+ 
 }
+

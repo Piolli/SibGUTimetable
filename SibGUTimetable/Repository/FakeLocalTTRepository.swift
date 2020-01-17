@@ -13,12 +13,12 @@ import RxCocoa
 
 class FakeLocalTTRepository: CoreDataTTRepository {
 
-    override func getSchedule() -> Observable<Timetable> {
-        return Observable.create { (observer) -> Disposable in
+    override func getSchedule() -> Single<Timetable> {
+        return Single.create { (single) -> Disposable in
             if let localSchedule = FileLoader.shared.getLocalSchedule() {
-                observer.onNext(localSchedule)
+                single(.success(localSchedule))
             } else {
-                observer.onError(RxError.unknown)
+                single(.error(RxError.unknown))
             }
             return Disposables.create()
         }

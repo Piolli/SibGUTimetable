@@ -44,7 +44,7 @@ class TTPageViewController: UIPageViewController {
     
     func updateSchedule() {
         isUpdatingSchedule = true
-        viewModelController.fetchData()
+        viewModelController.loadData()
     }
 
     //Calendar call func for select day with lessons

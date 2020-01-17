@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     
         let context = appDelegate.persistentContainer.viewContext
-        
+        context.insertedObjects
         return context
     }
 

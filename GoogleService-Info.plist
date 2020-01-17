@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>637087534039-mnbtbmk68mraab5ge7ouhtleg57hqtm8.apps.googleusercontent.com</string>
+	<string>637087534039-1saqca6olsu67do9ccjdu9f49ju0voh7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.637087534039-mnbtbmk68mraab5ge7ouhtleg57hqtm8</string>
+	<string>com.googleusercontent.apps.637087534039-1saqca6olsu67do9ccjdu9f49ju0voh7</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCL7bTMba71298csL6Tu66IHclnImq0eiI</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>alexandr.kamyshev.SibGUTimetable</string>
+	<string>a.kamyshev.SibGUTimetable</string>
 	<key>PROJECT_ID</key>
 	<string>sibgutimetable</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:637087534039:ios:68c0360573ad0051889992</string>
+	<string>1:637087534039:ios:d08b27d10ea36261889992</string>
 	<key>DATABASE_URL</key>
 	<string>https://sibgutimetable.firebaseio.com</string>
 </dict>

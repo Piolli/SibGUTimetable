@@ -91,7 +91,7 @@ class SibGUTimetableTests: XCTestCase {
 """
         var data = json.data(using: .utf8)!
         let decoder = JSONDecoder()
-        let schedule = try! decoder.decode(Schedule.self, from: data)
+        let schedule = try! decoder.decode(Timetable.self, from: data)
         
         print("\n------------------------------\n")
         print(schedule.group_name)

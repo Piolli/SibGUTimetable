@@ -10,31 +10,38 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-extension URLSession : NetworkSession {
+extension URLSession {
     
-    func loadData<T>(url: String) -> Observable<T> where T : Decodable {
-        guard let url = URL(string: url) else {
-            Logger.logMessageInfo(message: "loadData URL is nil")
-            return Observable.error(
-                NSError(domain: "NativeNetworkManager", code: 101, userInfo: ["desc": "invalid url string"])
-            )
-        }
-        
-        return Observable<T>.create({ (observer) -> Disposable in
-            let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                if let error = error {
-                    observer.onError(error)
-                }
-                
-                DispatchQueue.main.async {
-                    do {
-                        let decoder = JSONDecoder()
-                        let decodeData = try decoder.decode(T.self, from: data ?? Data())
-                        observer.onNext(decodeData)
-                    } catch {
-                        observer.onError(error)
+    func doRequest<T : Decodable>(_ request: URLRequest) -> Single<T> {
+        return Single<T>.create { (single) -> Disposable in
+            let task = self.dataTask(with: request, completionHandler: { (data, response, error) in
+                if error != nil {
+                    single(.error(ServerError.connectionError))
+                } else if let response = response as? HTTPURLResponse, let data = data {
+                    switch response.statusCode {
+                    case 200:
+                        DispatchQueue.main.async {
+                            do {
+                                let decoder = JSONDecoder()
+                                let decodeData = try decoder.decode(T.self, from: data)
+                                single(.success(decodeData))
+                            } catch {
+                                single(.error(ServerError.invalidJsonData))
+                            }
+                        }
+                    case 400:
+                        single(.error(ServerError.invalidRequest))
+                    case 401:
+                        single(.error(ServerError.notAuthorized))
+                    case 404:
+                        single(.error(ServerError.notFound))
+                    case 500...526:
+                        single(.error(ServerError.serverError))
+                    default:
+                        single(.error(ServerError.unknownError))
                     }
-                    observer.onCompleted()
+                } else {
+                    single(.error(ServerError.unknownError))
                 }
             })
             task.resume()
@@ -42,7 +49,7 @@ extension URLSession : NetworkSession {
             return Disposables.create {
                 task.cancel()
             }
-        })
+        }
     }
     
 }

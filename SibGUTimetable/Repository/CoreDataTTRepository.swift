@@ -8,9 +8,16 @@ import RxSwift
 
 class CoreDataTTRepository : TTRepository {
     
-    func getSchedule() -> Observable<Timetable> {
-        return PublishSubject<Timetable>.create { (observer) -> Disposable in
-            //TODO: make network request
+    enum TTError: Error {
+        case noTimetable
+        case serverError
+        case anotherError
+    }
+    
+    func getSchedule() -> Single<Timetable> {
+        return Single<Timetable>.create { (single) -> Disposable in
+            
+            single(.error(TTError.anotherError))
             return Disposables.create()
         }.subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
     }
