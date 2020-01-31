@@ -23,6 +23,9 @@ target 'SibGUTimetable' do
   pod 'Firebase/Firestore'
   # ---------------------
   
+  # Side menu
+  pod 'SideMenuSwift'
+  
   target 'SibGUTimetableTests' do
     inherit! :search_paths
     # Pods for testing

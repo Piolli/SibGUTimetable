@@ -3,7 +3,7 @@
     <entity name="Day" representedClassName="Day" syncable="YES">
         <attribute name="header" attributeType="String"/>
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="lessons" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Lesson"/>
+        <relationship name="lessonGroups" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="LessonGroup"/>
     </entity>
     <entity name="Lesson" representedClassName="Lesson" syncable="YES">
         <attribute name="end_time" optional="YES" attributeType="String"/>
@@ -13,18 +13,23 @@
         <attribute name="teacher" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="LessonGroup" representedClassName="LessonGroup" syncable="YES">
+        <relationship name="lessons" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Lesson"/>
+    </entity>
     <entity name="Timetable" representedClassName="Timetable" syncable="YES">
         <attribute name="group_name" attributeType="String"/>
+        <attribute name="updateTimestamp" optional="YES" attributeType="String"/>
         <relationship name="weeks" optional="YES" toMany="YES" maxCount="2" deletionRule="Nullify" ordered="YES" destinationEntity="Week"/>
     </entity>
     <entity name="Week" representedClassName="Week" syncable="YES">
-        <attribute name="number_week" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="order_week" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Day"/>
     </entity>
     <elements>
-        <element name="Day" positionX="-54" positionY="36" width="128" height="90"/>
+        <element name="Day" positionX="33.95703125" positionY="33.04296875" width="128" height="88"/>
         <element name="Lesson" positionX="-373.75390625" positionY="44.83984375" width="128" height="135"/>
-        <element name="Timetable" positionX="-338.8828125" positionY="220.7890625" width="128" height="73"/>
-        <element name="Week" positionX="-71.99609375" positionY="224.6953125" width="128" height="75"/>
+        <element name="LessonGroup" positionX="-170.40234375" positionY="95.0390625" width="128" height="58"/>
+        <element name="Timetable" positionX="-378.765625" positionY="197.3671875" width="128" height="88"/>
+        <element name="Week" positionX="-71.99609375" positionY="224.6953125" width="128" height="73"/>
     </elements>
 </model>

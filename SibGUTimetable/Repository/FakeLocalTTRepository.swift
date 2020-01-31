@@ -11,9 +11,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class FakeLocalTTRepository: CoreDataTTRepository {
-
-    override func getSchedule() -> Single<Timetable> {
+class FakeLocalTTRepository: TTRepository {
+    func getTimetable(groupId: Int, groupName: String) -> Single<Timetable> {
         return Single.create { (single) -> Disposable in
             if let localSchedule = FileLoader.shared.getLocalSchedule() {
                 single(.success(localSchedule))
@@ -21,7 +20,11 @@ class FakeLocalTTRepository: CoreDataTTRepository {
                 single(.error(RxError.unknown))
             }
             return Disposables.create()
-        }
+        }.debug("FakeLocalTTRepository (get)", trimOutput: false)
+    }
+    
+    func saveTimetable(timetable: Timetable) -> Completable {
+        .never()
     }
     
 }

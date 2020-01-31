@@ -8,36 +8,79 @@
 
 import XCTest
 import RxSwift
+import CoreData
 
 @testable import SibGUTimetable
 
 class TimetableRepositoryTests: XCTestCase {
 
-//    var sut: TimetableRepository!
-//    let disposeBag = DisposeBag()
-//    
-//    override func setUp() {
-//        sut = FakeLocalTimetableRepository()
-//    }
-//
-//    override func tearDown() {
-//        sut = nil
-//    }
-//
-//    func testGetSchedule_fileExists_returnsValidSchedule() {
-//        let localScheduleObservable = sut.getSchedule()
-//        let expect = expectation(description: "onNext method was called")
-//        
-//        localScheduleObservable.subscribe(onNext: { (schedule) in
-//            XCTAssertNotNil(schedule)
-//            XCTAssertEqual(schedule.group_name, "БПИ16-01")
-//            XCTAssertEqual(schedule.weeks!.count, 2)
-//            XCTAssertEqual((schedule.weeks!.firstObject as! Week).days?.count, 7)
-//            XCTAssertEqual((schedule.weeks!.lastObject as! Week).days?.count, 7)
-//            expect.fulfill()
-//        }).disposed(by: disposeBag)
-//        
-//        wait(for: [expect], timeout: 1.0)
-//    }
+    var repository: CoreDataTTRepository!
+    
+    lazy var mockPersistantContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "PersistentTimetable", managedObjectModel: self.managedObjectModel)
+        let description = NSPersistentStoreDescription()
+        description.type = NSInMemoryStoreType
+        description.shouldAddStoreAsynchronously = false // Make it simpler in test env
+        
+        container.persistentStoreDescriptions = [description]
+        container.loadPersistentStores { (description, error) in
+            // Check if the data store is in memory
+            precondition( description.type == NSInMemoryStoreType )
+                                        
+            // Check if creating container wrong
+            if let error = error {
+                fatalError("Create an in-mem coordinator failed \(error)")
+            }
+        }
+        return container
+    }()
+    
+    lazy var managedObjectModel: NSManagedObjectModel = {
+        let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle(for: type(of: self))] )!
+        return managedObjectModel
+    }()
 
+    override func setUp() {
+        repository = CoreDataTTRepository(persistentConstainer: mockPersistantContainer)
+    }
+    
+    override func tearDown() {
+        repository = nil
+    }
+
+    func test_add_timetable_valid_data() {
+        let exp = expectation(description: "was loaded")
+        let timetable = FileLoader.shared.getLocalSchedule()
+        XCTAssertNotNil(timetable)
+        repository.saveTimetable(timetable: timetable!)
+        print("before fetch all")
+        repository.fetchAll().subscribe(onSuccess: { (ts) in
+            dump(ts)
+            dump((ts.first?.weeks?.lastObject as? Week)?.order_week)
+            exp.fulfill()
+        }) { (error) in
+            
+        }
+        print("after fetch all")
+        wait(for: [exp], timeout: 3.0)
+    }
+    
+    func test_fetch_timetable_exits() {
+        let exp = expectation(description: "was loaded")
+        
+        let timetable = FileLoader.shared.getLocalSchedule()
+        XCTAssertNotNil(timetable)
+        repository.saveTimetable(timetable: timetable!)
+        
+        repository.getTimetable( groupId: 740, groupName: "БПИ16-01").subscribe(onSuccess: { (timetable) in
+            exp.fulfill()
+            dump((timetable.weeks?.lastObject as? Week)?.order_week)
+        }) { (error) in
+            print("ERROR:", error)
+        }
+        
+        wait(for: [exp], timeout: 5.0)
+    }
+    
 }

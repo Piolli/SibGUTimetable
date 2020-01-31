@@ -38,12 +38,12 @@ enum ServerError : Error {
 
 public class NativeAPIServer : APIServer {
     
-    public lazy var sharedInstance = NativeAPIServer()
+    private let host = "http://192.168.1.46:5001/"
     
-    public init() { }
+    public static let sharedInstance = NativeAPIServer()
     
     func findGroup(queryGroupName: String) -> Single<[PairIDName]> {
-        if let url = makeGETWithParams(path: "http://127.0.0.1:5000/group", params: ["query": queryGroupName]) {
+        if let url = makeGETWithParams(path: "\(host)group", params: ["query": queryGroupName]) {
             let req = URLRequest(url: url)
             return URLSession.shared.doRequest(req)
         }
@@ -57,7 +57,16 @@ public class NativeAPIServer : APIServer {
     }
 
     func fetchTimetable(groupId: Int, groupName: String) -> Single<Timetable> {
-        fatalError()
+        let params: [String : String] = [
+            "group_name": groupName,
+            "id": String(groupId)
+        ]
+        
+        if let url = makeGETWithParams(path: "\(host)timetable", params: params) {
+            let request = URLRequest(url: url)
+            return URLSession.shared.doRequest(request)
+        }
+        return Single.error(ServerError.invalidRequest)
     }
     
 }
