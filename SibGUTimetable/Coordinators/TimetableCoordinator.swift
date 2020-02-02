@@ -9,17 +9,18 @@
 import Foundation
 import UIKit
 
-class TabTTPageViewCoordinator : Coordinator {
+class TimetableCoordinator : Coordinator {
     
     weak var navigationController: UINavigationController!
     
     let ttViewController = TimetableViewController()
     
     var rootViewController: UIViewController {
-        return navigationController
+//        return navigationController
+        return ttViewController
     }
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
         
         ttViewController.tabBarItem = UITabBarItem(title: "Timetable", image: UIImage(named: "tab_bar_item_timetable"), tag: 1)
@@ -30,6 +31,8 @@ class TabTTPageViewCoordinator : Coordinator {
     }
     
     func start() {
+        let timetable = FileLoader.shared.getLocalSchedule()
+        startWith(timetable: timetable!)
 //        let controller = TTPageViewController()
 //        controller.viewModelController?.repository = FakeLocalTTRepository()
 //        //TODO: make DI for repository

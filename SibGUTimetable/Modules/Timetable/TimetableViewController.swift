@@ -13,7 +13,7 @@ import FSCalendar
 
 class TimetableViewController: UIViewController {
     
-    var coordinator: TabTTPageViewCoordinator!
+    var coordinator: TimetableCoordinator!
 
     fileprivate weak var calendarView: FSCalendar!
 
@@ -43,6 +43,18 @@ class TimetableViewController: UIViewController {
 
         addCalendar()
         addTimetablePageViewController()
+        
+        setupRightBarButton()
+    }
+    
+    func setupRightBarButton() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(revealMenu))
+    }
+    
+    @objc func revealMenu() {
+        if let sideMenuController = sideMenuController {
+            sideMenuController.revealMenu()
+        }
     }
 
     private func initNavigationItem() {

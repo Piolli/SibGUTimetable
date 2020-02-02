@@ -39,7 +39,7 @@
 		11DC92FD23D9D4C500314C39 /* GroupSearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DC92FC23D9D4C500314C39 /* GroupSearchCoordinator.swift */; };
 		11DC92FF23D9E51F00314C39 /* ServerTTRepositoryTODORemake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DC92FE23D9E51F00314C39 /* ServerTTRepositoryTODORemake.swift */; };
 		11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C523C0507400CA52C2 /* Coordinator.swift */; };
-		11EA09C823C050B500CA52C2 /* TabTTPageViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C723C050B500CA52C2 /* TabTTPageViewCoordinator.swift */; };
+		11EA09C823C050B500CA52C2 /* TimetableCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C723C050B500CA52C2 /* TimetableCoordinator.swift */; };
 		11EA09CA23C0512F00CA52C2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C923C0512F00CA52C2 /* AppCoordinator.swift */; };
 		609530D6831E2DBBD2A1D1C3 /* FSCalendar + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6095332493044377CF1705DF /* FSCalendar + Ext.swift */; };
 		60953201621C1FC9AD6239EC /* TimetableViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609533084061D3F5C983CC07 /* TimetableViewModelController.swift */; };
@@ -123,7 +123,7 @@
 		11DC92FC23D9D4C500314C39 /* GroupSearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchCoordinator.swift; sourceTree = "<group>"; };
 		11DC92FE23D9E51F00314C39 /* ServerTTRepositoryTODORemake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTTRepositoryTODORemake.swift; sourceTree = "<group>"; };
 		11EA09C523C0507400CA52C2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		11EA09C723C050B500CA52C2 /* TabTTPageViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTTPageViewCoordinator.swift; sourceTree = "<group>"; };
+		11EA09C723C050B500CA52C2 /* TimetableCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableCoordinator.swift; sourceTree = "<group>"; };
 		11EA09C923C0512F00CA52C2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6095322281714670A637E162 /* CustomizablePageViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizablePageViewDelegate.swift; sourceTree = "<group>"; };
 		609533084061D3F5C983CC07 /* TimetableViewModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableViewModelController.swift; sourceTree = "<group>"; };
@@ -294,7 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				11EA09C523C0507400CA52C2 /* Coordinator.swift */,
-				11EA09C723C050B500CA52C2 /* TabTTPageViewCoordinator.swift */,
+				11EA09C723C050B500CA52C2 /* TimetableCoordinator.swift */,
 				11EA09C923C0512F00CA52C2 /* AppCoordinator.swift */,
 				11DC92FC23D9D4C500314C39 /* GroupSearchCoordinator.swift */,
 				1114AD5D23E3390400E99C84 /* TestPageView.swift */,
@@ -786,7 +786,7 @@
 				11C606CE23E4836D00CF2C79 /* ReusableTableViewDataSource.swift in Sources */,
 				A8011EC922B3D7C000567A37 /* SibGUTimetable.xcdatamodeld in Sources */,
 				11EA09CA23C0512F00CA52C2 /* AppCoordinator.swift in Sources */,
-				11EA09C823C050B500CA52C2 /* TabTTPageViewCoordinator.swift in Sources */,
+				11EA09C823C050B500CA52C2 /* TimetableCoordinator.swift in Sources */,
 				A8537EBF22EC494B005183C7 /* Lesson+CoreDataClass.swift in Sources */,
 				A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */,
 				A8537EC822EC4FE9005183C7 /* Logger.swift in Sources */,

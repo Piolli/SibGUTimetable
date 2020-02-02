@@ -15,7 +15,12 @@ class AppCoordinator : NSObject, Coordinator {
     private let window: UIWindow
     private var tabBarController: UITabBarController!
     private var navigationController: UINavigationController
-    lazy var sideCoordinator = SideMenuCoordinator(contentCoordinator: SimpleCoordinator())
+    lazy var sideCoordinator = SideMenuCoordinator(mainCoordinator: TimetableCoordinator(navigationController: nil), menuSections: [
+        ///Observe for teachers and their lessons
+        ("Add Timetable Section", SimpleCoordinator()),
+        ("Settings", SimpleCoordinator()),
+        ("About", SimpleCoordinator())
+    ])
     private lazy var rootCoordinator: Coordinator = {
 //        return TestPageView(navigationController: self.navigationController)
         

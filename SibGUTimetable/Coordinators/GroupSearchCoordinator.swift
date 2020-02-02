@@ -30,7 +30,7 @@ class GroupSearchCoordinator : Coordinator {
     
     #if DEBUG
     func openSearchedGroup(pair: PairIDName) {
-        let ttVC = TabTTPageViewCoordinator(navigationController: navigationController)
+        let ttVC = TimetableCoordinator(navigationController: navigationController)
 //        navigationController.pushViewController((ttVC.rootViewController as! UINavigationController).viewControllers[0], animated: true)
         //ONLY FOR DEBUG
         NativeAPIServer.sharedInstance.fetchTimetable(groupId: pair.id, groupName: pair.name)

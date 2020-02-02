@@ -13,58 +13,70 @@ import UIKit
 
 class SideMenuCoordinator : Coordinator {
     
+    typealias MenuSection = (sectionName: String, coordinator: Coordinator)
+    typealias MenuSections = [MenuSection]
+    
     let sideMenuController: SideMenuController
     
     var rootViewController: UIViewController {
         return sideMenuController
     }
     
-    let menuCoordinator: MenuListCoordinator
-    let contentCoordinator: Coordinator
+    let rootContentNavigatonController: UINavigationController
+    let menuListCoordinator: MenuListCoordinator
+    let menuSections: MenuSections
     
-    init(contentCoordinator: Coordinator) {
-        self.contentCoordinator = contentCoordinator
+    ///Default Coordinator's rootViewController is added to UINavigationController
+    ///Then UINavigationController is used for pushing another UIViewControllers
+    init(mainCoordinator: Coordinator, menuSections: MenuSections) {
+        self.menuSections = menuSections
         
-        menuCoordinator = MenuListCoordinator()
-        
-        sideMenuController = SideMenuController(
-            contentViewController: UINavigationController.createAndPush(contentCoordinator.rootViewController),
-            menuViewController: menuCoordinator.rootViewController
-        )
-        SideMenuController.preferences.basic.enableRubberEffectWhenPanning = false
-        
+        rootContentNavigatonController = UINavigationController.createAndPush(mainCoordinator.rootViewController)
+        menuListCoordinator = MenuListCoordinator(menuSections: menuSections.map({ $0.sectionName }))
+        sideMenuController = SideMenuController(contentViewController: rootContentNavigatonController,
+                                                menuViewController: menuListCoordinator.rootViewController)
 
+        menuListCoordinator.coordinator = self
         sideMenuController.navigationItem.title = "SideMenuController"
+        setupSideMenuControllerPreferences()
     }
 
+    func setupSideMenuControllerPreferences() {
+        SideMenuController.preferences.basic.enableRubberEffectWhenPanning = false
+    }
     
     func start() {
-        menuCoordinator.start()
-        contentCoordinator.start()
+        menuListCoordinator.start()
     }
     
-    func openTimetable() {
+    func didSelectMenuSection(sectionName: String) {
+        if let menuSection = menuSections.filter({$0.sectionName == sectionName}).first {
+            pushCoordinatorToRootNavigationController(coordinator: menuSection.coordinator)
+        } else {
+            print("Menu Section with name '\(sectionName)' don't exist or select default coordinator")
+        }
+    }
+    
+    private func pushCoordinatorToRootNavigationController(coordinator: Coordinator) {
         sideMenuController.hideMenu()
-        let vc = SimpleCoordinator().rootViewController
-//        vc.modalPresentationStyle = .formSheet
-//        navigationController.present(vc, animated: true, completion: nil)
-//        navigationController.pushViewController(vc, animated: true)
-        let nav = (sideMenuController.contentViewController as! UINavigationController)
-        nav.pushViewController(SimpleCoordinator().rootViewController, animated: true)
+        coordinator.start()
+        rootContentNavigatonController.pushViewController(coordinator.rootViewController, animated: true)
     }
-    
+
 }
 
 class MenuTableViewController : UIViewController {
     
-    let tableView = UITableView()
-    lazy var dataSource: ReusableTableViewDataSource<String> = {
-        let dataSource = ReusableTableViewDataSource<String>(models: ["Timetable", "Setting", "About app"], reuseIdentifier: "cell", cellConfigurator: { (str, cell) in
-            print("INCELL")
-            cell.textLabel?.text = str
-            cell.detailTextLabel?.text = str
-        })
-        return dataSource
+    public static let cellIdentifier = "cell"
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        tableView.tableHeaderView = headerView
+        tableView.isScrollEnabled = false
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        return tableView
     }()
     
     lazy var headerView: UIView = {
@@ -86,41 +98,48 @@ class MenuTableViewController : UIViewController {
     }()
     
     override func viewDidLoad() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-        
         let leadingMargin = view.frame.width - SideMenuController.preferences.basic.menuWidth
-        
-        tableView.separatorStyle = .none
-        tableView.tableHeaderView = headerView
-        
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingMargin),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingMargin + view.layoutMargins.left),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-        
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.dataSource = dataSource
     }
     
 }
 
 
 class MenuListCoordinator : NSObject, Coordinator, UITableViewDelegate {
-    let menuTableView: MenuTableViewController
+    let menuTableViewController: MenuTableViewController
+    let dataSource: ReusableTableViewDataSource<String>
+    unowned var coordinator: SideMenuCoordinator!
+    let menuSections: [String]
     
-    override init() {
-        menuTableView = MenuTableViewController()
+    init(menuSections: [String]) {
+        self.menuSections = menuSections
+        
+        menuTableViewController = MenuTableViewController()
+        dataSource = ReusableTableViewDataSource<String>(models: menuSections, reuseIdentifier: MenuTableViewController.cellIdentifier, cellConfigurator: { (str, cell) in
+            cell.textLabel?.text = str
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        })
+        super.init()
+        menuTableViewController.tableView.delegate = self
     }
     
     func start() {
-        
+        menuTableViewController.tableView.dataSource = dataSource
     }
     
     var rootViewController: UIViewController {
-        return menuTableView
+        return menuTableViewController
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        coordinator.didSelectMenuSection(sectionName: menuSections[indexPath.row])
     }
     
 }
@@ -135,7 +154,6 @@ class SimpleCoordinator : Coordinator {
         vc.view.backgroundColor = .blue
         return vc
     }()
-    
     
 }
 
@@ -160,7 +178,7 @@ class ButtonViewController : UIViewController {
      }
     
      @objc func showMenu(_ sender: UIButton) {
-        coordinator.openTimetable()
+//        coordinator.openTimetable()
      }
 
 }
