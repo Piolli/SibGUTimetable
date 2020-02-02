@@ -8,15 +8,18 @@
 
 import Foundation
 import UIKit
+import SideMenuSwift
 
 class AppCoordinator : NSObject, Coordinator {
     
     private let window: UIWindow
     private var tabBarController: UITabBarController!
     private var navigationController: UINavigationController
+    lazy var sideCoordinator = SideMenuCoordinator(contentCoordinator: SimpleCoordinator())
     private lazy var rootCoordinator: Coordinator = {
 //        return TestPageView(navigationController: self.navigationController)
-        return SideMenuCoordinator(contentViewControllerCoordinator: TestPageView(navigationController: self.navigationController))
+        
+        return sideCoordinator
 //        return TabTTPageViewCoordinator(navigationController: self.navigationController)
 //        return GroupSearchCoordinator(nav: self.navigationController)
     }()
@@ -44,14 +47,16 @@ class AppCoordinator : NSObject, Coordinator {
 
     
     func start() {
-//        window.rootViewController = tabBarController
         window.rootViewController = rootViewController
         rootCoordinator.start()
         window.makeKeyAndVisible()
+        
+        let table = (rootViewController as! SideMenuController).menuViewController.view.subviews.filter({ $0.isMember(of: UITableView.self) })[0] as! UITableView
+        table.estimatedRowHeight = 55
+        print("breakpoint")
     }
     
 }
-
 
 //MARK: - Setup root view controller (tabBar)
 extension AppCoordinator {

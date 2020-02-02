@@ -29,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return appDelegate.persistentContainer.newBackgroundContext()
     }()
-
+    
+    var appCoordinator: AppCoordinator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -39,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        let appCoordinator = AppCoordinator(window: window!)
+        appCoordinator = AppCoordinator(window: window!)
         appCoordinator.start()
         
         return true
@@ -50,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return navigationController
     }
 
+   
 
     func applicationWillTerminate(_ application: UIApplication) {
         self.saveContext()

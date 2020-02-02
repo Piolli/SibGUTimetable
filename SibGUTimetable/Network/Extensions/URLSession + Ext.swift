@@ -33,6 +33,9 @@ extension URLSession {
 //                                }
 //                            }
 //                        } else {
+//                        AppDelegate.backgroundContext.perform {
+//
+//                        }
                         DispatchQueue.main.async {
                             do {
                                 let decoder = JSONDecoder()
