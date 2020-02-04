@@ -11,13 +11,13 @@ import RxCocoa
 class TimetableViewModelController {
 
     //TODO: check mutations
-    var repository: TTRepository
+    var repository: TimetableRepository
     
     var viewModel: BehaviorRelay<TTViewModel?> = BehaviorRelay.init(value: nil)
     var loading: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
     var error: PublishRelay<Error> = PublishRelay.init()
 
-    internal init(repository: TTRepository) {
+    internal init(repository: TimetableRepository) {
         self.repository = repository
     }
 

@@ -6,7 +6,7 @@
 import Foundation
 import RxSwift
 
-protocol TTRepository {
+protocol TimetableRepository {
     
     func getTimetable(groupId: Int, groupName: String) -> Single<Timetable>
     

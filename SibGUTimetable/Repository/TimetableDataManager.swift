@@ -11,14 +11,20 @@ import RxSwift
 import RxCocoa
 import CoreData
 
-class TTDataManager {
+class TimetableDataManager {
     
-    let localRepository: TTRepository
-    let serverRepository: TTRepository
+    let localRepository: TimetableRepository
+    let serverRepository: TimetableRepository
     
-    init(localRepository: TTRepository, serverRepository: TTRepository) {
+    init(localRepository: TimetableRepository, serverRepository: TimetableRepository) {
         self.localRepository = localRepository
         self.serverRepository = serverRepository
+    }
+    
+    convenience init() {
+//        //TODO: DI with assembler
+////        self.init(localTTRepository: , serverTTRepository: )
+        fatalError("DI with assembler")
     }
     
     func deleteAll() {
@@ -84,10 +90,6 @@ class TTDataManager {
             .debug("RXSWIFT", trimOutput: false)
     }
     
-    convenience init() {
-//        //TODO: DI with assembler
-////        self.init(localTTRepository: , serverTTRepository: )
-        fatalError("DI with assembler")
-    }
+
     
 }

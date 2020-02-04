@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class StubTTRepository : TTRepository {
+class StubTTRepository : TimetableRepository {
     func getTimetable(groupId: Int, groupName: String) -> Single<Timetable> {
         return .never()
     }

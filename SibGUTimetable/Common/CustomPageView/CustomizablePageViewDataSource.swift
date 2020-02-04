@@ -30,6 +30,7 @@ class CustomizablePageViewDataSource<T, C: UIViewController> : NSObject, UIPageV
     let previousIterableValue: ModifyIterableValue
     let extractIterableValueFromController: Extractor
     
+    //TODO: make descriptions for each parameter
     init(startIterableValue: T, contentBuilder: @escaping ControllerBuilder, nextIterableValue: @escaping ModifyIterableValue, previousIterableValue: @escaping ModifyIterableValue, extractIterableValueFromController: @escaping Extractor) {
         self.contentBuilder = contentBuilder
         self.nextIterableValue = nextIterableValue

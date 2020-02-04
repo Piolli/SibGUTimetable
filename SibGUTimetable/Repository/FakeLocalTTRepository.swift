@@ -11,7 +11,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class FakeLocalTTRepository: TTRepository {
+class FakeLocalTTRepository: TimetableRepository {
     func getTimetable(groupId: Int, groupName: String) -> Single<Timetable> {
         return Single.create { (single) -> Disposable in
             if let localSchedule = FileLoader.shared.getLocalSchedule() {

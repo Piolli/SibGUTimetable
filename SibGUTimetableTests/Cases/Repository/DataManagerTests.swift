@@ -13,7 +13,7 @@ import CoreData
 
 class DataManagerTests: XCTestCase {
     
-    var dataManager: TTDataManager!
+    var dataManager: TimetableDataManager!
     
     lazy var mockPersistantContainer: NSPersistentContainer = {
         

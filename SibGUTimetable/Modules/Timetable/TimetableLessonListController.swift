@@ -20,6 +20,7 @@ class TimetableLessonListController: UITableViewController {
         tableView.register(TimetableLessonCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = .none
         
+        ///Maybe create init with viewModel?
         if viewModel?.countOflessons == 0 {
             let free = UILabel()
             free.text = "No Lessons Today"

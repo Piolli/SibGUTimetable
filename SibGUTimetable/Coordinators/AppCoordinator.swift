@@ -25,8 +25,6 @@ class AppCoordinator : NSObject, Coordinator {
 //        return TestPageView(navigationController: self.navigationController)
         
         return sideCoordinator
-//        return TabTTPageViewCoordinator(navigationController: self.navigationController)
-//        return GroupSearchCoordinator(nav: self.navigationController)
     }()
     
     var rootViewController: UIViewController {
@@ -55,10 +53,6 @@ class AppCoordinator : NSObject, Coordinator {
         window.rootViewController = rootViewController
         rootCoordinator.start()
         window.makeKeyAndVisible()
-        
-        let table = (rootViewController as! SideMenuController).menuViewController.view.subviews.filter({ $0.isMember(of: UITableView.self) })[0] as! UITableView
-        table.estimatedRowHeight = 55
-        print("breakpoint")
     }
     
 }

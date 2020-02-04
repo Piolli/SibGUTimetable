@@ -17,11 +17,7 @@ class TimetableViewController: UIViewController {
 
     fileprivate weak var calendarView: FSCalendar!
 
-    lazy var timetablePageViewController: TTPageViewController = {
-        let vc = TTPageViewController()
-        vc.pageViewDelegate = self
-        return vc
-    }()
+    lazy var timetablePageViewController: TimetablePageViewController = .init()
     
     fileprivate lazy var scopeGesture: UIPanGestureRecognizer = {
         [unowned self] in
@@ -45,6 +41,8 @@ class TimetableViewController: UIViewController {
         addTimetablePageViewController()
         
         setupRightBarButton()
+        
+        setupTimetablePageViewController()
     }
     
     func setupRightBarButton() {
@@ -103,18 +101,43 @@ class TimetableViewController: UIViewController {
     }
 
     private func makeTimetableConstraints(containerView: UIView) {
-        containerView.snp.makeConstraints { (make) in
-            make.leftMargin.rightMargin.bottomMargin.equalToSuperview()
-//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
-            make.top.equalTo(calendarView.snp_bottom)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(tabBarHeight)
-        }
+        let marginsGuide = view.layoutMarginsGuide
+        let marginBetweenTimetableAndCalendar = CGFloat(16)
+        
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: marginsGuide.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: marginsGuide.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: marginBetweenTimetableAndCalendar),
+            containerView.bottomAnchor.constraint(equalTo: marginsGuide.bottomAnchor)
+        ])
+        
+//        containerView.snp.makeConstraints { (make) in
+//            make.leftMargin.rightMargin.bottomMargin.equalToSuperview()
+//            make.rightMargin.rightMargin.bottomMargin.equalToSuperview()
+////            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+//            make.top.equalTo(calendarView.snp_bottom)
+//            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(tabBarHeight)
+//        }
+    }
+    
+    func setupTimetablePageViewController() {
+        //TODO: bind datamanger to timetableViewModel
+        addTimetablePageViewController()
+        
+        timetablePageViewController.timetableViewModel = TTViewModel(schedule: FileLoader.shared.getLocalSchedule()!)!
+        timetablePageViewController.pageDidMoveDirection.subscribe(onNext: { [weak self] (pageDidMoveTo) in
+            Logger.logMessageInfo(message: "pageViewDidMoved state: \(pageDidMoveTo)")
+            self?.calendarView.moveTo(state: pageDidMoveTo)
+            self?.updateTodayButtonVisibility()
+        }, onError: nil, onCompleted: nil, onDisposed: nil)
+
+        
     }
 
     func addTimetablePageViewController() {
         let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(containerView)
-
         makeTimetableConstraints(containerView: containerView)
 
         containerView.clipsToBounds = true
@@ -122,18 +145,7 @@ class TimetableViewController: UIViewController {
 
         updateTimetableFromSelectedDateCalendarView()
 
-        addViewControllerToContainerView(viewController: timetablePageViewController, containerView: containerView)
-    }
-
-    func addViewControllerToContainerView(viewController: UIViewController, containerView: UIView) {
-        addChild(viewController)
-        containerView.addSubview(viewController.view)
-        
-        viewController.view.snp.makeConstraints { (make) in
-            make.edges.equalTo(containerView)
-        }
-        
-        viewController.didMove(toParent: self)
+        add(viewController: timetablePageViewController, to: containerView)
     }
     
     fileprivate func initAppearance() {
@@ -153,7 +165,8 @@ extension TimetableViewController : FSCalendarDelegate {
             return
         }
 
-//        timetablePageViewController.select(at: date)
+        timetablePageViewController.select(date)
+        
         updateTodayButtonVisibility()
     }
 

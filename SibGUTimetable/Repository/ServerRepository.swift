@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class ServerRepository : TTRepository {
+class ServerRepository : TimetableRepository {
     
     func getTimetable(groupId: Int, groupName: String) -> Single<Timetable> {
         return NativeAPIServer.sharedInstance.fetchTimetable(groupId: groupId, groupName: groupName)

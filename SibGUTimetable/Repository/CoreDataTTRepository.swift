@@ -7,7 +7,7 @@ import Foundation
 import RxSwift
 import CoreData
 
-class CoreDataTTRepository : TTRepository {
+class CoreDataTTRepository : TimetableRepository {
     
     private let persistentConstainer: NSPersistentContainer
     private let context = AppDelegate.backgroundContext

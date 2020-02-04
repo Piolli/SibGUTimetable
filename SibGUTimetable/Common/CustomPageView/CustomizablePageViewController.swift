@@ -19,10 +19,10 @@ enum CustomizablePageViewMoveDirection: Int {
 
 //T - field that iterable (index)
 //C - content view controller class
-class CustomizablePageViewController<T, C: UIViewController> : UIPageViewController {
+class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPageViewController, UIPageViewControllerDelegate {
     
-//    var ds: CustomizablePageViewDataSource<T, C>
-    var pageDidMoveDirection: PublishRelay<CustomizablePageViewMoveDirection>!
+    lazy var pageDidMoveDirection: PublishRelay<CustomizablePageViewMoveDirection> = .init()
+    
     var customizableDataSource: CustomizablePageViewDataSource<T, C>? {
         didSet {
             let vc = self.customizableDataSource!.select(iterableValue: self.customizableDataSource!.iterableValue)
@@ -40,29 +40,48 @@ class CustomizablePageViewController<T, C: UIViewController> : UIPageViewControl
         }
     }
     
-    func commonSetup() {
-        pageDidMoveDirection = .init()
-    }
-    
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
-        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: options)
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         commonSetup()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        commonSetup()
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func commonSetup() {
+        delegate = self
+    }
+    
+    func select(iterableValue: T) {
+        if let newSelectedViewController = self.customizableDataSource?.select(iterableValue: iterableValue) {
+            setViewControllers([newSelectedViewController], direction: .forward, animated: true, completion: nil)
+        }
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard let customizableDataSource = customizableDataSource else {
+            //TODO logger
+            fatalError("CustomizablePageViewController: Attach data source!")
+        }
+        
+        if completed {
+            if let selectedPageContentView = pageViewController.viewControllers?.first as? C {
+                let selectedIterableValue = customizableDataSource.extractIterableValueFromController( selectedPageContentView)
+
+                if selectedIterableValue > customizableDataSource.iterableValue {
+                    pageDidMoveDirection.accept(.forward)
+                } else if selectedIterableValue < customizableDataSource.iterableValue {
+                    pageDidMoveDirection.accept(.backward)
+                }
+                customizableDataSource.iterableValue = selectedIterableValue
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
-    
-}
-
-extension CustomizablePageViewController {
-    
-    
     
 }

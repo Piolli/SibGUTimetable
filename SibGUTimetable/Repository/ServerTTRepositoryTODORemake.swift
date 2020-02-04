@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ServerTTRepositoryTODORemake: TTRepository {
+class ServerTTRepositoryTODORemake: TimetableRepository {
     
     let loadedTimetable: Timetable
     
