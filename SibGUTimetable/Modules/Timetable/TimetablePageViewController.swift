@@ -67,9 +67,6 @@ class TimetablePageViewController : UIViewController {
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-//        pageDidMove.bind(to: pageViewController.pageDidMoveDirection)
-//        pageViewController.pageDidMoveDirection.bind(to: pageDidMove)
-        
         add(viewController: pageViewController, to: containerView)
         
     }

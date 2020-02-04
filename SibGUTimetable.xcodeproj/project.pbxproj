@@ -35,6 +35,8 @@
 		119E51C223DF422B00E1ABA4 /* SibGUTimetable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC722B3D7C000567A37 /* SibGUTimetable.xcdatamodeld */; };
 		11B14BEB23E83DBD00B44958 /* TimetablePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B14BEA23E83DBD00B44958 /* TimetablePageViewController.swift */; };
 		11B14BED23E841FA00B44958 /* UIViewController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B14BEC23E841FA00B44958 /* UIViewController + Ext.swift */; };
+		11BFD48923E9BC2C00BE6B6B /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BFD48823E9BC2C00BE6B6B /* UserPreferences.swift */; };
+		11BFD49A23E9C01900BE6B6B /* UserPrerencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BFD49923E9C01900BE6B6B /* UserPrerencesTests.swift */; };
 		11C3889C23E438E200ED43A5 /* SideMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3889B23E438E200ED43A5 /* SideMenuCoordinator.swift */; };
 		11C3889E23E4468000ED43A5 /* UINavigationController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3889D23E4468000ED43A5 /* UINavigationController + Ext.swift */; };
 		11C606CE23E4836D00CF2C79 /* ReusableTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C606CD23E4836D00CF2C79 /* ReusableTableViewDataSource.swift */; };
@@ -81,6 +83,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		11BFD49323E9BEFA00BE6B6B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8011EB522B3D7C000567A37 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8011EBC22B3D7C000567A37;
+			remoteInfo = SibGUTimetable;
+		};
 		A8011ED522B3D7C100567A37 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A8011EB522B3D7C000567A37 /* Project object */;
@@ -122,6 +131,9 @@
 		119E51C023DEDC3200E1ABA4 /* StubTTRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubTTRepository.swift; sourceTree = "<group>"; };
 		11B14BEA23E83DBD00B44958 /* TimetablePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetablePageViewController.swift; sourceTree = "<group>"; };
 		11B14BEC23E841FA00B44958 /* UIViewController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Ext.swift"; sourceTree = "<group>"; };
+		11BFD48823E9BC2C00BE6B6B /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		11BFD48E23E9BEFA00BE6B6B /* UserPreferencesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UserPreferencesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		11BFD49923E9C01900BE6B6B /* UserPrerencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPrerencesTests.swift; sourceTree = "<group>"; };
 		11C3889B23E438E200ED43A5 /* SideMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCoordinator.swift; sourceTree = "<group>"; };
 		11C3889D23E4468000ED43A5 /* UINavigationController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController + Ext.swift"; sourceTree = "<group>"; };
 		11C606CD23E4836D00CF2C79 /* ReusableTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableTableViewDataSource.swift; sourceTree = "<group>"; };
@@ -180,6 +192,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		11BFD48B23E9BEFA00BE6B6B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A8011EBA22B3D7C000567A37 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -234,6 +253,7 @@
 				A8537EC722EC4FE9005183C7 /* Logger.swift */,
 				11C606CD23E4836D00CF2C79 /* ReusableTableViewDataSource.swift */,
 				1114AD5A23E32D7B00E99C84 /* CustomPageView */,
+				11BFD48823E9BC2C00BE6B6B /* UserPreferences.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -287,6 +307,14 @@
 			children = (
 			);
 			path = DataManagers;
+			sourceTree = "<group>";
+		};
+		11BFD49823E9BFFC00BE6B6B /* UserPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				11BFD49923E9C01900BE6B6B /* UserPrerencesTests.swift */,
+			);
+			path = UserPreferences;
 			sourceTree = "<group>";
 		};
 		11C606CC23E4834600CF2C79 /* SideMenu */ = {
@@ -366,6 +394,7 @@
 				A8011EBD22B3D7C000567A37 /* SibGUTimetable.app */,
 				A8011ED422B3D7C100567A37 /* SibGUTimetableTests.xctest */,
 				A8011EDF22B3D7C100567A37 /* SibGUTimetableUITests.xctest */,
+				11BFD48E23E9BEFA00BE6B6B /* UserPreferencesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -464,6 +493,7 @@
 		A8D4A541235C52DC0093FE61 /* Cases */ = {
 			isa = PBXGroup;
 			children = (
+				11BFD49823E9BFFC00BE6B6B /* UserPreferences */,
 				A8AFAA68236EDC5400E0AB6D /* Repository */,
 				A8D4A546235C533B0093FE61 /* AppModel */,
 				A8D4A545235C53260093FE61 /* Network */,
@@ -544,6 +574,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		11BFD48D23E9BEFA00BE6B6B /* UserPreferencesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11BFD49523E9BEFA00BE6B6B /* Build configuration list for PBXNativeTarget "UserPreferencesTests" */;
+			buildPhases = (
+				11BFD48A23E9BEFA00BE6B6B /* Sources */,
+				11BFD48B23E9BEFA00BE6B6B /* Frameworks */,
+				11BFD48C23E9BEFA00BE6B6B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				11BFD49423E9BEFA00BE6B6B /* PBXTargetDependency */,
+			);
+			name = UserPreferencesTests;
+			productName = UserPreferencesTests;
+			productReference = 11BFD48E23E9BEFA00BE6B6B /* UserPreferencesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A8011EBC22B3D7C000567A37 /* SibGUTimetable */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8011EE822B3D7C100567A37 /* Build configuration list for PBXNativeTarget "SibGUTimetable" */;
@@ -608,10 +656,14 @@
 		A8011EB522B3D7C000567A37 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Alexandr;
 				TargetAttributes = {
+					11BFD48D23E9BEFA00BE6B6B = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = A8011EBC22B3D7C000567A37;
+					};
 					A8011EBC22B3D7C000567A37 = {
 						CreatedOnToolsVersion = 10.2;
 					};
@@ -641,11 +693,19 @@
 				A8011EBC22B3D7C000567A37 /* SibGUTimetable */,
 				A8011ED322B3D7C100567A37 /* SibGUTimetableTests */,
 				A8011EDE22B3D7C100567A37 /* SibGUTimetableUITests */,
+				11BFD48D23E9BEFA00BE6B6B /* UserPreferencesTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		11BFD48C23E9BEFA00BE6B6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A8011EBB22B3D7C000567A37 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -780,6 +840,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		11BFD48A23E9BEFA00BE6B6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A8011EB922B3D7C000567A37 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -794,6 +861,7 @@
 				1114AD5C23E32DBE00E99C84 /* CustomizablePageViewController.swift in Sources */,
 				11C606CE23E4836D00CF2C79 /* ReusableTableViewDataSource.swift in Sources */,
 				A8011EC922B3D7C000567A37 /* SibGUTimetable.xcdatamodeld in Sources */,
+				11BFD48923E9BC2C00BE6B6B /* UserPreferences.swift in Sources */,
 				11EA09CA23C0512F00CA52C2 /* AppCoordinator.swift in Sources */,
 				11B14BEB23E83DBD00B44958 /* TimetablePageViewController.swift in Sources */,
 				11EA09C823C050B500CA52C2 /* TimetableCoordinator.swift in Sources */,
@@ -844,6 +912,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8011ED922B3D7C100567A37 /* SibGUTimetableTests.swift in Sources */,
+				11BFD49A23E9C01900BE6B6B /* UserPrerencesTests.swift in Sources */,
 				1114AD5523E18A0000E99C84 /* DataManagerTests.swift in Sources */,
 				A8F80DD72337B12D001442A9 /* NativeNetworkManagerTests.swift in Sources */,
 				119E51C223DF422B00E1ABA4 /* SibGUTimetable.xcdatamodeld in Sources */,
@@ -865,6 +934,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		11BFD49423E9BEFA00BE6B6B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8011EBC22B3D7C000567A37 /* SibGUTimetable */;
+			targetProxy = 11BFD49323E9BEFA00BE6B6B /* PBXContainerItemProxy */;
+		};
 		A8011ED622B3D7C100567A37 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A8011EBC22B3D7C000567A37 /* SibGUTimetable */;
@@ -889,6 +963,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		11BFD49623E9BEFA00BE6B6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = UserPreferencesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sanyakam.UserPreferencesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SibGUTimetable.app/SibGUTimetable";
+			};
+			name = Debug;
+		};
+		11BFD49723E9BEFA00BE6B6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = UserPreferencesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sanyakam.UserPreferencesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SibGUTimetable.app/SibGUTimetable";
+			};
+			name = Release;
+		};
 		A8011EE622B3D7C100567A37 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1139,6 +1253,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		11BFD49523E9BEFA00BE6B6B /* Build configuration list for PBXNativeTarget "UserPreferencesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11BFD49623E9BEFA00BE6B6B /* Debug */,
+				11BFD49723E9BEFA00BE6B6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A8011EB822B3D7C000567A37 /* Build configuration list for PBXProject "SibGUTimetable" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
