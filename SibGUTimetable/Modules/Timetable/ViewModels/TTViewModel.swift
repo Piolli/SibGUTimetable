@@ -11,7 +11,7 @@ import os
 
 class TTViewModel {
     
-    private let schedule: Timetable
+    let schedule: Timetable
     let groupName: String
     
     init?(schedule: Timetable) {

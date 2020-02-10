@@ -11,10 +11,20 @@ import RxSwift
 import RxCocoa
 import CoreData
 
+enum TimetableDataManagerError : Error {
+    case emptyStore
+    case didNotUpdate
+    case serverError(String)
+    case unknown
+}
+
 class TimetableDataManager {
     
-    let localRepository: TimetableRepository
-    let serverRepository: TimetableRepository
+    private let localRepository: TimetableRepository
+    private let serverRepository: TimetableRepository
+    
+    public let timetable: PublishRelay<Timetable> = .init()
+    public let error: PublishRelay<TimetableDataManagerError> = .init()
     
     init(localRepository: TimetableRepository, serverRepository: TimetableRepository) {
         self.localRepository = localRepository
@@ -28,68 +38,62 @@ class TimetableDataManager {
     }
     
     func deleteAll() {
-        let fetch: NSFetchRequest<NSFetchRequestResult> = Timetable.fetchRequest()
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Timetable")
         let deleteReq = NSBatchDeleteRequest(fetchRequest: fetch)
         let result = try? AppDelegate.backgroundContext.execute(deleteReq)
-        print("result", result)
+        print("---------", result.debugDescription)
+        try? AppDelegate.backgroundContext.save()
     }
     
-    func fetchTimetable(groupId: Int, groupName: String) -> Observable<Timetable> {
-//        let local = localRepository.getTimetable(groupId: groupId, groupName: groupName)
-//        let server = serverRepository.getTimetable(groupId: groupId, groupName: groupName)
-//
-//        return Observable.create { (observer) -> Disposable in
-//
-//            var mergedError: Error?
-//            var isCompleted = false
-//
-//            let disp1 = local.subscribe(onSuccess: { (timetable) in
-//                observer.onNext(timetable)
-//                if isCompleted {
-//                    observer.onCompleted()
-//                }
-//                isCompleted = true
-//            }) { (error) in
-//                if mergedError != nil {
-//                    observer.onError(error)
-//                }
-//                mergedError = error
-//            }
-//
-//            let disp2 = server.subscribe(onSuccess: { (timetable) in
-//                observer.onNext(timetable)
-//                if isCompleted {
-//                    observer.onCompleted()
-//                }
-//                isCompleted = true
-//            }) { (error) in
-//                if mergedError != nil {
-//                    observer.onError(error)
-//                }
-//                mergedError = error
-//            }
-//
-//            return Disposables.create(disp1, disp2)
-//        }.debug("Custom")
-        
-        return localRepository
-            .getTimetable(groupId: groupId, groupName: groupName)
-            .asObservable()
-            .catchError { [weak self] (error) -> Observable<Timetable> in
-                guard let self = self else {
-                    return Observable.error(RxError.unknown)
-                }
-                print("RXSWIFTLOG: load timetable from server")
-                return
-                    self.serverRepository.getTimetable(groupId: groupId, groupName: groupName)
-                        .map {
-                            self.localRepository.saveTimetable(timetable: $0)
-                            return $0
-                        }.asObservable()
+    func loadTimetable(groupId: Int, groupName: String) -> Observable<Timetable> {
+        let observable = localRepository
+        .getTimetable(groupId: groupId, groupName: groupName)
+        .asObservable()
+        .catchError { [weak self] (error) -> Observable<Timetable> in
+            guard let self = self else {
+                return Observable.error(RxError.unknown)
             }
-            .debug("RXSWIFT", trimOutput: false)
+            print("RXSWIFTLOG: load timetable from server")
+            return
+                self.serverRepository.getTimetable(groupId: groupId, groupName: groupName)
+                    .map {
+                        self.localRepository.saveTimetable(timetable: $0).debug("saveTimetable", trimOutput: false).debug("Save server", trimOutput: false).subscribe(onCompleted: {
+                        }) { [weak self] (error) in
+                            self?.error.accept(TimetableDataManagerError.serverError(error.localizedDescription))
+                            print("ERROR:", error.localizedDescription)
+                        }
+                        
+                        return $0
+                    }.asObservable().debug("CatchError", trimOutput: false)
+        }
+        .debug("RXSWIFT", trimOutput: false)
+        
+        
+        
+        observable.subscribe(onNext: { [weak self] (timetable) in
+            self?.timetable.accept(timetable)
+        }, onError: { (error) in
+            
+        }, onCompleted: nil, onDisposed: nil)
+        
+        return observable
     }
     
-
+    func updateTimetable(groupId: Int, groupName: String) -> Observable<Timetable> {
+        let observable = serverRepository
+            .getTimetable(groupId: groupId, groupName: groupName)
+            .map { [weak self] (timetable) -> Timetable in
+                self?.localRepository.saveTimetable(timetable: timetable).subscribe(onCompleted: nil, onError: nil)
+                return timetable
+        }.asObservable()
+        
+        observable.subscribe(onNext: { [weak self] (timetable) in
+            self?.timetable.accept(timetable)
+        }, onError: { (error) in
+            
+        }, onCompleted: nil, onDisposed: nil)
+        
+        return observable
+    }
     
 }

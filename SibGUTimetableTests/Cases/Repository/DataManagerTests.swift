@@ -41,7 +41,7 @@ class DataManagerTests: XCTestCase {
     }()
 
     override func setUp() {
-        dataManager = .init(localRepository: CoreDataTTRepository(persistentConstainer: mockPersistantContainer),
+        dataManager = .init(localRepository: CoreDataTTRepository(persistentConstainer: mockPersistantContainer, context: AppDelegate.backgroundContext),
                             serverRepository: ServerRepository())
     }
 
@@ -49,32 +49,56 @@ class DataManagerTests: XCTestCase {
         dataManager = nil
     }
     
-    func test_getTimetable_success() {
-        let exp = expectation(description: "was loaded")
-//        let saveExp = expectation(description: "save to db")
-////        dataManager.deleteAll()
-//        let timetable = FileLoader.shared.getLocalSchedule()
-//        CoreDataTTRepository(persistentConstainer: self.mockPersistantContainer).saveTimetable(timetable: timetable!).subscribe(onCompleted: {
-//            saveExp.fulfill()
-//        }, onError: { error in
-//            saveExp.fulfill()
-//            print("Error:", error.localizedDescription)
-//        })
-        
-        dataManager.localRepository.getTimetable(groupId: 740, groupName: "БПИ16-01").subscribe(onSuccess: { (timetable) in
+    func test_update_timetable_check() {
+        test_update_timetable()
+        test_update_timetable()
+        test_update_timetable()
+        test_update_timetable()
+        test_update_timetable()
+        test_update_timetable()
+        test_print_all_timetables()
+        test_updateTimetable_and_check_newest_returned_timetable()
+    }
+    
+    func test_update_timetable() -> TimeInterval {
+        let exp = expectation(description: "update was loaded")
+        var timestamp: TimeInterval = .zero
+        dataManager.updateTimetable(groupId: 740, groupName: "БПИ16-01").subscribe(onNext: { (timetable) in
             exp.fulfill()
-        }) { (error) in
-            print("ERRPR", error.localizedDescription)
-        }
-//
-//        dataManager.fetchTimetable(groupId: 740, groupName: "БПИ16-01").subscribe(onNext: { (timetable) in
-//            print(timetable.group_name)
-//        }, onError: { (error) in
-//            print(error.localizedDescription)
-//        }, onCompleted: {
-//            exp.fulfill()
-//        }, onDisposed: nil)
-//
-        wait(for: [exp], timeout: 5.0)
+            timestamp = timetable.updateTimestampTime
+            print("newTimestamp:", timetable.updateTimestampTime)
+        }, onError: nil, onCompleted: nil, onDisposed: nil)
+        
+        wait(for: [exp], timeout: 30.0)
+        return timestamp
+    }
+    
+    func test_print_all_timetables() {
+        let repo = CoreDataTTRepository(persistentConstainer: mockPersistantContainer, context: AppDelegate.backgroundContext)
+        
+        let exp = expectation(description: "printed all timetables")
+        repo.fetchAll().subscribe(onSuccess: { (timetables) in
+            timetables.forEach { (timetable) in
+                print("---------------", timetable.updateTimestampTime)
+            }
+            exp.fulfill()
+        }, onError: { error in
+            print(error.localizedDescription)
+        })
+        wait(for: [exp], timeout: 30.0)
+    }
+    
+    func test_updateTimetable_and_check_newest_returned_timetable() {
+        let exp = expectation(description: "was loaded")
+        let newTimestamp = test_update_timetable()
+        
+//        dataManager.deleteAll()
+        dataManager.fetchTimetable(groupId: 740, groupName: "БПИ16-01").subscribe(onNext: { (timetable) in
+            exp.fulfill()
+            XCTAssertEqual(timetable.updateTimestampTime, newTimestamp)
+            print("fetched timestamp:", timetable.updateTimestampTime)
+        }, onError: nil, onCompleted: nil, onDisposed: nil)
+
+        wait(for: [exp], timeout: 50.0)
     }
 }

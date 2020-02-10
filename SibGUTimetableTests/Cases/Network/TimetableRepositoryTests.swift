@@ -42,7 +42,7 @@ class TimetableRepositoryTests: XCTestCase {
     }()
 
     override func setUp() {
-        repository = CoreDataTTRepository(persistentConstainer: mockPersistantContainer)
+        repository = CoreDataTTRepository(persistentConstainer: mockPersistantContainer, context: AppDelegate.backgroundContext)
     }
     
     override func tearDown() {

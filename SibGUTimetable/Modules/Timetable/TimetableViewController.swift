@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import SnapKit
 import FSCalendar
+import RxSwift
+
 
 class TimetableViewController: UIViewController {
     
@@ -110,25 +112,33 @@ class TimetableViewController: UIViewController {
             containerView.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: marginBetweenTimetableAndCalendar),
             containerView.bottomAnchor.constraint(equalTo: marginsGuide.bottomAnchor)
         ])
-        
-//        containerView.snp.makeConstraints { (make) in
-//            make.leftMargin.rightMargin.bottomMargin.equalToSuperview()
-//            make.rightMargin.rightMargin.bottomMargin.equalToSuperview()
-////            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
-//            make.top.equalTo(calendarView.snp_bottom)
-//            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(tabBarHeight)
-//        }
     }
+    
+    let dataManager = TimetableDataManager(localRepository: CoreDataTTRepository(), serverRepository: ServerRepository())
     
     func setupTimetablePageViewController() {
         //TODO: bind datamanger to timetableViewModel
         addTimetablePageViewController()
-        
-        timetablePageViewController.timetableViewModel = TTViewModel(schedule: FileLoader.shared.getLocalSchedule()!)!
-        timetablePageViewController.pageDidMoveDirection.subscribe(onNext: { [weak self] (pageDidMoveTo) in
-            Logger.logMessageInfo(message: "pageViewDidMoved state: \(pageDidMoveTo)")
-            self?.calendarView.moveTo(state: pageDidMoveTo)
-            self?.updateTodayButtonVisibility()
+        dataManager.loadTimetable(groupId: 2534, groupName: "БПИ16-01")
+        dataManager.timetable.subscribe(onNext: { (timetable) in
+            DispatchQueue.main.async {
+                //Because server-side saves timetable to db then we can compare if timetable is new
+                if self.timetablePageViewController.timetableViewModel?.schedule.updateTimestampTime != timetable.updateTimestampTime {
+                    self.timetablePageViewController.timetableViewModel = TTViewModel(schedule: timetable)
+                }
+            }
+        }, onError: nil, onCompleted: nil, onDisposed: nil)
+        dataManager.updateTimetable(groupId: 2534, groupName: "БПИ16-01")
+//
+//        timetablePageViewController.timetableViewModel = TTViewModel(schedule: FileLoader.shared.getLocalSchedule()!)!
+        timetablePageViewController.pageDidMoveDirection
+            .subscribeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (pageDidMoveTo) in
+            DispatchQueue.main.async {
+                Logger.logMessageInfo(message: "pageViewDidMoved state: \(pageDidMoveTo)")
+                self?.calendarView.moveTo(state: pageDidMoveTo)
+                self?.updateTodayButtonVisibility()
+            }
         }, onError: nil, onCompleted: nil, onDisposed: nil)
 
         

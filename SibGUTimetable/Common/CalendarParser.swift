@@ -103,8 +103,8 @@ class CalendarParser {
             months.append(month)
         }
         
-        dump(months)
-        dump(self.today)
+//        dump(months)
+//        dump(self.today)
         
         
     }

@@ -10,7 +10,7 @@ import CoreData
 class CoreDataTTRepository : TimetableRepository {
     
     private let persistentConstainer: NSPersistentContainer
-    private let context = AppDelegate.backgroundContext
+    private let context: NSManagedObjectContext
     
     func getTimetable(groupId: Int, groupName: String) -> Single<Timetable> {
         return fetchAll()
@@ -31,13 +31,13 @@ class CoreDataTTRepository : TimetableRepository {
                 completed(.error(RxError.unknown))
                 return Disposables.create()
             }
-            
-            if self.context.hasChanges {
-                do {
-                    try self.context.save()
-                    
-                } catch {
-                    completed(.error(RxError.unknown))
+            self.context.perform {
+                if self.context.hasChanges {
+                    do {
+                        try self.context.save()
+                    } catch {
+                        completed(.error(RxError.unknown))
+                    }
                 }
             }
             
@@ -45,16 +45,16 @@ class CoreDataTTRepository : TimetableRepository {
         }
     }
     
-    init(persistentConstainer: NSPersistentContainer) {
+    init(persistentConstainer: NSPersistentContainer, context: NSManagedObjectContext) {
         self.persistentConstainer = persistentConstainer
+        self.context = context
     }
     
     convenience init() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("Delegate of UIApplication isn't AppDelegate class")
         }
-        
-        self.init(persistentConstainer: appDelegate.persistentContainer)
+        self.init(persistentConstainer: appDelegate.persistentContainer, context: AppDelegate.backgroundContext)
     }
     
     func fetchAll() -> Single<[Timetable]> {
@@ -74,7 +74,7 @@ class CoreDataTTRepository : TimetableRepository {
                     if let timetables = try self.context.fetch(fetchRequest) as? [Timetable] {
                         single(.success(timetables))
                     } else {
-                        single(.error(RxError.noElements))
+                        single(.error(TTError.doNotSaved))
                     }
                 } catch {
                     single(.error(error))
@@ -90,6 +90,7 @@ class CoreDataTTRepository : TimetableRepository {
         case noTimetable
         case serverError
         case anotherError
+        case doNotSaved
     }
 
 }
