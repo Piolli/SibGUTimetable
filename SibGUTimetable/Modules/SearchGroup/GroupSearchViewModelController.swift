@@ -20,20 +20,29 @@ class GroupSearchViewModelController {
     private let api: APIServer
     public let viewModel: PublishRelay<GroupSearchViewModel>
     public let error: PublishRelay<Error>
+    public let loading: PublishRelay<Bool>
     private let disposeBag = DisposeBag()
     
     init(api: APIServer) {
         self.api = api
         self.viewModel = .init()
+        self.loading = .init()
         self.error = .init()
     }
     
     public func searchGroup(query: String) {
+        loading.accept(true)
         api.findGroup(queryGroupName: query).subscribe(onSuccess: { [weak self] (groupPairs) in
             self?.viewModel.accept(GroupSearchViewModel(groupPairs: groupPairs))
+            self?.loading.accept(false)
         }) { [weak self] (error) in
             self?.error.accept(error)
+            self?.loading.accept(false)
         }.disposed(by: disposeBag)
+    }
+    
+    public func save(timetableDetails: TimetableDetails) {
+        UserPreferences.sharedInstance.saveTimetableDetails(timetableDetails)
     }
     
 }

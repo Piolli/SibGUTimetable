@@ -54,6 +54,11 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
     }
     
     func select(iterableValue: T) {
+        if customizableDataSource?.iterableValue == iterableValue {
+            print("Select the same date!")
+            return
+        }
+        
         if let newSelectedViewController = self.customizableDataSource?.select(iterableValue: iterableValue) {
             setViewControllers([newSelectedViewController], direction: .forward, animated: true, completion: nil)
         }

@@ -25,11 +25,13 @@ class SideMenuCoordinator : Coordinator {
     let rootContentNavigatonController: UINavigationController
     let menuListCoordinator: MenuListCoordinator
     let menuSections: MenuSections
+    let mainCoordinator: Coordinator
     
     ///Default Coordinator's rootViewController is added to UINavigationController
     ///Then UINavigationController is used for pushing another UIViewControllers
     init(mainCoordinator: Coordinator, menuSections: MenuSections) {
         self.menuSections = menuSections
+        self.mainCoordinator = mainCoordinator
         
         rootContentNavigatonController = UINavigationController.createAndPush(mainCoordinator.rootViewController)
         menuListCoordinator = MenuListCoordinator(menuSections: menuSections.map({ $0.sectionName }))
@@ -46,7 +48,12 @@ class SideMenuCoordinator : Coordinator {
     }
     
     func start() {
+        mainCoordinator.start()
         menuListCoordinator.start()
+    }
+    
+    func reloadMainViewController() {
+//        sideMenuController.contentViewController 
     }
     
     func didSelectMenuSection(sectionName: String) {

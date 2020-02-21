@@ -7,31 +7,70 @@
 //
 
 import Foundation
+import RxSwift
+import RxRelay
 
 
-struct TimetableDetails : Codable, Equatable {
+class TimetableDetails : NSObject, Codable {
+    
     let groupName: String
     let timestamp: String
+    let groupId: Int
+    
+    internal init(groupId: Int, groupName: String, timestamp: String) {
+        self.groupName = groupName
+        self.timestamp = timestamp
+        self.groupId = groupId
+    }
+    
 }
 
-class UserPreferences {
+extension UserDefaults {
+    
+    @objc dynamic var timetableDetails: Data {
+        return data(forKey: "timetableDetails") ?? Data()
+    }
+    
+}
+
+class UserPreferences : NSObject {
     
     public static let sharedInstance = UserPreferences()
-    
-    private init() { }
+    public let timetableDetailsDidChanged: PublishRelay<TimetableDetails?> = .init()
     private let defaults = UserDefaults.standard
+    let selectedTimetableDetailsKey = "timetableDetails"
+    var observer: NSKeyValueObservation!
     
-    let selectedTimetableDetailsKey = "timetable_group_name"
     
-    func saveTimetableDetails(groupName: String, timestamp: String) {
+    private override init() {
+        super.init()
+        observer = defaults.observe(\.timetableDetails, options: .new, changeHandler: { (defaults, value) in
+            print("some", value.newValue, value.oldValue)
+            if let data = value.newValue {
+                let object = try? JSONDecoder().decode(TimetableDetails.self, from: data)
+                print(object?.groupName, object?.timestamp)
+            }
+        })
+    }
+    
+    deinit {
+        observer.invalidate()
+    }
+   
+    func saveTimetableDetails(groupId: Int, groupName: String, timestamp: String) {
+        let timetableDetails = TimetableDetails(groupId: groupId, groupName: groupName, timestamp: timestamp)
+        self.saveTimetableDetails(timetableDetails)
+    }
+    
+    func saveTimetableDetails(_ timetableDetails: TimetableDetails) {
         let encoder = JSONEncoder()
-        guard let json = try? encoder.encode(TimetableDetails(groupName: groupName, timestamp: timestamp)) else {
+        guard let json = try? encoder.encode(timetableDetails) else {
             //TODO logger
             print("JSON is nil")
             return
         }
-        
         defaults.set(json, forKey: selectedTimetableDetailsKey)
+        timetableDetailsDidChanged.accept(timetableDetails)
     }
     
     func getTimetableDetails() -> TimetableDetails? {
@@ -46,6 +85,14 @@ class UserPreferences {
     
     func clearTimetableDetails() {
         defaults.removeObject(forKey: selectedTimetableDetailsKey)
+        timetableDetailsDidChanged.accept(nil)
     }
+    
+    @objc fileprivate func didChangeValue(notification: Notification) {
+        print("Notification description: ",notification.description)
+        
+        dump(notification)
+    }
+    
     
 }

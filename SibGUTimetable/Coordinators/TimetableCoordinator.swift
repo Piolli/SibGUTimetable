@@ -13,41 +13,35 @@ class TimetableCoordinator : Coordinator {
     
     weak var navigationController: UINavigationController!
     
-    let ttViewController = TimetableViewController()
+    let timetableViewController = TimetableViewController()
     
     var rootViewController: UIViewController {
 //        return navigationController
-        return ttViewController
+        return timetableViewController
     }
     
     init(navigationController: UINavigationController?) {
         self.navigationController = navigationController
         
-        ttViewController.tabBarItem = UITabBarItem(title: "Timetable", image: UIImage(named: "tab_bar_item_timetable"), tag: 1)
-        ttViewController.coordinator = self
+        timetableViewController.tabBarItem = UITabBarItem(title: "Timetable", image: UIImage(named: "tab_bar_item_timetable"), tag: 1)
+        timetableViewController.coordinator = self
 //        navigationController.pushViewController(ttViewController, animated: true)
 //        let navigationController = AppCoordinator.putInNavigationController(ttViewController)
 //        self.navigationController = navigationController
     }
     
     func start() {
-        let timetable = FileLoader.shared.getLocalSchedule()
-        startWith(timetable: timetable!)
 //        let controller = TTPageViewController()
 //        controller.viewModelController?.repository = FakeLocalTTRepository()
 //        //TODO: make DI for repository
 //        navigationController.pushViewController(controller, animated: true)
+        //TODO: make DI for repository
+        timetableViewController.dataManager = TimetableDataManager(localRepository: CoreDataTTRepository(), serverRepository: ServerRepository())
     }
     
     #if DEBUG
     func startWith(timetable: Timetable) {
-//        let controller = ViewController()
-        
-//        controller.viewModelController?.repository = FakeLocalTTRepository()
-//        ServerTTRepositoryTODORemake(timetable: timetable)
-//        controller.updateSchedule()
-        //TODO: make DI for repository
-        navigationController.pushViewController(ttViewController, animated: true)
+        timetableViewController.dataManager = .init(localRepository: FakeLocalTTRepository(timetable: timetable), serverRepository: ServerTTRepositoryTODORemake(timetable: timetable))
     }
     #endif
     

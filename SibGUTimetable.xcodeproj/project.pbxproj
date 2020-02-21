@@ -62,7 +62,6 @@
 		A8011ED922B3D7C100567A37 /* SibGUTimetableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011ED822B3D7C100567A37 /* SibGUTimetableTests.swift */; };
 		A8011EE422B3D7C100567A37 /* SibGUTimetableUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011EE322B3D7C100567A37 /* SibGUTimetableUITests.swift */; };
 		A8209F1922D70A7200E1BAF6 /* TTLessonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8209F1822D70A7200E1BAF6 /* TTLessonViewModel.swift */; };
-		A8209F2C22D719D000E1BAF6 /* TTPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8209F2B22D719D000E1BAF6 /* TTPageViewController.swift */; };
 		A8209F2E22D71A1400E1BAF6 /* TTViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8209F2D22D71A1400E1BAF6 /* TTViewModel.swift */; };
 		A8537EBF22EC494B005183C7 /* Lesson+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EB722EC494B005183C7 /* Lesson+CoreDataClass.swift */; };
 		A8537EC122EC494B005183C7 /* Week+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EB922EC494B005183C7 /* Week+CoreDataClass.swift */; };
@@ -165,7 +164,6 @@
 		A8011EE322B3D7C100567A37 /* SibGUTimetableUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SibGUTimetableUITests.swift; sourceTree = "<group>"; };
 		A8011EE522B3D7C100567A37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8209F1822D70A7200E1BAF6 /* TTLessonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTLessonViewModel.swift; sourceTree = "<group>"; };
-		A8209F2B22D719D000E1BAF6 /* TTPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTPageViewController.swift; sourceTree = "<group>"; };
 		A8209F2D22D71A1400E1BAF6 /* TTViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTViewModel.swift; sourceTree = "<group>"; };
 		A833C99E2310166E00290DBD /* Objc-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objc-Bridge-Header.h"; sourceTree = "<group>"; };
 		A8537EB722EC494B005183C7 /* Lesson+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lesson+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -249,10 +247,10 @@
 		1114AD6023E3F78F00E99C84 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1114AD5A23E32D7B00E99C84 /* CustomPageView */,
 				A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */,
 				A8537EC722EC4FE9005183C7 /* Logger.swift */,
 				11C606CD23E4836D00CF2C79 /* ReusableTableViewDataSource.swift */,
-				1114AD5A23E32D7B00E99C84 /* CustomPageView */,
 				11BFD48823E9BC2C00BE6B6B /* UserPreferences.swift */,
 			);
 			path = Common;
@@ -557,7 +555,6 @@
 				609533084061D3F5C983CC07 /* TimetableViewModelController.swift */,
 				A8011EC222B3D7C000567A37 /* TimetableViewController.swift */,
 				A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonListController.swift */,
-				A8209F2B22D719D000E1BAF6 /* TTPageViewController.swift */,
 				11B14BEA23E83DBD00B44958 /* TimetablePageViewController.swift */,
 			);
 			path = Timetable;
@@ -881,7 +878,6 @@
 				A8E3BC4E22D1F7FC006E1B65 /* TimetableLessonCell.swift in Sources */,
 				A8E3BC4C22D1F7A7006E1B65 /* TimetableLessonListController.swift in Sources */,
 				119E51BD23DED7C100E1ABA4 /* Week+CoreDataProperties.swift in Sources */,
-				A8209F2C22D719D000E1BAF6 /* TTPageViewController.swift in Sources */,
 				1114AD5923E1982C00E99C84 /* ObservableType+Ext.swift in Sources */,
 				A8D2299E235C503C00FE98BE /* URLSession + Ext.swift in Sources */,
 				1114AD5E23E3390400E99C84 /* TestPageView.swift in Sources */,

@@ -15,15 +15,17 @@ class AppCoordinator : NSObject, Coordinator {
     private let window: UIWindow
     private var tabBarController: UITabBarController!
     private var navigationController: UINavigationController
+    
     lazy var sideCoordinator = SideMenuCoordinator(mainCoordinator: TimetableCoordinator(navigationController: nil), menuSections: [
         ///Observe for teachers and their lessons
-        ("Add Timetable Section", SimpleCoordinator()),
+        ("Change group's timetable", GroupSearchCoordinator(appCoordinator: self)),
         ("Settings", SimpleCoordinator()),
         ("About", SimpleCoordinator())
     ])
+    
     private lazy var rootCoordinator: Coordinator = {
 //        return TestPageView(navigationController: self.navigationController)
-        
+//        return GroupSearchCoordinator(nav: self.navigationController)
         return sideCoordinator
     }()
     
@@ -53,6 +55,10 @@ class AppCoordinator : NSObject, Coordinator {
         window.rootViewController = rootViewController
         rootCoordinator.start()
         window.makeKeyAndVisible()
+        #warning("DELETE in Release")
+        if #available(iOS 13.0, *) {
+            window.overrideUserInterfaceStyle = .light
+        }
     }
     
 }

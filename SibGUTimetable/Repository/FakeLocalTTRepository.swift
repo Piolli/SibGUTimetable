@@ -12,19 +12,23 @@ import RxSwift
 import RxCocoa
 
 class FakeLocalTTRepository: TimetableRepository {
+    
+    let timetable: Timetable
+    
+    init(timetable: Timetable) {
+        self.timetable = timetable
+    }
+    
     func getTimetable(groupId: Int, groupName: String) -> Single<Timetable> {
         return Single.create { (single) -> Disposable in
-            if let localSchedule = FileLoader.shared.getLocalSchedule() {
-                single(.success(localSchedule))
-            } else {
-                single(.error(RxError.unknown))
-            }
+            single(.success(self.timetable))
             return Disposables.create()
         }.debug("FakeLocalTTRepository (get)", trimOutput: false)
     }
     
     func saveTimetable(timetable: Timetable) -> Completable {
-        .never()
+        Logger.logMessageInfo(message: "It saved nothing")
+        return .never()
     }
     
 }

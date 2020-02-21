@@ -12,9 +12,9 @@ import RxRelay
 
 class GroupSearchViewModel {
     
-    var groupPairs: [PairIDName] = []
+    var groupPairs: [GroupPairIDName] = []
     
-    init(groupPairs: [PairIDName]) {
+    init(groupPairs: [GroupPairIDName]) {
         self.groupPairs = groupPairs
     }
     

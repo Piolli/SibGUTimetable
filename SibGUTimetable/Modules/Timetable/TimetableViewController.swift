@@ -16,10 +16,14 @@ import RxSwift
 class TimetableViewController: UIViewController {
     
     var coordinator: TimetableCoordinator!
-
-    fileprivate weak var calendarView: FSCalendar!
-
+    weak var calendarView: FSCalendar!
     lazy var timetablePageViewController: TimetablePageViewController = .init()
+    var dataManager: TimetableDataManager! {
+        didSet {
+            setupDataManager()
+            print("TimetableViewController didSet dataManager")
+        }
+    }
     
     fileprivate lazy var scopeGesture: UIPanGestureRecognizer = {
         [unowned self] in
@@ -45,6 +49,13 @@ class TimetableViewController: UIViewController {
         setupRightBarButton()
         
         setupTimetablePageViewController()
+        
+        //setup autoupdate
+        UserPreferences.sharedInstance.timetableDetailsDidChanged.subscribe(onNext: { (timetableDetails) in
+            guard let timetableDetails = timetableDetails else { return }
+            self.dataManager.updateTimetable(groupId: timetableDetails.groupId, groupName: timetableDetails.groupName)
+        })
+        
     }
     
     func setupRightBarButton() {
@@ -58,8 +69,6 @@ class TimetableViewController: UIViewController {
     }
 
     private func initNavigationItem() {
-        self.navigationItem.title = "БПИ16-01"
-
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сегодня", style: .plain, target: self, action: #selector(todayButtonDidTapped(_:)))
     }
@@ -114,21 +123,36 @@ class TimetableViewController: UIViewController {
         ])
     }
     
-    let dataManager = TimetableDataManager(localRepository: CoreDataTTRepository(), serverRepository: ServerRepository())
+    func setupDataManager() {
+        dataManager.loadTimetable(groupId: 740, groupName: "БПИ16-01")
+        dataManager.timetable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { (timetable) in
+            //Because server-side saves timetable to db then we can compare if timetable is new
+//                DispatchQueue.main.async {
+                    if self.timetablePageViewController.timetableViewModel?.schedule.updateTimestampTime != timetable.updateTimestampTime {
+                        self.timetablePageViewController.timetableViewModel = TTViewModel(schedule: timetable)
+                        self.navigationItem.title = timetable.group_name
+                    }
+//                }
+        }, onError: nil, onCompleted: nil, onDisposed: nil)
+        dataManager.updateTimetable(groupId: 740, groupName: "БПИ16-01")
+    }
     
     func setupTimetablePageViewController() {
         //TODO: bind datamanger to timetableViewModel
         addTimetablePageViewController()
-        dataManager.loadTimetable(groupId: 2534, groupName: "БПИ16-01")
-        dataManager.timetable.subscribe(onNext: { (timetable) in
-            DispatchQueue.main.async {
-                //Because server-side saves timetable to db then we can compare if timetable is new
-                if self.timetablePageViewController.timetableViewModel?.schedule.updateTimestampTime != timetable.updateTimestampTime {
-                    self.timetablePageViewController.timetableViewModel = TTViewModel(schedule: timetable)
-                }
-            }
-        }, onError: nil, onCompleted: nil, onDisposed: nil)
-        dataManager.updateTimetable(groupId: 2534, groupName: "БПИ16-01")
+//        dataManager.loadTimetable(groupId: 740, groupName: "БПИ16-01")
+//        dataManager.timetable.subscribe(onNext: { (timetable) in
+////            timetable.valida
+//            DispatchQueue.main.async {
+//                //Because server-side saves timetable to db then we can compare if timetable is new
+//                if self.timetablePageViewController.timetableViewModel?.schedule.updateTimestampTime != timetable.updateTimestampTime {
+//                    self.timetablePageViewController.timetableViewModel = TTViewModel(schedule: timetable)
+//                }
+//            }
+//        }, onError: nil, onCompleted: nil, onDisposed: nil)
+//        dataManager.updateTimetable(groupId: 740, groupName: "БПИ16-01")
 //
 //        timetablePageViewController.timetableViewModel = TTViewModel(schedule: FileLoader.shared.getLocalSchedule()!)!
         timetablePageViewController.pageDidMoveDirection
@@ -168,6 +192,7 @@ extension TimetableViewController : FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         Logger.logMessageInfo(message: "Did select date: \(calendar.selectedDate)")
         updateTimetableFrom(date: calendar.selectedDate)
+        
     }
 
     private func updateTimetableFrom(date: Date?) {

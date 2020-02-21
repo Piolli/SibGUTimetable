@@ -8,11 +8,11 @@
 
 import UIKit
 import CoreData
-import Firebase
+//import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
+    var window: UIWindow!
     
     //Manager of transactions (save method)
     static var context: NSManagedObjectContext = {
@@ -38,11 +38,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = .red
         UITabBar.appearance().barTintColor = .white
         
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
         
-        appCoordinator = AppCoordinator(window: window!)
+        appCoordinator = AppCoordinator(window: window)
         appCoordinator.start()
         
+        
+//        #warning("delete")
+//        UserPreferences.sharedInstance.clearTimetableDetails()
+//        UserPreferences.sharedInstance.saveTimetableDetails(groupId: 740, groupName: "БПИ16-01", timestamp: "")
+//        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
+//            UserPreferences.sharedInstance.saveTimetableDetails(groupId: 742, groupName: "БПИ18-01", timestamp: "")
+//        }
+//        Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { (timer) in
+//            UserPreferences.sharedInstance.saveTimetableDetails(groupId: 512, groupName: "БИС16-01", timestamp: "")
+//        }
         return true
     }
     
@@ -50,8 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController(rootViewController: vc)
         return navigationController
     }
-
-   
 
     func applicationWillTerminate(_ application: UIApplication) {
         self.saveContext()

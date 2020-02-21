@@ -13,23 +13,23 @@ import RxCocoa
 
 class GroupSearchCoordinator : Coordinator {
     
-    weak var navigationController: UINavigationController!
+    let groupSearchViewController: GroupSearchViewController
+    let appCoordinator: AppCoordinator
     
     var rootViewController: UIViewController {
-        return navigationController
+        return groupSearchViewController
     }
 
-    init(nav: UINavigationController) {
-        navigationController = nav
-        let ttViewController = GroupSearchViewController()
-        ttViewController.apiServer = NativeAPIServer.sharedInstance
-        ttViewController.coordinator = self
-        nav.pushViewController(ttViewController, animated: true)
-//        navigationController = AppCoordinator.putInNavigationController(ttViewController)
+    init(appCoordinator: AppCoordinator) {
+        self.appCoordinator = appCoordinator
+        groupSearchViewController = GroupSearchViewController()
+        groupSearchViewController.apiServer = NativeAPIServer.sharedInstance
+        groupSearchViewController.coordinator = self
     }
     
     #if DEBUG
-    func openSearchedGroup(pair: PairIDName) {
+    func openSearchedGroup(pair: GroupPairIDName) {
+        var navigationController: UINavigationController = .init()
         let ttVC = TimetableCoordinator(navigationController: navigationController)
 //        navigationController.pushViewController((ttVC.rootViewController as! UINavigationController).viewControllers[0], animated: true)
         //ONLY FOR DEBUG
@@ -44,6 +44,7 @@ class GroupSearchCoordinator : Coordinator {
     #endif
     
     func start() {
+        
 //        let controller = TTPageViewController()
 //        navigationController?.pushViewController(controller, animated: true)
     }

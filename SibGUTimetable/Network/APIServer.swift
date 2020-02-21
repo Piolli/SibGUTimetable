@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 
-struct PairIDName : Decodable {
+struct GroupPairIDName : Decodable {
     let id: Int
     let name: String
 }
@@ -19,7 +19,7 @@ struct PairIDName : Decodable {
 
 protocol APIServer {
     
-    func findGroup(queryGroupName: String) -> Single<[PairIDName]>
+    func findGroup(queryGroupName: String) -> Single<[GroupPairIDName]>
     
     func fetchTimetable(groupId: Int, groupName: String) -> Single<Timetable>
     
@@ -42,7 +42,7 @@ public class NativeAPIServer : APIServer {
     
     public static let sharedInstance = NativeAPIServer()
     
-    func findGroup(queryGroupName: String) -> Single<[PairIDName]> {
+    func findGroup(queryGroupName: String) -> Single<[GroupPairIDName]> {
         if let url = makeGETWithParams(path: "\(host)group", params: ["query": queryGroupName]) {
             let req = URLRequest(url: url)
             return URLSession.shared.doRequest(req)

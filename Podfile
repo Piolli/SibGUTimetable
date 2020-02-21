@@ -12,19 +12,22 @@ target 'SibGUTimetable' do
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'
   
-  # Firebase
-  # ---------------------
-  # Add the Firebase pod for Google Analytics
-  pod 'Firebase/Analytics'
-
-  # Add the pods for any other Firebase products you want to use in your app
-  # For example, to use Firebase Authentication and Cloud Firestore
-  pod 'Firebase/Auth'
-  pod 'Firebase/Firestore'
-  # ---------------------
+#  # Firebase
+#  # ---------------------
+#  # Add the Firebase pod for Google Analytics
+#  pod 'Firebase/Analytics'
+#
+#  # Add the pods for any other Firebase products you want to use in your app
+#  # For example, to use Firebase Authentication and Cloud Firestore
+#  pod 'Firebase/Auth'
+#  pod 'Firebase/Firestore'
+#  # ---------------------
   
   # Side menu
   pod 'SideMenuSwift'
+  
+  # Animation indicator
+  pod 'NVActivityIndicatorView'
   
   target 'SibGUTimetableTests' do
     inherit! :search_paths

@@ -41,14 +41,10 @@ class CalendarParser {
     //Return the number of week as a number like 0 or 1
     func currentNumberOfWeek(date: Date = Date()) -> Int {
         let dateComponents = calendar.dateComponents(in: .current, from: date)
-
         let numberWeekOfYear = dateComponents.weekOfYear!
-        
-        let result = (numberWeekOfYear - 1) % 2
+        let result = numberWeekOfYear % 2
 //        Logger.logMessage(message: "currentNumberOfWeek is \(result)", type: .info)
-
         return result
-        
     }
     
     //Return the number of day in week like 'monday' = 0, 'tuesday' = 1

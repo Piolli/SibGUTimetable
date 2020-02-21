@@ -28,5 +28,12 @@ extension UIViewController {
         viewController.didMove(toParent: self)
     }
     
+    func showMessage(text: String, title: String) {
+        let alert = UIAlertController(title: title, message: text, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 

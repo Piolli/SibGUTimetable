@@ -21,23 +21,23 @@ class TimetableViewModelController {
         self.repository = repository
     }
 
-    func loadData() {
-        loading.accept(true)
-        
-        repository.getTimetable(groupId: 740, groupName: "БПИ16-01").subscribe(onSuccess: { (timetable) in
-            self.viewModel.accept(TTViewModel(schedule: timetable))
-        }) { (error) in
-            self.error.accept(error)
-        }
-//        repository.getTimetable(groupName: <#String#>).subscribe(onSuccess: { [weak self] (timetable) in
-//            self?.loading.accept(false)
-//            Logger.logMessageInfo(message: "get schedule with \(timetable.group_name) \(timetable.weeks?.count)")
-//            self?.viewModel.accept(TTViewModel(schedule: timetable))
+//    func loadData() {
+//        loading.accept(true)
+//
+//        repository.getTimetable(groupId: 740, groupName: "БПИ16-01").subscribe(onSuccess: { (timetable) in
+//            self.viewModel.accept(TTViewModel(schedule: timetable))
 //        }) { (error) in
-//            
+//            self.error.accept(error)
 //        }
-//        URLSession.shared.rx.response(request: URLRequest(url: .init(fileURLWithPath: ""))).deb
-        
-    }
+////        repository.getTimetable(groupName: <#String#>).subscribe(onSuccess: { [weak self] (timetable) in
+////            self?.loading.accept(false)
+////            Logger.logMessageInfo(message: "get schedule with \(timetable.group_name) \(timetable.weeks?.count)")
+////            self?.viewModel.accept(TTViewModel(schedule: timetable))
+////        }) { (error) in
+////
+////        }
+////        URLSession.shared.rx.response(request: URLRequest(url: .init(fileURLWithPath: ""))).deb
+//
+//    }
 
 }
