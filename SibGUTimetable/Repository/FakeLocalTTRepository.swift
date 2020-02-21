@@ -19,7 +19,7 @@ class FakeLocalTTRepository: TimetableRepository {
         self.timetable = timetable
     }
     
-    func getTimetable(groupId: Int, groupName: String) -> Single<Timetable> {
+    func getTimetable(timetableDetails: TimetableDetails) -> Single<Timetable> {
         return Single.create { (single) -> Disposable in
             single(.success(self.timetable))
             return Disposables.create()

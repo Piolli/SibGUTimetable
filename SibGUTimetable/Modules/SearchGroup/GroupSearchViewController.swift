@@ -13,7 +13,7 @@ import RxRelay
 import SnapKit
 import NVActivityIndicatorView
 
-class GroupSearchViewController: UIViewController {
+class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
 
     private static let cellId = "groupPair"
     
@@ -75,7 +75,8 @@ class GroupSearchViewController: UIViewController {
         initViewModel()
         
         //setup activity indicator
-        
+        activityIndicatorView = .init(frame: CGRect(x: view.bounds.width/2, y: view.bounds.height/2, width: 75, height: 75), type: .lineScaleParty, color: .blue, padding: nil)
+        view.addSubview(activityIndicatorView)
     }
     
     func initViewModel() {
@@ -109,19 +110,24 @@ extension GroupSearchViewController : UITableViewDelegate {
 //            coordinator.openSearchedGroup(pair: pair)
             //try to load and save to UserPreferences TimetableDetails
             let manager = TimetableDataManager(localRepository: CoreDataTTRepository(), serverRepository: ServerRepository())
-            
-            manager.updateTimetable(groupId: pair.id, groupName: pair.name).subscribe(onNext: { [weak self] (timetable) in
-                self?.viewModelController.save(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name, timestamp: timetable.updateTimestamp ?? ""))
+//            activityIndicatorView.startAnimating()
+            startAnimating()
+            let timetableDetails = TimetableDetails(groupId: pair.id, groupName: pair.name)
+            manager.preloadTimetable(timetableDetails: timetableDetails)
+                .observeOn(MainScheduler.instance)
+                .subscribe(onCompleted: { [weak self] in
+                self?.stopAnimating()
+                self?.viewModelController.save(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name, timestamp: ""))
                 self?.navigationController?.popViewController(animated: true)
-                }, onError: { error in
-                    print("error:", error)
-                    self.showMessage(text: error.localizedDescription, title: "Error")
-            }, onCompleted: {
-                
-            }).disposed(by: disposeBag)
+            }) { [weak self] error in
+                print("error:", error)
+                self?.showMessage(text: error.localizedDescription, title: "Error")
+                self?.stopAnimating()
+            }
         } else {
             fatalError("viewModel is nil")
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

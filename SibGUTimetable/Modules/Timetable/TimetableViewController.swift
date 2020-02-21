@@ -53,7 +53,7 @@ class TimetableViewController: UIViewController {
         //setup autoupdate
         UserPreferences.sharedInstance.timetableDetailsDidChanged.subscribe(onNext: { (timetableDetails) in
             guard let timetableDetails = timetableDetails else { return }
-            self.dataManager.updateTimetable(groupId: timetableDetails.groupId, groupName: timetableDetails.groupName)
+            self.dataManager.loadTimetable(timetableDetails: timetableDetails)
         })
         
     }
@@ -61,6 +61,7 @@ class TimetableViewController: UIViewController {
     func setupRightBarButton() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(revealMenu))
     }
+    
     
     @objc func revealMenu() {
         if let sideMenuController = sideMenuController {
@@ -124,7 +125,6 @@ class TimetableViewController: UIViewController {
     }
     
     func setupDataManager() {
-        dataManager.loadTimetable(groupId: 740, groupName: "БПИ16-01")
         dataManager.timetable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (timetable) in
@@ -136,7 +136,12 @@ class TimetableViewController: UIViewController {
                     }
 //                }
         }, onError: nil, onCompleted: nil, onDisposed: nil)
-        dataManager.updateTimetable(groupId: 740, groupName: "БПИ16-01")
+        
+        if let timetableDetails = UserPreferences.sharedInstance.getTimetableDetails() {
+            dataManager.loadTimetable(timetableDetails: timetableDetails)
+        } else {
+            showMessage(text: "Choose group from left side menu", title: "Error")
+        }
     }
     
     func setupTimetablePageViewController() {

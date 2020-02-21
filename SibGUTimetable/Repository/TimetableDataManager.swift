@@ -45,9 +45,9 @@ class TimetableDataManager {
         try? AppDelegate.backgroundContext.save()
     }
     
-    func loadTimetable(groupId: Int, groupName: String) -> Observable<Timetable> {
+    func loadTimetable(timetableDetails: TimetableDetails) -> Observable<Timetable> {
         let observable = localRepository
-        .getTimetable(groupId: groupId, groupName: groupName)
+        .getTimetable(timetableDetails: timetableDetails)
         .asObservable()
         .catchError { [weak self] (error) -> Observable<Timetable> in
             guard let self = self else {
@@ -55,7 +55,7 @@ class TimetableDataManager {
             }
             print("RXSWIFTLOG: load timetable from server")
             return
-                self.serverRepository.getTimetable(groupId: groupId, groupName: groupName)
+                self.serverRepository.getTimetable(timetableDetails: timetableDetails)
                     .map {
                         self.localRepository.saveTimetable(timetable: $0).debug("saveTimetable", trimOutput: false).debug("Save server", trimOutput: false).subscribe(onCompleted: {
                         }) { [weak self] (error) in
@@ -79,21 +79,16 @@ class TimetableDataManager {
         return observable
     }
     
-    func updateTimetable(groupId: Int, groupName: String) -> Observable<Timetable> {
-        let observable = serverRepository
-            .getTimetable(groupId: groupId, groupName: groupName)
-            .map { [weak self] (timetable) -> Timetable in
-                self?.localRepository.saveTimetable(timetable: timetable).subscribe(onCompleted: nil, onError: nil)
-                return timetable
-        }.asObservable()
-        
-        observable.subscribe(onNext: { [weak self] (timetable) in
-            self?.timetable.accept(timetable)
-        }, onError: { (error) in
-            
-        }, onCompleted: nil, onDisposed: nil)
-        
-        return observable
+    func preloadTimetable(timetableDetails: TimetableDetails) -> Completable {
+         return serverRepository
+            .getTimetable(timetableDetails: timetableDetails)
+            .map { [weak self] (timetable) -> Void in
+                self?.localRepository.saveTimetable(timetable: timetable).subscribe(onCompleted: { [weak self] in
+                    self?.timetable.accept(timetable)
+                }, onError: { error in
+                    self?.error.accept(.didNotUpdate)
+                })
+        }.asCompletable()
     }
     
 }

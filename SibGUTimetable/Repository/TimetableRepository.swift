@@ -8,7 +8,7 @@ import RxSwift
 
 protocol TimetableRepository {
     
-    func getTimetable(groupId: Int, groupName: String) -> Single<Timetable>
+    func getTimetable(timetableDetails: TimetableDetails) -> Single<Timetable>
     
     func saveTimetable(timetable: Timetable) -> Completable
  

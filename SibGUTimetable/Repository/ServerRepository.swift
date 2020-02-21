@@ -11,8 +11,8 @@ import RxSwift
 
 class ServerRepository : TimetableRepository {
     
-    func getTimetable(groupId: Int, groupName: String) -> Single<Timetable> {
-        return NativeAPIServer.sharedInstance.fetchTimetable(groupId: groupId, groupName: groupName)
+    func getTimetable(timetableDetails: TimetableDetails) -> Single<Timetable> {
+        return NativeAPIServer.sharedInstance.fetchTimetable(timetableDetails: timetableDetails)
     }
     
     func saveTimetable(timetable: Timetable) -> Completable {

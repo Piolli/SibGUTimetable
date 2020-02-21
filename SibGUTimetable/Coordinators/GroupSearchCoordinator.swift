@@ -33,7 +33,7 @@ class GroupSearchCoordinator : Coordinator {
         let ttVC = TimetableCoordinator(navigationController: navigationController)
 //        navigationController.pushViewController((ttVC.rootViewController as! UINavigationController).viewControllers[0], animated: true)
         //ONLY FOR DEBUG
-        NativeAPIServer.sharedInstance.fetchTimetable(groupId: pair.id, groupName: pair.name)
+        NativeAPIServer.sharedInstance.fetchTimetable(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name))
             .observeOn(MainScheduler.instance)
             .subscribe(onSuccess: { (timetable) in
             ttVC.startWith(timetable: timetable)

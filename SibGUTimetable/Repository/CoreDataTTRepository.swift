@@ -12,14 +12,14 @@ class CoreDataTTRepository : TimetableRepository {
     private let persistentConstainer: NSPersistentContainer
     private let context: NSManagedObjectContext
     
-    func getTimetable(groupId: Int, groupName: String) -> Single<Timetable> {
+    func getTimetable(timetableDetails: TimetableDetails) -> Single<Timetable> {
         return fetchAll()
             .asObservable()
             .flatMap { (ts) -> Observable<Timetable> in
                 let sortedTimetables = ts.sorted(by: <)
                 return Observable.from(sortedTimetables)
         }
-        .filter { $0.group_name == groupName }
+        .filter { $0.group_name == timetableDetails.groupName }
         .asObservable()
         .takeLast(1)
         .asSingle()

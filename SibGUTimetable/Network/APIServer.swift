@@ -21,7 +21,7 @@ protocol APIServer {
     
     func findGroup(queryGroupName: String) -> Single<[GroupPairIDName]>
     
-    func fetchTimetable(groupId: Int, groupName: String) -> Single<Timetable>
+    func fetchTimetable(timetableDetails: TimetableDetails) -> Single<Timetable>
     
 }
 
@@ -56,10 +56,10 @@ public class NativeAPIServer : APIServer {
         return urlComponents?.url
     }
 
-    func fetchTimetable(groupId: Int, groupName: String) -> Single<Timetable> {
+    func fetchTimetable(timetableDetails: TimetableDetails) -> Single<Timetable> {
         let params: [String : String] = [
-            "group_name": groupName,
-            "id": String(groupId)
+            "group_name": timetableDetails.groupName,
+            "id": String(timetableDetails.groupId)
         ]
         
         if let url = makeGETWithParams(path: "\(host)timetable", params: params) {

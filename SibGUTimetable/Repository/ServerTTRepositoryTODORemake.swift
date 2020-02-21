@@ -18,7 +18,7 @@ class ServerTTRepositoryTODORemake: TimetableRepository {
         self.loadedTimetable = timetable
     }
     
-    func getTimetable(groupId: Int, groupName: String) -> Single<Timetable> {
+    func getTimetable(timetableDetails: TimetableDetails) -> Single<Timetable> {
         return Single.just(loadedTimetable)
     }
     

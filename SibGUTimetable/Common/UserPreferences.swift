@@ -14,10 +14,10 @@ import RxRelay
 class TimetableDetails : NSObject, Codable {
     
     let groupName: String
-    let timestamp: String
+    let timestamp: String?
     let groupId: Int
     
-    internal init(groupId: Int, groupName: String, timestamp: String) {
+    internal init(groupId: Int, groupName: String, timestamp: String? = nil) {
         self.groupName = groupName
         self.timestamp = timestamp
         self.groupId = groupId
