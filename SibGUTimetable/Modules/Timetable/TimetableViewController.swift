@@ -18,6 +18,7 @@ class TimetableViewController: UIViewController {
     var coordinator: TimetableCoordinator!
     weak var calendarView: FSCalendar!
     lazy var timetablePageViewController: TimetablePageViewController = .init()
+    let disposeBag = DisposeBag()
     var dataManager: TimetableDataManager! {
         didSet {
             setupDataManager()
@@ -54,7 +55,7 @@ class TimetableViewController: UIViewController {
         UserPreferences.sharedInstance.timetableDetailsDidChanged.subscribe(onNext: { (timetableDetails) in
             guard let timetableDetails = timetableDetails else { return }
             self.dataManager.loadTimetable(timetableDetails: timetableDetails)
-        })
+            }).disposed(by: disposeBag)
         
     }
     
@@ -135,7 +136,7 @@ class TimetableViewController: UIViewController {
                         self.navigationItem.title = timetable.group_name
                     }
 //                }
-        }, onError: nil, onCompleted: nil, onDisposed: nil)
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         if let timetableDetails = UserPreferences.sharedInstance.getTimetableDetails() {
             dataManager.loadTimetable(timetableDetails: timetableDetails)
@@ -168,9 +169,13 @@ class TimetableViewController: UIViewController {
                 self?.calendarView.moveTo(state: pageDidMoveTo)
                 self?.updateTodayButtonVisibility()
             }
-        }, onError: nil, onCompleted: nil, onDisposed: nil)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        
+        timetablePageViewController.tableViewOffsetDidChange.subscribe(onNext: { (point) in
+            if point.y > 0 {
+                self.calendarView.setScope(.week, animated: true)
+            }
+        }).disposed(by: disposeBag)
     }
 
     func addTimetablePageViewController() {

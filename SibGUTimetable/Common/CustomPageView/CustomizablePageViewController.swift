@@ -22,11 +22,13 @@ enum CustomizablePageViewMoveDirection: Int {
 class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPageViewController, UIPageViewControllerDelegate {
     
     lazy var pageDidMoveDirection: PublishRelay<CustomizablePageViewMoveDirection> = .init()
+    lazy var tableViewOffsetDidChange: PublishRelay<CGPoint> = .init()
     
     var customizableDataSource: CustomizablePageViewDataSource<T, C>? {
         didSet {
             let vc = self.customizableDataSource!.select(iterableValue: self.customizableDataSource!.iterableValue)
-            setViewControllers([vc], direction: .forward, animated: true, completion: nil)
+            attachPublishRelay(with: vc)
+            setViewControllers([vc], direction: .forward, animated: false, completion: nil)
         }
     }
     
@@ -51,6 +53,7 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
     
     func commonSetup() {
         delegate = self
+        dump(gestureRecognizers)
     }
     
     func select(iterableValue: T) {
@@ -64,6 +67,12 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
         }
     }
     
+    func attachPublishRelay(with viewController: UIViewController) {
+        (viewController as? TimetableLessonListController)?.contentOffsetDidChange = { [weak self] point in
+            self?.tableViewOffsetDidChange.accept(point)
+        }
+    }
+    
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard let customizableDataSource = customizableDataSource else {
             //TODO logger
@@ -73,7 +82,9 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
         if completed {
             if let selectedPageContentView = pageViewController.viewControllers?.first as? C {
                 let selectedIterableValue = customizableDataSource.extractIterableValueFromController( selectedPageContentView)
-
+                
+                attachPublishRelay(with: selectedPageContentView)
+                
                 if selectedIterableValue > customizableDataSource.iterableValue {
                     pageDidMoveDirection.accept(.forward)
                 } else if selectedIterableValue < customizableDataSource.iterableValue {

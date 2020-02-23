@@ -17,6 +17,10 @@ class TimetablePageViewController : UIViewController {
         return pageView
     }()
     
+    var tableViewOffsetDidChange: PublishRelay<CGPoint> {
+        return pageViewController.tableViewOffsetDidChange
+    }
+    
     var pageDidMoveDirection: PublishRelay<CustomizablePageViewMoveDirection> {
         return pageViewController.pageDidMoveDirection
     }

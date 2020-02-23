@@ -8,11 +8,14 @@
 
 import UIKit
 
+
 class TimetableLessonListController: UITableViewController {
     
     var viewModel: TTDayViewModel?
-    
+    var contentOffsetDidChange: ((CGPoint) -> ())?
     var date: Date!
+    
+    private var contentOffsetObserver: NSKeyValueObservation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +43,20 @@ class TimetableLessonListController: UITableViewController {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100.0
         
+        contentOffsetObserver = tableView.observe(\UITableView.contentOffset, options: .new) { [weak self](tableView, value) in
+            guard let newValue = value.newValue else { return }
+            self?.contentOffsetDidChange?(newValue)
+        }
+    }
+    
+    deinit {
+        contentOffsetObserver?.invalidate()
+    }
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        print("velocity:", velocity)
+        print("pointee:", targetContentOffset.pointee)
+        self.contentOffsetDidChange?(velocity)
     }
 
     // MARK: - Table view data source
@@ -54,4 +71,5 @@ class TimetableLessonListController: UITableViewController {
         return cell
     }
 
+    // MARK: - Table view content offset
 }
