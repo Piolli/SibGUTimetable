@@ -10,7 +10,7 @@ import Foundation
 
 class TTLessonViewModel {
     
-    let lesson: Lesson
+    private let lesson: Lesson
     
     init(lesson: Lesson) {
         self.lesson = lesson
@@ -20,8 +20,20 @@ class TTLessonViewModel {
         return "\(lesson.name!) (\(lesson.office!), \(lesson.type!))"
     }
     
+    var lessonName: String {
+        return lesson.name ?? ""
+    }
+    
     var timeRange: String {
-        return "\(lesson.start_time!) – \(lesson.end_time!)"
+        return "\(startTime)\n\(endTime)"
+    }
+    
+    var startTime: String {
+        return lesson.start_time ?? ""
+    }
+    
+    var endTime: String {
+        return lesson.end_time ?? ""
     }
     
     var typeLesson: String {

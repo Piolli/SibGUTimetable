@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1103A0C523FFF89200D87570 /* LessonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103A0C423FFF89200D87570 /* LessonCell.swift */; };
 		1114AD5323E1635100E99C84 /* TimetableDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114AD5223E1635100E99C84 /* TimetableDataManager.swift */; };
 		1114AD5523E18A0000E99C84 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114AD5423E189FF00E99C84 /* DataManagerTests.swift */; };
 		1114AD5723E18A8800E99C84 /* ServerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114AD5623E18A8800E99C84 /* ServerRepository.swift */; };
@@ -75,7 +76,6 @@
 		A8AFAA6A236EDCAA00E0AB6D /* TimetableRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AFAA69236EDCAA00E0AB6D /* TimetableRepositoryTests.swift */; };
 		A8D2299E235C503C00FE98BE /* URLSession + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D2299D235C503C00FE98BE /* URLSession + Ext.swift */; };
 		A8E3BC4C22D1F7A7006E1B65 /* TimetableLessonListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonListController.swift */; };
-		A8E3BC4E22D1F7FC006E1B65 /* TimetableLessonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E3BC4D22D1F7FC006E1B65 /* TimetableLessonCell.swift */; };
 		A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */; };
 		A8F80DD72337B12D001442A9 /* NativeNetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F80DD62337B12D001442A9 /* NativeNetworkManagerTests.swift */; };
 		D60A521E49E599E56CC36265 /* Pods_SibGUTimetableTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A161EF1AAC4CC928AB0BD83 /* Pods_SibGUTimetableTests.framework */; };
@@ -106,6 +106,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1103A0C423FFF89200D87570 /* LessonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonCell.swift; sourceTree = "<group>"; };
 		1114AD5223E1635100E99C84 /* TimetableDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableDataManager.swift; sourceTree = "<group>"; };
 		1114AD5423E189FF00E99C84 /* DataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
 		1114AD5623E18A8800E99C84 /* ServerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRepository.swift; sourceTree = "<group>"; };
@@ -177,7 +178,6 @@
 		A8AFAA69236EDCAA00E0AB6D /* TimetableRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimetableRepositoryTests.swift; path = SibGUTimetableTests/Cases/Network/TimetableRepositoryTests.swift; sourceTree = SOURCE_ROOT; };
 		A8D2299D235C503C00FE98BE /* URLSession + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession + Ext.swift"; sourceTree = "<group>"; };
 		A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLessonListController.swift; sourceTree = "<group>"; };
-		A8E3BC4D22D1F7FC006E1B65 /* TimetableLessonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLessonCell.swift; sourceTree = "<group>"; };
 		A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarParser.swift; sourceTree = "<group>"; };
 		A8F80DD62337B12D001442A9 /* NativeNetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeNetworkManagerTests.swift; sourceTree = "<group>"; };
 		C4E942E396A03AE669B83590 /* Pods-SibGUTimetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SibGUTimetable.debug.xcconfig"; path = "Target Support Files/Pods-SibGUTimetable/Pods-SibGUTimetable.debug.xcconfig"; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 		1114AD6323E3F99300E99C84 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				A8E3BC4D22D1F7FC006E1B65 /* TimetableLessonCell.swift */,
+				1103A0C423FFF89200D87570 /* LessonCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -865,6 +865,7 @@
 				A8537EBF22EC494B005183C7 /* Lesson+CoreDataClass.swift in Sources */,
 				A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */,
 				A8537EC822EC4FE9005183C7 /* Logger.swift in Sources */,
+				1103A0C523FFF89200D87570 /* LessonCell.swift in Sources */,
 				119E51C123DEDC3200E1ABA4 /* StubTTRepository.swift in Sources */,
 				A8209F2E22D71A1400E1BAF6 /* TTViewModel.swift in Sources */,
 				A8537EC322EC494B005183C7 /* Day+CoreDataClass.swift in Sources */,
@@ -875,7 +876,6 @@
 				11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */,
 				119E51B623DED7C100E1ABA4 /* Lesson+CoreDataProperties.swift in Sources */,
 				114C9E4A23D6B72700BED746 /* GroupSearchViewModelController.swift in Sources */,
-				A8E3BC4E22D1F7FC006E1B65 /* TimetableLessonCell.swift in Sources */,
 				A8E3BC4C22D1F7A7006E1B65 /* TimetableLessonListController.swift in Sources */,
 				119E51BD23DED7C100E1ABA4 /* Week+CoreDataProperties.swift in Sources */,
 				1114AD5923E1982C00E99C84 /* ObservableType+Ext.swift in Sources */,
@@ -1050,7 +1050,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1105,7 +1105,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

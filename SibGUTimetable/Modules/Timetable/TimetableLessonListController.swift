@@ -16,9 +16,13 @@ class TimetableLessonListController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.register(TimetableLessonCell.self, forCellReuseIdentifier: "cell")
-        tableView.separatorStyle = .none
+        
+        tableView.register(LessonCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = .singleLine
+//        tableView.separatorInsetReference = .fromAutomaticInsets
+//        tableView.separatorInset = .init(top: 18, left: 0, bottom: 18, right: 0)
+        tableView.tableFooterView = UIView()
+        tableView.allowsSelection = false
         
         ///Maybe create init with viewModel?
         if viewModel?.countOflessons == 0 {
@@ -45,7 +49,7 @@ class TimetableLessonListController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TimetableLessonCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LessonCell
         cell.viewModel = viewModel?.lessonViewModel(at: indexPath)
         return cell
     }
