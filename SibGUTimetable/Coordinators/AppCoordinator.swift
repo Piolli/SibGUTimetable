@@ -19,8 +19,8 @@ class AppCoordinator : NSObject, Coordinator {
     lazy var sideCoordinator = SideMenuCoordinator(mainCoordinator: TimetableCoordinator(navigationController: nil), menuSections: [
         ///Observe for teachers and their lessons
         ("Change group's timetable", GroupSearchCoordinator(appCoordinator: self)),
-        ("Settings", SimpleCoordinator()),
-        ("About", SimpleCoordinator())
+//        ("Settings", SimpleCoordinator()),
+        ("About app", SimpleCoordinator())
     ])
     
     private lazy var rootCoordinator: Coordinator = {
@@ -57,7 +57,7 @@ class AppCoordinator : NSObject, Coordinator {
         window.makeKeyAndVisible()
         #warning("DELETE in Release")
         if #available(iOS 13.0, *) {
-            window.overrideUserInterfaceStyle = .light
+//            window.overrideUserInterfaceStyle = .light
         }
     }
     

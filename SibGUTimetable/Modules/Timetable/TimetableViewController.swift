@@ -42,7 +42,7 @@ class TimetableViewController: UIViewController {
         super.viewDidLoad()
         
         initNavigationItem()
-        initAppearance()
+        
 
         addCalendar()
         addTimetablePageViewController()
@@ -50,13 +50,13 @@ class TimetableViewController: UIViewController {
         setupRightBarButton()
         
         setupTimetablePageViewController()
-        
         //setup autoupdate
         UserPreferences.sharedInstance.timetableDetailsDidChanged.subscribe(onNext: { (timetableDetails) in
             guard let timetableDetails = timetableDetails else { return }
             self.dataManager.loadTimetable(timetableDetails: timetableDetails)
             }).disposed(by: disposeBag)
         
+        initAppearance()
     }
     
     func setupRightBarButton() {
@@ -114,7 +114,7 @@ class TimetableViewController: UIViewController {
     }
 
     private func makeTimetableConstraints(containerView: UIView) {
-        let marginsGuide = view.layoutMarginsGuide
+        let marginsGuide = view!
         let marginBetweenTimetableAndCalendar = CGFloat(16)
         
         NSLayoutConstraint.activate([
@@ -193,7 +193,10 @@ class TimetableViewController: UIViewController {
     }
     
     fileprivate func initAppearance() {
-        self.view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = .systemBackground
+            calendarView.appearance.titleDefaultColor = .systemGray4
+        }
     }
     
 }

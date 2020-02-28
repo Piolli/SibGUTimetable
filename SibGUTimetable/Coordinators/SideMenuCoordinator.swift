@@ -87,6 +87,9 @@ class MenuListCoordinator : NSObject, Coordinator, UITableViewDelegate {
         dataSource = ReusableTableViewDataSource<String>(models: menuSections, reuseIdentifier: MenuTableViewController.cellIdentifier, cellConfigurator: { (str, cell) in
             cell.textLabel?.text = str
             cell.textLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+            if #available(iOS 13.0, *) {
+                cell.backgroundColor = .systemGray6
+            }
         })
         super.init()
         menuTableViewController.tableView.delegate = self

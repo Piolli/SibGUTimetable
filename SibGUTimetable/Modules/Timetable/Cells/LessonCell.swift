@@ -47,6 +47,8 @@ class LessonCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        if #available(iOS 13, *) {
+            label.textColor = .systemTeal }
         label.font = .systemFont(ofSize: 16)
         label.text = "Разработка корпоративных приложений"
         return label
@@ -112,7 +114,8 @@ extension LessonCell {
     
     func setupCell() {
         #warning("delete this")
-        contentView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+//        contentView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+//        contentView.backgroundColor = UIColor.systemGray
 
         contentView.addSubview(separatorView)
         contentView.addSubview(timeRangeLabel)
