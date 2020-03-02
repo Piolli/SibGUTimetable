@@ -18,6 +18,9 @@ class TimetableViewController: UIViewController {
     var coordinator: TimetableCoordinator!
     weak var calendarView: FSCalendar!
     lazy var timetablePageViewController: TimetablePageViewController = .init()
+    
+    var calendarHeightConstraint: NSLayoutConstraint!
+    
     let disposeBag = DisposeBag()
     var dataManager: TimetableDataManager! {
         didSet {
@@ -43,7 +46,6 @@ class TimetableViewController: UIViewController {
         
         initNavigationItem()
         
-
         addCalendar()
         addTimetablePageViewController()
         
@@ -54,9 +56,19 @@ class TimetableViewController: UIViewController {
         UserPreferences.sharedInstance.timetableDetailsDidChanged.subscribe(onNext: { (timetableDetails) in
             guard let timetableDetails = timetableDetails else { return }
             self.dataManager.loadTimetable(timetableDetails: timetableDetails)
-            }).disposed(by: disposeBag)
+        }).disposed(by: disposeBag)
         
         initAppearance()
+        
+        checkExistingTimetableDetails()
+    }
+    
+    func checkExistingTimetableDetails() {
+        if let timetableDetails = UserPreferences.sharedInstance.getTimetableDetails() {
+            dataManager.loadTimetable(timetableDetails: timetableDetails)
+        } else {
+            showMessage(text: "Choose group from left side menu", title: "Error")
+        }
     }
     
     func setupRightBarButton() {
@@ -82,6 +94,8 @@ class TimetableViewController: UIViewController {
 
     private func addCalendar() {
         let calendar = FSCalendar()
+        calendar.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(calendar)
 
         //Set monday for start week
@@ -99,18 +113,20 @@ class TimetableViewController: UIViewController {
     }
 
     private func makeCalendarConstraints(calendar: FSCalendar) {
-        calendar.snp.makeConstraints { (make) in
-            make.width.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.height.equalTo(300)
-        }
+        let safeAreaGuide = view.safeAreaLayoutGuide
+        calendarHeightConstraint = calendar.heightAnchor.constraint(equalToConstant: 300)
+        
+        NSLayoutConstraint.activate([
+            calendar.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            calendar.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            calendar.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            calendarHeightConstraint
+        ])
     }
 
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        calendar.snp.updateConstraints { (make) in
-            make.height.equalTo(bounds.height)
-        }
-        self.view.layoutIfNeeded()
+        calendarHeightConstraint.constant = bounds.height
+        view.layoutIfNeeded()
     }
 
     private func makeTimetableConstraints(containerView: UIView) {
@@ -128,39 +144,18 @@ class TimetableViewController: UIViewController {
     func setupDataManager() {
         dataManager.timetable
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { (timetable) in
-            //Because server-side saves timetable to db then we can compare if timetable is new
-//                DispatchQueue.main.async {
-                    if self.timetablePageViewController.timetableViewModel?.schedule.updateTimestampTime != timetable.updateTimestampTime {
-                        self.timetablePageViewController.timetableViewModel = TTViewModel(schedule: timetable)
-                        self.navigationItem.title = timetable.group_name
-                    }
-//                }
+            .subscribe(onNext: { [weak self] (timetable) in
+                guard let self = self else { return }
+                //Because server-side saves timetable to db then we can compare if timetable is new
+                if self.timetablePageViewController.timetableViewModel?.schedule.updateTimestampTime != timetable.updateTimestampTime {
+                    self.timetablePageViewController.timetableViewModel = TTViewModel(schedule: timetable)
+                    self.navigationItem.title = timetable.group_name
+                }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
-        if let timetableDetails = UserPreferences.sharedInstance.getTimetableDetails() {
-            dataManager.loadTimetable(timetableDetails: timetableDetails)
-        } else {
-            showMessage(text: "Choose group from left side menu", title: "Error")
-        }
+        checkExistingTimetableDetails()
     }
     
     func setupTimetablePageViewController() {
-        //TODO: bind datamanger to timetableViewModel
-        addTimetablePageViewController()
-//        dataManager.loadTimetable(groupId: 740, groupName: "БПИ16-01")
-//        dataManager.timetable.subscribe(onNext: { (timetable) in
-////            timetable.valida
-//            DispatchQueue.main.async {
-//                //Because server-side saves timetable to db then we can compare if timetable is new
-//                if self.timetablePageViewController.timetableViewModel?.schedule.updateTimestampTime != timetable.updateTimestampTime {
-//                    self.timetablePageViewController.timetableViewModel = TTViewModel(schedule: timetable)
-//                }
-//            }
-//        }, onError: nil, onCompleted: nil, onDisposed: nil)
-//        dataManager.updateTimetable(groupId: 740, groupName: "БПИ16-01")
-//
-//        timetablePageViewController.timetableViewModel = TTViewModel(schedule: FileLoader.shared.getLocalSchedule()!)!
         timetablePageViewController.pageDidMoveDirection
             .subscribeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (pageDidMoveTo) in
@@ -192,10 +187,21 @@ class TimetableViewController: UIViewController {
         add(viewController: timetablePageViewController, to: containerView)
     }
     
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    
     fileprivate func initAppearance() {
         if #available(iOS 13.0, *) {
             self.view.backgroundColor = .systemBackground
             calendarView.appearance.titleDefaultColor = .systemGray4
+        } else {
+            self.view.backgroundColor = .white
+            calendarView.appearance.titleDefaultColor = .lightGray
         }
     }
     

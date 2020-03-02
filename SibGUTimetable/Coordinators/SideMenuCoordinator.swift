@@ -89,6 +89,8 @@ class MenuListCoordinator : NSObject, Coordinator, UITableViewDelegate {
             cell.textLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
             if #available(iOS 13.0, *) {
                 cell.backgroundColor = .systemGray6
+            } else {
+                cell.backgroundColor = .white
             }
         })
         super.init()

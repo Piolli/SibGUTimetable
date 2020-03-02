@@ -61,6 +61,9 @@ class MenuTableViewController : UIViewController {
         if #available(iOS 13.0, *) {
             view.backgroundColor = .systemGray6
             tableView.backgroundColor = .systemGray6
+        } else {
+            view.backgroundColor = .white
+            tableView.backgroundColor = .white
         }
         
     }

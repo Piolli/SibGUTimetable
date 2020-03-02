@@ -46,14 +46,16 @@ class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
         tableView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview()
         }
-        searchController = UISearchController()
+        searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.sizeToFit()
         
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.hidesSearchBarWhenScrolling = false
         
         let searchBar = searchController.searchBar
+        
         searchBar.returnKeyType = .done
+        searchBar.placeholder = "Enter a group name"
         let searchResults = searchBar.rx.text.orEmpty
             .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
@@ -77,6 +79,8 @@ class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
         //setup activity indicator
         activityIndicatorView = .init(frame: CGRect(x: view.bounds.width/2, y: view.bounds.height/2, width: 75, height: 75), type: .lineScaleParty, color: .blue, padding: nil)
         view.addSubview(activityIndicatorView)
+        
+        navigationItem.title = "Group search"
     }
     
     func initViewModel() {
@@ -118,7 +122,9 @@ extension GroupSearchViewController : UITableViewDelegate {
                 .subscribe(onCompleted: { [weak self] in
                 self?.stopAnimating()
                 self?.viewModelController.save(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name, timestamp: ""))
-                self?.navigationController?.popViewController(animated: true)
+//                self?.navigationController?.popViewController(animated: true)
+                    self?.navigationController?.popViewController(animated: true)
+//                    self?.navigationController?.popToRootViewController(animated: true)
             }) { [weak self] error in
                 print("error:", error)
                 self?.showMessage(text: error.localizedDescription, title: "Error")
