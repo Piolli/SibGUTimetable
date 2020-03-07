@@ -83,6 +83,7 @@ class MenuListCoordinator : NSObject, Coordinator, UITableViewDelegate {
     init(menuSections: [String]) {
         self.menuSections = menuSections
         
+        //TODO: move to MenuTableViewController
         menuTableViewController = MenuTableViewController()
         dataSource = ReusableTableViewDataSource<String>(models: menuSections, reuseIdentifier: MenuTableViewController.cellIdentifier, cellConfigurator: { (str, cell) in
             cell.textLabel?.text = str
@@ -113,40 +114,19 @@ class MenuListCoordinator : NSObject, Coordinator, UITableViewDelegate {
 }
 
 class SimpleCoordinator : Coordinator {
+    
+    let viewController: UIViewController
+    
+    init(_ viewController: UIViewController = UIViewController()) {
+        self.viewController = viewController
+    }
+    
     func start() {
-        
+        viewController.view.backgroundColor = .blue
     }
     
     lazy var rootViewController: UIViewController = {
-        let vc = ButtonViewController()
-        vc.view.backgroundColor = .blue
-        return vc
+        self.viewController
     }()
     
-}
-
-class ButtonViewController : UIViewController {
-
-    var coordinator: SideMenuCoordinator!
-    let button = UIButton(type: .system)
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //Work with side menu
-         
-        navigationItem.title = "ButtonViewController"
-        
-         button.translatesAutoresizingMaskIntoConstraints = false
-         view.addSubview(button)
-         button.snp.makeConstraints { (maker) in
-            maker.centerX.centerY.equalToSuperview()
-         }
-         button.addTarget(self, action: #selector(showMenu(_:)), for: .touchUpInside)
-         button.setTitle("Show", for: .normal)
-     }
-    
-     @objc func showMenu(_ sender: UIButton) {
-//        coordinator.openTimetable()
-     }
-
 }

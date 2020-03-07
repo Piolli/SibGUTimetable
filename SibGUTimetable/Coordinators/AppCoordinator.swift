@@ -12,6 +12,7 @@ import SideMenuSwift
 
 class AppCoordinator : NSObject, Coordinator {
     
+    
     private let window: UIWindow
     private var tabBarController: UITabBarController!
     private var navigationController: UINavigationController
@@ -19,8 +20,17 @@ class AppCoordinator : NSObject, Coordinator {
     lazy var sideCoordinator = SideMenuCoordinator(mainCoordinator: TimetableCoordinator(navigationController: nil), menuSections: [
         ///Observe for teachers and their lessons
         ("Change group's timetable", GroupSearchCoordinator(appCoordinator: self)),
-//        ("Settings", SimpleCoordinator()),
-        ("About app", SimpleCoordinator())
+        ("Settings", SimpleCoordinator()),
+//        let items = [
+//            "Feedback",
+//            "Rate Me",
+//            "Licenses"
+//        ]
+        ("About app", AboutAppCoordinator(aboutItems: [
+            ("Feedback", SimpleCoordinator()),
+            ("Rate Me", SimpleCoordinator()),
+            ("Licenses", SimpleCoordinator()),
+        ]))
     ])
     
     private lazy var rootCoordinator: Coordinator = {

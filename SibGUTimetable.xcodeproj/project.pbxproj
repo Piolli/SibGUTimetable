@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11017F602413C52D003E2871 /* AboutAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11017F5F2413C52D003E2871 /* AboutAppCoordinator.swift */; };
 		1103A0C523FFF89200D87570 /* LessonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103A0C423FFF89200D87570 /* LessonCell.swift */; };
 		1114AD5323E1635100E99C84 /* TimetableDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114AD5223E1635100E99C84 /* TimetableDataManager.swift */; };
 		1114AD5523E18A0000E99C84 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114AD5423E189FF00E99C84 /* DataManagerTests.swift */; };
@@ -15,6 +16,7 @@
 		1114AD5C23E32DBE00E99C84 /* CustomizablePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114AD5B23E32DBE00E99C84 /* CustomizablePageViewController.swift */; };
 		1114AD5E23E3390400E99C84 /* TestPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114AD5D23E3390400E99C84 /* TestPageView.swift */; };
 		1114AD6223E3F8A800E99C84 /* CustomizablePageViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114AD6123E3F8A800E99C84 /* CustomizablePageViewDataSource.swift */; };
+		111E0D73240E7F4C000F4D4B /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E0D72240E7F4C000F4D4B /* AboutAppViewController.swift */; };
 		1127386C23D714790074C7A4 /* GroupSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1127386B23D714790074C7A4 /* GroupSearchViewController.swift */; };
 		1141FA5B23C9F07900796667 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1141FA5A23C9F07900796667 /* GoogleService-Info.plist */; };
 		1141FA5C23C9F07900796667 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1141FA5A23C9F07900796667 /* GoogleService-Info.plist */; };
@@ -106,6 +108,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11017F5F2413C52D003E2871 /* AboutAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppCoordinator.swift; sourceTree = "<group>"; };
 		1103A0C423FFF89200D87570 /* LessonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonCell.swift; sourceTree = "<group>"; };
 		1114AD5223E1635100E99C84 /* TimetableDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableDataManager.swift; sourceTree = "<group>"; };
 		1114AD5423E189FF00E99C84 /* DataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
@@ -114,6 +117,7 @@
 		1114AD5B23E32DBE00E99C84 /* CustomizablePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizablePageViewController.swift; sourceTree = "<group>"; };
 		1114AD5D23E3390400E99C84 /* TestPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPageView.swift; sourceTree = "<group>"; };
 		1114AD6123E3F8A800E99C84 /* CustomizablePageViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizablePageViewDataSource.swift; sourceTree = "<group>"; };
+		111E0D72240E7F4C000F4D4B /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		1127386B23D714790074C7A4 /* GroupSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewController.swift; sourceTree = "<group>"; };
 		1141FA5A23C9F07900796667 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1141FA5E23CA09BB00796667 /* APIServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServer.swift; sourceTree = "<group>"; };
@@ -237,6 +241,7 @@
 		1114AD5F23E3F69100E99C84 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				111E0D71240E7F2F000F4D4B /* AboutApp */,
 				11C606CC23E4834600CF2C79 /* SideMenu */,
 				119F6FF723E4247300FD6D46 /* SearchGroup */,
 				A8E3BC4A22D1F73C006E1B65 /* Timetable */,
@@ -272,6 +277,14 @@
 				A89DDCA322D704F500769EAA /* TTDayViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		111E0D71240E7F2F000F4D4B /* AboutApp */ = {
+			isa = PBXGroup;
+			children = (
+				111E0D72240E7F4C000F4D4B /* AboutAppViewController.swift */,
+			);
+			path = AboutApp;
 			sourceTree = "<group>";
 		};
 		119F6FF723E4247300FD6D46 /* SearchGroup */ = {
@@ -332,6 +345,7 @@
 				11DC92FC23D9D4C500314C39 /* GroupSearchCoordinator.swift */,
 				1114AD5D23E3390400E99C84 /* TestPageView.swift */,
 				11C3889B23E438E200ED43A5 /* SideMenuCoordinator.swift */,
+				11017F5F2413C52D003E2871 /* AboutAppCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -872,9 +886,11 @@
 				1114AD5723E18A8800E99C84 /* ServerRepository.swift in Sources */,
 				1114AD5323E1635100E99C84 /* TimetableDataManager.swift in Sources */,
 				A89DDCA422D704F500769EAA /* TTDayViewModel.swift in Sources */,
+				11017F602413C52D003E2871 /* AboutAppCoordinator.swift in Sources */,
 				A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */,
 				11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */,
 				119E51B623DED7C100E1ABA4 /* Lesson+CoreDataProperties.swift in Sources */,
+				111E0D73240E7F4C000F4D4B /* AboutAppViewController.swift in Sources */,
 				114C9E4A23D6B72700BED746 /* GroupSearchViewModelController.swift in Sources */,
 				A8E3BC4C22D1F7A7006E1B65 /* TimetableLessonListController.swift in Sources */,
 				119E51BD23DED7C100E1ABA4 /* Week+CoreDataProperties.swift in Sources */,
