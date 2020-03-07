@@ -122,7 +122,12 @@ class SimpleCoordinator : Coordinator {
     }
     
     func start() {
-        viewController.view.backgroundColor = .blue
+        if #available(iOS 13.0, *) {
+            viewController.view.backgroundColor = .systemBackground
+        } else {
+            viewController.view.backgroundColor = .white
+            
+        }
     }
     
     lazy var rootViewController: UIViewController = {

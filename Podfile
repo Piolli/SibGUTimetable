@@ -29,6 +29,9 @@ target 'SibGUTimetable' do
   # Animation indicator
   pod 'NVActivityIndicatorView'
   
+  # Auto generated acknowledgements
+  pod 'AcknowList'
+  
   target 'SibGUTimetableTests' do
     inherit! :search_paths
     # Pods for testing

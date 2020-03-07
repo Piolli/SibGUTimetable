@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SideMenuSwift
+import AcknowList
 
 class AppCoordinator : NSObject, Coordinator {
     
@@ -29,7 +30,7 @@ class AppCoordinator : NSObject, Coordinator {
         ("About app", AboutAppCoordinator(aboutItems: [
             ("Feedback", SimpleCoordinator()),
             ("Rate Me", SimpleCoordinator()),
-            ("Licenses", SimpleCoordinator()),
+            ("Licenses", SimpleCoordinator(AcknowListViewController())),
         ]))
     ])
     

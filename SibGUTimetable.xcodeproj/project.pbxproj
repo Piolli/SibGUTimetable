@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11017F602413C52D003E2871 /* AboutAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11017F5F2413C52D003E2871 /* AboutAppCoordinator.swift */; };
+		11017F632413D5D9003E2871 /* Pods-SibGUTimetable-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11017F622413D5D9003E2871 /* Pods-SibGUTimetable-acknowledgements.plist */; };
 		1103A0C523FFF89200D87570 /* LessonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1103A0C423FFF89200D87570 /* LessonCell.swift */; };
 		1114AD5323E1635100E99C84 /* TimetableDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114AD5223E1635100E99C84 /* TimetableDataManager.swift */; };
 		1114AD5523E18A0000E99C84 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114AD5423E189FF00E99C84 /* DataManagerTests.swift */; };
@@ -109,6 +110,7 @@
 
 /* Begin PBXFileReference section */
 		11017F5F2413C52D003E2871 /* AboutAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppCoordinator.swift; sourceTree = "<group>"; };
+		11017F622413D5D9003E2871 /* Pods-SibGUTimetable-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-SibGUTimetable-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-SibGUTimetable/Pods-SibGUTimetable-acknowledgements.plist"; sourceTree = "<group>"; };
 		1103A0C423FFF89200D87570 /* LessonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonCell.swift; sourceTree = "<group>"; };
 		1114AD5223E1635100E99C84 /* TimetableDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableDataManager.swift; sourceTree = "<group>"; };
 		1114AD5423E189FF00E99C84 /* DataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 		A8011EB422B3D7C000567A37 = {
 			isa = PBXGroup;
 			children = (
+				11017F622413D5D9003E2871 /* Pods-SibGUTimetable-acknowledgements.plist */,
 				1141FA5A23C9F07900796667 /* GoogleService-Info.plist */,
 				A8011EBF22B3D7C000567A37 /* SibGUTimetable */,
 				A8011ED722B3D7C100567A37 /* SibGUTimetableTests */,
@@ -723,6 +726,7 @@
 			files = (
 				A8011ECE22B3D7C100567A37 /* LaunchScreen.storyboard in Resources */,
 				1141FA5B23C9F07900796667 /* GoogleService-Info.plist in Resources */,
+				11017F632413D5D9003E2871 /* Pods-SibGUTimetable-acknowledgements.plist in Resources */,
 				A8011ECB22B3D7C100567A37 /* Assets.xcassets in Resources */,
 				1197A53223BE501A008737B2 /* schedule.json in Resources */,
 			);
