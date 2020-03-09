@@ -17,7 +17,7 @@ class TestPageView : Coordinator {
     weak var navigationController: UINavigationController!
     lazy var viewController: TimetablePageViewController = {
         let timetable = FileLoader.shared.getLocalSchedule()!
-        let viewModel = TTViewModel(schedule: timetable)!
+        let viewModel = TimetableViewModel(schedule: timetable)!
         let vc = TimetablePageViewController()
         vc.timetableViewModel = viewModel
         return vc

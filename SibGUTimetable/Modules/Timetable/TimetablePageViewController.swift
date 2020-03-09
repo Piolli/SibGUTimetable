@@ -25,7 +25,7 @@ class TimetablePageViewController : UIViewController {
         return pageViewController.pageDidMoveDirection
     }
     
-    public var timetableViewModel: TTViewModel? {
+    public var timetableViewModel: TimetableViewModel? {
         didSet {
             guard let timetableViewModel = self.timetableViewModel else {
                 pageViewController.dataSource = nil

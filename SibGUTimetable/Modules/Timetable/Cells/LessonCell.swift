@@ -12,7 +12,7 @@ import UIKit
 
 class LessonCell: UITableViewCell {
     
-    var viewModel: TTLessonViewModel? {
+    var viewModel: TimetableLessonViewModel? {
         didSet {
             nameLabel.text = self.viewModel?.lessonName
             timeRangeLabel.text = self.viewModel?.timeRange

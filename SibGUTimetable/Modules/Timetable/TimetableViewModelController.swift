@@ -13,7 +13,7 @@ class TimetableViewModelController {
     //TODO: check mutations
     var repository: TimetableRepository
     
-    var viewModel: BehaviorRelay<TTViewModel?> = BehaviorRelay.init(value: nil)
+    var viewModel: BehaviorRelay<TimetableViewModel?> = BehaviorRelay.init(value: nil)
     var loading: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
     var error: PublishRelay<Error> = PublishRelay.init()
 

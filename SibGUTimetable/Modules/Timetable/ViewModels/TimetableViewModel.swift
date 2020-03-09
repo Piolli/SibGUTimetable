@@ -9,7 +9,7 @@
 import Foundation
 import os
 
-class TTViewModel {
+class TimetableViewModel {
     
     let schedule: Timetable
     let groupName: String
@@ -40,8 +40,8 @@ class TTViewModel {
         return day
     }
 
-    func getDayViewModel(at date: Date) -> TTDayViewModel {
-        return TTDayViewModel(day: getDay(at: date), date: date)
+    func getDayViewModel(at date: Date) -> TimetableDayViewModel {
+        return TimetableDayViewModel(day: getDay(at: date), date: date)
     }
     
 }

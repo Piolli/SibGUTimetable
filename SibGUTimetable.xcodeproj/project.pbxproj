@@ -65,8 +65,8 @@
 		A8011ECE22B3D7C100567A37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8011ECC22B3D7C100567A37 /* LaunchScreen.storyboard */; };
 		A8011ED922B3D7C100567A37 /* SibGUTimetableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011ED822B3D7C100567A37 /* SibGUTimetableTests.swift */; };
 		A8011EE422B3D7C100567A37 /* SibGUTimetableUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011EE322B3D7C100567A37 /* SibGUTimetableUITests.swift */; };
-		A8209F1922D70A7200E1BAF6 /* TTLessonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8209F1822D70A7200E1BAF6 /* TTLessonViewModel.swift */; };
-		A8209F2E22D71A1400E1BAF6 /* TTViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8209F2D22D71A1400E1BAF6 /* TTViewModel.swift */; };
+		A8209F1922D70A7200E1BAF6 /* TimetableLessonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8209F1822D70A7200E1BAF6 /* TimetableLessonViewModel.swift */; };
+		A8209F2E22D71A1400E1BAF6 /* TimetableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8209F2D22D71A1400E1BAF6 /* TimetableViewModel.swift */; };
 		A8537EBF22EC494B005183C7 /* Lesson+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EB722EC494B005183C7 /* Lesson+CoreDataClass.swift */; };
 		A8537EC122EC494B005183C7 /* Week+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EB922EC494B005183C7 /* Week+CoreDataClass.swift */; };
 		A8537EC322EC494B005183C7 /* Day+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EBB22EC494B005183C7 /* Day+CoreDataClass.swift */; };
@@ -75,7 +75,7 @@
 		A872CA3C235C92680040BB69 /* FileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A872CA3B235C92680040BB69 /* FileLoader.swift */; };
 		A88C2D46236D67F400CBE473 /* FileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A872CA3B235C92680040BB69 /* FileLoader.swift */; };
 		A88C2D48236D69E300CBE473 /* FakeLocalTTRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88C2D47236D69E300CBE473 /* FakeLocalTTRepository.swift */; };
-		A89DDCA422D704F500769EAA /* TTDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89DDCA322D704F500769EAA /* TTDayViewModel.swift */; };
+		A89DDCA422D704F500769EAA /* TimetableDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89DDCA322D704F500769EAA /* TimetableDayViewModel.swift */; };
 		A8AFAA6A236EDCAA00E0AB6D /* TimetableRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AFAA69236EDCAA00E0AB6D /* TimetableRepositoryTests.swift */; };
 		A8D2299E235C503C00FE98BE /* URLSession + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D2299D235C503C00FE98BE /* URLSession + Ext.swift */; };
 		A8E3BC4C22D1F7A7006E1B65 /* TimetableLessonListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonListController.swift */; };
@@ -170,8 +170,8 @@
 		A8011EDF22B3D7C100567A37 /* SibGUTimetableUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SibGUTimetableUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8011EE322B3D7C100567A37 /* SibGUTimetableUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SibGUTimetableUITests.swift; sourceTree = "<group>"; };
 		A8011EE522B3D7C100567A37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A8209F1822D70A7200E1BAF6 /* TTLessonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTLessonViewModel.swift; sourceTree = "<group>"; };
-		A8209F2D22D71A1400E1BAF6 /* TTViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTViewModel.swift; sourceTree = "<group>"; };
+		A8209F1822D70A7200E1BAF6 /* TimetableLessonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLessonViewModel.swift; sourceTree = "<group>"; };
+		A8209F2D22D71A1400E1BAF6 /* TimetableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewModel.swift; sourceTree = "<group>"; };
 		A833C99E2310166E00290DBD /* Objc-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objc-Bridge-Header.h"; sourceTree = "<group>"; };
 		A8537EB722EC494B005183C7 /* Lesson+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lesson+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A8537EB922EC494B005183C7 /* Week+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 		A872CA39235C8B940040BB69 /* MockNetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkSession.swift; sourceTree = "<group>"; };
 		A872CA3B235C92680040BB69 /* FileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLoader.swift; sourceTree = "<group>"; };
 		A88C2D47236D69E300CBE473 /* FakeLocalTTRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLocalTTRepository.swift; sourceTree = "<group>"; };
-		A89DDCA322D704F500769EAA /* TTDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTDayViewModel.swift; sourceTree = "<group>"; };
+		A89DDCA322D704F500769EAA /* TimetableDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableDayViewModel.swift; sourceTree = "<group>"; };
 		A8AFAA69236EDCAA00E0AB6D /* TimetableRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimetableRepositoryTests.swift; path = SibGUTimetableTests/Cases/Network/TimetableRepositoryTests.swift; sourceTree = SOURCE_ROOT; };
 		A8D2299D235C503C00FE98BE /* URLSession + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession + Ext.swift"; sourceTree = "<group>"; };
 		A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLessonListController.swift; sourceTree = "<group>"; };
@@ -274,9 +274,9 @@
 		1114AD6423E3F99F00E99C84 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				A8209F2D22D71A1400E1BAF6 /* TTViewModel.swift */,
-				A8209F1822D70A7200E1BAF6 /* TTLessonViewModel.swift */,
-				A89DDCA322D704F500769EAA /* TTDayViewModel.swift */,
+				A8209F2D22D71A1400E1BAF6 /* TimetableViewModel.swift */,
+				A8209F1822D70A7200E1BAF6 /* TimetableLessonViewModel.swift */,
+				A89DDCA322D704F500769EAA /* TimetableDayViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -867,7 +867,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8011EC322B3D7C000567A37 /* TimetableViewController.swift in Sources */,
-				A8209F1922D70A7200E1BAF6 /* TTLessonViewModel.swift in Sources */,
+				A8209F1922D70A7200E1BAF6 /* TimetableLessonViewModel.swift in Sources */,
 				114C9E4C23D6B86000BED746 /* GroupSearchViewModel.swift in Sources */,
 				1127386C23D714790074C7A4 /* GroupSearchViewController.swift in Sources */,
 				119E51B823DED7C100E1ABA4 /* Day+CoreDataProperties.swift in Sources */,
@@ -885,11 +885,11 @@
 				A8537EC822EC4FE9005183C7 /* Logger.swift in Sources */,
 				1103A0C523FFF89200D87570 /* LessonCell.swift in Sources */,
 				119E51C123DEDC3200E1ABA4 /* StubTTRepository.swift in Sources */,
-				A8209F2E22D71A1400E1BAF6 /* TTViewModel.swift in Sources */,
+				A8209F2E22D71A1400E1BAF6 /* TimetableViewModel.swift in Sources */,
 				A8537EC322EC494B005183C7 /* Day+CoreDataClass.swift in Sources */,
 				1114AD5723E18A8800E99C84 /* ServerRepository.swift in Sources */,
 				1114AD5323E1635100E99C84 /* TimetableDataManager.swift in Sources */,
-				A89DDCA422D704F500769EAA /* TTDayViewModel.swift in Sources */,
+				A89DDCA422D704F500769EAA /* TimetableDayViewModel.swift in Sources */,
 				11017F602413C52D003E2871 /* AboutAppCoordinator.swift in Sources */,
 				A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */,
 				11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */,

@@ -11,7 +11,7 @@ import UIKit
 
 class TimetableLessonListController: UITableViewController {
     
-    var viewModel: TTDayViewModel?
+    var viewModel: TimetableDayViewModel?
     var contentOffsetDidChange: ((CGPoint) -> ())?
     var date: Date!
     

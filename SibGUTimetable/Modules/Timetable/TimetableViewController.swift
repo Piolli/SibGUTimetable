@@ -148,7 +148,7 @@ class TimetableViewController: UIViewController {
                 guard let self = self else { return }
                 //Because server-side saves timetable to db then we can compare if timetable is new
                 if self.timetablePageViewController.timetableViewModel?.schedule.updateTimestampTime != timetable.updateTimestampTime {
-                    self.timetablePageViewController.timetableViewModel = TTViewModel(schedule: timetable)
+                    self.timetablePageViewController.timetableViewModel = TimetableViewModel(schedule: timetable)
                     self.navigationItem.title = timetable.group_name
                 }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
