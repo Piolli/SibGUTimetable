@@ -50,6 +50,7 @@
 		11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C523C0507400CA52C2 /* Coordinator.swift */; };
 		11EA09C823C050B500CA52C2 /* TimetableCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C723C050B500CA52C2 /* TimetableCoordinator.swift */; };
 		11EA09CA23C0512F00CA52C2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C923C0512F00CA52C2 /* AppCoordinator.swift */; };
+		11FD6645241681ED00844150 /* LessonSubgroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FD6644241681ED00844150 /* LessonSubgroupCell.swift */; };
 		609530D6831E2DBBD2A1D1C3 /* FSCalendar + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6095332493044377CF1705DF /* FSCalendar + Ext.swift */; };
 		60953201621C1FC9AD6239EC /* TimetableViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609533084061D3F5C983CC07 /* TimetableViewModelController.swift */; };
 		60953995244668EE378EFDBF /* TimetableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60953F5405BA4E4523BB8045 /* TimetableRepository.swift */; };
@@ -149,6 +150,7 @@
 		11EA09C523C0507400CA52C2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		11EA09C723C050B500CA52C2 /* TimetableCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableCoordinator.swift; sourceTree = "<group>"; };
 		11EA09C923C0512F00CA52C2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		11FD6644241681ED00844150 /* LessonSubgroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSubgroupCell.swift; sourceTree = "<group>"; };
 		6095322281714670A637E162 /* CustomizablePageViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizablePageViewDelegate.swift; sourceTree = "<group>"; };
 		609533084061D3F5C983CC07 /* TimetableViewModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableViewModelController.swift; sourceTree = "<group>"; };
 		6095332493044377CF1705DF /* FSCalendar + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FSCalendar + Ext.swift"; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				1103A0C423FFF89200D87570 /* LessonCell.swift */,
+				11FD6644241681ED00844150 /* LessonSubgroupCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -915,6 +918,7 @@
 				11B14BED23E841FA00B44958 /* UIViewController + Ext.swift in Sources */,
 				1114AD6223E3F8A800E99C84 /* CustomizablePageViewDataSource.swift in Sources */,
 				60953F8DFEE1CE6C6A0575A4 /* Date + Ext.swift in Sources */,
+				11FD6645241681ED00844150 /* LessonSubgroupCell.swift in Sources */,
 				60953995244668EE378EFDBF /* TimetableRepository.swift in Sources */,
 				60953CAAB0C4B89192F73D4F /* CoreDataTTRepository.swift in Sources */,
 				1141FA5F23CA09BB00796667 /* APIServer.swift in Sources */,

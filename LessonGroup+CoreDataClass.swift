@@ -13,7 +13,7 @@ import CoreData
 @objc(LessonGroup)
 public class LessonGroup: NSManagedObject, Decodable {
     enum CodingKeys: String, CodingKey {
-            case lessons
+        case lessons
     }
         
     public convenience required init(from decoder: Decoder) throws {

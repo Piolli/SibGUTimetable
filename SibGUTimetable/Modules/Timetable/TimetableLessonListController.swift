@@ -21,6 +21,7 @@ class TimetableLessonListController: UITableViewController {
         super.viewDidLoad()
         
         tableView.register(LessonCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(LessonSubgroupCell.self, forCellReuseIdentifier: "subgroupCell")
         tableView.separatorStyle = .singleLine
 //        tableView.separatorInsetReference = .fromAutomaticInsets
 //        tableView.separatorInset = .init(top: 18, left: 0, bottom: 18, right: 0)
@@ -53,6 +54,19 @@ class TimetableLessonListController: UITableViewController {
         contentOffsetObserver?.invalidate()
     }
     
+    private func checkAmbiguousLayout(_ view: UIView) { for subview in view.subviews {
+        _ = subview.hasAmbiguousLayout
+          checkAmbiguousLayout(subview)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        UIView.exerciseAmbiguity(view)
+        checkAmbiguousLayout(view)
+//        print(view.value(forKey: "_autolayoutTrace")!)
+    }
+    
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         print("velocity:", velocity)
         print("pointee:", targetContentOffset.pointee)
@@ -66,10 +80,33 @@ class TimetableLessonListController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LessonCell
-        cell.viewModel = viewModel?.lessonViewModel(at: indexPath)
-        return cell
+        if let count = viewModel?.lessonViewModels(at: indexPath)?.count, count > 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "subgroupCell", for: indexPath) as! LessonSubgroupCell
+            cell.lessonViewModels = viewModel!.lessonViewModels(at: indexPath)!
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LessonCell
+            cell.viewModel = viewModel?.lessonViewModels(at: indexPath)?[0]
+            return cell
+        }
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LessonCell
+//        cell.viewModel = viewModel?.lessonViewModels(at: indexPath)
+//        return cell
     }
 
     // MARK: - Table view content offset
+}
+
+extension UIView {
+    class func exerciseAmbiguity(_ view: UIView) {
+    #if DEBUG
+        if view.hasAmbiguousLayout {
+           Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+          view.exerciseAmbiguityInLayout() }
+          } else {
+          for subview in view.subviews {
+          UIView.exerciseAmbiguity(subview) }
+          }
+          #endif
+        }
 }

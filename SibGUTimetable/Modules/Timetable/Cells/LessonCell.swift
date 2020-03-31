@@ -45,10 +45,11 @@ class LessonCell: UITableViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
+        label.setContentHuggingPriority(UILayoutPriority(252), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         if #available(iOS 13, *) {
-            label.textColor = .systemTeal }
+            label.textColor = .systemBlue }
         label.font = .systemFont(ofSize: 16)
         label.text = "Разработка корпоративных приложений"
         return label
@@ -56,6 +57,7 @@ class LessonCell: UITableViewCell {
     
     private let teacherLabel: UILabel = {
         let label = UILabel()
+        label.setContentHuggingPriority(UILayoutPriority(251), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Зотин А. Г."
 //        label.textAlignment = .right
@@ -103,7 +105,6 @@ extension LessonCell {
     }
     
     fileprivate func constraintTimeRangeLabel(_ margins: UILayoutGuide, _ marginsValues: UIEdgeInsets) {
-        let rootLayoutMargins = layoutMargins
         NSLayoutConstraint.activate([
             timeRangeLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
             timeRangeLabel.trailingAnchor.constraint(equalTo: separatorView.leadingAnchor, constant: -(marginsValues.right )),
@@ -113,10 +114,6 @@ extension LessonCell {
     }
     
     func setupCell() {
-        #warning("delete this")
-//        contentView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
-//        contentView.backgroundColor = UIColor.systemGray
-
         contentView.addSubview(separatorView)
         contentView.addSubview(timeRangeLabel)
         contentView.addSubview(officeLabel)
@@ -127,31 +124,29 @@ extension LessonCell {
         let margins = contentView.layoutMarginsGuide
         let marginsValues = contentView.layoutMargins
         
+        #if DEBUG
         if false {
             timeRangeLabel.backgroundColor = .green
             officeLabel.backgroundColor = .red
             typeLabel.backgroundColor = .blue
         }
+        #endif
         
         //TODO: why leading anchor is to leading instead of trailing of separator view?
-        
         constraintSeparatorView(margins)
         constraintTimeRangeLabel(margins, marginsValues)
 
-
         let separatorMargins = separatorView.layoutMarginsGuide
-        print(separatorView.layoutMargins)
         NSLayoutConstraint.activate([
             officeLabel.leadingAnchor.constraint(equalTo: separatorMargins.leadingAnchor),
             officeLabel.topAnchor.constraint(equalTo: margins.topAnchor)
         ])
             
-
-        print(separatorView.layoutMargins)
         NSLayoutConstraint.activate([
             typeLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
             typeLabel.topAnchor.constraint(equalTo: margins.topAnchor),
-            typeLabel.leadingAnchor.constraint(equalTo: officeLabel.trailingAnchor, constant: 8)
+            typeLabel.leadingAnchor.constraint(equalTo: officeLabel.trailingAnchor, constant: 8),
+            typeLabel.widthAnchor.constraint(equalTo: officeLabel.widthAnchor)
         ])
         
         //Add lesson name
@@ -164,7 +159,7 @@ extension LessonCell {
             nameLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
             optionalTopAnchorConstraint
         ])
-        
+
         //add teacher
         NSLayoutConstraint.activate([
             teacherLabel.topAnchor.constraint(equalToSystemSpacingBelow: nameLabel.bottomAnchor, multiplier: 1.0),
@@ -172,6 +167,7 @@ extension LessonCell {
             teacherLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
             teacherLabel.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
         ])
+        
     }
     
 }

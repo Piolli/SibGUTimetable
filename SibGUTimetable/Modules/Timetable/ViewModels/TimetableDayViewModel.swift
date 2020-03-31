@@ -26,13 +26,15 @@ class TimetableDayViewModel {
         return day.lessonGroups?.count ?? 0
     }
     
-    func lessonViewModel(at indexPath: IndexPath) -> TimetableLessonViewModel? {
-        //TODO make to 'LessonGroup'
+    func lessonViewModels(at indexPath: IndexPath) -> [TimetableLessonViewModel]? {
+        //TODO return lesson group
         let lessonGroup = day.lessonGroups?.array[indexPath.row] as! LessonGroup
         if let firstLessons = lessonGroup.lessons?.firstObject as? Lesson {
-            return TimetableLessonViewModel(lesson: firstLessons)
+            return [TimetableLessonViewModel(lesson: firstLessons)]
         }
-        return nil
+        return []
+//        return lessonGroup.lessons?.array
+//            .map { TimetableLessonViewModel(lesson: ($0 as! Lesson)) }
     }
     
 }
