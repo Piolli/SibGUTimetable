@@ -22,6 +22,7 @@ class GroupSearchViewModelController {
     public let error: PublishRelay<Error>
     public let loading: PublishRelay<Bool>
     private let disposeBag = DisposeBag()
+    private let userPreferences: UserPreferences = Assembler.shared.resolve()
     
     init(api: APIServer) {
         self.api = api
@@ -42,7 +43,7 @@ class GroupSearchViewModelController {
     }
     
     public func save(timetableDetails: TimetableDetails) {
-        UserPreferences.sharedInstance.saveTimetableDetails(timetableDetails)
+        userPreferences.saveTimetableDetails(timetableDetails)
     }
     
 }

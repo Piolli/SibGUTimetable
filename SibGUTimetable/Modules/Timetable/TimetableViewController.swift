@@ -20,6 +20,7 @@ class TimetableViewController: UIViewController {
     lazy var timetablePageViewController: TimetablePageViewController = .init()
     
     var calendarHeightConstraint: NSLayoutConstraint!
+    let userPreferences: UserPreferences = Assembler.shared.resolve()
     
     let disposeBag = DisposeBag()
     var dataManager: TimetableDataManager! {
@@ -53,7 +54,7 @@ class TimetableViewController: UIViewController {
         
         setupTimetablePageViewController()
         //setup autoupdate
-        UserPreferences.sharedInstance.timetableDetailsDidChanged.subscribe(onNext: { (timetableDetails) in
+        userPreferences.timetableDetailsDidChanged.subscribe(onNext: { (timetableDetails) in
             guard let timetableDetails = timetableDetails else { return }
             self.dataManager.loadTimetable(timetableDetails: timetableDetails)
         }).disposed(by: disposeBag)
@@ -64,7 +65,7 @@ class TimetableViewController: UIViewController {
     }
     
     func checkExistingTimetableDetails() {
-        if let timetableDetails = UserPreferences.sharedInstance.getTimetableDetails() {
+        if let timetableDetails = userPreferences.getTimetableDetails() {
             dataManager.loadTimetable(timetableDetails: timetableDetails)
         } else {
             showMessage(text: "Choose group from left side menu", title: "Error")
@@ -74,7 +75,6 @@ class TimetableViewController: UIViewController {
     func setupRightBarButton() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(revealMenu))
     }
-    
     
     @objc func revealMenu() {
         if let sideMenuController = sideMenuController {

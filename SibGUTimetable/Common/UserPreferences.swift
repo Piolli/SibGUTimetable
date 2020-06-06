@@ -33,14 +33,23 @@ extension UserDefaults {
     
 }
 
-class UserPreferences : NSObject {
+protocol UserPreferences {
+    func saveTimetableDetails(groupId: Int, groupName: String, timestamp: String)
+    func saveTimetableDetails(_ timetableDetails: TimetableDetails)
+    func getTimetableDetails() -> TimetableDetails?
+    func clearTimetableDetails()
+    var timetableDetailsDidChanged: PublishRelay<TimetableDetails?> { get }
+}
+
+class DefaultsUserPreferences : NSObject, UserPreferences {
     
-    public static let sharedInstance = UserPreferences()
+    public static let sharedInstance = DefaultsUserPreferences()
     public let timetableDetailsDidChanged: PublishRelay<TimetableDetails?> = .init()
-    private let defaults = UserDefaults.standard
+
     let selectedTimetableDetailsKey = "timetableDetails"
     var observer: NSKeyValueObservation!
-    
+
+    private let defaults = UserDefaults.standard
     
     private override init() {
         super.init()

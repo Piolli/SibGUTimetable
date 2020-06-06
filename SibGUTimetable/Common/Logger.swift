@@ -19,7 +19,7 @@ class Logger {
         error = "ERROR",
         debug = "DEBUG"
     }
-    
+        
     static func logMessage(message: String? = nil, error: Error? = nil, file: String = #file, type: LogType = .info, line: Int = #line, function: String = #function) {
         let splitPath = file.split(separator: "/").last!
         let formatMacrosInfo = "\(splitPath):\(line) in \(function)"

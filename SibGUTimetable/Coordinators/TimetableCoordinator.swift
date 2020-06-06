@@ -31,12 +31,7 @@ class TimetableCoordinator : Coordinator {
     }
     
     func start() {
-//        let controller = TTPageViewController()
-//        controller.viewModelController?.repository = FakeLocalTTRepository()
-//        //TODO: make DI for repository
-//        navigationController.pushViewController(controller, animated: true)
-        //TODO: make DI for repository
-        timetableViewController.dataManager = TimetableDataManager(localRepository: CoreDataTTRepository(), serverRepository: ServerRepository())
+        timetableViewController.dataManager = Assembler.shared.resolve()
     }
     
     #if DEBUG

@@ -16,6 +16,7 @@ import NVActivityIndicatorView
 class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
 
     private static let cellId = "groupPair"
+    private let timetableManager: TimetableDataManager = Assembler.shared.resolve()
     
     var coordinator: GroupSearchCoordinator!
     var viewModelController: GroupSearchViewModelController!
@@ -113,11 +114,10 @@ extension GroupSearchViewController : UITableViewDelegate {
         if let pair = viewModel?.groupPairs[indexPath.row] {
 //            coordinator.openSearchedGroup(pair: pair)
             //try to load and save to UserPreferences TimetableDetails
-            let manager = TimetableDataManager(localRepository: CoreDataTTRepository(), serverRepository: ServerRepository())
 //            activityIndicatorView.startAnimating()
             startAnimating()
             let timetableDetails = TimetableDetails(groupId: pair.id, groupName: pair.name)
-            manager.preloadTimetable(timetableDetails: timetableDetails)
+            timetableManager.preloadTimetable(timetableDetails: timetableDetails)
                 .observeOn(MainScheduler.instance)
                 .subscribe(onCompleted: { [weak self] in
                 self?.stopAnimating()
