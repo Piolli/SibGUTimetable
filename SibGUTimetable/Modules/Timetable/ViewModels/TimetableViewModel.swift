@@ -16,7 +16,7 @@ class TimetableViewModel {
     
     init?(schedule: Timetable) {
         guard let groupName = schedule.group_name, let weeks = schedule.weeks else {
-            print("ERROR: Timetable is nil")
+            logger.error("Timetable is nil")
             return nil
         }
         

@@ -35,7 +35,7 @@ class AboutAppCoordinator : Coordinator {
             push(item: item)
         } else {
             //log
-            print("Item with name '\(itemName)' don't exist or select default coordinator")
+            logger.critical("Item with name '\(itemName)' don't exist or select default coordinator")
         }
     }
     

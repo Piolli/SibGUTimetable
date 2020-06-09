@@ -41,7 +41,6 @@ class TimetableDataManager {
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Timetable")
         let deleteReq = NSBatchDeleteRequest(fetchRequest: fetch)
         let result = try? AppDelegate.backgroundContext.execute(deleteReq)
-        print("---------", result.debugDescription)
         try? AppDelegate.backgroundContext.save()
     }
     
@@ -53,14 +52,14 @@ class TimetableDataManager {
             guard let self = self else {
                 return Observable.error(RxError.unknown)
             }
-            print("RXSWIFTLOG: load timetable from server")
+            logger.trace("RXSWIFTLOG: load timetable from server")
             return
                 self.serverRepository.getTimetable(timetableDetails: timetableDetails)
                     .map {
                         self.localRepository.saveTimetable(timetable: $0).debug("saveTimetable", trimOutput: false).debug("Save server", trimOutput: false).subscribe(onCompleted: {
                         }) { [weak self] (error) in
                             self?.error.accept(TimetableDataManagerError.serverError(error.localizedDescription))
-                            print("ERROR:", error.localizedDescription)
+                            logger.error("\(error.localizedDescription)")
                         }
                         
                         return $0

@@ -58,7 +58,7 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
     
     func select(iterableValue: T) {
         if customizableDataSource?.iterableValue == iterableValue {
-            print("Select the same date!")
+            logger.debug("User selected the same page")
             return
         }
         

@@ -10,7 +10,7 @@ extension FSCalendar {
 
     func moveTo(state: CustomizablePageViewMoveDirection) {
         guard let selectedDate = self.selectedDate else {
-            Logger.logMessageInfo(message: "FSCalendar selectedDate is null")
+            logger.error("FSCalendar selectedDate is null")
             return
         }
 
@@ -24,7 +24,7 @@ extension FSCalendar {
     }
 
     var isSelectedDateEqualsToday: Bool {
-        Logger.logMessageInfo(message: "isSelectedDateEqualsToday is \(self.selectedDate) == \(self.today)")
+        logger.debug("isSelectedDateEqualsToday is \(self.selectedDate) == \(self.today)")
         return self.selectedDate == self.today
     }
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,8 @@
 		1141FA6523CA0F3300796667 /* NativeServerAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141FA6423CA0F3300796667 /* NativeServerAPITests.swift */; };
 		114C9E4A23D6B72700BED746 /* GroupSearchViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4923D6B72700BED746 /* GroupSearchViewModelController.swift */; };
 		114C9E4C23D6B86000BED746 /* GroupSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */; };
+		1177059F248E769900483E0A /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 1177059E248E769900483E0A /* Logging */; };
+		117705A1248E7F7700483E0A /* CustomLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117705A0248E7F7700483E0A /* CustomLogHandler.swift */; };
 		118F0C1023C24500003BCEF2 /* Timetable+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118F0C0F23C24500003BCEF2 /* Timetable+CoreDataClass.swift */; };
 		1197A53123BE20E0008737B2 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = 1197A53023BE20E0008737B2 /* schedule.json */; };
 		1197A53223BE501A008737B2 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = 1197A53023BE20E0008737B2 /* schedule.json */; };
@@ -74,7 +76,6 @@
 		A8537EBF22EC494B005183C7 /* Lesson+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EB722EC494B005183C7 /* Lesson+CoreDataClass.swift */; };
 		A8537EC122EC494B005183C7 /* Week+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EB922EC494B005183C7 /* Week+CoreDataClass.swift */; };
 		A8537EC322EC494B005183C7 /* Day+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EBB22EC494B005183C7 /* Day+CoreDataClass.swift */; };
-		A8537EC822EC4FE9005183C7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8537EC722EC4FE9005183C7 /* Logger.swift */; };
 		A872CA3A235C8B940040BB69 /* MockNetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A872CA39235C8B940040BB69 /* MockNetworkSession.swift */; };
 		A872CA3C235C92680040BB69 /* FileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A872CA3B235C92680040BB69 /* FileLoader.swift */; };
 		A88C2D46236D67F400CBE473 /* FileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A872CA3B235C92680040BB69 /* FileLoader.swift */; };
@@ -130,6 +131,7 @@
 		1141FA6423CA0F3300796667 /* NativeServerAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeServerAPITests.swift; sourceTree = "<group>"; };
 		114C9E4923D6B72700BED746 /* GroupSearchViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewModelController.swift; sourceTree = "<group>"; };
 		114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewModel.swift; sourceTree = "<group>"; };
+		117705A0248E7F7700483E0A /* CustomLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogHandler.swift; sourceTree = "<group>"; };
 		118F0C0F23C24500003BCEF2 /* Timetable+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timetable+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1197A53023BE20E0008737B2 /* schedule.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schedule.json; sourceTree = "<group>"; };
 		119E519E23DED59E00E1ABA4 /* LessonGroup+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LessonGroup+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -184,7 +186,6 @@
 		A8537EB722EC494B005183C7 /* Lesson+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lesson+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A8537EB922EC494B005183C7 /* Week+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A8537EBB22EC494B005183C7 /* Day+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A8537EC722EC4FE9005183C7 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A872CA39235C8B940040BB69 /* MockNetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkSession.swift; sourceTree = "<group>"; };
 		A872CA3B235C92680040BB69 /* FileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLoader.swift; sourceTree = "<group>"; };
 		A88C2D47236D69E300CBE473 /* FakeLocalTTRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLocalTTRepository.swift; sourceTree = "<group>"; };
@@ -215,6 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1177059F248E769900483E0A /* Logging in Frameworks */,
 				96147595C3636E42C0F1E1A4 /* Pods_SibGUTimetable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,9 +266,9 @@
 			children = (
 				1114AD5A23E32D7B00E99C84 /* CustomPageView */,
 				A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */,
-				A8537EC722EC4FE9005183C7 /* Logger.swift */,
 				11C606CD23E4836D00CF2C79 /* ReusableTableViewDataSource.swift */,
 				11BFD48823E9BC2C00BE6B6B /* UserPreferences.swift */,
+				117705A0248E7F7700483E0A /* CustomLogHandler.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -641,6 +643,9 @@
 			dependencies = (
 			);
 			name = SibGUTimetable;
+			packageProductDependencies = (
+				1177059E248E769900483E0A /* Logging */,
+			);
 			productName = SibGUTimetable;
 			productReference = A8011EBD22B3D7C000567A37 /* SibGUTimetable.app */;
 			productType = "com.apple.product-type.application";
@@ -720,6 +725,9 @@
 				Base,
 			);
 			mainGroup = A8011EB422B3D7C000567A37;
+			packageReferences = (
+				1177059D248E769900483E0A /* XCRemoteSwiftPackageReference "swift-log" */,
+			);
 			productRefGroup = A8011EBE22B3D7C000567A37 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -903,7 +911,6 @@
 				A8537EBF22EC494B005183C7 /* Lesson+CoreDataClass.swift in Sources */,
 				A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */,
 				119F178D248BACEB00EF0B21 /* Assembler.swift in Sources */,
-				A8537EC822EC4FE9005183C7 /* Logger.swift in Sources */,
 				1103A0C523FFF89200D87570 /* LessonCell.swift in Sources */,
 				119E51C123DEDC3200E1ABA4 /* StubTTRepository.swift in Sources */,
 				A8209F2E22D71A1400E1BAF6 /* TimetableViewModel.swift in Sources */,
@@ -943,6 +950,7 @@
 				60953CAAB0C4B89192F73D4F /* CoreDataTTRepository.swift in Sources */,
 				1141FA5F23CA09BB00796667 /* APIServer.swift in Sources */,
 				60953201621C1FC9AD6239EC /* TimetableViewModelController.swift in Sources */,
+				117705A1248E7F7700483E0A /* CustomLogHandler.swift in Sources */,
 				A88C2D48236D69E300CBE473 /* FakeLocalTTRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1339,6 +1347,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1177059D248E769900483E0A /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1177059E248E769900483E0A /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1177059D248E769900483E0A /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		A8011EC722B3D7C000567A37 /* SibGUTimetable.xcdatamodeld */ = {

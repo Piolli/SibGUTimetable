@@ -68,8 +68,8 @@ class TimetableLessonListController: UITableViewController {
     }
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        print("velocity:", velocity)
-        print("pointee:", targetContentOffset.pointee)
+        logger.trace("velocity: \(velocity)")
+        logger.trace("pointee: \(targetContentOffset.pointee)")
         self.contentOffsetDidChange?(velocity)
     }
 

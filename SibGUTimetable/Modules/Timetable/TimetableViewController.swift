@@ -26,7 +26,7 @@ class TimetableViewController: UIViewController {
     var dataManager: TimetableDataManager! {
         didSet {
             setupDataManager()
-            print("TimetableViewController didSet dataManager")
+            logger.debug("TimetableViewController didSet dataManager")
         }
     }
     
@@ -160,7 +160,7 @@ class TimetableViewController: UIViewController {
             .subscribeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (pageDidMoveTo) in
             DispatchQueue.main.async {
-                Logger.logMessageInfo(message: "pageViewDidMoved state: \(pageDidMoveTo)")
+                logger.debug("pageViewDidMoved state: \(pageDidMoveTo)")
                 self?.calendarView.moveTo(state: pageDidMoveTo)
                 self?.updateTodayButtonVisibility()
             }
@@ -209,7 +209,7 @@ class TimetableViewController: UIViewController {
 
 extension TimetableViewController : FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        Logger.logMessageInfo(message: "Did select date: \(calendar.selectedDate)")
+        logger.debug("Did select date: \(calendar.selectedDate)")
         updateTimetableFrom(date: calendar.selectedDate)
         
     }
@@ -237,7 +237,7 @@ extension TimetableViewController : FSCalendarDelegate {
 
 extension TimetableViewController : CustomizablePageViewDelegate {
     func pageViewDidMoved(state: CustomizablePageViewMoveDirection) {
-        Logger.logMessageInfo(message: "pageViewDidMoved state: \(state)")
+        logger.debug("pageViewDidMoved state: \(state)")
         calendarView.moveTo(state: state)
         updateTodayButtonVisibility()
     }

@@ -29,7 +29,7 @@ class TimetablePageViewController : UIViewController {
         didSet {
             guard let timetableViewModel = self.timetableViewModel else {
                 pageViewController.dataSource = nil
-                print("TimetablePageViewController: timetableViewModel set to nil")
+                logger.error("timetableViewModel set to nil")
                 return
             }
             pageViewController.dataSource = CustomizablePageViewDataSource<Date, TimetableLessonListController>.init(startIterableValue: Date(), contentBuilder: { [weak self] (date) -> TimetableLessonListController in

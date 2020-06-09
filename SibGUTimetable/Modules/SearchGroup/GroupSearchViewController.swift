@@ -126,7 +126,7 @@ extension GroupSearchViewController : UITableViewDelegate {
                     self?.navigationController?.popViewController(animated: true)
 //                    self?.navigationController?.popToRootViewController(animated: true)
             }) { [weak self] error in
-                print("error:", error)
+                logger.error("\(error.localizedDescription)")
                 self?.showMessage(text: error.localizedDescription, title: "Error")
                 self?.stopAnimating()
             }

@@ -8,7 +8,12 @@
 
 import UIKit
 import CoreData
+import Logging
 //import Firebase
+
+var logger = Logger(label: "timetable.app.logger") { (label) -> LogHandler in
+    return CustomLogHandler()
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -42,17 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         appCoordinator = AppCoordinator(window: window)
         appCoordinator.start()
-        
-        
-//        #warning("delete")
-//        UserPreferences.sharedInstance.clearTimetableDetails()
-//        UserPreferences.sharedInstance.saveTimetableDetails(groupId: 740, groupName: "БПИ16-01", timestamp: "")
-//        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
-//            UserPreferences.sharedInstance.saveTimetableDetails(groupId: 742, groupName: "БПИ18-01", timestamp: "")
-//        }
-//        Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { (timer) in
-//            UserPreferences.sharedInstance.saveTimetableDetails(groupId: 512, groupName: "БИС16-01", timestamp: "")
-//        }
+
         return true
     }
     

@@ -54,10 +54,10 @@ class DefaultsUserPreferences : NSObject, UserPreferences {
     private override init() {
         super.init()
         observer = defaults.observe(\.timetableDetails, options: .new, changeHandler: { (defaults, value) in
-            print("some", value.newValue, value.oldValue)
+            logger.debug("\(value.newValue), \(value.oldValue)")
             if let data = value.newValue {
                 let object = try? JSONDecoder().decode(TimetableDetails.self, from: data)
-                print(object?.groupName, object?.timestamp)
+                logger.debug("\(object?.groupName), \(object?.timestamp)")
             }
         })
     }
@@ -74,8 +74,7 @@ class DefaultsUserPreferences : NSObject, UserPreferences {
     func saveTimetableDetails(_ timetableDetails: TimetableDetails) {
         let encoder = JSONEncoder()
         guard let json = try? encoder.encode(timetableDetails) else {
-            //TODO logger
-            print("JSON is nil")
+            logger.error("JSON is nil")
             return
         }
         defaults.set(json, forKey: selectedTimetableDetailsKey)
@@ -85,8 +84,7 @@ class DefaultsUserPreferences : NSObject, UserPreferences {
     func getTimetableDetails() -> TimetableDetails? {
         let decoder = JSONDecoder()
         guard let data = defaults.data(forKey: selectedTimetableDetailsKey) else {
-            //TODO logger
-            print("Data is nil")
+            logger.error("Data is nil")
             return nil
         }
         return try? decoder.decode(TimetableDetails.self, from: data)
@@ -98,8 +96,7 @@ class DefaultsUserPreferences : NSObject, UserPreferences {
     }
     
     @objc fileprivate func didChangeValue(notification: Notification) {
-        print("Notification description: ",notification.description)
-        
+        logger.debug("Notification description: \(notification.description)")
         dump(notification)
     }
     
