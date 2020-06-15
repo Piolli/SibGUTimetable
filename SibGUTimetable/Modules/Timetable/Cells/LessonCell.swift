@@ -48,9 +48,7 @@ class LessonCell: UITableViewCell {
         label.setContentHuggingPriority(UILayoutPriority(252), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        if #available(iOS 13, *) {
-            label.textColor = .systemBlue }
-        label.font = .systemFont(ofSize: 16)
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.text = "Разработка корпоративных приложений"
         return label
     }()
@@ -60,6 +58,8 @@ class LessonCell: UITableViewCell {
         label.setContentHuggingPriority(UILayoutPriority(251), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Зотин А. Г."
+        
+        label.textColor = ThemeProvider.shared.linkColor
 //        label.textAlignment = .right
         label.font = .systemFont(ofSize: 12)
         return label

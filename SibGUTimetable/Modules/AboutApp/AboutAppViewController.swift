@@ -96,9 +96,8 @@ class AboutAppViewController : UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         cell.textLabel?.text = items[indexPath.row]
         cell.accessoryType = .disclosureIndicator
-        if #available(iOS 13.0, *) {
-            cell.backgroundColor = .secondarySystemBackground
-        }
+        cell.backgroundColor = ThemeProvider.shared.aboutAppTableViewCellBackgroundColor
+        
         return cell
     }
     

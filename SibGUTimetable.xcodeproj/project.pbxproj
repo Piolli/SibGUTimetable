@@ -49,6 +49,7 @@
 		11C3889C23E438E200ED43A5 /* SideMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3889B23E438E200ED43A5 /* SideMenuCoordinator.swift */; };
 		11C3889E23E4468000ED43A5 /* UINavigationController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3889D23E4468000ED43A5 /* UINavigationController + Ext.swift */; };
 		11C606CE23E4836D00CF2C79 /* ReusableTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C606CD23E4836D00CF2C79 /* ReusableTableViewDataSource.swift */; };
+		11CD09E1249270BA00D4612E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CD09E0249270BA00D4612E /* Theme.swift */; };
 		11DA582A23E7310B005FB1BF /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA582923E7310B005FB1BF /* MenuTableViewController.swift */; };
 		11DC92FD23D9D4C500314C39 /* GroupSearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DC92FC23D9D4C500314C39 /* GroupSearchCoordinator.swift */; };
 		11DC92FF23D9E51F00314C39 /* ServerTTRepositoryTODORemake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DC92FE23D9E51F00314C39 /* ServerTTRepositoryTODORemake.swift */; };
@@ -152,6 +153,7 @@
 		11C3889B23E438E200ED43A5 /* SideMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCoordinator.swift; sourceTree = "<group>"; };
 		11C3889D23E4468000ED43A5 /* UINavigationController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController + Ext.swift"; sourceTree = "<group>"; };
 		11C606CD23E4836D00CF2C79 /* ReusableTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableTableViewDataSource.swift; sourceTree = "<group>"; };
+		11CD09E0249270BA00D4612E /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		11DA582923E7310B005FB1BF /* MenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		11DC92FC23D9D4C500314C39 /* GroupSearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchCoordinator.swift; sourceTree = "<group>"; };
 		11DC92FE23D9E51F00314C39 /* ServerTTRepositoryTODORemake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTTRepositoryTODORemake.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				11C606CD23E4836D00CF2C79 /* ReusableTableViewDataSource.swift */,
 				11BFD48823E9BC2C00BE6B6B /* UserPreferences.swift */,
 				117705A0248E7F7700483E0A /* CustomLogHandler.swift */,
+				11CD09E0249270BA00D4612E /* Theme.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -935,6 +938,7 @@
 				609530D6831E2DBBD2A1D1C3 /* FSCalendar + Ext.swift in Sources */,
 				11DC92FF23D9E51F00314C39 /* ServerTTRepositoryTODORemake.swift in Sources */,
 				A88C2D46236D67F400CBE473 /* FileLoader.swift in Sources */,
+				11CD09E1249270BA00D4612E /* Theme.swift in Sources */,
 				119E51A823DED59E00E1ABA4 /* LessonGroup+CoreDataClass.swift in Sources */,
 				119E51BA23DED7C100E1ABA4 /* Timetable+CoreDataProperties.swift in Sources */,
 				119F1790248BAD2800EF0B21 /* RepositoryAssembler.swift in Sources */,

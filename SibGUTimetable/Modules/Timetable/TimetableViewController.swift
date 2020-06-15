@@ -196,13 +196,9 @@ class TimetableViewController: UIViewController {
     
     
     fileprivate func initAppearance() {
-        if #available(iOS 13.0, *) {
-            self.view.backgroundColor = .systemBackground
-            calendarView.appearance.titleDefaultColor = .systemGray4
-        } else {
-            self.view.backgroundColor = .white
-            calendarView.appearance.titleDefaultColor = .lightGray
-        }
+        //TODO: fix next and prev. colors
+        calendarView.appearance.titleDefaultColor = ThemeProvider.shared.calendarTitleCellBackgroundColor
+        self.view.backgroundColor = ThemeProvider.shared.whiteBackgroundColor
     }
     
 }
