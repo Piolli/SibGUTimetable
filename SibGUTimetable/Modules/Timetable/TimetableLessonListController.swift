@@ -89,12 +89,32 @@ class TimetableLessonListController: UITableViewController {
             cell.viewModel = viewModel?.lessonViewModels(at: indexPath)?[0]
             return cell
         }
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LessonCell
-//        cell.viewModel = viewModel?.lessonViewModels(at: indexPath)
-//        return cell
     }
-
-    // MARK: - Table view content offset
+    
+    var cells: [IndexPath: UITableViewCell] = [:]
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if !cells.values.contains(cell) {
+        cell.setNeedsLayout()
+        cell.layoutIfNeeded()
+        cells[indexPath] = cell
+//        }
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let cell = cells[indexPath] else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+        return cell.frame.height
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let cell = cells[indexPath] else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+        return cell.frame.height
+    }
+    
 }
 
 extension UIView {
@@ -102,10 +122,14 @@ extension UIView {
     #if DEBUG
         if view.hasAmbiguousLayout {
            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-          view.exerciseAmbiguityInLayout() }
+                view.exerciseAmbiguityInLayout()
+                logger.debug("Debug layout")
+            }
           } else {
-          for subview in view.subviews {
-          UIView.exerciseAmbiguity(subview) }
+            for subview in view.subviews {
+                UIView.exerciseAmbiguity(subview)
+                logger.debug("Debug layout")
+            }
           }
           #endif
         }

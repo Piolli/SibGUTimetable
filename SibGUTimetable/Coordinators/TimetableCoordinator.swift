@@ -25,6 +25,7 @@ class TimetableCoordinator : Coordinator {
         
         timetableViewController.tabBarItem = UITabBarItem(title: "Timetable", image: UIImage(named: "tab_bar_item_timetable"), tag: 1)
         timetableViewController.coordinator = self
+        
 //        navigationController.pushViewController(ttViewController, animated: true)
 //        let navigationController = AppCoordinator.putInNavigationController(ttViewController)
 //        self.navigationController = navigationController
