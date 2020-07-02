@@ -46,6 +46,7 @@ class LessonCell: UITableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.setContentHuggingPriority(UILayoutPriority(252), for: .vertical)
+        label.setContentCompressionResistancePriority(UILayoutPriority(752), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 16, weight: .semibold)
@@ -56,6 +57,7 @@ class LessonCell: UITableViewCell {
     private let teacherLabel: UILabel = {
         let label = UILabel()
         label.setContentHuggingPriority(UILayoutPriority(251), for: .vertical)
+        label.setContentCompressionResistancePriority(UILayoutPriority(751), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Зотин А. Г."
         

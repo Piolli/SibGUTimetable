@@ -45,19 +45,15 @@ class LessonSubgroupCell: UITableViewCell {
         var y = contentView.frame.origin.y
         
         for cell in cells {
-            cell.setNeedsLayout()
-            cell.layoutIfNeeded()
-            cell.sizeToFit()
-            
-            logger.debug("cell frame = \(cell.contentView)")
-            //TODO: calculate overall height of cell through sum of all labels and margins
-            cell.frame = .init(x: 0, y: y, width: width, height: 100)
             cell.frame.origin.y = y
-            y += cell.bounds.height
+            let autoLayoutHeight = cell.systemLayoutSizeFitting(CGSize(width: bounds.width, height: UIView.layoutFittingCompressedSize.height))
+            cell.frame.size.height = autoLayoutHeight.height
+            cell.frame.size.width = bounds.width
+            logger.info("Calculated height: \(autoLayoutHeight)")
+            y += cell.frame.height
         }
-//        frame.size.height = CGFloat(300)
-//        contentView.frame.size.height = CGFloat(300)
         
+        logger.debug("Full Height of Cell: \(y)")
         frame.size.height = CGFloat(y)
         contentView.frame.size.height = CGFloat(y)
     }

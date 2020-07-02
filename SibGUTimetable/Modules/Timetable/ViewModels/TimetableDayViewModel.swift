@@ -27,7 +27,6 @@ class TimetableDayViewModel {
     }
     
     func lessonViewModels(at indexPath: IndexPath) -> [TimetableLessonViewModel]? {
-        //TODO return lesson group
         let lessonGroup = day.lessonGroups?.array[indexPath.row] as! LessonGroup
         return lessonGroup.lessons?.array
             .map { TimetableLessonViewModel(lesson: ($0 as! Lesson)) }

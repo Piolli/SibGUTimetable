@@ -94,11 +94,9 @@ class TimetableLessonListController: UITableViewController {
     var cells: [IndexPath: UITableViewCell] = [:]
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if !cells.values.contains(cell) {
         cell.setNeedsLayout()
         cell.layoutIfNeeded()
         cells[indexPath] = cell
-//        }
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
