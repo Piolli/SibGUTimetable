@@ -97,6 +97,10 @@ class LessonCell: UITableViewCell {
 
 extension LessonCell {
     
+    public func hideTimeRangeLabel() {
+        timeRangeLabel.isHidden = true
+    }
+    
     fileprivate func constraintSeparatorView(_ margins: UILayoutGuide) {
         NSLayoutConstraint.activate([
             separatorView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),

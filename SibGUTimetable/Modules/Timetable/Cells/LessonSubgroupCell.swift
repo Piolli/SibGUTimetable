@@ -29,18 +29,16 @@ class LessonSubgroupCell: UITableViewCell {
             let view = LessonCell()
             view.translatesAutoresizingMaskIntoConstraints = false
             view.viewModel = lessonViewModels[i]
+            if i != 0 {
+                view.hideTimeRangeLabel()
+            }
             cells.append(view)
             contentView.addSubview(view)
         }
     }
     
-    
-    
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        let height = contentView.bounds.height
-        let width = contentView.bounds.width
         
         var y = contentView.frame.origin.y
         
@@ -53,7 +51,7 @@ class LessonSubgroupCell: UITableViewCell {
             y += cell.frame.height
         }
         
-        logger.debug("Full Height of Cell: \(y)")
+        logger.info("Full Height of Cell: \(y)")
         frame.size.height = CGFloat(y)
         contentView.frame.size.height = CGFloat(y)
     }
