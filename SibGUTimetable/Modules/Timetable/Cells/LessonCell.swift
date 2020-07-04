@@ -27,9 +27,17 @@ class LessonCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
         label.textAlignment = .center
-//        label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.systemFont(ofSize: 15)
         label.text = "8:00\n9:30"
+        return label
+    }()
+    
+    private let officeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Л318"
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 12)
         return label
     }()
     
@@ -45,8 +53,7 @@ class LessonCell: UITableViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.setContentHuggingPriority(UILayoutPriority(252), for: .vertical)
-        label.setContentCompressionResistancePriority(UILayoutPriority(752), for: .vertical)
+        label.setContentCompressionResistancePriority(UILayoutPriority(751), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 16, weight: .semibold)
@@ -56,22 +63,10 @@ class LessonCell: UITableViewCell {
     
     private let teacherLabel: UILabel = {
         let label = UILabel()
-        label.setContentHuggingPriority(UILayoutPriority(251), for: .vertical)
-        label.setContentCompressionResistancePriority(UILayoutPriority(751), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Зотин А. Г."
-        
-        label.textColor = ThemeProvider.shared.linkColor
-//        label.textAlignment = .right
-        label.font = .systemFont(ofSize: 12)
-        return label
-    }()
-    
-    private let officeLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Л318"
         label.numberOfLines = 0
+        label.textColor = ThemeProvider.shared.linkColor
         label.font = .systemFont(ofSize: 12)
         return label
     }()
@@ -82,7 +77,6 @@ class LessonCell: UITableViewCell {
         separatorView.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)
         return separatorView
     }()
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -113,7 +107,7 @@ extension LessonCell {
     fileprivate func constraintTimeRangeLabel(_ margins: UILayoutGuide, _ marginsValues: UIEdgeInsets) {
         NSLayoutConstraint.activate([
             timeRangeLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            timeRangeLabel.trailingAnchor.constraint(equalTo: separatorView.leadingAnchor, constant: -(marginsValues.right )),
+            timeRangeLabel.trailingAnchor.constraint(equalTo: separatorView.leadingAnchor, constant: -(marginsValues.right)),
             timeRangeLabel.topAnchor.constraint(equalTo: margins.topAnchor),
             timeRangeLabel.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
         ])
