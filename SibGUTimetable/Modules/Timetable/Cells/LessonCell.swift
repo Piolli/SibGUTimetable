@@ -75,7 +75,7 @@ class LessonCell: UITableViewCell {
     private let separatorView: UIView = {
         let separatorView = UIView()
         separatorView.translatesAutoresizingMaskIntoConstraints = false
-        separatorView.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)
+        separatorView.backgroundColor = ThemeProvider.shared.separatorColor
         return separatorView
     }()
     
@@ -115,6 +115,9 @@ extension LessonCell {
     }
     
     func setupCell() {
+        
+        contentView.backgroundColor = ThemeProvider.shared.lessonCellBackgroungColor
+        
         contentView.addSubview(separatorView)
         contentView.addSubview(timeRangeLabel)
         contentView.addSubview(officeLabel)

@@ -27,6 +27,7 @@ class TimetableLessonListController: UITableViewController {
 //        tableView.separatorInset = .init(top: 18, left: 0, bottom: 18, right: 0)
         tableView.tableFooterView = UIView()
         tableView.allowsSelection = false
+        tableView.backgroundColor = ThemeProvider.shared.tableViewBackgroundColor
         
         ///Maybe create init with viewModel?
         if viewModel?.countOflessons == 0 {

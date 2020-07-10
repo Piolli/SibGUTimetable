@@ -196,9 +196,18 @@ class TimetableViewController: UIViewController {
     
     
     fileprivate func initAppearance() {
-        //TODO: fix next and prev. colors
-        calendarView.appearance.titleDefaultColor = ThemeProvider.shared.calendarTitleCellBackgroundColor
-        self.view.backgroundColor = ThemeProvider.shared.whiteBackgroundColor
+        calendarView.appearance.titleDefaultColor = ThemeProvider.shared.calendarViewSelectedMonthDaysTextColor
+        calendarView.appearance.headerTitleColor = ThemeProvider.shared.calendarViewMonthTitleTextColor
+        calendarView.appearance.weekdayTextColor = ThemeProvider.shared.calendarViewWeekdayTextColor
+        
+        //TODO: select specified days
+//        calendarView.appearance.titleWeekendColor = .green
+        calendarView.appearance.titlePlaceholderColor = ThemeProvider.shared.calendarPrevAndNextMonthDaysTextColor
+        
+        self.view.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor
+        calendarView.calendarHeaderView.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor
+        calendarView.calendarWeekdayView.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor
+        calendarView.daysContainer.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor
     }
     
 }
@@ -207,7 +216,6 @@ extension TimetableViewController : FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         logger.debug("Did select date: \(calendar.selectedDate)")
         updateTimetableFrom(date: calendar.selectedDate)
-        
     }
 
     private func updateTimetableFrom(date: Date?) {

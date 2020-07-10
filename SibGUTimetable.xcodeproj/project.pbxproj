@@ -28,6 +28,7 @@
 		114C9E4C23D6B86000BED746 /* GroupSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */; };
 		1177059F248E769900483E0A /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 1177059E248E769900483E0A /* Logging */; };
 		117705A1248E7F7700483E0A /* CustomLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117705A0248E7F7700483E0A /* CustomLogHandler.swift */; };
+		117F4F5924B8A7DB00FB2384 /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117F4F5824B8A7DB00FB2384 /* UIColor + Ext.swift */; };
 		11845E9424B8434500791186 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11845E9224B8434500791186 /* Localizable.strings */; };
 		11845E9724B8451B00791186 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11845E9624B8451B00791186 /* LocalizedStrings.swift */; };
 		118F0C1023C24500003BCEF2 /* Timetable+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118F0C0F23C24500003BCEF2 /* Timetable+CoreDataClass.swift */; };
@@ -135,6 +136,7 @@
 		114C9E4923D6B72700BED746 /* GroupSearchViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewModelController.swift; sourceTree = "<group>"; };
 		114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewModel.swift; sourceTree = "<group>"; };
 		117705A0248E7F7700483E0A /* CustomLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogHandler.swift; sourceTree = "<group>"; };
+		117F4F5824B8A7DB00FB2384 /* UIColor + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Ext.swift"; sourceTree = "<group>"; };
 		11845E9324B8434500791186 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		11845E9524B8438C00791186 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		11845E9624B8451B00791186 /* LocalizedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 				609533396D1049D91B806AC2 /* Date + Ext.swift */,
 				11C3889D23E4468000ED43A5 /* UINavigationController + Ext.swift */,
 				11B14BEC23E841FA00B44958 /* UIViewController + Ext.swift */,
+				117F4F5824B8A7DB00FB2384 /* UIColor + Ext.swift */,
 			);
 			name = Extensions;
 			path = Network/Extensions;
@@ -933,6 +936,7 @@
 				A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */,
 				119F178D248BACEB00EF0B21 /* Assembler.swift in Sources */,
 				1103A0C523FFF89200D87570 /* LessonCell.swift in Sources */,
+				117F4F5924B8A7DB00FB2384 /* UIColor + Ext.swift in Sources */,
 				119E51C123DEDC3200E1ABA4 /* StubTTRepository.swift in Sources */,
 				A8209F2E22D71A1400E1BAF6 /* TimetableViewModel.swift in Sources */,
 				A8537EC322EC494B005183C7 /* Day+CoreDataClass.swift in Sources */,

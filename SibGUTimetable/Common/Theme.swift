@@ -37,19 +37,83 @@ protocol Theme {
     
     var aboutAppTableViewCellBackgroundColor: UIColor { get }
     
-    var calendarTitleCellBackgroundColor: UIColor { get }
+    var calendarViewSelectedMonthDaysTextColor: UIColor { get }
     
     var linkColor: UIColor { get }
+    
+    var lessonCellBackgroungColor: UIColor { get }
+    
+    var calendarViewBackgroungColor: UIColor { get }
+    
+    var calendarViewMonthTitleTextColor: UIColor { get }
+    
+    var calendarViewWeekdayTextColor: UIColor { get }
+    
+    var calendarPrevAndNextMonthDaysTextColor: UIColor { get }
+    
+    var separatorColor: UIColor { get }
     
 }
 
 extension Theme {
-    var tableViewBackgroundColor: UIColor {
+    
+    var separatorColor: UIColor {
+        return .init(
+            light: UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1),
+            dark: UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1))
+    }
+    
+    var calendarPrevAndNextMonthDaysTextColor: UIColor {
+        return .init(light: .init(white: 0.60, alpha: 1), dark: .init(white: 0.40, alpha: 1))
+    }
+    
+    var calendarViewMonthTitleTextColor: UIColor {
         if #available(iOS 13.0, *) {
-            return UIColor.systemBackground
+            return UIColor.systemGray
         }
         else {
-            return UIColor.white
+            //systemGray in light mode
+            return .init(rgb: 0x8e8e93)
+        }
+    }
+    
+    var calendarViewWeekdayTextColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.systemGray2
+        }
+        else {
+            //systemGray2 in light mode
+            return .init(rgb: 0xaeaeb2)
+        }
+    }
+    
+    var calendarViewBackgroungColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.systemGray5
+        }
+        else {
+            //systemGray5 in light mode
+            return .init(rgb: 0xe5e5ea)
+        }
+    }
+    
+    var lessonCellBackgroungColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.systemGray6
+        }
+        else {
+            //systemGray6 in light mode
+            return .init(rgb: 0xf2f2f7)
+        }
+    }
+    
+    var tableViewBackgroundColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.systemGray6
+        }
+        else {
+            //systemGray6 in light mode
+            return .init(rgb: 0xf2f2f7)
         }
     }
     
@@ -64,10 +128,11 @@ extension Theme {
     
     var whiteBackgroundColor: UIColor {
         if #available(iOS 13.0, *) {
-            return UIColor.systemBackground
+            return UIColor.systemGray6
         }
         else {
-            return UIColor.white
+            //systemGray6 in light mode
+            return .init(rgb: 0xf2f2f7)
         }
     }
     
@@ -75,13 +140,17 @@ extension Theme {
         return .init(light: UIColor.init(white: 0.95, alpha: 1), dark: UIColor.init(white: 0.25, alpha: 1))
     }
     
-    var calendarTitleCellBackgroundColor: UIColor {
+    var calendarViewSelectedMonthDaysTextColor: UIColor {
         return .init(light: .init(white: 0.15, alpha: 1), dark: .init(white: 0.95, alpha: 1))
     }
     
-    //TODO: Fix link color based on UIColor.link
     var linkColor: UIColor {
-        return .init(light: UIColor.blue, dark: UIColor.blue)
+        if #available(iOS 13.0, *) {
+            return UIColor.link
+        }
+        else {
+            return UIColor.blue
+        }
     }
     
 }
