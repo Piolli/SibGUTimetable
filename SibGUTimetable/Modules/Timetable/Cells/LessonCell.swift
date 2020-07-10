@@ -54,6 +54,7 @@ class LessonCell: UITableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.setContentCompressionResistancePriority(UILayoutPriority(751), for: .vertical)
+        label.setContentHuggingPriority(UILayoutPriority(249), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 16, weight: .semibold)
