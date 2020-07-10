@@ -33,7 +33,7 @@ class MenuTableViewController : UIViewController {
         
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.text = "SibGU Timetable"
+        title.text = LocalizedStrings.SibGU_Timetable
         title.font = UIFont.systemFont(ofSize: 28)
         title.textAlignment = .center
         

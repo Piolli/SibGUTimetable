@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  SibGUTimetable
+
+  Created by Александр Камышев on 10.07.2020.
+  Copyright © 2020 Alexandr. All rights reserved.
+*/
+
+"No_lessons_today" = "No lessons today";
+"Today" = "Today";
+"Change_group" = "Change group";
+"Settings" = "Settings";
+"About_app" = "About app";
+"Enter_a_group_name" = "Enter a group name";
+"Group_search" = "Group search";
+"Feedback" = "Feedback";
+"Rate_Me" = "Rate Me";
+"Licenses" = "Licenses";
+"SibGU_Timetable" = "SibGU Timetable";

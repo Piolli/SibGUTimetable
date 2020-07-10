@@ -20,17 +20,12 @@ class AppCoordinator : NSObject, Coordinator {
     
     lazy var sideCoordinator = SideMenuCoordinator(mainCoordinator: TimetableCoordinator(navigationController: nil), menuSections: [
         ///Observe for teachers and their lessons
-        ("Change group's timetable", GroupSearchCoordinator(appCoordinator: self)),
-        ("Settings", SimpleCoordinator()),
-//        let items = [
-//            "Feedback",
-//            "Rate Me",
-//            "Licenses"
-//        ]
-        ("About app", AboutAppCoordinator(aboutItems: [
-            ("Feedback", SimpleCoordinator()),
-            ("Rate Me", SimpleCoordinator()),
-            ("Licenses", SimpleCoordinator(AcknowListViewController())),
+        (LocalizedStrings.Change_group, GroupSearchCoordinator(appCoordinator: self)),
+        (LocalizedStrings.Settings, SimpleCoordinator()),
+        (LocalizedStrings.About_app, AboutAppCoordinator(aboutItems: [
+            (LocalizedStrings.Feedback, SimpleCoordinator()),
+            (LocalizedStrings.Rate_Me, SimpleCoordinator()),
+            (LocalizedStrings.Licenses, SimpleCoordinator(AcknowListViewController())),
         ]))
     ])
     
@@ -66,10 +61,6 @@ class AppCoordinator : NSObject, Coordinator {
         window.rootViewController = rootViewController
         rootCoordinator.start()
         window.makeKeyAndVisible()
-        #warning("DELETE in Release")
-        if #available(iOS 13.0, *) {
-//            window.overrideUserInterfaceStyle = .light
-        }
     }
     
 }

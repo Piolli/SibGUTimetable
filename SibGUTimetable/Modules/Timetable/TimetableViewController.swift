@@ -84,7 +84,7 @@ class TimetableViewController: UIViewController {
 
     private func initNavigationItem() {
         self.navigationItem.largeTitleDisplayMode = .always
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сегодня", style: .plain, target: self, action: #selector(todayButtonDidTapped(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: LocalizedStrings.Today, style: .plain, target: self, action: #selector(todayButtonDidTapped(_:)))
     }
     
     @objc func todayButtonDidTapped(_ sender: Any) {

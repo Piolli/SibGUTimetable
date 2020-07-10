@@ -56,7 +56,7 @@ class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
         let searchBar = searchController.searchBar
         
         searchBar.returnKeyType = .done
-        searchBar.placeholder = "Enter a group name"
+        searchBar.placeholder = LocalizedStrings.Enter_a_group_name
         let searchResults = searchBar.rx.text.orEmpty
             .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
@@ -81,7 +81,7 @@ class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
         activityIndicatorView = .init(frame: CGRect(x: view.bounds.width/2, y: view.bounds.height/2, width: 75, height: 75), type: .lineScaleParty, color: .blue, padding: nil)
         view.addSubview(activityIndicatorView)
         
-        navigationItem.title = "Group search"
+        navigationItem.title = LocalizedStrings.Group_search
     }
     
     func initViewModel() {
