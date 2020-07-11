@@ -25,9 +25,10 @@ class LessonCell: UITableViewCell {
     private let timeRangeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = .preferredFont(forTextStyle: .callout)
+        label.textColor = ThemeProvider.shared.labelColor
         label.text = "8:00\n9:30"
         return label
     }()
@@ -37,7 +38,8 @@ class LessonCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Л318"
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 12)
+        label.textColor = ThemeProvider.shared.labelColor
+        label.font = .preferredFont(forTextStyle: .caption1)
         return label
     }()
     
@@ -46,7 +48,8 @@ class LessonCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Лабораторная работа"
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 12)
+        label.font = .preferredFont(forTextStyle: .caption1)
+        label.textColor = ThemeProvider.shared.labelColor
         label.textAlignment = .right
         return label
     }()
@@ -57,7 +60,8 @@ class LessonCell: UITableViewCell {
         label.setContentHuggingPriority(UILayoutPriority(249), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = .preferredFont(forTextStyle: .headline)
+        label.textColor = ThemeProvider.shared.labelColor
         label.text = "Разработка корпоративных приложений"
         return label
     }()
@@ -68,7 +72,7 @@ class LessonCell: UITableViewCell {
         label.text = "Зотин А. Г."
         label.numberOfLines = 0
         label.textColor = ThemeProvider.shared.linkColor
-        label.font = .systemFont(ofSize: 12)
+        label.font = .preferredFont(forTextStyle: .caption1)
         return label
     }()
     
@@ -97,9 +101,10 @@ extension LessonCell {
     }
     
     fileprivate func constraintSeparatorView(_ margins: UILayoutGuide) {
+        let additionalWidthForTimeLabel = CGFloat(16)
         NSLayoutConstraint.activate([
             separatorView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            separatorView.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: contentView.frame.height + 16),
+            separatorView.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: contentView.frame.height + additionalWidthForTimeLabel),
             separatorView.widthAnchor.constraint(equalToConstant: 1),
             separatorView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
         ])

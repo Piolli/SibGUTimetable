@@ -53,9 +53,33 @@ protocol Theme {
     
     var separatorColor: UIColor { get }
     
+    var labelColor: UIColor { get }
+    
+    var secondaryLabelColor: UIColor { get }
+    
 }
 
 extension Theme {
+    
+    var labelColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.label
+        }
+        else {
+            //label in light mode
+            return .init(rgb: 0xffffff)
+        }
+    }
+    
+    var secondaryLabelColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.secondaryLabel
+        }
+        else {
+            //secondaryLabel in light mode
+            return UIColor.init(rgb: 0xebebf5).withAlphaComponent(0.6)
+        }
+    }
     
     var separatorColor: UIColor {
         return .init(
