@@ -15,6 +15,17 @@ class LessonSubgroupCell: UITableViewCell {
     var cells: [LessonCell] = []
     var separators: [UIView] = []
     
+    public let timeRangeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = .preferredFont(forTextStyle: .callout)
+        label.textColor = ThemeProvider.shared.labelColor
+        label.text = "08:00\n09:30"
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCell()
@@ -27,6 +38,7 @@ class LessonSubgroupCell: UITableViewCell {
     
     func setupCell() {
         contentView.backgroundColor = ThemeProvider.shared.lessonCellBackgroungColor
+        contentView.addSubview(timeRangeLabel)
     }
 
     var lessonViewModels: [TimetableLessonViewModel] = [] {
@@ -48,9 +60,7 @@ class LessonSubgroupCell: UITableViewCell {
             let view = LessonCell()
             view.translatesAutoresizingMaskIntoConstraints = false
             view.viewModel = lessonViewModels[i]
-            if i != 0 {
-                view.hideTimeRangeLabel()
-            }
+            view.hideTimeRangeLabel()
             if i < lessonViewModels.count - 1 {
                 let separator = UIView()
                 separator.translatesAutoresizingMaskIntoConstraints = false
@@ -61,6 +71,7 @@ class LessonSubgroupCell: UITableViewCell {
             cells.append(view)
             contentView.addSubview(view)
         }
+        contentView.bringSubviewToFront(timeRangeLabel)
     }
     
     override func layoutSubviews() {
@@ -83,6 +94,15 @@ class LessonSubgroupCell: UITableViewCell {
         logger.info("Full Height of Cell: \(y)")
         frame.size.height = CGFloat(y)
         contentView.frame.size.height = CGFloat(y)
+        
+        if let cellTimeRangeFrame = cells.first?.timeRangeLabelFrame {
+            ///The same x, y and width values
+            timeRangeLabel.frame = cellTimeRangeFrame
+            ///Set different height
+            timeRangeLabel.frame.size.height = contentView.bounds.height - cellTimeRangeFrame.origin.y * 2
+            timeRangeLabel.text = cells.first!.viewModel?.timeRange
+        }
+        
     }
     
 }
