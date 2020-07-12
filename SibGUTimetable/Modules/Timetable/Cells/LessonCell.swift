@@ -83,6 +83,10 @@ class LessonCell: UITableViewCell {
         return separatorView
     }()
     
+    var separatorOriginX: CGFloat {
+        return separatorView.frame.origin.x
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCell()

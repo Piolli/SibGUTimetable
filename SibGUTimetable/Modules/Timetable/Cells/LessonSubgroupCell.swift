@@ -13,24 +13,50 @@ import UIKit
 class LessonSubgroupCell: UITableViewCell {
     
     var cells: [LessonCell] = []
+    var separators: [UIView] = []
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupCell()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupCell()
+    }
+    
+    func setupCell() {
+        contentView.backgroundColor = ThemeProvider.shared.lessonCellBackgroungColor
+    }
 
     var lessonViewModels: [TimetableLessonViewModel] = [] {
         didSet {
             cells.forEach { (view) in
                 view.removeFromSuperview()
             }
+            separators.forEach { (separator) in
+                separator.removeFromSuperview()
+            }
+            separators.removeAll()
             cells.removeAll()
-            setupCell()
+            setupCellLayout()
         }
     }
     
-    func setupCell() {
+    func setupCellLayout() {
         for i in 0..<lessonViewModels.count {
             let view = LessonCell()
             view.translatesAutoresizingMaskIntoConstraints = false
             view.viewModel = lessonViewModels[i]
             if i != 0 {
                 view.hideTimeRangeLabel()
+            }
+            if i < lessonViewModels.count - 1 {
+                let separator = UIView()
+                separator.translatesAutoresizingMaskIntoConstraints = false
+                separator.backgroundColor = ThemeProvider.shared.separatorColor
+                separators.append(separator)
+                contentView.addSubview(separator)
             }
             cells.append(view)
             contentView.addSubview(view)
@@ -42,13 +68,16 @@ class LessonSubgroupCell: UITableViewCell {
         
         var y = contentView.frame.origin.y
         
-        for cell in cells {
+        for (i, cell) in cells.enumerated() {
             cell.frame.origin.y = y
             let autoLayoutHeight = cell.systemLayoutSizeFitting(CGSize(width: bounds.width, height: UIView.layoutFittingCompressedSize.height))
             cell.frame.size.height = autoLayoutHeight.height
             cell.frame.size.width = bounds.width
+            if i < separators.count - 1 {
+                separators[i].frame = .init(x: cell.separatorOriginX, y: cell.frame.maxY, width: cell.bounds.width - cell.separatorOriginX, height: 1)
+            }
             logger.info("Calculated height: \(autoLayoutHeight)")
-            y += cell.frame.height
+            y += cell.frame.height + 1
         }
         
         logger.info("Full Height of Cell: \(y)")

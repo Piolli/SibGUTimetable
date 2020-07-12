@@ -67,7 +67,7 @@ extension Theme {
         }
         else {
             //label in light mode
-            return .init(rgb: 0xffffff)
+            return .init(rgb: 0x000000)
         }
     }
     
@@ -77,7 +77,7 @@ extension Theme {
         }
         else {
             //secondaryLabel in light mode
-            return UIColor.init(rgb: 0xebebf5).withAlphaComponent(0.6)
+            return UIColor.init(rgb: 0x3c3c43).withAlphaComponent(0.6)
         }
     }
     
