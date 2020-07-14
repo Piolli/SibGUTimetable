@@ -81,8 +81,8 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard let customizableDataSource = customizableDataSource else {
-            //TODO logger
-            fatalError("CustomizablePageViewController: Attach data source!")
+            logger.error("Attach customizableDataSource!")
+            return
         }
         
         if completed {

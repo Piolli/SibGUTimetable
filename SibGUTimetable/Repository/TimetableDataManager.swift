@@ -31,12 +31,6 @@ class TimetableDataManager {
         self.serverRepository = serverRepository
     }
     
-    convenience init() {
-//        //TODO: DI with assembler
-////        self.init(localTTRepository: , serverTTRepository: )
-        fatalError("DI with assembler")
-    }
-    
     func deleteAll() {
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Timetable")
         let deleteReq = NSBatchDeleteRequest(fetchRequest: fetch)

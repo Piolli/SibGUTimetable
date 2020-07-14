@@ -57,8 +57,7 @@ class SideMenuCoordinator : Coordinator {
     }
     
     func didSelectMenuSection(sectionName: String) {
-        //TODO: replace to first(where: {})
-        if let menuSection = menuSections.filter({$0.sectionName == sectionName}).first {
+        if let menuSection = menuSections.first(where: {$0.sectionName == sectionName}) {
             pushCoordinatorToRootNavigationController(coordinator: menuSection.coordinator)
         } else {
             logger.critical("Menu Section with name '\(sectionName)' doesn't exist or select default coordinator")

@@ -59,7 +59,6 @@ class MenuTableViewController : UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
-        //TODO: make more gray
         view.backgroundColor = ThemeProvider.shared.whiteBackgroundColor
         tableView.backgroundColor = ThemeProvider.shared.whiteBackgroundColor
         

@@ -68,8 +68,7 @@ class CoreDataTTRepository : TimetableRepository {
                 do {
                     let fetchRequest: NSFetchRequest<Timetable> = Timetable.fetchRequest()
                     let count = try self.context.count(for: fetchRequest)
-                    //TODO: change to logger
-                    logger.info("Finded timetables in store: \(count)")
+                    logger.debug("Finded timetables in store: \(count)")
                     
                     if let timetables = try self.context.fetch(fetchRequest) as? [Timetable] {
                         single(.success(timetables))

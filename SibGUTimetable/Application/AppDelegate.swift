@@ -12,7 +12,7 @@ import Logging
 //import Firebase
 
 var logger = Logger(label: "timetable.app.logger") { (label) -> LogHandler in
-    return CustomLogHandler()
+    return CustomLogHandler(showMetadata: false)
 }
 
 @UIApplicationMain

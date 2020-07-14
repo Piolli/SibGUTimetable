@@ -11,11 +11,17 @@ import Logging
 import Darwin
 
 struct CustomLogHandler : LogHandler {
+    
+    public let showMetadata: Bool
+    
+    init(showMetadata: Bool) {
+        self.showMetadata = showMetadata
+    }
 
     private let stream = StdioOutputStream.stdout
 
     func log(level: Logger.Level, message: Logger.Message, metadata: Logger.Metadata?, file: String, function: String, line: UInt) {
-        var metadata = metadata ?? Logger.Metadata()
+        var metadata = (showMetadata ? metadata : Logger.Metadata()) ?? Logger.Metadata()
         
         metadata["file"] = "\(file)"
         metadata["function (line)"] = "\(function) (\(String(line)))"

@@ -32,23 +32,23 @@ class TimetablePageViewController : UIViewController {
                 logger.error("timetableViewModel set to nil")
                 return
             }
-            pageViewController.dataSource = CustomizablePageViewDataSource<Date, TimetableLessonListController>.init(startIterableValue: Date(), contentBuilder: { [weak self] (date) -> TimetableLessonListController in
-                guard let self = self else {
-                    ///Todo: LOG error
-                    fatalError("TimetablePageViewController self is nil")
-                }
-                        let vc = TimetableLessonListController()
-                        vc.date = date
-                        vc.viewModel = timetableViewModel.getDayViewModel(at: date)
-                        return vc
-                    }, nextIterableValue: { (date) -> Date in
-                        return date.followingDateByDay()
-                    }, previousIterableValue: { (date) -> Date in
-                        return date.previousDateByDay()
-                    }, extractIterableValueFromController: { (viewController) -> Date in
-                        return viewController.date
-                    })
-            
+            pageViewController.dataSource = CustomizablePageViewDataSource<Date, TimetableLessonListController>.init(
+                startIterableValue: Date(),
+                contentBuilder: { [weak self] (date) -> TimetableLessonListController in
+                    guard let self = self else {
+                        fatalError("TimetablePageViewController self is nil")
+                    }
+                    let vc = TimetableLessonListController()
+                    vc.date = date
+                    vc.viewModel = timetableViewModel.getDayViewModel(at: date)
+                    return vc
+                }, nextIterableValue: { (date) -> Date in
+                    return date.followingDateByDay()
+                }, previousIterableValue: { (date) -> Date in
+                    return date.previousDateByDay()
+                }, extractIterableValueFromController: { (viewController) -> Date in
+                    return viewController.date
+                })
         }
     }
     
