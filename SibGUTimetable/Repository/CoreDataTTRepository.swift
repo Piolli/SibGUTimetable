@@ -14,15 +14,9 @@ class CoreDataTTRepository : TimetableRepository {
     
     func getTimetable(timetableDetails: TimetableDetails) -> Single<Timetable> {
         return fetchAll()
-            .asObservable()
-            .flatMap { (ts) -> Observable<Timetable> in
-                let sortedTimetables = ts.sorted(by: <)
-                return Observable.from(sortedTimetables)
-        }
-        .filter { $0.group_name == timetableDetails.groupName }
-        .asObservable()
-        .takeLast(1)
-        .asSingle()
+            .filter { $0.group_name == timetableDetails.groupName }
+            .takeLast(1)
+            .asSingle()
     }
     
     func saveTimetable(timetable: Timetable) -> Completable {
@@ -35,6 +29,7 @@ class CoreDataTTRepository : TimetableRepository {
                 if self.context.hasChanges {
                     do {
                         try self.context.save()
+                        completed(.completed)
                     } catch {
                         completed(.error(RxError.unknown))
                     }
@@ -57,10 +52,10 @@ class CoreDataTTRepository : TimetableRepository {
         self.init(persistentConstainer: appDelegate.persistentContainer, context: AppDelegate.backgroundContext)
     }
     
-    func fetchAll() -> Single<[Timetable]> {
-        return Single.create { [weak self] (single) -> Disposable in
+    func fetchAll() -> Observable<Timetable> {
+        return Observable.create { [weak self] (observer) -> Disposable in
             guard let self = self else {
-                single(.error(RxError.unknown))
+                observer.onError(RxError.unknown)
                 return Disposables.create()
             }
             
@@ -68,21 +63,21 @@ class CoreDataTTRepository : TimetableRepository {
                 do {
                     let fetchRequest: NSFetchRequest<Timetable> = Timetable.fetchRequest()
                     let count = try self.context.count(for: fetchRequest)
-                    logger.debug("Finded timetables in store: \(count)")
+                    logger.debug("Count of Timetables in presistent store: \(count)")
                     
-                    if let timetables = try self.context.fetch(fetchRequest) as? [Timetable] {
-                        single(.success(timetables))
-                    } else {
-                        single(.error(TTError.doNotSaved))
+                    let timetables = try self.context.fetch(fetchRequest)
+                    timetables.forEach { (timetable) in
+                        observer.onNext(timetable)
                     }
+                    observer.onCompleted()
                 } catch {
-                    single(.error(error))
-                    fatalError(error.localizedDescription)
+                    observer.onError(error)
+                    logger.error("Fetch timetable from core data storage. Error: \(error.localizedDescription)")
                 }
             }
+             
             return Disposables.create()
         }
-        .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
     }
     
     enum TTError: Error {

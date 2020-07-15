@@ -84,7 +84,7 @@ class LessonSubgroupCell: UITableViewCell {
             let autoLayoutHeight = cell.systemLayoutSizeFitting(CGSize(width: bounds.width, height: UIView.layoutFittingCompressedSize.height))
             cell.frame.size.height = autoLayoutHeight.height
             cell.frame.size.width = bounds.width
-            if i < separators.count - 1 {
+            if i < separators.count {
                 separators[i].frame = .init(x: cell.separatorOriginX, y: cell.frame.maxY, width: cell.bounds.width - cell.separatorOriginX, height: 1)
             }
             logger.info("Calculated height: \(autoLayoutHeight)")
@@ -99,7 +99,7 @@ class LessonSubgroupCell: UITableViewCell {
             ///The same x, y and width values
             timeRangeLabel.frame = cellTimeRangeFrame
             ///Set different height
-            timeRangeLabel.frame.size.height = contentView.bounds.height - cellTimeRangeFrame.origin.y * 2
+            timeRangeLabel.frame.size.height = contentView.frame.size.height - cellTimeRangeFrame.origin.y * 2
             timeRangeLabel.text = cells.first!.viewModel?.timeRange
         }
         

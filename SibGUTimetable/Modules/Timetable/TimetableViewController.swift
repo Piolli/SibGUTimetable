@@ -199,9 +199,7 @@ class TimetableViewController: UIViewController {
         calendarView.appearance.titleDefaultColor = ThemeProvider.shared.calendarViewSelectedMonthDaysTextColor
         calendarView.appearance.headerTitleColor = ThemeProvider.shared.calendarViewMonthTitleTextColor
         calendarView.appearance.weekdayTextColor = ThemeProvider.shared.calendarViewWeekdayTextColor
-        
-        //TODO: select specified days
-//        calendarView.appearance.titleWeekendColor = .green
+        calendarView.appearance.headerDateFormat = "LLLL YYYY"
         calendarView.appearance.titlePlaceholderColor = ThemeProvider.shared.calendarPrevAndNextMonthDaysTextColor
         
         self.view.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor

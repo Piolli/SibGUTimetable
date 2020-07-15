@@ -21,10 +21,12 @@ struct CustomLogHandler : LogHandler {
     private let stream = StdioOutputStream.stdout
 
     func log(level: Logger.Level, message: Logger.Message, metadata: Logger.Metadata?, file: String, function: String, line: UInt) {
-        var metadata = (showMetadata ? metadata : Logger.Metadata()) ?? Logger.Metadata()
+        var metadata = metadata ?? Logger.Metadata()
         
-        metadata["file"] = "\(file)"
-        metadata["function (line)"] = "\(function) (\(String(line)))"
+        if showMetadata {
+            metadata["file"] = "\(file)"
+            metadata["function (line)"] = "\(function) (\(String(line)))"
+        }
         
         let sortedMetadataArray = metadata.sorted(by: { $0.key < $1.key })
         let pretty = sortedMetadataArray
