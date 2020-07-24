@@ -19,7 +19,12 @@ public class Week: NSManagedObject, Decodable {
     }
     
     public convenience required init(from decoder: Decoder) throws {
-        self.init(context: AppDelegate.backgroundContext)
+        guard let context = decoder.userInfo[CodingUserInfoKey.context!] as? NSManagedObjectContext else {
+            fatalError("Doesn't provide NSManagedObjectContext for CoreData Object")
+        }
+        
+        self.init(context: context)
+        
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.order_week = try values.decode(Int16.self, forKey: .order_week)
         let daysArray = try values.decode([Day].self, forKey: .days)

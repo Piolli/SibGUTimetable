@@ -10,7 +10,7 @@ protocol TimetableRepository {
     
     func getTimetable(timetableDetails: TimetableDetails) -> Single<Timetable>
     
-    func saveTimetable(timetable: Timetable) -> Completable
+    func save(timetable: Timetable) -> Completable
  
 }
 

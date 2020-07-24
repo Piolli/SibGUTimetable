@@ -26,7 +26,7 @@ class FakeLocalTTRepository: TimetableRepository {
         }.debug("FakeLocalTTRepository (get)", trimOutput: false)
     }
     
-    func saveTimetable(timetable: Timetable) -> Completable {
+    func save(timetable: Timetable) -> Completable {
         logger.debug("It saved nothing")
         return .never()
     }

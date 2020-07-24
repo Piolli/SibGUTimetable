@@ -102,6 +102,7 @@ class LessonSubgroupCell: UITableViewCell {
             timeRangeLabel.frame.size.height = contentView.frame.size.height - cellTimeRangeFrame.origin.y * 2
             timeRangeLabel.text = cells.first!.viewModel?.timeRange
         }
+        logger.debug("timeRangeLabel.frame = \(timeRangeLabel.frame)| BOUNDS: \(contentView.bounds)")
         
     }
     

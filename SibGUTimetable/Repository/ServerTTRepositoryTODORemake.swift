@@ -22,7 +22,7 @@ class ServerTTRepositoryTODORemake: TimetableRepository {
         return Single.just(loadedTimetable)
     }
     
-    func saveTimetable(timetable: Timetable) -> Completable {
+    func save(timetable: Timetable) -> Completable {
         .never()
     }
     

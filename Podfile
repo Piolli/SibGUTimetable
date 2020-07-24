@@ -35,6 +35,8 @@ target 'SibGUTimetable' do
   target 'SibGUTimetableTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'RxBlocking', '~> 5'
+    pod 'RxTest', '~> 5'
   end
 
   target 'SibGUTimetableUITests' do

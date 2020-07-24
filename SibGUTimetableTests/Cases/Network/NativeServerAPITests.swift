@@ -77,7 +77,8 @@ class NativeServerAPITests: XCTestCase {
     func test_fetch_timetable_valid() {
         let exp = expectation(description: "fetch timetable completed")
         
-        NativeAPIServer.sharedInstance.fetchTimetable(groupId: 740, groupName: "БПИ16-01").subscribe(onSuccess: { (timetable) in
+        NativeAPIServer.sharedInstance.fetchTimetable(timetableDetails: TimetableDetails(groupId: 740, groupName: "БПИ16-01"))
+            .subscribe(onSuccess: { (timetable) in
             XCTAssertEqual(timetable.weeks?.count, 2)
             XCTAssertEqual(timetable.group_name, "БПИ16-01")
             print(timetable.updateTimestampTime)

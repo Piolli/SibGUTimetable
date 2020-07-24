@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol RepositoryAssembler {
     
@@ -21,15 +22,18 @@ protocol RepositoryAssembler {
 extension RepositoryAssembler {
     
     func resolveLocal() -> TimetableRepository {
-        return CoreDataTTRepository()
+        fatalError()
+//        return CoreDataTTRepository(context: AppDelegate.backgroundContext)
     }
     
     func resolveNetwork() -> TimetableRepository {
-        return ServerRepository()
+        fatalError()
+//        return ServerRepository(context: AppDelegate.backgroundContext)
     }
     
     func resolve() -> TimetableDataManager {
-        return TimetableDataManager(localRepository: resolveLocal(), serverRepository: resolveNetwork())
+        let context = AppDelegate.context
+        return TimetableDataManager(localRepository: CoreDataTTRepository(context: context), serverRepository: ServerRepository(context: context))
     }
     
 }
@@ -48,10 +52,11 @@ extension FakeRepositoryAssembler {
     
     func resolveNetwork() -> TimetableRepository {
         guard let timetable = FileLoader.shared.getLocalSchedule() else {
-            fatalError("Local timetable doesn't exist")
+            fatalError("Network timetable doesn't exist")
         }
         
         return ServerTTRepositoryTODORemake(timetable: timetable)
     }
     
 }
+

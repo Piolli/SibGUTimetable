@@ -19,8 +19,11 @@ public class Day: NSManagedObject, Decodable {
     }
     
     public convenience required init(from decoder: Decoder) throws {
+        guard let context = decoder.userInfo[CodingUserInfoKey.context!] as? NSManagedObjectContext else {
+            fatalError("Doesn't provide NSManagedObjectContext for CoreData Object")
+        }
         
-        self.init(context: AppDelegate.backgroundContext)
+        self.init(context: context)
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         

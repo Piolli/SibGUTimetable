@@ -9,7 +9,6 @@ import CoreData
 
 class CoreDataTTRepository : TimetableRepository {
     
-    private let persistentConstainer: NSPersistentContainer
     private let context: NSManagedObjectContext
     
     func getTimetable(timetableDetails: TimetableDetails) -> Single<Timetable> {
@@ -19,7 +18,7 @@ class CoreDataTTRepository : TimetableRepository {
             .asSingle()
     }
     
-    func saveTimetable(timetable: Timetable) -> Completable {
+    func save(timetable: Timetable) -> Completable {
         return Completable.create { [weak self] (completed) -> Disposable in
             guard let self = self else {
                 completed(.error(RxError.unknown))
@@ -31,6 +30,7 @@ class CoreDataTTRepository : TimetableRepository {
                         try self.context.save()
                         completed(.completed)
                     } catch {
+                        logger.error("CoreData NSManagedObjectContext wasn't saved")
                         completed(.error(RxError.unknown))
                     }
                 }
@@ -40,16 +40,12 @@ class CoreDataTTRepository : TimetableRepository {
         }
     }
     
-    init(persistentConstainer: NSPersistentContainer, context: NSManagedObjectContext) {
-        self.persistentConstainer = persistentConstainer
+    init(context: NSManagedObjectContext) {
         self.context = context
     }
     
-    convenience init() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            fatalError("Delegate of UIApplication isn't AppDelegate class")
-        }
-        self.init(persistentConstainer: appDelegate.persistentContainer, context: AppDelegate.backgroundContext)
+    @objc private func compareUpdateTimestamp(t1: Timetable, t2: Timetable) -> Bool {
+        return false
     }
     
     func fetchAll() -> Observable<Timetable> {
@@ -61,9 +57,10 @@ class CoreDataTTRepository : TimetableRepository {
             
             self.context.perform {
                 do {
-                    let fetchRequest: NSFetchRequest<Timetable> = Timetable.fetchRequest()
+                    let fetchRequest: NSFetchRequest<Timetable> = Timetable.sortByUpdateTimestampFetchRequest(ascending: true)
+                    
                     let count = try self.context.count(for: fetchRequest)
-                    logger.debug("Count of Timetables in presistent store: \(count)")
+                    logger.debug("Count of Timetables in persistent store: \(count)")
                     
                     let timetables = try self.context.fetch(fetchRequest)
                     timetables.forEach { (timetable) in

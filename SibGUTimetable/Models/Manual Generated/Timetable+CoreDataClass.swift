@@ -11,6 +11,7 @@ import CoreData
 
 @objc(Timetable)
 public class Timetable: NSManagedObject, Decodable {
+    
     enum CodingKeys: String, CodingKey {
         case group_name
         case weeks
@@ -22,7 +23,11 @@ public class Timetable: NSManagedObject, Decodable {
     }
     
     public convenience required init(from decoder: Decoder) throws {
-        self.init(context: AppDelegate.backgroundContext)
+        guard let context = decoder.userInfo[CodingUserInfoKey.context!] as? NSManagedObjectContext else {
+            fatalError("Doesn't provide NSManagedObjectContext for CoreData Object")
+        }
+        
+        self.init(context: context)
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -39,7 +44,30 @@ public class Timetable: NSManagedObject, Decodable {
 
 //MARK: - `Comparable
 extension Timetable : Comparable {
+    
     public static func < (lhs: Timetable, rhs: Timetable) -> Bool {
         return lhs.updateTimestampTime < rhs.updateTimestampTime
     }
+    
+}
+
+// MARK: – Sorted NSFetchRequest
+extension Timetable {
+    
+    public class func sortByUpdateTimestampFetchRequest(ascending: Bool) -> NSFetchRequest<Timetable> {
+        let fetchRequest: NSFetchRequest<Timetable> = Timetable.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "updateTimestamp", ascending: ascending, comparator: { (t1, t2) -> ComparisonResult in
+            let time1 = Double(t1 as! String)!
+            let time2 = Double(t2 as! String)!
+            if time1 < time2 {
+                return .orderedAscending
+            } else if time1 > time2 {
+                return .orderedDescending
+            } else {
+                return .orderedSame
+            }
+        })]
+        return fetchRequest
+    }
+    
 }

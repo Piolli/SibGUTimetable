@@ -14,7 +14,7 @@ class UserPrerencesTests: XCTestCase {
     var userPreferences: UserPreferences!
     
     override func setUp() {
-        userPreferences = UserPreferences.sharedInstance
+        userPreferences = Assembler.shared.resolve()
     }
 
     override func tearDown() {
@@ -24,9 +24,9 @@ class UserPrerencesTests: XCTestCase {
     func test_saveTimetableGroupName() {
         let groupName = "BPI"
         let timestamp = "123456"
-        let details = TimetableDetails(groupName: groupName, timestamp: timestamp)
+        let details = TimetableDetails(groupId: 740, groupName: groupName, timestamp: timestamp)
         
-        userPreferences.saveTimetableDetails(groupName: groupName, timestamp: timestamp)
+        userPreferences.saveTimetableDetails(groupId: 740, groupName: groupName, timestamp: timestamp)
         
         XCTAssertEqual(userPreferences.getTimetableDetails(), details)
     }

@@ -14,7 +14,7 @@ class StubTTRepository : TimetableRepository {
         return .never()
     }
     
-    func saveTimetable(timetable: Timetable) -> Completable {
+    func save(timetable: Timetable) -> Completable {
         return .never()
     }
 }
