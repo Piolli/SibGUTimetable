@@ -33,7 +33,9 @@ class GroupSearchViewModelController {
     
     public func searchGroup(query: String) {
         loading.accept(true)
-        api.findGroup(queryGroupName: query).subscribe(onSuccess: { [weak self] (groupPairs) in
+        api.findGroup(queryGroupName: query)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] (groupPairs) in
             self?.viewModel.accept(GroupSearchViewModel(groupPairs: groupPairs))
             self?.loading.accept(false)
         }) { [weak self] (error) in

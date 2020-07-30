@@ -117,19 +117,22 @@ extension GroupSearchViewController : UITableViewDelegate {
 //            activityIndicatorView.startAnimating()
             startAnimating()
             let timetableDetails = TimetableDetails(groupId: pair.id, groupName: pair.name)
-            timetableManager.preloadTimetable(timetableDetails: timetableDetails)
+            timetableManager.loadTimetable(timetableDetails: timetableDetails)
+            timetableManager.timetableOutput
                 .observeOn(MainScheduler.instance)
-                .subscribe(onCompleted: { [weak self] in
+                .subscribe(onNext: { [weak self] timetable in
                 self?.stopAnimating()
                 self?.viewModelController.save(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name, timestamp: ""))
-//                self?.navigationController?.popViewController(animated: true)
-                    self?.navigationController?.popViewController(animated: true)
-//                    self?.navigationController?.popToRootViewController(animated: true)
-            }) { [weak self] error in
+                self?.navigationController?.popViewController(animated: true)
+                }).disposed(by: disposeBag)
+            
+            timetableManager.errorOutput
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: { [weak self] (error) in
                 logger.error("\(error.localizedDescription)")
                 self?.showMessage(text: error.localizedDescription, title: "Error")
                 self?.stopAnimating()
-            }
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         } else {
             fatalError("viewModel is nil")
         }

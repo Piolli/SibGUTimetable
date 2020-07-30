@@ -26,7 +26,7 @@
 		1141FA6523CA0F3300796667 /* NativeServerAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141FA6423CA0F3300796667 /* NativeServerAPITests.swift */; };
 		114C9E4A23D6B72700BED746 /* GroupSearchViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4923D6B72700BED746 /* GroupSearchViewModelController.swift */; };
 		114C9E4C23D6B86000BED746 /* GroupSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */; };
-		1177059F248E769900483E0A /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 1177059E248E769900483E0A /* SwiftPackageProductDependency */; };
+		1177059F248E769900483E0A /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 1177059E248E769900483E0A /* Logging */; };
 		117705A1248E7F7700483E0A /* CustomLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117705A0248E7F7700483E0A /* CustomLogHandler.swift */; };
 		117F4F5924B8A7DB00FB2384 /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117F4F5824B8A7DB00FB2384 /* UIColor + Ext.swift */; };
 		11845E9424B8434500791186 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11845E9224B8434500791186 /* Localizable.strings */; };
@@ -226,7 +226,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1177059F248E769900483E0A /* BuildFile in Frameworks */,
+				1177059F248E769900483E0A /* Logging in Frameworks */,
 				96147595C3636E42C0F1E1A4 /* Pods_SibGUTimetable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -666,7 +666,7 @@
 			);
 			name = SibGUTimetable;
 			packageProductDependencies = (
-				1177059E248E769900483E0A /* SwiftPackageProductDependency */,
+				1177059E248E769900483E0A /* Logging */,
 			);
 			productName = SibGUTimetable;
 			productReference = A8011EBD22B3D7C000567A37 /* SibGUTimetable.app */;
@@ -750,7 +750,7 @@
 			);
 			mainGroup = A8011EB422B3D7C000567A37;
 			packageReferences = (
-				1177059D248E769900483E0A /* RemoteSwiftPackageReference */,
+				1177059D248E769900483E0A /* XCRemoteSwiftPackageReference "swift-log" */,
 			);
 			productRefGroup = A8011EBE22B3D7C000567A37 /* Products */;
 			projectDirPath = "";
@@ -1406,7 +1406,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1177059D248E769900483E0A /* RemoteSwiftPackageReference */ = {
+		1177059D248E769900483E0A /* XCRemoteSwiftPackageReference "swift-log" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-log/";
 			requirement = {
@@ -1417,9 +1417,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1177059E248E769900483E0A /* SwiftPackageProductDependency */ = {
+		1177059E248E769900483E0A /* Logging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1177059D248E769900483E0A /* RemoteSwiftPackageReference */;
+			package = 1177059D248E769900483E0A /* XCRemoteSwiftPackageReference "swift-log" */;
 			productName = Logging;
 		};
 /* End XCSwiftPackageProductDependency section */

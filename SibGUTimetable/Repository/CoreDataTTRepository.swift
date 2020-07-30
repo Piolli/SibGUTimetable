@@ -28,10 +28,11 @@ class CoreDataTTRepository : TimetableRepository {
                 if self.context.hasChanges {
                     do {
                         try self.context.save()
+                        logger.info("CoreData NSManagedObjectContext was saved")
                         completed(.completed)
                     } catch {
                         logger.error("CoreData NSManagedObjectContext wasn't saved")
-                        completed(.error(RxError.unknown))
+                        completed(.error(error))
                     }
                 }
             }
@@ -55,15 +56,17 @@ class CoreDataTTRepository : TimetableRepository {
                 return Disposables.create()
             }
             
-            self.context.perform {
+            self.context.performAndWait {
                 do {
-                    let fetchRequest: NSFetchRequest<Timetable> = Timetable.sortByUpdateTimestampFetchRequest(ascending: true)
+                    let fetchRequest: NSFetchRequest<Timetable> = Timetable.fetchRequest()
                     
                     let count = try self.context.count(for: fetchRequest)
                     logger.debug("Count of Timetables in persistent store: \(count)")
                     
                     let timetables = try self.context.fetch(fetchRequest)
-                    timetables.forEach { (timetable) in
+                    timetables
+                        .sorted(by: <)
+                        .forEach { (timetable) in
                         observer.onNext(timetable)
                     }
                     observer.onCompleted()

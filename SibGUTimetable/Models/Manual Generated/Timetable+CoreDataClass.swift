@@ -42,7 +42,7 @@ public class Timetable: NSManagedObject, Decodable {
     }
 }
 
-//MARK: - `Comparable
+//MARK: - Comparable
 extension Timetable : Comparable {
     
     public static func < (lhs: Timetable, rhs: Timetable) -> Bool {
@@ -54,6 +54,8 @@ extension Timetable : Comparable {
 // MARK: – Sorted NSFetchRequest
 extension Timetable {
     
+    ///Unfortunatelly SQLite persistent store doesn't support compare block in NSSortDescriptor
+    ///Instead uses sort method of Timetable's array
     public class func sortByUpdateTimestampFetchRequest(ascending: Bool) -> NSFetchRequest<Timetable> {
         let fetchRequest: NSFetchRequest<Timetable> = Timetable.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "updateTimestamp", ascending: ascending, comparator: { (t1, t2) -> ComparisonResult in

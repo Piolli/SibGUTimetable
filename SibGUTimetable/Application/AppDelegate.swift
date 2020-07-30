@@ -28,13 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return context
     }()
     
-    static var backgroundContext: NSManagedObjectContext = {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            fatalError("AppDelegate is nil and context too")
-        }
-        return appDelegate.persistentContainer.newBackgroundContext()
-    }()
-    
     var appCoordinator: AppCoordinator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

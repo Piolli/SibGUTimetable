@@ -71,7 +71,7 @@ class TimetableRepositoryTests: XCTestCase {
         ///There're no anyone changes to main context
         XCTAssertFalse(mockPersistantContainer.viewContext.hasChanges)
         
-        repository.save(timetable: timetable!)
+        repository.save(timetable: timetable!).subscribe().disposed(by: disposeBag)
         
         let localTimetable = try repository.fetchAll().toBlocking().single()
         
@@ -99,7 +99,7 @@ class TimetableRepositoryTests: XCTestCase {
         
         XCTAssertTrue(backgroundContext.hasChanges)
         ///Save context instead of specified Timetable
-        repository.save(timetable: timetables[0])
+        try repository.save(timetable: timetables[0]).toBlocking().first()
 
         ///Return the latest Timetable from repository
         let fetchedTimetable = try repository.getTimetable(timetableDetails: TimetableDetails(groupId: 779, groupName: "БПИ16-01")).toBlocking().single()

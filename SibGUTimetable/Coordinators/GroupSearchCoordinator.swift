@@ -27,21 +27,21 @@ class GroupSearchCoordinator : Coordinator {
         groupSearchViewController.coordinator = self
     }
     
-    #if DEBUG
-    func openSearchedGroup(pair: GroupPairIDName) {
-        var navigationController: UINavigationController = .init()
-        let ttVC = TimetableCoordinator(navigationController: navigationController)
-//        navigationController.pushViewController((ttVC.rootViewController as! UINavigationController).viewControllers[0], animated: true)
-        //ONLY FOR DEBUG
-        NativeAPIServer.sharedInstance.fetchTimetable(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name))
-            .observeOn(MainScheduler.instance)
-            .subscribe(onSuccess: { (timetable) in
-            ttVC.startWith(timetable: timetable)
-        }) { (error) in
-            fatalError(error.localizedDescription)
-        }
-    }
-    #endif
+//    #if DEBUG
+//    func openSearchedGroup(pair: GroupPairIDName) {
+//        var navigationController: UINavigationController = .init()
+//        let ttVC = TimetableCoordinator(navigationController: navigationController)
+////        navigationController.pushViewController((ttVC.rootViewController as! UINavigationController).viewControllers[0], animated: true)
+//        //ONLY FOR DEBUG
+//        NativeAPIServer.sharedInstance.fetchTimetable(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name))
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onSuccess: { (timetable) in
+//            ttVC.startWith(timetable: timetable)
+//        }) { (error) in
+//            fatalError(error.localizedDescription)
+//        }
+//    }
+//    #endif
     
     func start() {
         

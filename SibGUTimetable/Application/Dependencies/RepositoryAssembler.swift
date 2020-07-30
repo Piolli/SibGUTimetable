@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import CoreData
 
 protocol RepositoryAssembler {
@@ -32,7 +33,10 @@ extension RepositoryAssembler {
     }
     
     func resolve() -> TimetableDataManager {
-        let context = AppDelegate.context
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("AppDelegate is nil and context too")
+        }
+        let context = delegate.persistentContainer.newBackgroundContext()
         return TimetableDataManager(localRepository: CoreDataTTRepository(context: context), serverRepository: ServerRepository(context: context))
     }
     

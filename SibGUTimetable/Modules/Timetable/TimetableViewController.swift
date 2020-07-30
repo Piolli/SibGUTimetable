@@ -68,6 +68,7 @@ class TimetableViewController: UIViewController {
         if let timetableDetails = userPreferences.getTimetableDetails() {
             dataManager.loadTimetable(timetableDetails: timetableDetails)
         } else {
+            //TODO: add localization
             showMessage(text: "Choose group from left side menu", title: "Error")
         }
     }
@@ -157,11 +158,13 @@ class TimetableViewController: UIViewController {
                     self.timetablePageViewController.timetableViewModel = TimetableViewModel(schedule: timetable)
                     self.navigationItem.title = timetable.group_name
                 }
-            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            }, onError: nil, onCompleted: nil, onDisposed: nil)
+            .disposed(by: disposeBag)
         checkExistingTimetableDetails()
     }
     
     func setupTimetablePageViewController() {
+        //TODO: check out code below
         timetablePageViewController.pageDidMoveDirection
             .subscribeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (pageDidMoveTo) in

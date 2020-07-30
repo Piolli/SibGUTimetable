@@ -41,37 +41,49 @@ class TimetableDataManager {
 //        try? AppDelegate.backgroundContext.save()
     }
     
+    let semaphore = DispatchSemaphore(value: 1)
+    
     func loadTimetable(timetableDetails: TimetableDetails) {
         
-        localRepository
-            .getTimetable(timetableDetails: timetableDetails)
-            .subscribe { [weak self] (timetable) in
-                self?.timetableOutput.accept(timetable)
-            } onError: { [weak self] (error) in
-                self?.errorOutput.accept(error)
-            }.disposed(by: disposeBag)
+        let observable = Observable.concat(
+            localRepository.getTimetable(timetableDetails: timetableDetails)
+            .asObservable()
+            .catchError({ (error) -> Observable<Timetable> in
+                logger.error("Local Repository getTimetable: \(error.localizedDescription)")
+                self.errorOutput.accept(error)
+                return .empty()
+            }),
+            ///Observer catch any errors from this observable
+            serverRepository.getTimetable(timetableDetails: timetableDetails).map({ [weak self] (timetable) -> Timetable in
+                guard let self = self else {
+                    fatalError("self is nil in getTimetable")
+                }
+                logger.info("LocalRepository is saving timetable")
+                self.localRepository.save(timetable: timetable).subscribe (onCompleted: {
+                    logger.info("Timetable was saved to LocalRepository")
+                }, onError: { [weak self] (error) in
+                    logger.info("Timetable error while saving to LocalRepository: \(error)")
+                    self?.errorOutput.accept(error)
+                }).disposed(by: self.disposeBag)
 
-        serverRepository
-            .getTimetable(timetableDetails: timetableDetails)
-            .subscribe { [weak self] (timetable) in
-                self?.timetableOutput.accept(timetable)
-                self?.localRepository.save(timetable: timetable)
-            } onError: { [weak self] (error) in
-                self?.errorOutput.accept(error)
-            }.disposed(by: disposeBag)
+                return timetable
+            }).asObservable()
+        )
+        .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .background))
         
-    }
+        observable
+            .subscribe (onNext: { [weak self] (timetable) in
+            self?.timetableOutput.accept(timetable)
+        }, onError: { [weak self] (error) in
+            logger.error("Error: \(error.localizedDescription)")
+            self?.errorOutput.accept(error)
+
+        }, onCompleted: { [weak self] in
+
+        }, onDisposed: {
+            
+        }).disposed(by: disposeBag)
     
-    func preloadTimetable(timetableDetails: TimetableDetails) -> Completable {
-         return serverRepository
-            .getTimetable(timetableDetails: timetableDetails)
-            .map { [weak self] (timetable) -> Void in
-                self?.localRepository.save(timetable: timetable).subscribe(onCompleted: { [weak self] in
-                    self?.timetableOutput.accept(timetable)
-                }, onError: { error in
-                    self?.errorOutput.accept(RxError.unknown)
-                })
-        }.asCompletable()
     }
     
 }

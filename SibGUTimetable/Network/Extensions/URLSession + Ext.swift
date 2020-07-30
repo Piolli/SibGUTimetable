@@ -63,7 +63,7 @@ extension URLSession {
             return Disposables.create {
                 task.cancel()
             }
-        }.subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
+        }.subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .background))
     }
     
 }

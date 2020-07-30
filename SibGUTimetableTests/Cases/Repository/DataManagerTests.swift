@@ -8,25 +8,33 @@
 
 import XCTest
 import CoreData
+import RxTest
+import RxSwift
+import RxBlocking
+
 
 @testable import SibGUTimetable
 
 class DataManagerTests: XCTestCase {
     
     var dataManager: TimetableDataManager!
+    var testScheduler: TestScheduler!
+    var localRepository: TimetableRepository!
     
     lazy var mockPersistantContainer: NSPersistentContainer = {
-        
-        let container = NSPersistentContainer(name: "PersistentTimetable", managedObjectModel: self.managedObjectModel)
+
+        let model = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.managedObjectModel
+        XCTAssertNotNil(model)
+        let container = NSPersistentContainer(name: "PersistentTimetable", managedObjectModel: model!)
         let description = NSPersistentStoreDescription()
         description.type = NSInMemoryStoreType
         description.shouldAddStoreAsynchronously = false // Make it simpler in test env
-        
+
         container.persistentStoreDescriptions = [description]
         container.loadPersistentStores { (description, error) in
             // Check if the data store is in memory
             precondition( description.type == NSInMemoryStoreType )
-                                        
+
             // Check if creating container wrong
             if let error = error {
                 fatalError("Create an in-mem coordinator failed \(error)")
@@ -35,70 +43,84 @@ class DataManagerTests: XCTestCase {
         return container
     }()
     
-    lazy var managedObjectModel: NSManagedObjectModel = {
-           let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle(for: type(of: self))] )!
-           return managedObjectModel
+    lazy var backgroundContext: NSManagedObjectContext = {
+//        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+//        context.parent = mockPersistantContainer.viewContext
+//        context.persistentStoreCoordinator = mockPersistantContainer.persistentStoreCoordinator
+        return mockPersistantContainer.newBackgroundContext()
+//        return context
     }()
 
     override func setUp() {
-        dataManager = .init(localRepository: CoreDataTTRepository(persistentConstainer: mockPersistantContainer, context: AppDelegate.backgroundContext),
-                            serverRepository: ServerRepository())
+        testScheduler = TestScheduler(initialClock: 0)
+        localRepository = CoreDataTTRepository(context: backgroundContext)
+        dataManager = .init(localRepository: localRepository,
+                            serverRepository: MockServerRepository(context: backgroundContext))
     }
 
     override func tearDown() {
         dataManager = nil
+        testScheduler.stop()
+        testScheduler = nil
     }
     
-    func test_update_timetable_check() {
-        test_update_timetable()
-        test_update_timetable()
-        test_update_timetable()
-        test_update_timetable()
-        test_update_timetable()
-        test_update_timetable()
-        test_print_all_timetables()
-        test_updateTimetable_and_check_newest_returned_timetable()
+    func timetableWith(timestamp: String) -> Timetable {
+        let timetable = Timetable(context: backgroundContext)
+        timetable.updateTimestamp = timestamp
+        return timetable
     }
     
-    func test_update_timetable() -> TimeInterval {
-        let exp = expectation(description: "update was loaded")
-        var timestamp: TimeInterval = .zero
-        dataManager.updateTimetable(groupId: 740, groupName: "БПИ16-01").subscribe(onNext: { (timetable) in
-            exp.fulfill()
-            timestamp = timetable.updateTimestampTime
-            print("newTimestamp:", timetable.updateTimestampTime)
-        }, onError: nil, onCompleted: nil, onDisposed: nil)
+    func test_loadTimetable() {
+    
+        let exp = expectation(description: "")
+        exp.expectedFulfillmentCount = 1
         
-        wait(for: [exp], timeout: 30.0)
-        return timestamp
-    }
-    
-    func test_print_all_timetables() {
-        let repo = CoreDataTTRepository(persistentConstainer: mockPersistantContainer, context: AppDelegate.backgroundContext)
-        
-        let exp = expectation(description: "printed all timetables")
-        repo.fetchAll().subscribe(onSuccess: { (timetables) in
-            timetables.forEach { (timetable) in
-                print("---------------", timetable.updateTimestampTime)
+        //0 + 1
+        dataManager.loadTimetable(timetableDetails: TimetableDetails(groupId: 779, groupName: "БПИ16-01"))
+ 
+        dataManager.timetableOutput.subscribe { (event) in
+            switch event {
+            case .next(let timetable):
+                print("Got timetable: \(timetable)")
+                exp.fulfill()
+            case .error(let error):
+                fatalError()
+            case .completed:
+                fatalError()
             }
-            exp.fulfill()
-        }, onError: { error in
-            print(error.localizedDescription)
-        })
-        wait(for: [exp], timeout: 30.0)
+        
+        }
+
+        wait(for: [exp], timeout: 5.0)
     }
     
-    func test_updateTimetable_and_check_newest_returned_timetable() {
-        let exp = expectation(description: "was loaded")
-        let newTimestamp = test_update_timetable()
-        
-//        dataManager.deleteAll()
-        dataManager.fetchTimetable(groupId: 740, groupName: "БПИ16-01").subscribe(onNext: { (timetable) in
-            exp.fulfill()
-            XCTAssertEqual(timetable.updateTimestampTime, newTimestamp)
-            print("fetched timestamp:", timetable.updateTimestampTime)
-        }, onError: nil, onCompleted: nil, onDisposed: nil)
+}
 
-        wait(for: [exp], timeout: 50.0)
+class MockServerRepository : TimetableRepository {
+    
+    internal init(context: NSManagedObjectContext) {
+        self.context = context
     }
+    
+    let context: NSManagedObjectContext
+    
+    func getTimetable(timetableDetails: TimetableDetails) -> Single<Timetable> {
+        Single.create { [weak self] (single) -> Disposable in
+            guard let self = self else { fatalError() }
+            ///server payload
+            Thread.sleep(forTimeInterval: 0.5)
+            let decoder = JSONDecoder()
+            decoder.userInfo[CodingUserInfoKey.context!] = self.context
+            let timetable = FileLoader.shared.getLocalSchedule(decoder: decoder)
+            assert(timetable != nil)
+            timetable!.updateTimestamp = "\(Date().timeIntervalSince1970)"
+            single(.success(timetable!))
+            return Disposables.create()
+        }.subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInteractive))
+    }
+    
+    func save(timetable: Timetable) -> Completable {
+        fatalError("MockServerRepository doesn't support 'save' method")
+    }
+    
 }
