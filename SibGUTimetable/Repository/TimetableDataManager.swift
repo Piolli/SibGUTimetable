@@ -50,6 +50,7 @@ class TimetableDataManager {
             .asObservable()
             .catchError({ (error) -> Observable<Timetable> in
                 logger.error("Local Repository getTimetable: \(error.localizedDescription)")
+                
                 self.errorOutput.accept(error)
                 return .empty()
             }),
@@ -63,7 +64,8 @@ class TimetableDataManager {
                     logger.info("Timetable was saved to LocalRepository")
                 }, onError: { [weak self] (error) in
                     logger.info("Timetable error while saving to LocalRepository: \(error)")
-                    self?.errorOutput.accept(error)
+                    let nserror = NSError(domain: "Timetable error while saving to LocalRepository", code: 102, userInfo: nil)
+                    self?.errorOutput.accept(nserror)
                 }).disposed(by: self.disposeBag)
 
                 return timetable

@@ -16,7 +16,7 @@ import NVActivityIndicatorView
 class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
 
     private static let cellId = "groupPair"
-    private let timetableManager: TimetableDataManager = Assembler.shared.resolve()
+    private weak var timetableManager: TimetableDataManager?
     
     var coordinator: GroupSearchCoordinator!
     var viewModelController: GroupSearchViewModelController!
@@ -24,6 +24,15 @@ class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
     var disposeBag = DisposeBag()
     var searchController: UISearchController!
     var activityIndicatorView: NVActivityIndicatorView!
+    
+    init(timetableManager: TimetableDataManager) {
+        self.timetableManager = timetableManager
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     var viewModel: GroupSearchViewModel? {
         didSet {
@@ -111,7 +120,7 @@ extension GroupSearchViewController : UITableViewDataSource {
 
 extension GroupSearchViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let pair = viewModel?.groupPairs[indexPath.row] {
+        if let pair = viewModel?.groupPairs[indexPath.row], let timetableManager = self.timetableManager {
 //            coordinator.openSearchedGroup(pair: pair)
             //try to load and save to UserPreferences TimetableDetails
 //            activityIndicatorView.startAnimating()
@@ -119,23 +128,29 @@ extension GroupSearchViewController : UITableViewDelegate {
             let timetableDetails = TimetableDetails(groupId: pair.id, groupName: pair.name)
             timetableManager.loadTimetable(timetableDetails: timetableDetails)
             timetableManager.timetableOutput
+                .debug("GroupSearchViewController (timetableManager.timetableOutput)", trimOutput: false)
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] timetable in
                 self?.stopAnimating()
-                self?.viewModelController.save(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name, timestamp: ""))
+                self?.viewModelController.save(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name, timestamp: timetable.updateTimestamp))
                 self?.navigationController?.popViewController(animated: true)
                 }).disposed(by: disposeBag)
             
             timetableManager.errorOutput
+                .debug("GroupSearchViewController (timetableManager.errorOutput)", trimOutput: false)
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] (error) in
-                logger.error("\(error.localizedDescription)")
-                self?.showMessage(text: error.localizedDescription, title: "Error")
-                self?.stopAnimating()
+                    //101 = local error
+                    if let error = error as? NSError, error.code == 101 {
+                        logger.error("\(error.localizedDescription)")
+                        self?.showMessage(text: error.localizedDescription, title: "Error")
+                        self?.stopAnimating()
+                    }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         } else {
             fatalError("viewModel is nil")
         }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

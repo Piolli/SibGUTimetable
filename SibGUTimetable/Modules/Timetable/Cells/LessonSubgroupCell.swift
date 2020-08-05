@@ -87,11 +87,11 @@ class LessonSubgroupCell: UITableViewCell {
             if i < separators.count {
                 separators[i].frame = .init(x: cell.separatorOriginX, y: cell.frame.maxY, width: cell.bounds.width - cell.separatorOriginX, height: 1)
             }
-            logger.info("Calculated height: \(autoLayoutHeight)")
+            logger.trace("Calculated height: \(autoLayoutHeight)")
             y += cell.frame.height + 1
         }
         
-        logger.info("Full Height of Cell: \(y)")
+        logger.trace("Full Height of Cell: \(y)")
         frame.size.height = CGFloat(y)
         contentView.frame.size.height = CGFloat(y)
         
@@ -102,7 +102,7 @@ class LessonSubgroupCell: UITableViewCell {
             timeRangeLabel.frame.size.height = contentView.frame.size.height - cellTimeRangeFrame.origin.y * 2
             timeRangeLabel.text = cells.first!.viewModel?.timeRange
         }
-        logger.debug("timeRangeLabel.frame = \(timeRangeLabel.frame)| BOUNDS: \(contentView.bounds)")
+        logger.trace("timeRangeLabel.frame = \(timeRangeLabel.frame)| BOUNDS: \(contentView.bounds)")
         
     }
     

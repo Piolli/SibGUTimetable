@@ -12,6 +12,7 @@ import UIKit
 class TimetableCoordinator : Coordinator {
     
     weak var navigationController: UINavigationController!
+    weak var timetableDataManager: TimetableDataManager!
     
     let timetableViewController = TimetableViewController()
     
@@ -20,8 +21,9 @@ class TimetableCoordinator : Coordinator {
         return timetableViewController
     }
     
-    init(navigationController: UINavigationController?) {
+    init(navigationController: UINavigationController?, timetableDataManager: TimetableDataManager) {
         self.navigationController = navigationController
+        self.timetableDataManager = timetableDataManager
         
         timetableViewController.tabBarItem = UITabBarItem(title: "Timetable", image: UIImage(named: "tab_bar_item_timetable"), tag: 1)
         timetableViewController.coordinator = self
@@ -32,7 +34,7 @@ class TimetableCoordinator : Coordinator {
     }
     
     func start() {
-        timetableViewController.dataManager = Assembler.shared.resolve()
+        timetableViewController.dataManager = timetableDataManager
     }
     
     #if DEBUG

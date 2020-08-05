@@ -24,7 +24,7 @@ extension FSCalendar {
     }
 
     var isSelectedDateEqualsToday: Bool {
-        logger.debug("isSelectedDateEqualsToday is \(self.selectedDate) == \(self.today)")
+        logger.trace("isSelectedDateEqualsToday is \(self.selectedDate) == \(self.today)")
         return self.selectedDate == self.today
     }
 }

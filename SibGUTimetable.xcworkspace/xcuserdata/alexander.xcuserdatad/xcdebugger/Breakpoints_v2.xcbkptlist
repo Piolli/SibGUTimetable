@@ -36,7 +36,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "55747F89-BC7F-4AA9-896F-8C8373BF36F4 - 1425e9b5b43d824b"
+                  uuid = "55747F89-BC7F-4AA9-896F-8C8373BF36F4 - 14df015a747cc55c"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -51,7 +51,7 @@
                   offsetFromSymbolStart = "1055">
                </Location>
                <Location
-                  uuid = "55747F89-BC7F-4AA9-896F-8C8373BF36F4 - bb9378032ca648e0"
+                  uuid = "55747F89-BC7F-4AA9-896F-8C8373BF36F4 - bb6990ecece70f29"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -164,7 +164,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "2C1A77D8-E958-487F-AEBC-F4E1204FF833 - b0162b6dd172572a"
+                  uuid = "2C1A77D8-E958-487F-AEBC-F4E1204FF833 - 4795e3d86f515eb"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -179,7 +179,7 @@
                   offsetFromSymbolStart = "113">
                </Location>
                <Location
-                  uuid = "2C1A77D8-E958-487F-AEBC-F4E1204FF833 - b0162b6dd172572a"
+                  uuid = "2C1A77D8-E958-487F-AEBC-F4E1204FF833 - 4795e3d86f515eb"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -318,8 +318,8 @@
             filePath = "SibGUTimetable/Modules/SearchGroup/GroupSearchViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -334,8 +334,8 @@
             filePath = "SibGUTimetable/Modules/Timetable/TimetableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "setupDataManager()"
             landmarkType = "7">
          </BreakpointContent>
@@ -526,8 +526,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "105"
             endingLineNumber = "105"
-            landmarkName = "test_fetch_newest_timetable_exits()"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

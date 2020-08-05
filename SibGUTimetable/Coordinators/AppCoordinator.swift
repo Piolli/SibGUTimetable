@@ -17,10 +17,11 @@ class AppCoordinator : NSObject, Coordinator {
     private let window: UIWindow
     private var tabBarController: UITabBarController!
     private var navigationController: UINavigationController
+    private let timetableDataManager: TimetableDataManager
     
-    lazy var sideCoordinator = SideMenuCoordinator(mainCoordinator: TimetableCoordinator(navigationController: nil), menuSections: [
+    lazy var sideCoordinator = SideMenuCoordinator(mainCoordinator: TimetableCoordinator(navigationController: nil, timetableDataManager: timetableDataManager), menuSections: [
         ///Observe for teachers and their lessons
-        (LocalizedStrings.Change_group, GroupSearchCoordinator(appCoordinator: self)),
+        (LocalizedStrings.Change_group, GroupSearchCoordinator(appCoordinator: self, dataManager: timetableDataManager)),
         (LocalizedStrings.Settings, SimpleCoordinator()),
         (LocalizedStrings.About_app, AboutAppCoordinator(aboutItems: [
             (LocalizedStrings.Feedback, SimpleCoordinator()),
@@ -42,6 +43,7 @@ class AppCoordinator : NSObject, Coordinator {
     }
     
     internal init(window: UIWindow) {
+        self.timetableDataManager = Assembler.shared.resolve()
         self.window = window
         self.navigationController = UINavigationController()
     }

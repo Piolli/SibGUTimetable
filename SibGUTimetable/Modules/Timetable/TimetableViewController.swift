@@ -53,15 +53,19 @@ class TimetableViewController: UIViewController {
         setupRightBarButton()
         
         setupTimetablePageViewController()
-        //setup autoupdate
-        userPreferences.timetableDetailsDidChanged.subscribe(onNext: { (timetableDetails) in
-            guard let timetableDetails = timetableDetails else { return }
-            self.dataManager.loadTimetable(timetableDetails: timetableDetails)
-        }).disposed(by: disposeBag)
+//        //setup autoupdate
+//        userPreferences.timetableDetailsDidChanged.subscribe(onNext: { (timetableDetails) in
+//            guard let timetableDetails = timetableDetails else { return }
+//            self.dataManager.loadTimetable(timetableDetails: timetableDetails)
+//        }).disposed(by: disposeBag)
         
         initAppearance()
         
         checkExistingTimetableDetails()
+    }
+    
+    deinit {
+        logger.debug("deinit TimetableViewController")
     }
     
     func checkExistingTimetableDetails() {
@@ -152,13 +156,19 @@ class TimetableViewController: UIViewController {
         dataManager.timetableOutput
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (timetable) in
-                guard let self = self else { return }
+                guard let self = self else {
+                    logger.error("self is nil")
+                    return
+                }
+                logger.info("Got timetable: \(timetable.group_name)")
                 //Because server-side saves timetable to db then we can compare if timetable is new
                 if self.timetablePageViewController.timetableViewModel?.schedule.updateTimestampTime != timetable.updateTimestampTime {
                     self.timetablePageViewController.timetableViewModel = TimetableViewModel(schedule: timetable)
                     self.navigationItem.title = timetable.group_name
                 }
-            }, onError: nil, onCompleted: nil, onDisposed: nil)
+            }, onError: { [weak self] (error) in
+                self?.showMessage(text: error.localizedDescription, title: "Error")
+            }, onCompleted: nil, onDisposed: nil)
             .disposed(by: disposeBag)
         checkExistingTimetableDetails()
     }
@@ -169,17 +179,17 @@ class TimetableViewController: UIViewController {
             .subscribeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (pageDidMoveTo) in
             DispatchQueue.main.async {
-                logger.debug("pageViewDidMoved state: \(pageDidMoveTo)")
+                logger.trace("pageViewDidMoved state: \(pageDidMoveTo)")
                 self?.calendarView.moveTo(state: pageDidMoveTo)
                 self?.updateTodayButtonVisibility()
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        timetablePageViewController.tableViewOffsetDidChange.subscribe(onNext: { (point) in
-            if point.y > 0 {
-                self.calendarView.setScope(.week, animated: true)
-            }
-        }).disposed(by: disposeBag)
+//        timetablePageViewController.tableViewOffsetDidChange.subscribe(onNext: { (point) in
+//            if point.y > 0 {
+//                self.calendarView.setScope(.week, animated: true)
+//            }
+//        }).disposed(by: disposeBag)
     }
 
     func addTimetablePageViewController() {
@@ -221,7 +231,7 @@ class TimetableViewController: UIViewController {
 
 extension TimetableViewController : FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        logger.debug("Did select date: \(calendar.selectedDate)")
+        logger.trace("Did select date: \(calendar.selectedDate)")
         updateTimetableFrom(date: calendar.selectedDate)
     }
 
@@ -248,7 +258,7 @@ extension TimetableViewController : FSCalendarDelegate {
 
 extension TimetableViewController : CustomizablePageViewDelegate {
     func pageViewDidMoved(state: CustomizablePageViewMoveDirection) {
-        logger.debug("pageViewDidMoved state: \(state)")
+        logger.trace("pageViewDidMoved state: \(state)")
         calendarView.moveTo(state: state)
         updateTodayButtonVisibility()
     }
