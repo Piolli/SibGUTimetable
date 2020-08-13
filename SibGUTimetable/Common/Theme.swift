@@ -53,6 +53,8 @@ protocol Theme {
     
     var separatorColor: UIColor { get }
     
+    var lightSeparatorColor: UIColor { get }
+    
     var labelColor: UIColor { get }
     
     var secondaryLabelColor: UIColor { get }
@@ -79,6 +81,12 @@ extension Theme {
             //secondaryLabel in light mode
             return UIColor.init(rgb: 0x3c3c43).withAlphaComponent(0.6)
         }
+    }
+    
+    var lightSeparatorColor: UIColor {
+        return .init(
+            light: UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1),
+            dark: UIColor(red: 32/255, green: 32/255, blue: 32/255, alpha: 1))
     }
     
     var separatorColor: UIColor {

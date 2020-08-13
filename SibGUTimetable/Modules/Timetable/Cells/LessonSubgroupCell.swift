@@ -64,7 +64,7 @@ class LessonSubgroupCell: UITableViewCell {
             if i < lessonViewModels.count - 1 {
                 let separator = UIView()
                 separator.translatesAutoresizingMaskIntoConstraints = false
-                separator.backgroundColor = ThemeProvider.shared.separatorColor
+                separator.backgroundColor = ThemeProvider.shared.lightSeparatorColor
                 separators.append(separator)
                 contentView.addSubview(separator)
             }
