@@ -24,6 +24,7 @@
 		1141FA5D23C9F07900796667 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1141FA5A23C9F07900796667 /* GoogleService-Info.plist */; };
 		1141FA5F23CA09BB00796667 /* APIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141FA5E23CA09BB00796667 /* APIServer.swift */; };
 		1141FA6523CA0F3300796667 /* NativeServerAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141FA6423CA0F3300796667 /* NativeServerAPITests.swift */; };
+		1149607E24E836B000168303 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1149607D24E836B000168303 /* FeedbackViewController.swift */; };
 		114C9E4A23D6B72700BED746 /* GroupSearchViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4923D6B72700BED746 /* GroupSearchViewModelController.swift */; };
 		114C9E4C23D6B86000BED746 /* GroupSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */; };
 		1177059F248E769900483E0A /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 1177059E248E769900483E0A /* Logging */; };
@@ -133,6 +134,7 @@
 		1141FA5A23C9F07900796667 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1141FA5E23CA09BB00796667 /* APIServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServer.swift; sourceTree = "<group>"; };
 		1141FA6423CA0F3300796667 /* NativeServerAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeServerAPITests.swift; sourceTree = "<group>"; };
+		1149607D24E836B000168303 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		114C9E4923D6B72700BED746 /* GroupSearchViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewModelController.swift; sourceTree = "<group>"; };
 		114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewModel.swift; sourceTree = "<group>"; };
 		117705A0248E7F7700483E0A /* CustomLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogHandler.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		1114AD5F23E3F69100E99C84 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				1149607C24E8368F00168303 /* Feedback */,
 				111E0D71240E7F2F000F4D4B /* AboutApp */,
 				11C606CC23E4834600CF2C79 /* SideMenu */,
 				119F6FF723E4247300FD6D46 /* SearchGroup */,
@@ -309,6 +312,14 @@
 				111E0D72240E7F4C000F4D4B /* AboutAppViewController.swift */,
 			);
 			path = AboutApp;
+			sourceTree = "<group>";
+		};
+		1149607C24E8368F00168303 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				1149607D24E836B000168303 /* FeedbackViewController.swift */,
+			);
+			path = Feedback;
 			sourceTree = "<group>";
 		};
 		119F178E248BACFE00EF0B21 /* Dependencies */ = {
@@ -963,6 +974,7 @@
 				A89DDCA422D704F500769EAA /* TimetableDayViewModel.swift in Sources */,
 				11017F602413C52D003E2871 /* AboutAppCoordinator.swift in Sources */,
 				A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */,
+				1149607E24E836B000168303 /* FeedbackViewController.swift in Sources */,
 				11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */,
 				119E51B623DED7C100E1ABA4 /* Lesson+CoreDataProperties.swift in Sources */,
 				111E0D73240E7F4C000F4D4B /* AboutAppViewController.swift in Sources */,
