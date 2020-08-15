@@ -141,14 +141,14 @@ class TimetableViewController: UIViewController {
     }
 
     private func makeTimetableConstraints(containerView: UIView) {
-        let marginsGuide = view!
-        let marginBetweenTimetableAndCalendar = CGFloat(16)
+        let marginsGuide = view.safeAreaLayoutGuide
+        let marginBetweenTimetableAndCalendar = CGFloat(0)
         
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: marginsGuide.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: marginsGuide.trailingAnchor),
+            containerView.leadingAnchor.constraint(equalTo: marginsGuide.leadingAnchor, constant: 8),
+            marginsGuide.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 8),
             containerView.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: marginBetweenTimetableAndCalendar),
-            containerView.bottomAnchor.constraint(equalTo: marginsGuide.bottomAnchor)
+            view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
     }
     
@@ -197,22 +197,14 @@ class TimetableViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(containerView)
         makeTimetableConstraints(containerView: containerView)
-
-        containerView.clipsToBounds = true
-        containerView.layer.cornerRadius = 8
-
         updateTimetableFromSelectedDateCalendarView()
-
         add(viewController: timetablePageViewController, to: containerView)
     }
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
-    
     
     fileprivate func initAppearance() {
         calendarView.appearance.titleDefaultColor = ThemeProvider.shared.calendarViewSelectedMonthDaysTextColor
@@ -241,7 +233,7 @@ extension TimetableViewController : FSCalendarDelegate {
         }
 
         timetablePageViewController.select(date)
-        
+
         updateTodayButtonVisibility()
     }
 

@@ -27,7 +27,7 @@ class TimetableLessonListController: UITableViewController {
 //        tableView.separatorInset = .init(top: 18, left: 0, bottom: 18, right: 0)
         tableView.tableFooterView = UIView()
         tableView.allowsSelection = false
-        tableView.backgroundColor = ThemeProvider.shared.tableViewBackgroundColor
+        tableView.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor
         
         ///Maybe create init with viewModel?
         if viewModel?.countOflessons == 0 {
@@ -79,15 +79,41 @@ class TimetableLessonListController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.countOflessons ?? 0
     }
+    
+    /// Rounds corners for first and last cell
+    /// - Parameters:
+    ///   - cell: must be rounded
+    ///   - indexPath: uses for check position of cell
+    func roundCellCorners(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+        let isLastCell = indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1
+        let isFirstCell = indexPath.row == 0
+        
+        if !isLastCell && !isFirstCell {
+            return
+        }
+        
+        if isLastCell {
+            cell.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+            ///hide separator of table view cell
+            cell.separatorInset = .init(top: 0, left: 10000, bottom: 0, right: 0)
+        } else if isFirstCell {
+            cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        }
+        
+        cell.layer.cornerRadius = 8
+        cell.clipsToBounds = true
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let count = viewModel?.lessonViewModels(at: indexPath)?.count, count > 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "subgroupCell", for: indexPath) as! LessonSubgroupCell
             cell.lessonViewModels = viewModel!.lessonViewModels(at: indexPath)!
+            roundCellCorners(cell, indexPath)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LessonCell
             cell.viewModel = viewModel?.lessonViewModels(at: indexPath)?[0]
+            roundCellCorners(cell, indexPath)
             return cell
         }
     }
