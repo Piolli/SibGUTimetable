@@ -15,14 +15,20 @@ class FeedbackViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         
         let inputLabel = UILabel()
+        inputLabel.font = .preferredFont(forTextStyle: .subheadline)
+        inputLabel.textColor = ThemeProvider.shared.secondaryLabelColor
         inputLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(inputLabel)
         inputLabel.text = "Core issue"
         
         let inputTextField = UITextField()
         inputTextField.translatesAutoresizingMaskIntoConstraints = false
+        inputTextField.font = .preferredFont(forTextStyle: .callout)
         view.addSubview(inputTextField)
-        inputTextField.borderStyle = .roundedRect
+        addBorderAndBackground(for: inputTextField)
+        inputTextField.heightAnchor.constraint(equalToConstant: inputTextField.font!.lineHeight + 16).isActive = true
+        inputTextField.leftView = .init(frame: .init(x: 0, y: 0, width: 4, height: 1))
+        inputTextField.leftViewMode = .always
         inputTextField.text = ""
         
         self.contraint(label: inputLabel, withInput: inputTextField, to: view)
@@ -35,14 +41,15 @@ class FeedbackViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         
         let inputLabel = UILabel()
+        inputLabel.textColor = ThemeProvider.shared.secondaryLabelColor
+        inputLabel.font = .preferredFont(forTextStyle: .subheadline)
         inputLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(inputLabel)
         inputLabel.text = "Additional comments"
         
         let inputTextField = UITextView()
-        inputTextField.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
-        inputTextField.layer.borderWidth = 1.0
-        inputTextField.layer.cornerRadius = 5
+        inputTextField.font = .preferredFont(forTextStyle: .callout)
+        addBorderAndBackground(for: inputTextField)
         
         inputTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(inputTextField)
@@ -52,7 +59,15 @@ class FeedbackViewController: UIViewController {
         self.contraint(label: inputLabel, withInput: inputTextField, to: view)
         
         return view
+    
     }()
+    
+    private func addBorderAndBackground(for view: UIView) {
+        view.layer.borderColor = ThemeProvider.shared.viewBorderColor.cgColor
+        view.layer.borderWidth = 0.25
+        view.layer.cornerRadius = 8
+        view.backgroundColor = ThemeProvider.shared.tableViewBackgroundColor
+    }
     
     private func contraint(label: UIView, withInput input: UIView, to view: UIView) {
         NSLayoutConstraint.activate([
@@ -70,6 +85,7 @@ class FeedbackViewController: UIViewController {
     lazy var contentView: UIView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(coreIssueInputView)
         stackView.addArrangedSubview(additionalCommentsInputView)
@@ -78,6 +94,8 @@ class FeedbackViewController: UIViewController {
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.alwaysBounceVertical = true
+        scrollView.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
         return scrollView
@@ -86,10 +104,10 @@ class FeedbackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScrollView()
+        view.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor
     }
     
     private func setupScrollView() {
-        
         view.addSubview(scrollView)
         
         let frameGuide = scrollView.frameLayoutGuide

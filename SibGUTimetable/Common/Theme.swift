@@ -59,6 +59,8 @@ protocol Theme {
     
     var secondaryLabelColor: UIColor { get }
     
+    var viewBorderColor: UIColor { get }
+    
 }
 
 extension Theme {
@@ -87,6 +89,10 @@ extension Theme {
         return .init(
             light: UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1),
             dark: UIColor(red: 32/255, green: 32/255, blue: 32/255, alpha: 1))
+    }
+    
+    var viewBorderColor: UIColor {
+        return UIColor(rgb: 0xbfbfbf)
     }
     
     var separatorColor: UIColor {
