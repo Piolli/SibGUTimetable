@@ -10,6 +10,16 @@ import UIKit
 
 class FeedbackViewController: UIViewController {
     
+    lazy var coreIssueTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = .preferredFont(forTextStyle: .callout)
+        textField.leftView = .init(frame: .init(x: 0, y: 0, width: 4, height: 1))
+        textField.leftViewMode = .always
+        addBorderAndBackground(for: textField)
+        return textField
+    }()
+    
     lazy var coreIssueInputView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -21,19 +31,20 @@ class FeedbackViewController: UIViewController {
         view.addSubview(inputLabel)
         inputLabel.text = "Core issue"
         
-        let inputTextField = UITextField()
-        inputTextField.translatesAutoresizingMaskIntoConstraints = false
-        inputTextField.font = .preferredFont(forTextStyle: .callout)
-        view.addSubview(inputTextField)
-        addBorderAndBackground(for: inputTextField)
-        inputTextField.heightAnchor.constraint(equalToConstant: inputTextField.font!.lineHeight + 16).isActive = true
-        inputTextField.leftView = .init(frame: .init(x: 0, y: 0, width: 4, height: 1))
-        inputTextField.leftViewMode = .always
-        inputTextField.text = ""
+        view.addSubview(coreIssueTextField)
+        coreIssueTextField.heightAnchor.constraint(equalToConstant: coreIssueTextField.font!.lineHeight + 16).isActive = true
         
-        self.contraint(label: inputLabel, withInput: inputTextField, to: view)
+        self.contraint(label: inputLabel, withInput: coreIssueTextField, to: view)
         
         return view
+    }()
+    
+    lazy var additionalCommentsTextView: UITextView = {
+        let inputTextField = UITextView()
+        inputTextField.font = .preferredFont(forTextStyle: .callout)
+        inputTextField.translatesAutoresizingMaskIntoConstraints = false
+        addBorderAndBackground(for: inputTextField)
+        return inputTextField
     }()
     
     lazy var additionalCommentsInputView: UIView = {
@@ -47,19 +58,12 @@ class FeedbackViewController: UIViewController {
         view.addSubview(inputLabel)
         inputLabel.text = "Additional comments"
         
-        let inputTextField = UITextView()
-        inputTextField.font = .preferredFont(forTextStyle: .callout)
-        addBorderAndBackground(for: inputTextField)
+        view.addSubview(additionalCommentsTextView)
+        additionalCommentsTextView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
-        inputTextField.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(inputTextField)
-        inputTextField.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        inputTextField.text = ""
-        
-        self.contraint(label: inputLabel, withInput: inputTextField, to: view)
+        self.contraint(label: inputLabel, withInput: additionalCommentsTextView, to: view)
         
         return view
-    
     }()
     
     private func addBorderAndBackground(for view: UIView) {
@@ -103,8 +107,10 @@ class FeedbackViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupScrollView()
         view.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor
+        setupScrollView()
+        setupCreateBarButton()
+        setupCancelBarButton()
     }
     
     private func setupScrollView() {
@@ -130,11 +136,27 @@ class FeedbackViewController: UIViewController {
     }
     
     private func setupCreateBarButton() {
-        
+        let createButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(createIssue))
+        navigationItem.rightBarButtonItem = createButton
     }
     
     private func setupCancelBarButton() {
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelIssue))
+        navigationItem.leftBarButtonItem = cancelButton
+    }
+    
+    @objc private func createIssue() {
+        guard let coreIssueText = coreIssueTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+              coreIssueText.count > 3 else {
+            logger.error("Core Issue's text lenght <= 3")
+            showMessage(text: "Core issue text is too short", title: "Error")
+            return
+        }
+    }
+    
+    @objc private func cancelIssue() {
         
     }
+    
 
 }
