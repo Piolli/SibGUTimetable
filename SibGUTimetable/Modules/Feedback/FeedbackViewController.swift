@@ -12,6 +12,9 @@ class FeedbackViewController: UIViewController {
     
     lazy var coreIssueTextField: UITextField = {
         let textField = UITextField()
+        textField.tag = 0
+        textField.returnKeyType = .next
+        textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .preferredFont(forTextStyle: .callout)
         textField.leftView = .init(frame: .init(x: 0, y: 0, width: 4, height: 1))
@@ -41,11 +44,24 @@ class FeedbackViewController: UIViewController {
     
     lazy var additionalCommentsTextView: UITextView = {
         let inputTextField = UITextView()
+        inputTextField.tag = 1
         inputTextField.font = .preferredFont(forTextStyle: .callout)
         inputTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        let keyboardToolbar = UIToolbar()
+        keyboardToolbar.sizeToFit()
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboardForAdditionalCommentsTextView))
+        keyboardToolbar.items = [flexBarButton, doneBarButton]
+        inputTextField.inputAccessoryView = keyboardToolbar
+        
         addBorderAndBackground(for: inputTextField)
         return inputTextField
     }()
+    
+    @objc func dismissKeyboardForAdditionalCommentsTextView() {
+        additionalCommentsTextView.endEditing(true)
+    }
     
     lazy var additionalCommentsInputView: UIView = {
         let view = UIView()
@@ -111,6 +127,7 @@ class FeedbackViewController: UIViewController {
         setupScrollView()
         setupCreateBarButton()
         setupCancelBarButton()
+//        registerForKeyboardNotifications()
     }
     
     private func setupScrollView() {
@@ -155,8 +172,45 @@ class FeedbackViewController: UIViewController {
     }
     
     @objc private func cancelIssue() {
-        
+        navigationController?.popViewController(animated: true)
+    }
+
+}
+
+// MARK: - UITextFieldDelegate
+extension FeedbackViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.tag == 0 {
+            additionalCommentsTextView.becomeFirstResponder()
+        }
+        return false
+    }
+}
+
+// MARK: - Keyboard intecation
+// TODO: make switching animation between input views
+// TODO: fix offset position
+extension FeedbackViewController {
+    private func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-
+    @objc func keyboardWasShown(_ notificaiton: NSNotification) {
+        guard let keyboardFrameValue = notificaiton.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
+            return
+        }
+        
+        let keyboardHeight = keyboardFrameValue.cgRectValue.height
+        let contentInsets: UIEdgeInsets = .init(top: 20, left: 0, bottom: keyboardHeight, right: 0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc func keyboardWillBeHidden(_ notificaiton: NSNotification) {
+        let contentInsets: UIEdgeInsets = .init(top: 20, left: 0, bottom: 0, right: 0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
 }

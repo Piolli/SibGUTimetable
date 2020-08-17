@@ -24,7 +24,7 @@ class AppCoordinator : NSObject, Coordinator {
         (LocalizedStrings.Change_group, GroupSearchCoordinator(appCoordinator: self, dataManager: timetableDataManager)),
         (LocalizedStrings.Settings, SimpleCoordinator()),
         (LocalizedStrings.About_app, AboutAppCoordinator(aboutItems: [
-            (LocalizedStrings.Feedback, SimpleCoordinator()),
+            (LocalizedStrings.Feedback, SimpleCoordinator(FeedbackViewController())),
             (LocalizedStrings.Rate_Me, SimpleCoordinator()),
             (LocalizedStrings.Licenses, SimpleCoordinator(AcknowListViewController())),
         ]))

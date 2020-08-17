@@ -118,7 +118,7 @@ class SimpleCoordinator : Coordinator {
     }
     
     func start() {
-        viewController.view.backgroundColor = ThemeProvider.shared.whiteBackgroundColor
+
     }
     
     lazy var rootViewController: UIViewController = {
