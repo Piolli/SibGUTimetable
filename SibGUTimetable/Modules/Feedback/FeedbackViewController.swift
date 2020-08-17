@@ -32,7 +32,7 @@ class FeedbackViewController: UIViewController {
         inputLabel.textColor = ThemeProvider.shared.secondaryLabelColor
         inputLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(inputLabel)
-        inputLabel.text = "Core issue"
+        inputLabel.text = LocalizedStrings.Core_issue
         
         view.addSubview(coreIssueTextField)
         coreIssueTextField.heightAnchor.constraint(equalToConstant: coreIssueTextField.font!.lineHeight + 16).isActive = true
@@ -72,7 +72,7 @@ class FeedbackViewController: UIViewController {
         inputLabel.font = .preferredFont(forTextStyle: .subheadline)
         inputLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(inputLabel)
-        inputLabel.text = "Additional comments"
+        inputLabel.text = LocalizedStrings.Additional_comments
         
         view.addSubview(additionalCommentsTextView)
         additionalCommentsTextView.heightAnchor.constraint(equalToConstant: 150).isActive = true
@@ -127,6 +127,7 @@ class FeedbackViewController: UIViewController {
         setupScrollView()
         setupCreateBarButton()
         setupCancelBarButton()
+        navigationController?.title = LocalizedStrings.New_question
 //        registerForKeyboardNotifications()
     }
     
@@ -166,7 +167,7 @@ class FeedbackViewController: UIViewController {
         guard let coreIssueText = coreIssueTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
               coreIssueText.count > 3 else {
             logger.error("Core Issue's text lenght <= 3")
-            showMessage(text: "Core issue text is too short", title: "Error")
+            showMessage(text: LocalizedStrings.Core_issue_text_is_too_short, title: LocalizedStrings.Error)
             return
         }
     }

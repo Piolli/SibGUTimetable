@@ -54,4 +54,24 @@ enum LocalizedStrings {
         return NSLocalizedString("SibGU_Timetable", comment: "Application name")
     }
     
+    static var New_question: String {
+        return NSLocalizedString("New_question", comment: "Application name")
+    }
+    
+    static var Core_issue: String {
+        return NSLocalizedString("Core_issue", comment: "Application name")
+    }
+    
+    static var Additional_comments: String {
+        return NSLocalizedString("Additional_comments", comment: "Application name")
+    }
+    
+    static var Core_issue_text_is_too_short: String {
+        return NSLocalizedString("Core_issue_text_is_too_short", comment: "Application name")
+    }
+    
+    static var Error: String {
+        return NSLocalizedString("Error", comment: "Application name")
+    }
+    
 }

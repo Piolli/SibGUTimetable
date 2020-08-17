@@ -17,3 +17,8 @@
 "Rate_Me" = "Оцените приложение";
 "Licenses" = "Лицензии";
 "SibGU_Timetable" = "СибГУ Расписание";
+"New_question" = "Новый вопрос";
+"Core_issue" = "Суть проблемы";
+"Additional_comments" = "Подробнее о проблеме";
+"Core_issue_text_is_too_short" = "Слишком короткий текст в поле 'Суть проблемы'";
+"Error" = "Ошибка";
