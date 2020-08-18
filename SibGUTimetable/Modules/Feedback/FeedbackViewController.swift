@@ -12,6 +12,15 @@ import NVActivityIndicatorView
 
 class FeedbackViewController: UIViewController, NVActivityIndicatorViewable {
     
+    enum LayoutMetrics {
+        static let textFieldLeftEmptyViewWidth = 4
+        static let textFieldAdditionalHeight = CGFloat(16)
+        static let additionalCommentTextViewHeight = CGFloat(150)
+        static let spaceBetweenLabelAndInputView = CGFloat(8)
+        static let spaceBetweenInputViewsInStackView = CGFloat(20)
+        static let scrollViewContentInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+    }
+    
     let network: APIServer = Assembler.shared.resolve()
     let disposeBag = DisposeBag()
     
@@ -22,7 +31,7 @@ class FeedbackViewController: UIViewController, NVActivityIndicatorViewable {
         textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .preferredFont(forTextStyle: .callout)
-        textField.leftView = .init(frame: .init(x: 0, y: 0, width: 4, height: 1))
+        textField.leftView = .init(frame: .init(x: 0, y: 0, width: LayoutMetrics.textFieldLeftEmptyViewWidth, height: 1))
         textField.leftViewMode = .always
         addBorderAndBackground(for: textField)
         return textField
@@ -40,7 +49,7 @@ class FeedbackViewController: UIViewController, NVActivityIndicatorViewable {
         inputLabel.text = LocalizedStrings.Core_issue
         
         view.addSubview(coreIssueTextField)
-        coreIssueTextField.heightAnchor.constraint(equalToConstant: coreIssueTextField.font!.lineHeight + 16).isActive = true
+        coreIssueTextField.heightAnchor.constraint(equalToConstant: coreIssueTextField.font!.lineHeight + LayoutMetrics.textFieldAdditionalHeight).isActive = true
         
         self.contraint(label: inputLabel, withInput: coreIssueTextField, to: view)
         
@@ -80,7 +89,7 @@ class FeedbackViewController: UIViewController, NVActivityIndicatorViewable {
         inputLabel.text = LocalizedStrings.Additional_comments
         
         view.addSubview(additionalCommentsTextView)
-        additionalCommentsTextView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        additionalCommentsTextView.heightAnchor.constraint(equalToConstant: LayoutMetrics.additionalCommentTextViewHeight).isActive = true
         
         self.contraint(label: inputLabel, withInput: additionalCommentsTextView, to: view)
         
@@ -100,7 +109,7 @@ class FeedbackViewController: UIViewController, NVActivityIndicatorViewable {
             label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             label.topAnchor.constraint(equalTo: view.topAnchor),
             
-            input.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
+            input.topAnchor.constraint(equalTo: label.bottomAnchor, constant: LayoutMetrics.spaceBetweenLabelAndInputView),
             input.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             input.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             input.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -110,7 +119,7 @@ class FeedbackViewController: UIViewController, NVActivityIndicatorViewable {
     lazy var contentView: UIView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 20
+        stackView.spacing = LayoutMetrics.spaceBetweenInputViewsInStackView
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(coreIssueInputView)
         stackView.addArrangedSubview(additionalCommentsInputView)
@@ -120,7 +129,7 @@ class FeedbackViewController: UIViewController, NVActivityIndicatorViewable {
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
-        scrollView.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
+        scrollView.contentInset = LayoutMetrics.scrollViewContentInsets
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
         return scrollView
@@ -223,13 +232,17 @@ extension FeedbackViewController {
         }
         
         let keyboardHeight = keyboardFrameValue.cgRectValue.height
-        let contentInsets: UIEdgeInsets = .init(top: 20, left: 0, bottom: keyboardHeight, right: 0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
+        var contentInsets = LayoutMetrics.scrollViewContentInsets
+        contentInsets.bottom = keyboardHeight
+        adjustScrollViewContentInsets(contentInsets)
     }
     
     @objc func keyboardWillBeHidden(_ notificaiton: NSNotification) {
-        let contentInsets: UIEdgeInsets = .init(top: 20, left: 0, bottom: 0, right: 0)
+        let defaultContentInsets: UIEdgeInsets = LayoutMetrics.scrollViewContentInsets
+        adjustScrollViewContentInsets(defaultContentInsets)
+    }
+    
+    func adjustScrollViewContentInsets(_ contentInsets: UIEdgeInsets) {
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
     }
