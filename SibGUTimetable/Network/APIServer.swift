@@ -11,9 +11,18 @@ import RxSwift
 import RxCocoa
 
 
-struct GroupPairIDName : Decodable {
+struct GroupPairIDName: Decodable {
     let id: Int
     let name: String
+}
+
+struct UserIssue: Codable {
+    let coreIssue: String
+    let additionalComments: String
+}
+
+struct ResponseMessage: Codable {
+    let message: String?
 }
     
 
@@ -22,6 +31,8 @@ protocol APIServer {
     func findGroup(queryGroupName: String) -> Single<[GroupPairIDName]>
     
     func fetchTimetable(timetableDetails: TimetableDetails, jsonDecoder: JSONDecoder) -> Single<Timetable>
+    
+    func create(issue: UserIssue) -> Single<ResponseMessage>
     
 }
 
@@ -64,6 +75,19 @@ public class NativeAPIServer : APIServer {
         if let url = makeGETWithParams(path: "\(host)timetable", params: params) {
             let request = URLRequest(url: url)
             return URLSession.shared.doRequest(request, jsonDecoder: jsonDecoder)
+        }
+        return Single.error(ServerError.invalidRequest)
+    }
+    
+    func create(issue: UserIssue) -> Single<ResponseMessage> {
+        let params: [String : String] = [
+            "core_issue": issue.coreIssue,
+            "additional_comments": String(issue.additionalComments)
+        ]
+        if let url = makeGETWithParams(path: "\(host)feedback", params: params) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            return URLSession.shared.doRequest(request)
         }
         return Single.error(ServerError.invalidRequest)
     }

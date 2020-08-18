@@ -22,3 +22,4 @@
 "Additional_comments" = "Подробнее о проблеме";
 "Core_issue_text_is_too_short" = "Слишком короткий текст в поле 'Суть проблемы'";
 "Error" = "Ошибка";
+"Error_occured_while_sending_issue" = "Ошибка при передаче данных";

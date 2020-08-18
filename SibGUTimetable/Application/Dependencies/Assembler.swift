@@ -17,6 +17,10 @@ class Assembler :
 
     private init() { }
 
+    func resolve() -> APIServer {
+        return NativeAPIServer.sharedInstance
+    }
+    
 }
 
 

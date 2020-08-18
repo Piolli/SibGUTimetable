@@ -22,3 +22,4 @@
 "Additional_comments" = "Additional comments";
 "Core_issue_text_is_too_short" = "Core issue text is too short";
 "Error" = "Error";
+"Error_occured_while_sending_issue" = "Error occured while sending issue";

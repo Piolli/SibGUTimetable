@@ -74,4 +74,8 @@ enum LocalizedStrings {
         return NSLocalizedString("Error", comment: "Application name")
     }
     
+    static var Error_occured_while_sending_issue: String {
+        return NSLocalizedString("Error_occured_while_sending_issue", comment: "Application name")
+    }
+    
 }

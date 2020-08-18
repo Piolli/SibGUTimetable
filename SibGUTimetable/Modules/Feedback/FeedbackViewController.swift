@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import RxSwift
+import NVActivityIndicatorView
 
-class FeedbackViewController: UIViewController {
+class FeedbackViewController: UIViewController, NVActivityIndicatorViewable {
+    
+    let network: APIServer = Assembler.shared.resolve()
+    let disposeBag = DisposeBag()
     
     lazy var coreIssueTextField: UITextField = {
         let textField = UITextField()
@@ -170,10 +175,25 @@ class FeedbackViewController: UIViewController {
             showMessage(text: LocalizedStrings.Core_issue_text_is_too_short, title: LocalizedStrings.Error)
             return
         }
+        startAnimating()
+        network.create(issue: UserIssue(coreIssue: coreIssueText, additionalComments: additionalCommentsTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)))
+            .observeOn(MainScheduler.instance)
+            .subscribe { [weak self] (responseMessage) in
+            self?.stopAnimating()
+            self?.popViewController()
+        } onError: { [weak self] (error) in
+            self?.stopAnimating()
+            self?.showMessage(text: LocalizedStrings.Error_occured_while_sending_issue, title: LocalizedStrings.Error)
+        }.disposed(by: disposeBag)
+    }
+    
+    private func clearInputs() {
+        coreIssueTextField.text?.removeAll()
+        additionalCommentsTextView.text.removeAll()
     }
     
     @objc private func cancelIssue() {
-        navigationController?.popViewController(animated: true)
+        popViewController()
     }
 
 }

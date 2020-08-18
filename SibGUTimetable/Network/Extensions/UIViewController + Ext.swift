@@ -35,5 +35,9 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    func popViewController() {
+        navigationController?.popViewController(animated: true)
+    }
+    
 }
 
