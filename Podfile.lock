@@ -16,6 +16,7 @@ PODS:
     - RxSwift (~> 5)
   - SideMenuSwift (2.0.3)
   - SnapKit (4.2.0)
+  - SPAlert (2.1.4)
 
 DEPENDENCIES:
   - AcknowList
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - RxTest (~> 5)
   - SideMenuSwift
   - SnapKit (~> 4.0)
+  - SPAlert
 
 SPEC REPOS:
   trunk:
@@ -40,6 +42,7 @@ SPEC REPOS:
     - RxTest
     - SideMenuSwift
     - SnapKit
+    - SPAlert
 
 SPEC CHECKSUMS:
   AcknowList: a3ee7cfba2c45cf9d07d1b18fe729a5bcc518366
@@ -52,7 +55,8 @@ SPEC CHECKSUMS:
   RxTest: 4349afe98f564e0a9bc19063368904622d17d49a
   SideMenuSwift: 5c2b1496544ce3f1f08f4dddf4810eaac49f543d
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SPAlert: 1a8afa1c6ac86a82ab5b2cfdf7f9a51e68cb6c0c
 
-PODFILE CHECKSUM: f9a4d8c3e908c7a3b0c6b098437571437514fe98
+PODFILE CHECKSUM: 8ea959696519172d1e587f7556b1d62bd156f3df
 
 COCOAPODS: 1.8.4

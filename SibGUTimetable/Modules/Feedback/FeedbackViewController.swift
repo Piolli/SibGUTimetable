@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import NVActivityIndicatorView
+import SPAlert
 
 class FeedbackViewController: UIViewController, NVActivityIndicatorViewable {
     
@@ -181,18 +182,20 @@ class FeedbackViewController: UIViewController, NVActivityIndicatorViewable {
         guard let coreIssueText = coreIssueTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
               coreIssueText.count > 3 else {
             logger.error("Core Issue's text lenght <= 3")
-            showMessage(text: LocalizedStrings.Core_issue_text_is_too_short, title: LocalizedStrings.Error)
+            SPAlert.present(message: "\(LocalizedStrings.Error): \(LocalizedStrings.Core_issue_text_is_too_short)")
             return
         }
         startAnimating()
         network.create(issue: UserIssue(coreIssue: coreIssueText, additionalComments: additionalCommentsTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)))
             .observeOn(MainScheduler.instance)
             .subscribe { [weak self] (responseMessage) in
+            self?.clearInputs()
             self?.stopAnimating()
             self?.popViewController()
+            SPAlert.present(title: LocalizedStrings.Thanks_for_your_feedback_ex, preset: .like)
         } onError: { [weak self] (error) in
             self?.stopAnimating()
-            self?.showMessage(text: LocalizedStrings.Error_occured_while_sending_issue, title: LocalizedStrings.Error)
+            SPAlert.present(message: LocalizedStrings.Error_occured_while_sending_issue)
         }.disposed(by: disposeBag)
     }
     

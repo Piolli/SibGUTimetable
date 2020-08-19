@@ -32,6 +32,9 @@ target 'SibGUTimetable' do
   # Auto generated acknowledgements
   pod 'AcknowList'
   
+  # Show message on screen
+  pod 'SPAlert'
+  
   target 'SibGUTimetableTests' do
     inherit! :search_paths
     # Pods for testing

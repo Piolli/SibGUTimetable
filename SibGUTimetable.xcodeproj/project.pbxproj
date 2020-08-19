@@ -35,12 +35,6 @@
 		118F0C1023C24500003BCEF2 /* Timetable+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118F0C0F23C24500003BCEF2 /* Timetable+CoreDataClass.swift */; };
 		1197A53123BE20E0008737B2 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = 1197A53023BE20E0008737B2 /* schedule.json */; };
 		1197A53223BE501A008737B2 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = 1197A53023BE20E0008737B2 /* schedule.json */; };
-		119E51A823DED59E00E1ABA4 /* LessonGroup+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119E519E23DED59E00E1ABA4 /* LessonGroup+CoreDataClass.swift */; };
-		119E51B623DED7C100E1ABA4 /* Lesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119E51AD23DED7C100E1ABA4 /* Lesson+CoreDataProperties.swift */; };
-		119E51B823DED7C100E1ABA4 /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119E51AF23DED7C100E1ABA4 /* Day+CoreDataProperties.swift */; };
-		119E51BA23DED7C100E1ABA4 /* Timetable+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119E51B123DED7C100E1ABA4 /* Timetable+CoreDataProperties.swift */; };
-		119E51BB23DED7C100E1ABA4 /* LessonGroup+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119E51B223DED7C100E1ABA4 /* LessonGroup+CoreDataProperties.swift */; };
-		119E51BD23DED7C100E1ABA4 /* Week+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119E51B423DED7C100E1ABA4 /* Week+CoreDataProperties.swift */; };
 		119E51C123DEDC3200E1ABA4 /* StubTTRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119E51C023DEDC3200E1ABA4 /* StubTTRepository.swift */; };
 		119E51C223DF422B00E1ABA4 /* SibGUTimetable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC722B3D7C000567A37 /* SibGUTimetable.xcdatamodeld */; };
 		119F178D248BACEB00EF0B21 /* Assembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119F178C248BACEB00EF0B21 /* Assembler.swift */; };
@@ -48,6 +42,12 @@
 		119F1792248BB31C00EF0B21 /* UserPreferencesAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119F1791248BB31C00EF0B21 /* UserPreferencesAssembler.swift */; };
 		11B14BEB23E83DBD00B44958 /* TimetablePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B14BEA23E83DBD00B44958 /* TimetablePageViewController.swift */; };
 		11B14BED23E841FA00B44958 /* UIViewController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B14BEC23E841FA00B44958 /* UIViewController + Ext.swift */; };
+		11B75A6424ED42C6002E188D /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B75A5E24ED42C6002E188D /* Day+CoreDataProperties.swift */; };
+		11B75A6524ED42C6002E188D /* LessonGroup+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B75A5F24ED42C6002E188D /* LessonGroup+CoreDataProperties.swift */; };
+		11B75A6624ED42C6002E188D /* Timetable+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B75A6024ED42C6002E188D /* Timetable+CoreDataProperties.swift */; };
+		11B75A6724ED42C6002E188D /* Lesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B75A6124ED42C6002E188D /* Lesson+CoreDataProperties.swift */; };
+		11B75A6824ED42C6002E188D /* LessonGroup+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B75A6224ED42C6002E188D /* LessonGroup+CoreDataClass.swift */; };
+		11B75A6924ED42C6002E188D /* Week+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B75A6324ED42C6002E188D /* Week+CoreDataProperties.swift */; };
 		11BFD48923E9BC2C00BE6B6B /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BFD48823E9BC2C00BE6B6B /* UserPreferences.swift */; };
 		11BFD49A23E9C01900BE6B6B /* UserPrerencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BFD49923E9C01900BE6B6B /* UserPrerencesTests.swift */; };
 		11C3889C23E438E200ED43A5 /* SideMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3889B23E438E200ED43A5 /* SideMenuCoordinator.swift */; };
@@ -144,18 +144,18 @@
 		11845E9624B8451B00791186 /* LocalizedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
 		118F0C0F23C24500003BCEF2 /* Timetable+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timetable+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1197A53023BE20E0008737B2 /* schedule.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schedule.json; sourceTree = "<group>"; };
-		119E519E23DED59E00E1ABA4 /* LessonGroup+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LessonGroup+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		119E51AD23DED7C100E1ABA4 /* Lesson+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lesson+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		119E51AF23DED7C100E1ABA4 /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		119E51B123DED7C100E1ABA4 /* Timetable+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timetable+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		119E51B223DED7C100E1ABA4 /* LessonGroup+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LessonGroup+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		119E51B423DED7C100E1ABA4 /* Week+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Week+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		119E51C023DEDC3200E1ABA4 /* StubTTRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubTTRepository.swift; sourceTree = "<group>"; };
 		119F178C248BACEB00EF0B21 /* Assembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembler.swift; sourceTree = "<group>"; };
 		119F178F248BAD2800EF0B21 /* RepositoryAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryAssembler.swift; sourceTree = "<group>"; };
 		119F1791248BB31C00EF0B21 /* UserPreferencesAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesAssembler.swift; sourceTree = "<group>"; };
 		11B14BEA23E83DBD00B44958 /* TimetablePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetablePageViewController.swift; sourceTree = "<group>"; };
 		11B14BEC23E841FA00B44958 /* UIViewController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Ext.swift"; sourceTree = "<group>"; };
+		11B75A5E24ED42C6002E188D /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		11B75A5F24ED42C6002E188D /* LessonGroup+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LessonGroup+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		11B75A6024ED42C6002E188D /* Timetable+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timetable+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		11B75A6124ED42C6002E188D /* Lesson+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lesson+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		11B75A6224ED42C6002E188D /* LessonGroup+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LessonGroup+CoreDataClass.swift"; sourceTree = "<group>"; };
+		11B75A6324ED42C6002E188D /* Week+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Week+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		11BFD48823E9BC2C00BE6B6B /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		11BFD48E23E9BEFA00BE6B6B /* UserPreferencesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UserPreferencesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11BFD49923E9C01900BE6B6B /* UserPrerencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPrerencesTests.swift; sourceTree = "<group>"; };
@@ -522,15 +522,15 @@
 		A8209F1A22D7107500E1BAF6 /* Manual Generated */ = {
 			isa = PBXGroup;
 			children = (
-				119E51AD23DED7C100E1ABA4 /* Lesson+CoreDataProperties.swift */,
-				119E51AF23DED7C100E1ABA4 /* Day+CoreDataProperties.swift */,
-				119E51B123DED7C100E1ABA4 /* Timetable+CoreDataProperties.swift */,
-				119E51B223DED7C100E1ABA4 /* LessonGroup+CoreDataProperties.swift */,
-				119E51B423DED7C100E1ABA4 /* Week+CoreDataProperties.swift */,
+				11B75A5E24ED42C6002E188D /* Day+CoreDataProperties.swift */,
+				11B75A6124ED42C6002E188D /* Lesson+CoreDataProperties.swift */,
+				11B75A6224ED42C6002E188D /* LessonGroup+CoreDataClass.swift */,
+				11B75A5F24ED42C6002E188D /* LessonGroup+CoreDataProperties.swift */,
+				11B75A6024ED42C6002E188D /* Timetable+CoreDataProperties.swift */,
+				11B75A6324ED42C6002E188D /* Week+CoreDataProperties.swift */,
 				A8537EB722EC494B005183C7 /* Lesson+CoreDataClass.swift */,
 				118F0C0F23C24500003BCEF2 /* Timetable+CoreDataClass.swift */,
 				A8537EB922EC494B005183C7 /* Week+CoreDataClass.swift */,
-				119E519E23DED59E00E1ABA4 /* LessonGroup+CoreDataClass.swift */,
 				A8537EBB22EC494B005183C7 /* Day+CoreDataClass.swift */,
 			);
 			path = "Manual Generated";
@@ -949,13 +949,14 @@
 			files = (
 				A8011EC322B3D7C000567A37 /* TimetableViewController.swift in Sources */,
 				A8209F1922D70A7200E1BAF6 /* TimetableLessonViewModel.swift in Sources */,
+				11B75A6424ED42C6002E188D /* Day+CoreDataProperties.swift in Sources */,
 				114C9E4C23D6B86000BED746 /* GroupSearchViewModel.swift in Sources */,
 				1127386C23D714790074C7A4 /* GroupSearchViewController.swift in Sources */,
-				119E51B823DED7C100E1ABA4 /* Day+CoreDataProperties.swift in Sources */,
 				A8537EC122EC494B005183C7 /* Week+CoreDataClass.swift in Sources */,
 				11C3889C23E438E200ED43A5 /* SideMenuCoordinator.swift in Sources */,
 				1114AD5C23E32DBE00E99C84 /* CustomizablePageViewController.swift in Sources */,
 				11C606CE23E4836D00CF2C79 /* ReusableTableViewDataSource.swift in Sources */,
+				11B75A6524ED42C6002E188D /* LessonGroup+CoreDataProperties.swift in Sources */,
 				A8011EC922B3D7C000567A37 /* SibGUTimetable.xcdatamodeld in Sources */,
 				11BFD48923E9BC2C00BE6B6B /* UserPreferences.swift in Sources */,
 				11EA09CA23C0512F00CA52C2 /* AppCoordinator.swift in Sources */,
@@ -963,6 +964,9 @@
 				11EA09C823C050B500CA52C2 /* TimetableCoordinator.swift in Sources */,
 				A8537EBF22EC494B005183C7 /* Lesson+CoreDataClass.swift in Sources */,
 				A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */,
+				11B75A6924ED42C6002E188D /* Week+CoreDataProperties.swift in Sources */,
+				11B75A6824ED42C6002E188D /* LessonGroup+CoreDataClass.swift in Sources */,
+				11B75A6724ED42C6002E188D /* Lesson+CoreDataProperties.swift in Sources */,
 				119F178D248BACEB00EF0B21 /* Assembler.swift in Sources */,
 				1103A0C523FFF89200D87570 /* LessonCell.swift in Sources */,
 				117F4F5924B8A7DB00FB2384 /* UIColor + Ext.swift in Sources */,
@@ -976,11 +980,10 @@
 				A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */,
 				1149607E24E836B000168303 /* FeedbackViewController.swift in Sources */,
 				11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */,
-				119E51B623DED7C100E1ABA4 /* Lesson+CoreDataProperties.swift in Sources */,
 				111E0D73240E7F4C000F4D4B /* AboutAppViewController.swift in Sources */,
 				114C9E4A23D6B72700BED746 /* GroupSearchViewModelController.swift in Sources */,
+				11B75A6624ED42C6002E188D /* Timetable+CoreDataProperties.swift in Sources */,
 				A8E3BC4C22D1F7A7006E1B65 /* TimetableLessonListController.swift in Sources */,
-				119E51BD23DED7C100E1ABA4 /* Week+CoreDataProperties.swift in Sources */,
 				1114AD5923E1982C00E99C84 /* ObservableType+Ext.swift in Sources */,
 				A8D2299E235C503C00FE98BE /* URLSession + Ext.swift in Sources */,
 				11845E9724B8451B00791186 /* LocalizedStrings.swift in Sources */,
@@ -992,10 +995,7 @@
 				11DC92FF23D9E51F00314C39 /* ServerTTRepositoryTODORemake.swift in Sources */,
 				A88C2D46236D67F400CBE473 /* FileLoader.swift in Sources */,
 				11CD09E1249270BA00D4612E /* Theme.swift in Sources */,
-				119E51A823DED59E00E1ABA4 /* LessonGroup+CoreDataClass.swift in Sources */,
-				119E51BA23DED7C100E1ABA4 /* Timetable+CoreDataProperties.swift in Sources */,
 				119F1790248BAD2800EF0B21 /* RepositoryAssembler.swift in Sources */,
-				119E51BB23DED7C100E1ABA4 /* LessonGroup+CoreDataProperties.swift in Sources */,
 				11C3889E23E4468000ED43A5 /* UINavigationController + Ext.swift in Sources */,
 				118F0C1023C24500003BCEF2 /* Timetable+CoreDataClass.swift in Sources */,
 				11DA582A23E7310B005FB1BF /* MenuTableViewController.swift in Sources */,
