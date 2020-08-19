@@ -119,8 +119,4 @@ xcuserdata
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# Breakpoints
-## Various settings
-xcuserdata/
-
 # End of https://www.toptal.com/developers/gitignore/api/swift,cocoapods,xcode,swiftpackagemanager,swiftpm
