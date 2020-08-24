@@ -24,3 +24,4 @@
 "Error" = "Ошибка";
 "Error_occured_while_sending_issue" = "Ошибка при передаче данных";
 "Thanks_for_your_feedback_ex" = "Спасибо за ваш отзыв!";
+"Error_occured_while_loading_timetable" = "Ошибка при загрузке расписания";

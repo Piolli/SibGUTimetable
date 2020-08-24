@@ -82,4 +82,8 @@ enum LocalizedStrings {
         return NSLocalizedString("Thanks_for_your_feedback_ex", comment: "Application name")
     }
     
+    static var Error_occured_while_loading_timetable: String {
+        return NSLocalizedString("Error_occured_while_loading_timetable", comment: "Application name")
+    }
+    
 }

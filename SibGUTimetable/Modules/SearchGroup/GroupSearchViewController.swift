@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxRelay
 import SnapKit
+import SPAlert
 import NVActivityIndicatorView
 
 class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
@@ -121,9 +122,6 @@ extension GroupSearchViewController : UITableViewDataSource {
 extension GroupSearchViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let pair = viewModel?.groupPairs[indexPath.row], let timetableManager = self.timetableManager {
-//            coordinator.openSearchedGroup(pair: pair)
-            //try to load and save to UserPreferences TimetableDetails
-//            activityIndicatorView.startAnimating()
             startAnimating()
             let timetableDetails = TimetableDetails(groupId: pair.id, groupName: pair.name)
             timetableManager.loadTimetable(timetableDetails: timetableDetails)
@@ -131,20 +129,20 @@ extension GroupSearchViewController : UITableViewDelegate {
                 .debug("GroupSearchViewController (timetableManager.timetableOutput)", trimOutput: false)
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] timetable in
-                self?.stopAnimating()
-                self?.viewModelController.save(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name, timestamp: timetable.updateTimestamp))
-                self?.navigationController?.popViewController(animated: true)
+                    self?.stopAnimating()
+                    self?.viewModelController.save(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name, timestamp: timetable.updateTimestamp))
+                    self?.navigationController?.popViewController(animated: true)
                 }).disposed(by: disposeBag)
             
             timetableManager.errorOutput
                 .debug("GroupSearchViewController (timetableManager.errorOutput)", trimOutput: false)
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] (error) in
-                    //101 = local error
-                    if let error = error as? NSError, error.code == 101 {
+                    //Only network error
+                    if (error as NSError).code == 101 {
                         logger.error("\(error.localizedDescription)")
-                        self?.showMessage(text: error.localizedDescription, title: "Error")
                         self?.stopAnimating()
+                        SPAlert.present(message: LocalizedStrings.Error_occured_while_loading_timetable)
                     }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         } else {

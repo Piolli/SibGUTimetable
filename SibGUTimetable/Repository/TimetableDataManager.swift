@@ -55,7 +55,8 @@ class TimetableDataManager {
                 return .empty()
             }),
             ///Observer catch any errors from this observable
-            serverRepository.getTimetable(timetableDetails: timetableDetails).map({ [weak self] (timetable) -> Timetable in
+            serverRepository
+                .getTimetable(timetableDetails: timetableDetails).map({ [weak self] (timetable) -> Timetable in
                 guard let self = self else {
                     fatalError("self is nil in getTimetable")
                 }
@@ -69,22 +70,19 @@ class TimetableDataManager {
                 }).disposed(by: self.disposeBag)
 
                 return timetable
-            }).asObservable()
+                })
+                .asObservable()
+                .catchError({ [weak self] (error) -> Observable<Timetable> in
+                    let nserror = NSError(domain: LocalizedStrings.Error_occured_while_loading_timetable, code: 101, userInfo: nil)
+                    self?.errorOutput.accept(nserror)
+                    return .empty()
+                })
         )
         .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .background))
         
-        observable
-            .subscribe (onNext: { [weak self] (timetable) in
+        observable.subscribe (onNext: { [weak self] (timetable) in
             self?.timetableOutput.accept(timetable)
-        }, onError: { [weak self] (error) in
-            logger.error("Error: \(error.localizedDescription)")
-            self?.errorOutput.accept(error)
-
-        }, onCompleted: { [weak self] in
-
-        }, onDisposed: {
-            
-        }).disposed(by: disposeBag)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
     }
     
