@@ -18,7 +18,7 @@ class CustomizablePageViewDataSource<T, C: UIViewController> : NSObject, UIPageV
         case viewControllerIsNil
     }
     
-    typealias ControllerBuilder = (T) -> C
+    typealias ControllerBuilder = (T) -> C?
     typealias ModifyIterableValue = (T) -> T
     typealias Extractor = (C) -> T
     
@@ -39,8 +39,11 @@ class CustomizablePageViewDataSource<T, C: UIViewController> : NSObject, UIPageV
         self.extractIterableValueFromController = extractIterableValueFromController
     }
     
-    func select(iterableValue: T) -> UIViewController {
-        let viewController = contentBuilder(iterableValue)
+    func select(iterableValue: T) -> UIViewController? {
+        guard let viewController = contentBuilder(iterableValue) else {
+            logger.error("contentBuilder returns nil")
+            return nil
+        }
         let value = extractIterableValueFromController(viewController)
         self.iterableValue = value
         return viewController

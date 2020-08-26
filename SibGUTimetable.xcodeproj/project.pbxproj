@@ -19,6 +19,8 @@
 		1114AD6223E3F8A800E99C84 /* CustomizablePageViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1114AD6123E3F8A800E99C84 /* CustomizablePageViewDataSource.swift */; };
 		111E0D73240E7F4C000F4D4B /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E0D72240E7F4C000F4D4B /* AboutAppViewController.swift */; };
 		1127386C23D714790074C7A4 /* GroupSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1127386B23D714790074C7A4 /* GroupSearchViewController.swift */; };
+		1141875F24F65E9D0089478D /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141875E24F65E9D0089478D /* OnboardingViewController.swift */; };
+		1141876124F6BDE80089478D /* OnboardingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141876024F6BDE70089478D /* OnboardingItemViewController.swift */; };
 		1141FA5B23C9F07900796667 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1141FA5A23C9F07900796667 /* GoogleService-Info.plist */; };
 		1141FA5C23C9F07900796667 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1141FA5A23C9F07900796667 /* GoogleService-Info.plist */; };
 		1141FA5D23C9F07900796667 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1141FA5A23C9F07900796667 /* GoogleService-Info.plist */; };
@@ -131,6 +133,8 @@
 		1114AD6123E3F8A800E99C84 /* CustomizablePageViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizablePageViewDataSource.swift; sourceTree = "<group>"; };
 		111E0D72240E7F4C000F4D4B /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		1127386B23D714790074C7A4 /* GroupSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewController.swift; sourceTree = "<group>"; };
+		1141875E24F65E9D0089478D /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		1141876024F6BDE70089478D /* OnboardingItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItemViewController.swift; sourceTree = "<group>"; };
 		1141FA5A23C9F07900796667 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1141FA5E23CA09BB00796667 /* APIServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServer.swift; sourceTree = "<group>"; };
 		1141FA6423CA0F3300796667 /* NativeServerAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeServerAPITests.swift; sourceTree = "<group>"; };
@@ -265,6 +269,7 @@
 		1114AD5F23E3F69100E99C84 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				1141875D24F65E850089478D /* Onboarding */,
 				1149607C24E8368F00168303 /* Feedback */,
 				111E0D71240E7F2F000F4D4B /* AboutApp */,
 				11C606CC23E4834600CF2C79 /* SideMenu */,
@@ -312,6 +317,15 @@
 				111E0D72240E7F4C000F4D4B /* AboutAppViewController.swift */,
 			);
 			path = AboutApp;
+			sourceTree = "<group>";
+		};
+		1141875D24F65E850089478D /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				1141875E24F65E9D0089478D /* OnboardingViewController.swift */,
+				1141876024F6BDE70089478D /* OnboardingItemViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		1149607C24E8368F00168303 /* Feedback */ = {
@@ -953,6 +967,7 @@
 				114C9E4C23D6B86000BED746 /* GroupSearchViewModel.swift in Sources */,
 				1127386C23D714790074C7A4 /* GroupSearchViewController.swift in Sources */,
 				A8537EC122EC494B005183C7 /* Week+CoreDataClass.swift in Sources */,
+				1141876124F6BDE80089478D /* OnboardingItemViewController.swift in Sources */,
 				11C3889C23E438E200ED43A5 /* SideMenuCoordinator.swift in Sources */,
 				1114AD5C23E32DBE00E99C84 /* CustomizablePageViewController.swift in Sources */,
 				11C606CE23E4836D00CF2C79 /* ReusableTableViewDataSource.swift in Sources */,
@@ -972,6 +987,7 @@
 				117F4F5924B8A7DB00FB2384 /* UIColor + Ext.swift in Sources */,
 				119E51C123DEDC3200E1ABA4 /* StubTTRepository.swift in Sources */,
 				A8209F2E22D71A1400E1BAF6 /* TimetableViewModel.swift in Sources */,
+				1141875F24F65E9D0089478D /* OnboardingViewController.swift in Sources */,
 				A8537EC322EC494B005183C7 /* Day+CoreDataClass.swift in Sources */,
 				1114AD5723E18A8800E99C84 /* ServerRepository.swift in Sources */,
 				1114AD5323E1635100E99C84 /* TimetableDataManager.swift in Sources */,

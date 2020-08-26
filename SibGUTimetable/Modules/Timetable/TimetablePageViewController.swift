@@ -12,6 +12,8 @@ import UIKit
 
 class TimetablePageViewController : UIViewController {
     
+    private var pageViewDataSource: CustomizablePageViewDataSource<Date, TimetableLessonListController>!
+    
     private lazy var pageViewController: CustomizablePageViewController<Date, TimetableLessonListController> = {
         let pageView = CustomizablePageViewController<Date, TimetableLessonListController>()
         return pageView
@@ -32,12 +34,9 @@ class TimetablePageViewController : UIViewController {
                 logger.error("timetableViewModel set to nil")
                 return
             }
-            pageViewController.dataSource = CustomizablePageViewDataSource<Date, TimetableLessonListController>.init(
+            pageViewDataSource = CustomizablePageViewDataSource<Date, TimetableLessonListController>.init(
                 startIterableValue: Date(),
                 contentBuilder: { [weak self] (date) -> TimetableLessonListController in
-                    guard let self = self else {
-                        fatalError("TimetablePageViewController self is nil")
-                    }
                     let vc = TimetableLessonListController()
                     vc.date = date
                     vc.viewModel = timetableViewModel.getDayViewModel(at: date)
@@ -48,7 +47,8 @@ class TimetablePageViewController : UIViewController {
                     return date.previousDateByDay()
                 }, extractIterableValueFromController: { (viewController) -> Date in
                     return viewController.date
-                })
+            })
+            pageViewController.dataSource = pageViewDataSource
         }
     }
     
