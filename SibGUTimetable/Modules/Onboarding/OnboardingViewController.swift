@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import paper_onboarding
 
 class OnboardingViewController: UIViewController {
     
@@ -30,19 +29,9 @@ class OnboardingViewController: UIViewController {
     }
     
     lazy var onboardingItems: [OnboardingItemViewController] = {
-        let c = OnboardingItemViewController()
-        c.index = 0
-        c.view.backgroundColor = .red
-        
-        let b = OnboardingItemViewController()
-        b.index = 1
-        b.view.backgroundColor = .blue
-        
-        let g = OnboardingItemViewController()
-        g.index = 2
-        g.view.backgroundColor = .green
-        
-        return [c, b, g]
+        return (0...2).map { (i) -> OnboardingItemViewController in
+            return OnboardingItemViewController(index: i, item: .init(title: "Title \(i)", subtitle: "Subtitle \(i)", image: UIImage(), buttonType: .next))
+        }
     }()
     
     private func setupOnboardingPageView() {
