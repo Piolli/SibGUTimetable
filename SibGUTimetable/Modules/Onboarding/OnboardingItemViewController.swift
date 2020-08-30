@@ -84,7 +84,6 @@ class OnboardingItemViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .headline)
         label.text = item.title
         label.numberOfLines = 3
-        label.setContentCompressionResistancePriority(.init(751), for: .vertical)
         label.textAlignment = .center
         return label
     }()
@@ -109,7 +108,7 @@ class OnboardingItemViewController: UIViewController {
             actionButton.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
             margins.bottomAnchor.constraint(equalTo: actionButton.bottomAnchor, constant: 16),
             actionButton.widthAnchor.constraint(equalTo: margins.widthAnchor, multiplier: 0.5),
-            actionButton.heightAnchor.constraint(equalTo: margins.heightAnchor, multiplier: 0.1)
+            actionButton.heightAnchor.constraint(equalTo: margins.heightAnchor, multiplier: 0.05)
         ])
         
         view.addSubview(skipButton)
@@ -128,7 +127,7 @@ class OnboardingItemViewController: UIViewController {
         //init subtitle
         view.addSubview(subtitleLabel)
         NSLayoutConstraint.activate([
-            subtitleLabel.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -8),
+            actionButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 8),
             subtitleLabel.centerXAnchor.constraint(equalTo: margins.centerXAnchor, constant: 0),
             subtitleLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
             subtitleLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
@@ -138,7 +137,7 @@ class OnboardingItemViewController: UIViewController {
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
-            titleLabel.bottomAnchor.constraint(equalTo: subtitleLabel.topAnchor, constant: -8),
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
             titleLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
         ])
