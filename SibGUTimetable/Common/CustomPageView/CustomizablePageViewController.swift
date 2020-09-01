@@ -12,10 +12,12 @@ import RxSwift
 import RxRelay
 
 //Uses in delegate
+@frozen
 enum CustomizablePageViewMoveDirection: Int {
     case forward = 1
     case backward = -1
 }
+
 
 //T - field that iterable (index)
 //C - content view controller class
@@ -30,7 +32,7 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
                 logger.error("selected iterable value is nil")
                 return
             }
-            attachPublishRelay(with: vc)
+
             setViewControllers([vc], direction: .forward, animated: false, completion: nil)
         }
     }
@@ -40,7 +42,7 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
             if let ds = self.dataSource as? CustomizablePageViewDataSource<T, C> {
                 customizableDataSource = ds
             } else {
-                fatalError("dataSource type doesn't comform to CustomizablePageViewDataSource<T, C>")
+                fatalError("dataSource type doesn't conform to CustomizablePageViewDataSource<T, C>")
             }
         }
     }
@@ -59,26 +61,28 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
         dump(gestureRecognizers)
     }
     
+    func movePage(_ direction: CustomizablePageViewMoveDirection) {
+        if let dataSource = customizableDataSource,
+           let selectedViewController = viewControllers?.first,
+           let vc = dataSource.pageViewController(self, viewControllerAfter: selectedViewController) {
+            setViewControllers([vc], direction: .forward, animated: true)
+        }
+    }
+    
     func select(iterableValue: T) {
-        guard let oldSelectedDate = customizableDataSource?.iterableValue else {
+        guard let oldSelectedIterableValue = customizableDataSource?.iterableValue else {
             return
         }
         
-        if oldSelectedDate == iterableValue {
+        if oldSelectedIterableValue == iterableValue {
             logger.debug("User selected the same page")
             return
         }
         
-        let swipeDirection: NavigationDirection = iterableValue > oldSelectedDate ? .forward : .reverse
+        let swipeDirection: NavigationDirection = iterableValue > oldSelectedIterableValue ? .forward : .reverse
         
         if let newSelectedViewController = self.customizableDataSource?.select(iterableValue: iterableValue) {
             setViewControllers([newSelectedViewController], direction: swipeDirection, animated: true, completion: nil)
-        }
-    }
-    
-    func attachPublishRelay(with viewController: UIViewController) {
-        (viewController as? TimetableLessonListController)?.contentOffsetDidChange = { [weak self] point in
-            self?.tableViewOffsetDidChange.accept(point)
         }
     }
     
@@ -90,10 +94,8 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
         
         if completed {
             if let selectedPageContentView = pageViewController.viewControllers?.first as? C {
-                let selectedIterableValue = customizableDataSource.extractIterableValueFromController( selectedPageContentView)
-                
-                attachPublishRelay(with: selectedPageContentView)
-                
+                let selectedIterableValue = customizableDataSource.extractIterableValueFromControllerFunction( selectedPageContentView)
+
                 if selectedIterableValue > customizableDataSource.iterableValue {
                     pageDidMoveDirection.accept(.forward)
                 } else if selectedIterableValue < customizableDataSource.iterableValue {
@@ -102,6 +104,10 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
                 customizableDataSource.iterableValue = selectedIterableValue
             }
         }
+    }
+    
+    override func setViewControllers(_ viewControllers: [UIViewController]?, direction: UIPageViewController.NavigationDirection, animated: Bool, completion: ((Bool) -> Void)? = nil) {
+        super.setViewControllers(viewControllers, direction: direction, animated: animated, completion: completion)
     }
     
     override func viewDidLoad() {

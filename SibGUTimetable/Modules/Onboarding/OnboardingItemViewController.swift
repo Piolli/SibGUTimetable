@@ -16,9 +16,14 @@ class HighButton: UIButton {
     }
 }
 
+protocol OnboardingItemDelegate: AnyObject {
+    func buttomWasTapped(type: OnboardingItemViewController.ActionButtonType)
+    func skipButtomWasTapped()
+}
+
 class OnboardingItemViewController: UIViewController {
 
-    struct OnboardingItem {
+    struct OnboardingItem: Equatable {
         let title: String
         let subtitle: String
         let image: UIImage
@@ -32,8 +37,10 @@ class OnboardingItemViewController: UIViewController {
     
     let index: Int
     let item: OnboardingItem
+    weak var delegate: OnboardingItemDelegate?
         
-    init(index: Int, item: OnboardingItem) {
+    init(delegate: OnboardingItemDelegate, index: Int, item: OnboardingItem) {
+        self.delegate = delegate
         self.index = index
         self.item = item
         super.init(nibName: nil, bundle: nil)
@@ -55,6 +62,7 @@ class OnboardingItemViewController: UIViewController {
         button.backgroundColor = .blue
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.white, for: .highlighted)
+        button.addTarget(self, action: #selector(actionButtonWasPressed(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -141,6 +149,10 @@ class OnboardingItemViewController: UIViewController {
             titleLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
         ])
+    }
+    
+    @objc func actionButtonWasPressed(_ sender: UIButton) {
+        delegate?.buttomWasTapped(type: item.buttonType)
     }
 
 }

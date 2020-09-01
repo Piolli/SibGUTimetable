@@ -8,9 +8,10 @@
 
 import UIKit
 
+
 class OnboardingViewController: UIViewController {
     
-    lazy var onboarding = CustomizablePageViewController<Int, OnboardingItemViewController>()
+    lazy var onboardingPageView = CustomizablePageViewController<Int, OnboardingItemViewController>()
     var pageViewDataSource: CustomizablePageViewDataSource<Int, OnboardingItemViewController>!
     
     lazy var skipButton: UIButton = {
@@ -28,9 +29,17 @@ class OnboardingViewController: UIViewController {
         view.bringSubviewToFront(skipButton)
     }
     
-    lazy var onboardingItems: [OnboardingItemViewController] = {
-        return (0...2).map { (i) -> OnboardingItemViewController in
-            return OnboardingItemViewController(index: i, item: .init(title: "Title \(i)", subtitle: "Subtitle \(i)", image: UIImage(), buttonType: .next))
+    lazy var onboardingItems: [OnboardingItemViewController.OnboardingItem] = {
+        return [
+            .init(title: "Title post post post post post post post post post post post post post post post post post post post post post post post post post post post", subtitle: "Subtitle ", image: UIImage(), buttonType: .next),
+            .init(title: "Title", subtitle: "Subtitle post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post", image: UIImage(), buttonType: .next),
+            .init(title: "Third slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide", subtitle: "Subtitle post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post", image: UIImage(), buttonType: .start),
+        ]
+    }()
+    
+    lazy var onboardingItemViewControllers: [OnboardingItemViewController] = {
+        return onboardingItems.map { (item) -> OnboardingItemViewController in
+            return OnboardingItemViewController(delegate: self, index: onboardingItems.firstIndex(where: { $0 == item })!, item: item)
         }
     }()
     
@@ -52,7 +61,7 @@ class OnboardingViewController: UIViewController {
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        add(viewController: onboarding, to: containerView)
+        add(viewController: onboardingPageView, to: containerView)
     }
     
     private func setupDataSource() {
@@ -61,7 +70,7 @@ class OnboardingViewController: UIViewController {
                 logger.error("self is nil or 'i' isn't in bounds")
                 return nil
             }
-            return self.onboardingItems[i]
+            return self.onboardingItemViewControllers[i]
         }, nextIterableValue: { (i) -> Int in
             return i + 1
         }, previousIterableValue: { (i) -> Int in
@@ -69,17 +78,41 @@ class OnboardingViewController: UIViewController {
         }, extractIterableValueFromController: { (v) -> Int in
             return v.index
         })
-        onboarding.dataSource = pageViewDataSource
+        onboardingPageView.dataSource = pageViewDataSource
     }
     
     private func disableHorizontalBounce() {
-        for view in onboarding.view.subviews {
+        for view in onboardingPageView.view.subviews {
            if let scrollView = view as? UIScrollView {
               scrollView.delegate = self
            }
         }
     }
 
+}
+
+//MARK: - OnboardingItemDelegate
+//Get events from embedded ViewControllers into UIPageViewController
+extension OnboardingViewController: OnboardingItemDelegate {
+    
+    func buttomWasTapped(type: OnboardingItemViewController.ActionButtonType) {
+        logger.debug("type: \(type)")
+        switch type {
+        case .next:
+            onboardingPageView.movePage(.forward)
+        case .start:
+            //TODO: create coordinator for router interactions
+//        self.coordinator.openMainScreen()
+            break
+        }
+        
+    }
+    
+    func skipButtomWasTapped() {
+        //TODO: create coordinator for router interactions
+//        self.coordinator.openMainScreen()
+    }
+    
 }
 
 //MARK: - UIScrollViewDelegate

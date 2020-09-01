@@ -25,38 +25,47 @@ class CustomizablePageViewDataSource<T, C: UIViewController> : NSObject, UIPageV
     public let error: PublishRelay<PageViewError> = .init()
     
     var iterableValue: T
-    let contentBuilder: ControllerBuilder
-    let nextIterableValue: ModifyIterableValue
-    let previousIterableValue: ModifyIterableValue
-    let extractIterableValueFromController: Extractor
+    let contentBuilderFunction: ControllerBuilder
+    let nextIterableValueFunction: ModifyIterableValue
+    let previousIterableValueFunction: ModifyIterableValue
+    let extractIterableValueFromControllerFunction: Extractor
+    
+    var nextIterableValue: T {
+        return nextIterableValueFunction(iterableValue)
+    }
+    
+    var previousIterableValue: T {
+        return previousIterableValueFunction(iterableValue)
+    }
     
     //TODO: make descriptions for each parameter
     init(startIterableValue: T, contentBuilder: @escaping ControllerBuilder, nextIterableValue: @escaping ModifyIterableValue, previousIterableValue: @escaping ModifyIterableValue, extractIterableValueFromController: @escaping Extractor) {
-        self.contentBuilder = contentBuilder
-        self.nextIterableValue = nextIterableValue
-        self.previousIterableValue = previousIterableValue
+        self.contentBuilderFunction = contentBuilder
+        self.nextIterableValueFunction = nextIterableValue
+        self.previousIterableValueFunction = previousIterableValue
         self.iterableValue = startIterableValue
-        self.extractIterableValueFromController = extractIterableValueFromController
+        self.extractIterableValueFromControllerFunction = extractIterableValueFromController
     }
     
     func select(iterableValue: T) -> UIViewController? {
-        guard let viewController = contentBuilder(iterableValue) else {
-            logger.error("contentBuilder returns nil")
+        guard let viewController = contentBuilderFunction(iterableValue) else {
+            logger.error("contentBuilder returns nil, iterableValue: \(iterableValue)")
             return nil
         }
-        let value = extractIterableValueFromController(viewController)
+        let value = extractIterableValueFromControllerFunction(viewController)
         self.iterableValue = value
         return viewController
     }
     
     func move(isForward: Bool, viewController: UIViewController) -> UIViewController? {
         guard let viewController = viewController as? C else {
+            logger.error("viewController isn't C type")
             error.accept(.viewControllerIsNil)
             return nil
         }
-        let iterableValue = extractIterableValueFromController(viewController)
-        let previousValue = isForward ? nextIterableValue(iterableValue) : previousIterableValue(iterableValue)
-        return contentBuilder(previousValue)
+        let iterableValue = extractIterableValueFromControllerFunction(viewController)
+        let previousValue = isForward ? nextIterableValueFunction(iterableValue) : previousIterableValueFunction(iterableValue)
+        return contentBuilderFunction(previousValue)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -66,5 +75,6 @@ class CustomizablePageViewDataSource<T, C: UIViewController> : NSObject, UIPageV
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         move(isForward: true, viewController: viewController)
     }
+
     
 }
