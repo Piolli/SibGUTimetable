@@ -61,11 +61,9 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
         dump(gestureRecognizers)
     }
     
-    func movePage(_ direction: CustomizablePageViewMoveDirection) {
-        if let dataSource = customizableDataSource,
-           let selectedViewController = viewControllers?.first,
-           let vc = dataSource.pageViewController(self, viewControllerAfter: selectedViewController) {
-            setViewControllers([vc], direction: .forward, animated: true)
+    func move(_ direction: CustomizablePageViewMoveDirection) {
+        if let dataSource = customizableDataSource {
+            select(iterableValue: direction == .forward ? dataSource.nextIterableValue : dataSource.previousIterableValue)
         }
     }
     

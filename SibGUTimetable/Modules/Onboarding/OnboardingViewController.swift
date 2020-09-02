@@ -27,6 +27,7 @@ class OnboardingViewController: UIViewController {
         super.viewDidLoad()
         setupOnboardingPageView()
         view.bringSubviewToFront(skipButton)
+        view.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor
     }
     
     lazy var onboardingItems: [OnboardingItemViewController.OnboardingItem] = {
@@ -45,7 +46,6 @@ class OnboardingViewController: UIViewController {
     
     private func setupOnboardingPageView() {
         addPageView()
-        disableHorizontalBounce()
         setupDataSource()
     }
     
@@ -80,14 +80,6 @@ class OnboardingViewController: UIViewController {
         })
         onboardingPageView.dataSource = pageViewDataSource
     }
-    
-    private func disableHorizontalBounce() {
-        for view in onboardingPageView.view.subviews {
-           if let scrollView = view as? UIScrollView {
-              scrollView.delegate = self
-           }
-        }
-    }
 
 }
 
@@ -99,7 +91,7 @@ extension OnboardingViewController: OnboardingItemDelegate {
         logger.debug("type: \(type)")
         switch type {
         case .next:
-            onboardingPageView.movePage(.forward)
+            onboardingPageView.move(.forward)
         case .start:
             //TODO: create coordinator for router interactions
 //        self.coordinator.openMainScreen()
@@ -113,26 +105,4 @@ extension OnboardingViewController: OnboardingItemDelegate {
 //        self.coordinator.openMainScreen()
     }
     
-}
-
-//MARK: - UIScrollViewDelegate
-//Uses for disabling horizontal bounce
-extension OnboardingViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let selectedPageIndex = self.pageViewDataSource.iterableValue
-        if (selectedPageIndex == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width) {
-            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0);
-        } else if (selectedPageIndex == onboardingItems.count - 1 && scrollView.contentOffset.x > scrollView.bounds.size.width) {
-            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0);
-        }
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let selectedPageIndex = self.pageViewDataSource.iterableValue
-        if (selectedPageIndex == 0 && scrollView.contentOffset.x <= scrollView.bounds.size.width) {
-            targetContentOffset.pointee = CGPoint(x: scrollView.bounds.size.width, y: 0);
-        } else if (selectedPageIndex == onboardingItems.count - 1 && scrollView.contentOffset.x >= scrollView.bounds.size.width) {
-            targetContentOffset.pointee = CGPoint(x: scrollView.bounds.size.width, y: 0);
-        }
-    }
 }
