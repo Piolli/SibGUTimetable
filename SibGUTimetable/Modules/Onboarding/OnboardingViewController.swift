@@ -13,6 +13,7 @@ class OnboardingViewController: UIViewController {
     
     lazy var onboardingPageView = CustomizablePageViewController<Int, OnboardingItemViewController>()
     var pageViewDataSource: CustomizablePageViewDataSource<Int, OnboardingItemViewController>!
+    var coordinator: OnboardingCoordinator!
     
     lazy var skipButton: UIButton = {
         let button = UIButton()
@@ -93,16 +94,12 @@ extension OnboardingViewController: OnboardingItemDelegate {
         case .next:
             onboardingPageView.move(.forward)
         case .start:
-            //TODO: create coordinator for router interactions
-//        self.coordinator.openMainScreen()
-            break
+            coordinator.close()
         }
-        
     }
     
     func skipButtomWasTapped() {
-        //TODO: create coordinator for router interactions
-//        self.coordinator.openMainScreen()
+        coordinator.close()
     }
     
 }

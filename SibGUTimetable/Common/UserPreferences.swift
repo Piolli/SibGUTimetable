@@ -37,6 +37,8 @@ protocol UserPreferences {
     func saveTimetableDetails(groupId: Int, groupName: String, timestamp: String)
     func saveTimetableDetails(_ timetableDetails: TimetableDetails)
     func getTimetableDetails() -> TimetableDetails?
+    func isFirstAppOpening() -> Bool
+    func setFirstAppOpening()
     func clearTimetableDetails()
     var timetableDetailsDidChanged: PublishRelay<TimetableDetails?> { get }
 }
@@ -47,6 +49,7 @@ class DefaultsUserPreferences : NSObject, UserPreferences {
     public let timetableDetailsDidChanged: PublishRelay<TimetableDetails?> = .init()
 
     let selectedTimetableDetailsKey = "timetableDetails"
+    let firstAppOpeningKey = "firstOpeningAppKey"
     var observer: NSKeyValueObservation!
 
     private let defaults = UserDefaults.standard
@@ -93,6 +96,14 @@ class DefaultsUserPreferences : NSObject, UserPreferences {
     func clearTimetableDetails() {
         defaults.removeObject(forKey: selectedTimetableDetailsKey)
         timetableDetailsDidChanged.accept(nil)
+    }
+    
+    func isFirstAppOpening() -> Bool {
+        return (defaults.value(forKey: firstAppOpeningKey) as? Bool) ?? true
+    }
+    
+    func setFirstAppOpening() {
+        defaults.setValue(false, forKey: firstAppOpeningKey)
     }
     
     @objc fileprivate func didChangeValue(notification: Notification) {

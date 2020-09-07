@@ -27,6 +27,14 @@ extension UserPreferencesAssembler {
 
 class FakeUserPreferences : UserPreferences {
     
+    func isFirstAppOpening() -> Bool {
+        return true
+    }
+    
+    func setFirstAppOpening() {
+        
+    }
+    
     func saveTimetableDetails(groupId: Int, groupName: String, timestamp: String) {
         
     }
