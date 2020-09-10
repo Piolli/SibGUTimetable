@@ -55,9 +55,9 @@ class FakeUserPreferences : UserPreferences {
     
 }
 
-protocol FakeUserPreferenceAssembler : UserPreferencesAssembler { }
+protocol FakeUserPreferencesAssembler : UserPreferencesAssembler { }
 
-extension FakeUserPreferenceAssembler {
+extension FakeUserPreferencesAssembler {
     
     func resolve() -> UserPreferences {
         return FakeUserPreferences.init()

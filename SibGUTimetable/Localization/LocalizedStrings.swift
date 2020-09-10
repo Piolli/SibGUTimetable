@@ -86,4 +86,41 @@ enum LocalizedStrings {
         return NSLocalizedString("Error_occured_while_loading_timetable", comment: "Application name")
     }
     
+    //MARK: - Onboarding screen
+    static var Next: String {
+        return NSLocalizedString("Next", comment: "Application name")
+    }
+    
+    static var Skip: String {
+        return NSLocalizedString("Skip", comment: "Application name")
+    }
+    
+    static var Start: String {
+        return NSLocalizedString("Start", comment: "Application name")
+    }
+    
+    static var Offline_timetable: String {
+        return NSLocalizedString("Offline_timetable", comment: "Application name")
+    }
+    
+    static var Offline_timetable_description: String {
+        return NSLocalizedString("Offline_timetable_description", comment: "Application name")
+    }
+    
+    static var Dark_Mode: String {
+        return NSLocalizedString("Dark_Mode", comment: "Application name")
+    }
+    
+    static var Dark_Mode_description: String {
+        return NSLocalizedString("Dark_Mode_description", comment: "Application name")
+    }
+    
+    static var Calendar: String {
+        return NSLocalizedString("Calendar", comment: "Application name")
+    }
+    
+    static var Calendar_description: String {
+        return NSLocalizedString("Calendar_description", comment: "Application name")
+    }
+    
 }

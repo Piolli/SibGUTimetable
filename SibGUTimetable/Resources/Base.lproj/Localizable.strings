@@ -25,3 +25,14 @@
 "Error_occured_while_sending_issue" = "Error occured while sending issue";
 "Thanks_for_your_feedback_ex" = "Thanks for your feedback!";
 "Error_occured_while_loading_timetable" = "Error occured while loading timetable";
+//Onboarding screen
+"Next" = "Next";
+"Skip" = "Skip";
+"Start" = "Start";
+"Offline_timetable" = "Offline timetable";
+"Offline_timetable_description" = "Use a timetable without an Internet connection after initial downloading";
+"Dark_Mode" = "Dark Mode";
+"Dark_Mode_description" = "Use the application in the dark";
+"Calendar" = "Calendar";
+"Calendar_description" = "Get lessons on any day of the month";
+

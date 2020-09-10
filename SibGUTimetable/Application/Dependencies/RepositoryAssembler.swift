@@ -46,20 +46,29 @@ protocol FakeRepositoryAssembler : RepositoryAssembler { }
 
 extension FakeRepositoryAssembler {
     
-    func resolveLocal() -> TimetableRepository {
-        guard let timetable = FileLoader.shared.getLocalSchedule() else {
-            fatalError("Local timetable doesn't exist")
+    func getFakeTimetable() -> Timetable {
+        let decoder = JSONDecoder()
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("AppDelegate is nil and context too")
         }
-        
-        return FakeLocalTTRepository(timetable: timetable)
+        let context = delegate.persistentContainer.viewContext
+        decoder.userInfo[CodingUserInfoKey.context!] = context
+        guard let timetable = FileLoader.shared.getLocalSchedule(decoder: decoder) else {
+            fatalError("Network timetable doesn't exist")
+        }
+        return timetable
+    }
+    
+    func resolveLocal() -> TimetableRepository {
+        return FakeLocalTTRepository(timetable: getFakeTimetable())
     }
     
     func resolveNetwork() -> TimetableRepository {
-        guard let timetable = FileLoader.shared.getLocalSchedule() else {
-            fatalError("Network timetable doesn't exist")
-        }
-        
-        return ServerTTRepositoryTODORemake(timetable: timetable)
+        return ServerTTRepositoryTODORemake(timetable: getFakeTimetable())
+    }
+    
+    func resolve() -> TimetableDataManager {
+        return TimetableDataManager(localRepository: resolveLocal(), serverRepository: resolveNetwork())
     }
     
 }

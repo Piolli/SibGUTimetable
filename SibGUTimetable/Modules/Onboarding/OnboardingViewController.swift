@@ -15,27 +15,17 @@ class OnboardingViewController: UIViewController {
     var pageViewDataSource: CustomizablePageViewDataSource<Int, OnboardingItemViewController>!
     var coordinator: OnboardingCoordinator!
     
-    lazy var skipButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        //todo: translate
-        button.titleLabel?.text = "Skip"
-        button.isHidden = true
-        return button
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupOnboardingPageView()
-        view.bringSubviewToFront(skipButton)
         view.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor
     }
     
     lazy var onboardingItems: [OnboardingItemViewController.OnboardingItem] = {
         return [
-            .init(title: "Title post post post post post post post post post post post post post post post post post post post post post post post post post post post", subtitle: "Subtitle ", image: UIImage(), buttonType: .next),
-            .init(title: "Title", subtitle: "Subtitle post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post", image: UIImage(), buttonType: .next),
-            .init(title: "Third slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide slide", subtitle: "Subtitle post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post post", image: UIImage(), buttonType: .start),
+            .init(title: LocalizedStrings.Offline_timetable, subtitle: LocalizedStrings.Offline_timetable_description, image: UIImage(), buttonType: .next),
+            .init(title: LocalizedStrings.Dark_Mode, subtitle: LocalizedStrings.Dark_Mode_description, image: UIImage(), buttonType: .next),
+            .init(title: LocalizedStrings.Calendar, subtitle: LocalizedStrings.Calendar_description, image: UIImage(), buttonType: .start),
         ]
     }()
     

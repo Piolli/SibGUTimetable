@@ -30,9 +30,18 @@ class OnboardingItemViewController: UIViewController {
         let buttonType: ActionButtonType
     }
     
-    enum ActionButtonType {
+    enum ActionButtonType: CustomStringConvertible {
         case next
         case start
+        
+        var description: String {
+            switch self {
+            case .next:
+                return LocalizedStrings.Next
+            case .start:
+                return LocalizedStrings.Start
+            }
+        }
     }
     
     let index: Int
@@ -54,7 +63,7 @@ class OnboardingItemViewController: UIViewController {
     lazy var actionButton: UIButton = {
         let button = HighButton(type: .roundedRect)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(item.buttonType == .next ? "Next" : "Start", for: .normal)
+        button.setTitle(String(describing: item.buttonType), for: .normal)
         button.layer.cornerRadius = 8
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 1
@@ -71,7 +80,8 @@ class OnboardingItemViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = .preferredFont(forTextStyle: .caption1)
         button.setTitleColor(.darkGray, for: .normal)
-        button.setTitle("Skip", for: .normal)
+        button.setTitle(LocalizedStrings.Skip, for: .normal)
+        button.addTarget(self, action: #selector(skipButtonWasPressed), for: .touchUpInside)
         return button
     }()
     
@@ -153,6 +163,10 @@ class OnboardingItemViewController: UIViewController {
     
     @objc func actionButtonWasPressed(_ sender: UIButton) {
         delegate?.buttomWasTapped(type: item.buttonType)
+    }
+    
+    @objc func skipButtonWasPressed(_ sender: UIButton) {
+        delegate?.skipButtomWasTapped()
     }
 
 }

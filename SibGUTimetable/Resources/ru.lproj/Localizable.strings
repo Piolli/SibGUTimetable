@@ -25,3 +25,13 @@
 "Error_occured_while_sending_issue" = "Ошибка при передаче данных";
 "Thanks_for_your_feedback_ex" = "Спасибо за ваш отзыв!";
 "Error_occured_while_loading_timetable" = "Ошибка при загрузке расписания";
+//Onboarding screen
+"Next" = "Дальше";
+"Skip" = "Пропустить";
+"Start" = "Начать";
+"Offline_timetable" = "Офлайн расписание";
+"Offline_timetable_description" = "Пользуйтесь расписанием без подлючения к интернету после первоначальной загрузки";
+"Dark_Mode" = "Тёмная тема";
+"Dark_Mode_description" = "Идеально при использовании ночью";
+"Calendar" = "Календарь";
+"Calendar_description" = "Информация о занятиях в любые дни месяца";

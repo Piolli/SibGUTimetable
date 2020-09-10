@@ -10,7 +10,7 @@ import Foundation
 
 class Assembler :
     FakeRepositoryAssembler,
-    FakeUserPreferenceAssembler
+    FakeUserPreferencesAssembler
 {
 
     public static let shared = Assembler()
