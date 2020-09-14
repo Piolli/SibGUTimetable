@@ -2,7 +2,7 @@
 //  Week+CoreDataProperties.swift
 //  SibGUTimetable
 //
-//  Created by Александр Камышев on 27.01.2020.
+//  Created by Александр Камышев on 13.09.2020.
 //  Copyright © 2020 Alexandr. All rights reserved.
 //
 //
@@ -19,6 +19,7 @@ extension Week {
 
     @NSManaged public var order_week: Int16
     @NSManaged public var days: NSOrderedSet?
+    @NSManaged public var timetable: Timetable?
 
 }
 

@@ -30,7 +30,6 @@ class TimetablePageViewController : UIViewController {
     public var timetableViewModel: TimetableViewModel? {
         didSet {
             guard let timetableViewModel = self.timetableViewModel else {
-                pageViewController.dataSource = nil
                 logger.error("timetableViewModel set to nil")
                 return
             }

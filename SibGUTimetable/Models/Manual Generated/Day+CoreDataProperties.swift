@@ -2,7 +2,7 @@
 //  Day+CoreDataProperties.swift
 //  SibGUTimetable
 //
-//  Created by Александр Камышев on 27.01.2020.
+//  Created by Александр Камышев on 13.09.2020.
 //  Copyright © 2020 Alexandr. All rights reserved.
 //
 //
@@ -20,6 +20,7 @@ extension Day {
     @NSManaged public var header: String?
     @NSManaged public var order: Int16
     @NSManaged public var lessonGroups: NSOrderedSet?
+    @NSManaged public var week: Week?
 
 }
 

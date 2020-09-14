@@ -2,7 +2,7 @@
 //  Lesson+CoreDataProperties.swift
 //  SibGUTimetable
 //
-//  Created by Александр Камышев on 27.01.2020.
+//  Created by Александр Камышев on 13.09.2020.
 //  Copyright © 2020 Alexandr. All rights reserved.
 //
 //
@@ -23,5 +23,6 @@ extension Lesson {
     @NSManaged public var start_time: String?
     @NSManaged public var teacher: String?
     @NSManaged public var type: String?
+    @NSManaged public var lessonGroup: LessonGroup?
 
 }

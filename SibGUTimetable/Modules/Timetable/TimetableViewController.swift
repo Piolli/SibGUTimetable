@@ -160,7 +160,7 @@ class TimetableViewController: UIViewController {
                     logger.error("self is nil")
                     return
                 }
-                logger.info("Got timetable: \(timetable.group_name)")
+                logger.info("Got timetable: \(timetable.group_name):\(timetable.updateTimestampTime)")
                 //Because server-side saves timetable to db then we can compare if timetable is new
                 if self.timetablePageViewController.timetableViewModel?.schedule.updateTimestampTime != timetable.updateTimestampTime {
                     self.timetablePageViewController.timetableViewModel = TimetableViewModel(schedule: timetable)

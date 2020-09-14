@@ -23,7 +23,7 @@ class TimetableRepositoryTests: XCTestCase {
 
         let model = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.managedObjectModel
         XCTAssertNotNil(model)
-        let container = NSPersistentContainer(name: "PersistentTimetable", managedObjectModel: model!)
+        let container = NSPersistentContainer(name: "PersistentTimetableStore", managedObjectModel: model!)
         let description = NSPersistentStoreDescription()
         description.type = NSInMemoryStoreType
         description.shouldAddStoreAsynchronously = false // Make it simpler in test env
@@ -47,6 +47,8 @@ class TimetableRepositoryTests: XCTestCase {
     }()
     
     lazy var backgroundContext: NSManagedObjectContext = {
+        let context = mockPersistantContainer.newBackgroundContext()
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return mockPersistantContainer.newBackgroundContext()
     }()
 
@@ -87,31 +89,27 @@ class TimetableRepositoryTests: XCTestCase {
         return timetable!
     }
     
-    func test_fetch_newest_timetable_exits() throws {
-        let timetables = [
-            timetableWith(timestamp: "4"),
-            timetableWith(timestamp: "8"),
-            timetableWith(timestamp: "3"),
-            timetableWith(timestamp: "0"),
-            timetableWith(timestamp: "15"),
-            timetableWith(timestamp: "2")
-        ]
+    func saveTimetable(_ timetable: Timetable) throws {
+        try! repository.save(timetable: timetable).toBlocking().first()
+    }
+    
+    func test_add_duplicated_timetables() throws {
+        let timestamps: [TimeInterval] = [4, 4, 1, 15, 4, 2]
+        for ts in timestamps {
+            try! saveTimetable(timetableWith(timestamp: "\(ts)"))
+        }
+        //All Objects is saved above
+        XCTAssertFalse(backgroundContext.hasChanges)
         
-        XCTAssertTrue(backgroundContext.hasChanges)
-        ///Save context instead of specified Timetable
-        try repository.save(timetable: timetables[0]).toBlocking().first()
-
-        ///Return the latest Timetable from repository
+        ///Return the newest Timetable from repository
         let fetchedTimetable = try repository.getTimetable(timetableDetails: TimetableDetails(groupId: 779, groupName: "БПИ16-01")).toBlocking().single()
+        let databaseTimetables = try repository.fetchAll().toBlocking().toArray()
         
-        let expectedTimetable = timetables.max(by: { (t1, t2) -> Bool in
-            return t1.updateTimestampTime < t2.updateTimestampTime
-        })
-        dump(expectedTimetable)
-        XCTAssertEqual(fetchedTimetable, expectedTimetable)
+        //There's only one = newest timetable
+        XCTAssertEqual(databaseTimetables.count, 1)
         
-        
-        
+        let expectedTimetableTimestamp = timestamps.max(by: <)
+        XCTAssertEqual(fetchedTimetable.updateTimestampTime, expectedTimetableTimestamp)
     }
     
 }

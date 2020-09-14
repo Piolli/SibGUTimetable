@@ -2,7 +2,7 @@
 //  Timetable+CoreDataProperties.swift
 //  SibGUTimetable
 //
-//  Created by Александр Камышев on 29.01.2020.
+//  Created by Александр Камышев on 13.09.2020.
 //  Copyright © 2020 Alexandr. All rights reserved.
 //
 //
