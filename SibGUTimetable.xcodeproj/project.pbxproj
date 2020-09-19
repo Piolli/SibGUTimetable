@@ -38,6 +38,7 @@
 		118F0C1023C24500003BCEF2 /* Timetable+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118F0C0F23C24500003BCEF2 /* Timetable+CoreDataClass.swift */; };
 		1197A53123BE20E0008737B2 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = 1197A53023BE20E0008737B2 /* schedule.json */; };
 		1197A53223BE501A008737B2 /* schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = 1197A53023BE20E0008737B2 /* schedule.json */; };
+		119AB0172510C07B00303F9D /* DayOffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119AB0162510C07B00303F9D /* DayOffView.swift */; };
 		119E51C123DEDC3200E1ABA4 /* StubTTRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119E51C023DEDC3200E1ABA4 /* StubTTRepository.swift */; };
 		119E51C223DF422B00E1ABA4 /* SibGUTimetable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC722B3D7C000567A37 /* SibGUTimetable.xcdatamodeld */; };
 		119F178D248BACEB00EF0B21 /* Assembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119F178C248BACEB00EF0B21 /* Assembler.swift */; };
@@ -71,7 +72,6 @@
 		60953E2F9CE8749238040627 /* CustomizablePageViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6095322281714670A637E162 /* CustomizablePageViewDelegate.swift */; };
 		60953F8DFEE1CE6C6A0575A4 /* Date + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609533396D1049D91B806AC2 /* Date + Ext.swift */; };
 		6097B719C65E514D27B48132 /* Pods_SibGUTimetableUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6171F10FE805AF1C7BA5BD53 /* Pods_SibGUTimetableUITests.framework */; };
-		96147595C3636E42C0F1E1A4 /* Pods_SibGUTimetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA73E05C76CA07255943DC6E /* Pods_SibGUTimetable.framework */; };
 		A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC022B3D7C000567A37 /* AppDelegate.swift */; };
 		A8011EC322B3D7C000567A37 /* TimetableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC222B3D7C000567A37 /* TimetableViewController.swift */; };
 		A8011EC922B3D7C000567A37 /* SibGUTimetable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A8011EC722B3D7C000567A37 /* SibGUTimetable.xcdatamodeld */; };
@@ -150,6 +150,7 @@
 		11845E9624B8451B00791186 /* LocalizedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
 		118F0C0F23C24500003BCEF2 /* Timetable+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timetable+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1197A53023BE20E0008737B2 /* schedule.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schedule.json; sourceTree = "<group>"; };
+		119AB0162510C07B00303F9D /* DayOffView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOffView.swift; sourceTree = "<group>"; };
 		119E51C023DEDC3200E1ABA4 /* StubTTRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubTTRepository.swift; sourceTree = "<group>"; };
 		119F178C248BACEB00EF0B21 /* Assembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembler.swift; sourceTree = "<group>"; };
 		119F178F248BAD2800EF0B21 /* RepositoryAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryAssembler.swift; sourceTree = "<group>"; };
@@ -235,7 +236,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1177059F248E769900483E0A /* Logging in Frameworks */,
-				96147595C3636E42C0F1E1A4 /* Pods_SibGUTimetable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,6 +645,7 @@
 				A8011EC222B3D7C000567A37 /* TimetableViewController.swift */,
 				A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonListController.swift */,
 				11B14BEA23E83DBD00B44958 /* TimetablePageViewController.swift */,
+				119AB0162510C07B00303F9D /* DayOffView.swift */,
 			);
 			path = Timetable;
 			sourceTree = "<group>";
@@ -997,6 +998,7 @@
 				1114AD5323E1635100E99C84 /* TimetableDataManager.swift in Sources */,
 				A89DDCA422D704F500769EAA /* TimetableDayViewModel.swift in Sources */,
 				11017F602413C52D003E2871 /* AboutAppCoordinator.swift in Sources */,
+				119AB0172510C07B00303F9D /* DayOffView.swift in Sources */,
 				A8011EC122B3D7C000567A37 /* AppDelegate.swift in Sources */,
 				1149607E24E836B000168303 /* FeedbackViewController.swift in Sources */,
 				11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */,

@@ -18,7 +18,7 @@ class TestPageView : Coordinator {
     lazy var viewController: TimetablePageViewController = {
         let timetable = FileLoader.shared.getLocalSchedule()!
         let viewModel = TimetableViewModel(schedule: timetable)!
-        let vc = TimetablePageViewController()
+        let vc = TimetablePageViewController(startDate: Date())
         vc.timetableViewModel = viewModel
         return vc
     }()

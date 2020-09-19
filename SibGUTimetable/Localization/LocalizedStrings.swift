@@ -123,4 +123,8 @@ enum LocalizedStrings {
         return NSLocalizedString("Calendar_description", comment: "Application name")
     }
     
+    static var Day_off: String {
+        return NSLocalizedString("Day_off", comment: "Application name")
+    }
+    
 }

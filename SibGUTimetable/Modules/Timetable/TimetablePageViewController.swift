@@ -10,7 +10,10 @@ import Foundation
 import RxRelay
 import UIKit
 
+//TODO: Inherite from CustomizablePageViewController
 class TimetablePageViewController : UIViewController {
+    
+    let startDate: Date
     
     private var pageViewDataSource: CustomizablePageViewDataSource<Date, TimetableLessonListController>!
     
@@ -27,6 +30,15 @@ class TimetablePageViewController : UIViewController {
         return pageViewController.pageDidMoveDirection
     }
     
+    init(startDate: Date) {
+        self.startDate = startDate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     public var timetableViewModel: TimetableViewModel? {
         didSet {
             guard let timetableViewModel = self.timetableViewModel else {
@@ -34,8 +46,8 @@ class TimetablePageViewController : UIViewController {
                 return
             }
             pageViewDataSource = CustomizablePageViewDataSource<Date, TimetableLessonListController>.init(
-                startIterableValue: Date(),
-                contentBuilder: { [weak self] (date) -> TimetableLessonListController in
+                startIterableValue: startDate,
+                contentBuilder: { (date) -> TimetableLessonListController in
                     let vc = TimetableLessonListController()
                     vc.date = date
                     vc.viewModel = timetableViewModel.getDayViewModel(at: date)
@@ -46,7 +58,8 @@ class TimetablePageViewController : UIViewController {
                     return date.previousDateByDay()
                 }, extractIterableValueFromController: { (viewController) -> Date in
                     return viewController.date
-            })
+                }
+            )
             pageViewController.dataSource = pageViewDataSource
         }
     }
@@ -57,7 +70,6 @@ class TimetablePageViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .blue
 
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false

@@ -17,7 +17,7 @@ class AboutAppViewController : UITableViewController {
     }
     
     let cellIdentifier = "identifier"
-    let headerIconName = "test_app_icon"
+    let headerIconName = "day_off_2"
     var coordinator: AboutAppCoordinator!
     
     var items: [String] = [] {
@@ -28,7 +28,7 @@ class AboutAppViewController : UITableViewController {
     
     lazy var headerView: UIView = {
         var iconView: UIView = {
-            let image = UIImage(named: "test_app_icon")
+            let image = UIImage(named: headerIconName)
             let imageView = UIImageView(image: image)
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.setContentHuggingPriority(.defaultLow, for: .vertical)

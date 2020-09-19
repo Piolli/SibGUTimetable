@@ -17,7 +17,7 @@ class TimetableViewController: UIViewController {
     
     var coordinator: TimetableCoordinator!
     weak var calendarView: FSCalendar!
-    lazy var timetablePageViewController: TimetablePageViewController = .init()
+    var timetablePageViewController: TimetablePageViewController!
     
     var calendarHeightConstraint: NSLayoutConstraint!
     let userPreferences: UserPreferences = Assembler.shared.resolve()
@@ -112,13 +112,15 @@ class TimetableViewController: UIViewController {
         calendar.delegate = self
 
         self.calendarView = calendar
-        self.calendarView.select(Date())
-        #warning("Delete this")
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        let someDateTime = formatter.date(from: "2020/06/08 22:31")
-        self.calendarView.select(someDateTime, scrollToDate: true)
-        #warning("Delete this")
+        self.calendarView.selectToday()
+        timetablePageViewController = TimetablePageViewController(startDate: self.calendarView.today ?? Date())
+//        #warning("Delete this")
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+//        let someDateTime = formatter.date(from: "2020/06/08 22:31")
+//        timetablePageViewController = TimetablePageViewController(startDate: someDateTime)
+//        self.calendarView.select(someDateTime, scrollToDate: true)
+//        #warning("Delete this")
         self.calendarView.addGestureRecognizer(self.scopeGesture)
         self.calendarView.setScope(.week, animated: false)
     }
@@ -176,7 +178,6 @@ class TimetableViewController: UIViewController {
     func setupTimetablePageViewController() {
         //TODO: check out code below
         timetablePageViewController.pageDidMoveDirection
-            .subscribeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (pageDidMoveTo) in
             DispatchQueue.main.async {
                 logger.trace("pageViewDidMoved state: \(pageDidMoveTo)")

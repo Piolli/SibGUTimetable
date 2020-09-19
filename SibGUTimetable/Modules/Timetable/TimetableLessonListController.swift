@@ -16,6 +16,10 @@ class TimetableLessonListController: UITableViewController {
     var date: Date!
     
     private var contentOffsetObserver: NSKeyValueObservation?
+    
+    var isDayOff: Bool? {
+        return viewModel?.countOflessons == 0
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,17 +33,8 @@ class TimetableLessonListController: UITableViewController {
         tableView.allowsSelection = false
         tableView.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor
         
-        ///Maybe create init with viewModel?
-        if viewModel?.countOflessons == 0 {
-            let free = UILabel()
-            free.text = "No Lessons Today"
-            free.font = free.font.withSize(24)
-            tableView.addSubview(free)
-            free.snp.makeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.top.equalTo(30)
-            }
-//            tableView.backgroundView = free
+        if let isDayOff = isDayOff, isDayOff {
+            setupDayOffView()
         }
         
         self.tableView.rowHeight = UITableView.automaticDimension
@@ -51,9 +46,39 @@ class TimetableLessonListController: UITableViewController {
         }
     }
     
+    func setupDayOffView() {
+        let dayOffView = DayOffView()
+        dayOffView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.addSubview(dayOffView)
+        
+        let day = Calendar.current.dateComponents([.day], from: date)
+        //TODO: create enum with image identifiers
+        dayOffView.loadImage(from: "day_off_\(((day.day ?? 1) % 3) + 1)") { [weak self] (imageSize) in
+            guard let self = self else {
+                logger.error("self = nil")
+                return
+            }
+            let ratio = imageSize.height / imageSize.width
+            logger.debug("dayOffView image ratio: \(ratio)")
+            let dayOffHeightConstraint = dayOffView.heightAnchor.constraint(equalTo: self.tableView.widthAnchor, multiplier: ratio)
+            //TODO: check out another constraints with .defaultLow priority
+            dayOffHeightConstraint.priority = .defaultHigh
+            dayOffHeightConstraint.isActive = true
+        }
+        
+        NSLayoutConstraint.activate([
+            dayOffView.topAnchor.constraint(equalTo: tableView.topAnchor),
+            dayOffView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            dayOffView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
+            dayOffView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
+            dayOffView.heightAnchor.constraint(lessThanOrEqualTo: tableView.heightAnchor),
+        ])
+    }
+    
     deinit {
         contentOffsetObserver?.invalidate()
     }
+    
     
     private func checkAmbiguousLayout(_ view: UIView) { for subview in view.subviews {
         _ = subview.hasAmbiguousLayout
@@ -118,27 +143,27 @@ class TimetableLessonListController: UITableViewController {
         }
     }
     
-    var cells: [IndexPath: UITableViewCell] = [:]
+//    var cells: [IndexPath: UITableViewCell] = [:]
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.setNeedsLayout()
         cell.layoutIfNeeded()
-        cells[indexPath] = cell
+//        cells[indexPath] = cell
     }
     
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let cell = cells[indexPath] else {
-            return super.tableView(tableView, heightForRowAt: indexPath)
-        }
-        return cell.frame.height
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let cell = cells[indexPath] else {
-            return super.tableView(tableView, heightForRowAt: indexPath)
-        }
-        return cell.frame.height
-    }
+//    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        guard let cell = cells[indexPath] else {
+//            return super.tableView(tableView, heightForRowAt: indexPath)
+//        }
+//        return cell.frame.height
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        guard let cell = cells[indexPath] else {
+//            return super.tableView(tableView, heightForRowAt: indexPath)
+//        }
+//        return cell.frame.height
+//    }
     
 }
 

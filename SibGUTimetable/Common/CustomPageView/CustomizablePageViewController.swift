@@ -26,13 +26,12 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
     lazy var pageDidMoveDirection: PublishRelay<CustomizablePageViewMoveDirection> = .init()
     lazy var tableViewOffsetDidChange: PublishRelay<CGPoint> = .init()
     
-    private (set) var customizableDataSource: CustomizablePageViewDataSource<T, C>? {
+    weak private (set) var customizableDataSource: CustomizablePageViewDataSource<T, C>? {
         didSet {
             guard let vc = self.customizableDataSource!.select(iterableValue: self.customizableDataSource!.iterableValue) else {
                 logger.error("selected iterable value is nil")
                 return
             }
-
             setViewControllers([vc], direction: .forward, animated: false, completion: nil)
         }
     }
@@ -102,10 +101,6 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
                 customizableDataSource.iterableValue = selectedIterableValue
             }
         }
-    }
-    
-    override func setViewControllers(_ viewControllers: [UIViewController]?, direction: UIPageViewController.NavigationDirection, animated: Bool, completion: ((Bool) -> Void)? = nil) {
-        super.setViewControllers(viewControllers, direction: direction, animated: animated, completion: completion)
     }
     
     override func viewDidLoad() {
