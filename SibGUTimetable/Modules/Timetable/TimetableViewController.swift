@@ -50,7 +50,7 @@ class TimetableViewController: UIViewController {
         addCalendar()
         addTimetablePageViewController()
         
-        setupRightBarButton()
+        setupLeftBarButton()
         
         setupTimetablePageViewController()
 //        //setup autoupdate
@@ -70,6 +70,7 @@ class TimetableViewController: UIViewController {
     
     func checkExistingTimetableDetails() {
         if let timetableDetails = userPreferences.getTimetableDetails() {
+            logger.debug("timetableDetails: \(timetableDetails)")
             dataManager.loadTimetable(timetableDetails: timetableDetails)
         } else {
             //TODO: add localization
@@ -77,8 +78,9 @@ class TimetableViewController: UIViewController {
         }
     }
     
-    func setupRightBarButton() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(revealMenu))
+    func setupLeftBarButton() {
+        let iconImage = UIImage(named: "side_menu_icon")?.withRenderingMode(.alwaysTemplate)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: iconImage, style: .plain, target: self, action: #selector(revealMenu))
     }
     
     @objc func revealMenu() {
