@@ -7,8 +7,7 @@
 //
 
 import Foundation
-
-@testable import SibGUTimetable
+import AcknowList
 
 class FileLoader {
     
@@ -21,6 +20,22 @@ class FileLoader {
         let bundlePath = bundle.bundlePath
         let filePath = bundlePath + "/" + fileName
         return filePath
+    }
+    
+    func getAdditionalLicenses() -> [Acknow]? {
+        let filePath = getPath(ofFile: "additional_licenses.json")
+        do {
+            if let data = try String(contentsOfFile: filePath).data(using: .utf8) {
+                let decoder = JSONDecoder()
+                return try decoder.decode([Acknow].self, from: data)
+            } else {
+                logger.error("file with path (\(filePath) doesn't exist")
+            }
+        } catch {
+            logger.error("description: \(error.localizedDescription)")
+        }
+        return nil
+        
     }
     
     func getLocalSchedule(decoder: JSONDecoder = JSONDecoder()) -> Timetable? {

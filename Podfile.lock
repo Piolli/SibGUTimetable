@@ -1,5 +1,5 @@
 PODS:
-  - AcknowList (1.9.3)
+  - AcknowList (1.9.5)
   - FSCalendar (2.8.0)
   - NVActivityIndicatorView (4.8.0):
     - NVActivityIndicatorView/Presenter (= 4.8.0)
@@ -45,7 +45,7 @@ SPEC REPOS:
     - SPAlert
 
 SPEC CHECKSUMS:
-  AcknowList: a3ee7cfba2c45cf9d07d1b18fe729a5bcc518366
+  AcknowList: 485f0e0da8ff7d5aaa8fb54bbff1da1f065e496c
   FSCalendar: 3a5ed3636e2ba1b83ebebfcf0c2603105a6f5efe
   NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
   RxBlocking: c67185d26498ea3cbe3e121917c3c16739e43123

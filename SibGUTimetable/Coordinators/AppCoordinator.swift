@@ -33,7 +33,7 @@ class AppCoordinator : NSObject, Coordinator {
         (LocalizedStrings.About_app, AboutAppCoordinator(aboutItems: [
             (LocalizedStrings.Feedback, SimpleCoordinator(FeedbackViewController())),
             (LocalizedStrings.Rate_Me, SimpleCoordinator()),
-            (LocalizedStrings.Licenses, SimpleCoordinator(AcknowListViewController())),
+            (LocalizedStrings.Licenses, SimpleCoordinator(LicensesViewController())),
         ]))
     ])
     
@@ -75,3 +75,4 @@ class AppCoordinator : NSObject, Coordinator {
     }
     
 }
+

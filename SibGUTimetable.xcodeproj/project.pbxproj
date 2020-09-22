@@ -30,6 +30,7 @@
 		114C9E4A23D6B72700BED746 /* GroupSearchViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4923D6B72700BED746 /* GroupSearchViewModelController.swift */; };
 		114C9E4C23D6B86000BED746 /* GroupSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */; };
 		116F623F24FFF1FF009AF77D /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F623E24FFF1FF009AF77D /* OnboardingCoordinator.swift */; };
+		116FAD7B2519F82D0081A2FD /* Image-SibGUTimetable-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 116FAD7A2519F82D0081A2FD /* Image-SibGUTimetable-acknowledgements.plist */; };
 		1177059F248E769900483E0A /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 1177059E248E769900483E0A /* Logging */; };
 		117705A1248E7F7700483E0A /* CustomLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117705A0248E7F7700483E0A /* CustomLogHandler.swift */; };
 		117F4F5924B8A7DB00FB2384 /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117F4F5824B8A7DB00FB2384 /* UIColor + Ext.swift */; };
@@ -64,6 +65,9 @@
 		11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C523C0507400CA52C2 /* Coordinator.swift */; };
 		11EA09C823C050B500CA52C2 /* TimetableCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C723C050B500CA52C2 /* TimetableCoordinator.swift */; };
 		11EA09CA23C0512F00CA52C2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA09C923C0512F00CA52C2 /* AppCoordinator.swift */; };
+		11F1F9C9251A593B006EF7DF /* additional_licenses.json in Resources */ = {isa = PBXBuildFile; fileRef = 11F1F9C8251A593B006EF7DF /* additional_licenses.json */; };
+		11F1F9D3251A610D006EF7DF /* Acknow + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F1F9D2251A610D006EF7DF /* Acknow + Ext.swift */; };
+		11F1F9D9251A6170006EF7DF /* LicensesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F1F9D8251A6170006EF7DF /* LicensesListViewController.swift */; };
 		11FD6645241681ED00844150 /* LessonSubgroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FD6644241681ED00844150 /* LessonSubgroupCell.swift */; };
 		609530D6831E2DBBD2A1D1C3 /* FSCalendar + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6095332493044377CF1705DF /* FSCalendar + Ext.swift */; };
 		60953201621C1FC9AD6239EC /* TimetableViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609533084061D3F5C983CC07 /* TimetableViewModelController.swift */; };
@@ -94,6 +98,7 @@
 		A8E3BC4C22D1F7A7006E1B65 /* TimetableLessonListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E3BC4B22D1F7A7006E1B65 /* TimetableLessonListController.swift */; };
 		A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ECF6B922C8A5A100B97D2A /* CalendarParser.swift */; };
 		A8F80DD72337B12D001442A9 /* NativeNetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F80DD62337B12D001442A9 /* NativeNetworkManagerTests.swift */; };
+		CB54A287379C0E2797B94F7A /* Pods_SibGUTimetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA73E05C76CA07255943DC6E /* Pods_SibGUTimetable.framework */; };
 		D60A521E49E599E56CC36265 /* Pods_SibGUTimetableTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A161EF1AAC4CC928AB0BD83 /* Pods_SibGUTimetableTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +148,7 @@
 		114C9E4923D6B72700BED746 /* GroupSearchViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewModelController.swift; sourceTree = "<group>"; };
 		114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewModel.swift; sourceTree = "<group>"; };
 		116F623E24FFF1FF009AF77D /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		116FAD7A2519F82D0081A2FD /* Image-SibGUTimetable-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Image-SibGUTimetable-acknowledgements.plist"; sourceTree = "<group>"; };
 		117705A0248E7F7700483E0A /* CustomLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogHandler.swift; sourceTree = "<group>"; };
 		117F4F5824B8A7DB00FB2384 /* UIColor + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Ext.swift"; sourceTree = "<group>"; };
 		11845E9324B8434500791186 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -177,6 +183,9 @@
 		11EA09C523C0507400CA52C2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		11EA09C723C050B500CA52C2 /* TimetableCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableCoordinator.swift; sourceTree = "<group>"; };
 		11EA09C923C0512F00CA52C2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		11F1F9C8251A593B006EF7DF /* additional_licenses.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = additional_licenses.json; sourceTree = "<group>"; };
+		11F1F9D2251A610D006EF7DF /* Acknow + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Acknow + Ext.swift"; sourceTree = "<group>"; };
+		11F1F9D8251A6170006EF7DF /* LicensesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesListViewController.swift; sourceTree = "<group>"; };
 		11FD6644241681ED00844150 /* LessonSubgroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSubgroupCell.swift; sourceTree = "<group>"; };
 		6095322281714670A637E162 /* CustomizablePageViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizablePageViewDelegate.swift; sourceTree = "<group>"; };
 		609533084061D3F5C983CC07 /* TimetableViewModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableViewModelController.swift; sourceTree = "<group>"; };
@@ -236,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1177059F248E769900483E0A /* Logging in Frameworks */,
+				CB54A287379C0E2797B94F7A /* Pods_SibGUTimetable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +381,7 @@
 			children = (
 				119F178E248BACFE00EF0B21 /* Dependencies */,
 				A8011EC022B3D7C000567A37 /* AppDelegate.swift */,
+				11F1F9D8251A6170006EF7DF /* LicensesListViewController.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -526,6 +537,8 @@
 		A8011EF422B3D8BC00567A37 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				11F1F9C8251A593B006EF7DF /* additional_licenses.json */,
+				116FAD7A2519F82D0081A2FD /* Image-SibGUTimetable-acknowledgements.plist */,
 				A833C99E2310166E00290DBD /* Objc-Bridge-Header.h */,
 				A8011ECC22B3D7C100567A37 /* LaunchScreen.storyboard */,
 				A8011ECA22B3D7C100567A37 /* Assets.xcassets */,
@@ -572,6 +585,7 @@
 				11C3889D23E4468000ED43A5 /* UINavigationController + Ext.swift */,
 				11B14BEC23E841FA00B44958 /* UIViewController + Ext.swift */,
 				117F4F5824B8A7DB00FB2384 /* UIColor + Ext.swift */,
+				11F1F9D2251A610D006EF7DF /* Acknow + Ext.swift */,
 			);
 			name = Extensions;
 			path = Network/Extensions;
@@ -805,8 +819,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				116FAD7B2519F82D0081A2FD /* Image-SibGUTimetable-acknowledgements.plist in Resources */,
 				A8011ECE22B3D7C100567A37 /* LaunchScreen.storyboard in Resources */,
 				11845E9424B8434500791186 /* Localizable.strings in Resources */,
+				11F1F9C9251A593B006EF7DF /* additional_licenses.json in Resources */,
 				1141FA5B23C9F07900796667 /* GoogleService-Info.plist in Resources */,
 				11017F632413D5D9003E2871 /* Pods-SibGUTimetable-acknowledgements.plist in Resources */,
 				A8011ECB22B3D7C100567A37 /* Assets.xcassets in Resources */,
@@ -981,8 +997,10 @@
 				11EA09CA23C0512F00CA52C2 /* AppCoordinator.swift in Sources */,
 				11B14BEB23E83DBD00B44958 /* TimetablePageViewController.swift in Sources */,
 				11EA09C823C050B500CA52C2 /* TimetableCoordinator.swift in Sources */,
+				11F1F9D9251A6170006EF7DF /* LicensesListViewController.swift in Sources */,
 				A8537EBF22EC494B005183C7 /* Lesson+CoreDataClass.swift in Sources */,
 				A8ECF6BA22C8A5A100B97D2A /* CalendarParser.swift in Sources */,
+				11F1F9D3251A610D006EF7DF /* Acknow + Ext.swift in Sources */,
 				11B75A6924ED42C6002E188D /* Week+CoreDataProperties.swift in Sources */,
 				11B75A6824ED42C6002E188D /* LessonGroup+CoreDataClass.swift in Sources */,
 				11B75A6724ED42C6002E188D /* Lesson+CoreDataProperties.swift in Sources */,
