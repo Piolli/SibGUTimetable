@@ -4,15 +4,15 @@ PODS:
   - NVActivityIndicatorView (4.8.0):
     - NVActivityIndicatorView/Presenter (= 4.8.0)
   - NVActivityIndicatorView/Presenter (4.8.0)
-  - RxBlocking (5.0.0):
+  - RxBlocking (5.1.1):
     - RxSwift (~> 5)
-  - RxCocoa (5.0.0):
+  - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
-  - RxRelay (5.0.0):
+  - RxRelay (5.1.1):
     - RxSwift (~> 5)
-  - RxSwift (5.0.0)
-  - RxTest (5.0.0):
+  - RxSwift (5.1.1)
+  - RxTest (5.1.1):
     - RxSwift (~> 5)
   - SideMenuSwift (2.0.3)
   - SnapKit (4.2.0)
@@ -48,11 +48,11 @@ SPEC CHECKSUMS:
   AcknowList: 485f0e0da8ff7d5aaa8fb54bbff1da1f065e496c
   FSCalendar: 3a5ed3636e2ba1b83ebebfcf0c2603105a6f5efe
   NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
-  RxBlocking: c67185d26498ea3cbe3e121917c3c16739e43123
-  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
-  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
-  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
-  RxTest: 4349afe98f564e0a9bc19063368904622d17d49a
+  RxBlocking: 5f700a78cad61ce253ebd37c9a39b5ccc76477b4
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
   SideMenuSwift: 5c2b1496544ce3f1f08f4dddf4810eaac49f543d
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SPAlert: 1a8afa1c6ac86a82ab5b2cfdf7f9a51e68cb6c0c
