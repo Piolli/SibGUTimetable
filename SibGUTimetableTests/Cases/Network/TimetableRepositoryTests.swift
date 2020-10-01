@@ -15,7 +15,7 @@ import RxTest
 
 class TimetableRepositoryTests: XCTestCase {
 
-    var repository: CoreDataTTRepository!
+    var repository: CoreDataTimetableRepository!
     let disposeBag = DisposeBag()
     var testScheduler: TestScheduler!
     
@@ -54,7 +54,7 @@ class TimetableRepositoryTests: XCTestCase {
 
     override func setUp() {
         testScheduler = TestScheduler(initialClock: 0)
-        repository = CoreDataTTRepository(context: backgroundContext)
+        repository = CoreDataTimetableRepository(context: backgroundContext)
     }
     
     override func tearDown() {
@@ -75,7 +75,7 @@ class TimetableRepositoryTests: XCTestCase {
         
         repository.save(timetable: timetable!).subscribe().disposed(by: disposeBag)
         
-        let localTimetable = try repository.fetchAll().toBlocking().single()
+        let localTimetable = try repository.fetchAll(with: .init(groupId: 0, groupName: "БПИ16-01")).toBlocking().single()
         
         XCTAssertEqual(timetable, localTimetable)
     }
@@ -102,14 +102,14 @@ class TimetableRepositoryTests: XCTestCase {
         XCTAssertFalse(backgroundContext.hasChanges)
         
         ///Return the newest Timetable from repository
-        let fetchedTimetable = try repository.getTimetable(timetableDetails: TimetableDetails(groupId: 779, groupName: "БПИ16-01")).toBlocking().single()
-        let databaseTimetables = try repository.fetchAll().toBlocking().toArray()
+        let fetchedTimetable = try repository.getTimetable( TimetableDetails(groupId: 779, groupName: "БПИ16-01")).toBlocking().single()
+        let databaseTimetables = try repository.fetchAll(with: .init(groupId: 0, groupName: "БПИ16-01")).toBlocking().toArray()
         
         //There's only one = newest timetable
         XCTAssertEqual(databaseTimetables.count, 1)
         
         let expectedTimetableTimestamp = timestamps.max(by: <)
-        XCTAssertEqual(fetchedTimetable.updateTimestampTime, expectedTimetableTimestamp)
+        XCTAssertEqual(fetchedTimetable.timetable!.updateTimestampTime, expectedTimetableTimestamp)
     }
     
 }

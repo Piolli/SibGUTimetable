@@ -125,26 +125,27 @@ extension GroupSearchViewController : UITableViewDelegate {
             startAnimating()
             let timetableDetails = TimetableDetails(groupId: pair.id, groupName: pair.name)
             timetableManager.loadTimetable(timetableDetails: timetableDetails)
-            timetableManager.timetableOutput
+            timetableManager.loadTimetable(timetableDetails: timetableDetails)
                 .debug("GroupSearchViewController (timetableManager.timetableOutput)", trimOutput: false)
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] timetable in
+                    //TODO: --------------------------------------CHECK ON ERRORS
                     self?.stopAnimating()
-                    self?.viewModelController.save(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name, timestamp: timetable.updateTimestamp))
+                    self?.viewModelController.save(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name, timestamp: timetable.timetable!.updateTimestamp))
                     self?.navigationController?.popViewController(animated: true)
                 }).disposed(by: disposeBag)
             
-            timetableManager.errorOutput
-                .debug("GroupSearchViewController (timetableManager.errorOutput)", trimOutput: false)
-                .observeOn(MainScheduler.instance)
-                .subscribe(onNext: { [weak self] (error) in
-                    //Only network error
-                    if (error as NSError).code == 101 {
-                        logger.error("\(error.localizedDescription)")
-                        self?.stopAnimating()
-                        SPAlert.present(message: LocalizedStrings.Error_occured_while_loading_timetable)
-                    }
-            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+//            timetableManager.errorOutput
+//                .debug("GroupSearchViewController (timetableManager.errorOutput)", trimOutput: false)
+//                .observeOn(MainScheduler.instance)
+//                .subscribe(onNext: { [weak self] (error) in
+//                    //Only network error
+//                    if (error as NSError).code == 101 {
+//                        logger.error("\(error.localizedDescription)")
+//                        self?.stopAnimating()
+//                        SPAlert.present(message: LocalizedStrings.Error_occured_while_loading_timetable)
+//                    }
+//            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         } else {
             fatalError("viewModel is nil")
         }

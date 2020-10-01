@@ -37,7 +37,7 @@ extension RepositoryAssembler {
             fatalError("AppDelegate is nil and context too")
         }
         let context = delegate.persistentContainer.newBackgroundContext()
-        return TimetableDataManager(localRepository: CoreDataTTRepository(context: context), serverRepository: ServerRepository(context: context))
+        return TimetableDataManager(localRepository: CoreDataTimetableRepository(context: context), serverRepository: ServerRepository(context: context))
     }
     
 }

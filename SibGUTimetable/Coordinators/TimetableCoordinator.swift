@@ -14,33 +14,25 @@ class TimetableCoordinator : Coordinator {
     weak var navigationController: UINavigationController!
     weak var timetableDataManager: TimetableDataManager!
     
-    let timetableViewController = TimetableViewController()
+    var timetableViewController: TimetableViewController!
     
     var rootViewController: UIViewController {
-//        return navigationController
         return timetableViewController
     }
     
     init(navigationController: UINavigationController?, timetableDataManager: TimetableDataManager) {
         self.navigationController = navigationController
         self.timetableDataManager = timetableDataManager
-        
-        timetableViewController.tabBarItem = UITabBarItem(title: "Timetable", image: UIImage(named: "tab_bar_item_timetable"), tag: 1)
+
+        timetableViewController = TimetableViewController(viewModel: TimetableViewModel(dataManager: timetableDataManager))
         timetableViewController.coordinator = self
-        
-//        navigationController.pushViewController(ttViewController, animated: true)
-//        let navigationController = AppCoordinator.putInNavigationController(ttViewController)
-//        self.navigationController = navigationController
+        //        start()
     }
     
     func start() {
-        timetableViewController.dataManager = timetableDataManager
+//        let dataManager: TimetableDataManager = Assembler.shared.resolve()
+//        timetableViewController = TimetableViewController(viewModel: TimetableViewModel(dataManager: dataManager))
+//        timetableViewController.coordinator = self
     }
-    
-    #if DEBUG
-    func startWith(timetable: Timetable) {
-        timetableViewController.dataManager = .init(localRepository: FakeLocalTTRepository(timetable: timetable), serverRepository: ServerTTRepositoryTODORemake(timetable: timetable))
-    }
-    #endif
     
 }

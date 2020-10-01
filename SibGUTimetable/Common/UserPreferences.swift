@@ -63,6 +63,7 @@ class DefaultsUserPreferences : NSObject, UserPreferences {
                 logger.debug("\(object?.groupName), \(object?.timestamp)")
             }
         })
+        timetableDetailsDidChanged.accept(self.getTimetableDetails())
     }
     
     deinit {

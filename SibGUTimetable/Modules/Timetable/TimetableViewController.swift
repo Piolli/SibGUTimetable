@@ -11,6 +11,7 @@ import CoreData
 import SnapKit
 import FSCalendar
 import RxSwift
+import RxRelay
 
 
 class TimetableViewController: UIViewController {
@@ -22,12 +23,26 @@ class TimetableViewController: UIViewController {
     var calendarHeightConstraint: NSLayoutConstraint!
     let userPreferences: UserPreferences = Assembler.shared.resolve()
     
+    var initialDate: Date {
+        return self.calendarView.today ?? Date()
+    }
+    
     let disposeBag = DisposeBag()
-    var dataManager: TimetableDataManager! {
-        didSet {
-            setupDataManager()
-            logger.debug("TimetableViewController didSet dataManager")
-        }
+    let viewModel: TimetableViewModel
+    
+    private let timetableDetails: PublishRelay<TimetableDetails?> = .init()
+    
+    var input: TimetableViewModel.Input {
+        return .init(timetableDetails: timetableDetails.asObservable())
+    }
+    
+    init(viewModel: TimetableViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     fileprivate lazy var scopeGesture: UIPanGestureRecognizer = {
@@ -60,23 +75,24 @@ class TimetableViewController: UIViewController {
 //        }).disposed(by: disposeBag)
         
         initAppearance()
-        
-        checkExistingTimetableDetails()
+        bind(output: viewModel.transform(input: input))
+        timetableDetails.accept(userPreferences.getTimetableDetails())
+//        checkExistingTimetableDetails()
     }
     
     deinit {
         logger.debug("deinit TimetableViewController")
     }
     
-    func checkExistingTimetableDetails() {
-        if let timetableDetails = userPreferences.getTimetableDetails() {
-            logger.debug("timetableDetails: \(timetableDetails)")
-            dataManager.loadTimetable(timetableDetails: timetableDetails)
-        } else {
-            //TODO: add localization
-            showMessage(text: "Choose group from left side menu", title: "Error")
-        }
-    }
+//    func checkExistingTimetableDetails() {
+//        if let timetableDetails = userPreferences.getTimetableDetails() {
+//            logger.debug("timetableDetails: \(timetableDetails)")
+//            dataManager.loadTimetable(timetableDetails: timetableDetails)
+//        } else {
+//            //TODO: add localization
+//            showMessage(text: "Choose group from left side menu", title: "Error")
+//        }
+//    }
     
     func setupLeftBarButton() {
         let iconImage = UIImage(named: "side_menu_icon")?.withRenderingMode(.alwaysTemplate)
@@ -115,7 +131,7 @@ class TimetableViewController: UIViewController {
 
         self.calendarView = calendar
         self.calendarView.selectToday()
-        timetablePageViewController = TimetablePageViewController(startDate: self.calendarView.today ?? Date())
+        timetablePageViewController = TimetablePageViewController(startDate: initialDate)
 //        #warning("Delete this")
 //        let formatter = DateFormatter()
 //        formatter.dateFormat = "yyyy/MM/dd HH:mm"
@@ -156,25 +172,35 @@ class TimetableViewController: UIViewController {
         ])
     }
     
-    func setupDataManager() {
-        dataManager.timetableOutput
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (timetable) in
-                guard let self = self else {
-                    logger.error("self is nil")
-                    return
-                }
-                logger.info("Got timetable: \(timetable.group_name):\(timetable.updateTimestampTime)")
-                //Because server-side saves timetable to db then we can compare if timetable is new
-                if self.timetablePageViewController.timetableViewModel?.schedule.updateTimestampTime != timetable.updateTimestampTime {
-                    self.timetablePageViewController.timetableViewModel = TimetableViewModel(schedule: timetable)
-                    self.navigationItem.title = timetable.group_name
-                }
-            }, onError: { [weak self] (error) in
-                self?.showMessage(text: error.localizedDescription, title: "Error")
-            }, onCompleted: nil, onDisposed: nil)
-            .disposed(by: disposeBag)
-        checkExistingTimetableDetails()
+    
+    
+    func bind(output: TimetableViewModel.Output) {
+        output.timetable.drive(onNext: { [weak self] (timetableResult) in
+            guard let self = self, timetableResult.error == nil else {
+                logger.error("Error on get timetable: \(timetableResult.error?.localizedDescription ?? "")")
+                return
+            }
+            //show error
+            self.navigationItem.title = timetableResult.timetable?.group_name ?? ""
+            self.timetablePageViewController.timetable = timetableResult.timetable
+            
+        }, onCompleted: nil, onDisposed: nil)
+        .disposed(by: disposeBag)
+//        viewModel.output.timetable
+//            .drive(onNext: { (timetableResult) in
+//                if timetableResult.error != nil {
+//                    //show error
+//                    logger.error("error on get timetable: \(timetableResult.error)")
+//
+//                } else {
+//                    self.timetablePageViewController.timetable = timetableResult.timetable
+//                }
+//            }, onCompleted: nil, onDisposed: nil)
+//            .disposed(by: disposeBag)
+//
+//        userPreferences.timetableDetailsDidChanged.subscribe(viewModel.input.timetableDetailsInput).disposed(by: disposeBag)
+//
+//        viewModel.input.timetableDetailsInput.onNext(TimetableDetails(groupId: 0, groupName: "МПИ20-01"))
     }
     
     func setupTimetablePageViewController() {
@@ -207,6 +233,11 @@ class TimetableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     fileprivate func initAppearance() {

@@ -7,14 +7,20 @@ import Foundation
 import RxSwift
 import CoreData
 
-class CoreDataTTRepository : TimetableRepository {
+class CoreDataTimetableRepository : TimetableRepository {
     
     private let context: NSManagedObjectContext
     
     //TODO: rewrite method because there's only one timetable for each group_name
-    func getTimetable(timetableDetails: TimetableDetails) -> Single<Timetable> {
-        return fetchAll()
-            .filter { $0.group_name == timetableDetails.groupName }
+    func getTimetable(_ timetableDetails: TimetableDetails) -> Single<TimetableFetchResult> {
+        return fetchAll(with: timetableDetails)
+            .map({ (timetable) -> TimetableFetchResult in
+                return TimetableFetchResult(timetable: timetable, storage: .local, error: nil)
+            })
+            .catchError { (error) -> Observable<TimetableFetchResult> in
+                return .just(TimetableFetchResult(timetable: nil, storage: .local, error: error))
+            }
+            .ifEmpty(default: TimetableFetchResult(timetable: nil, storage: .local, error: TimetableDataManagerError.emptyStore))
             .takeLast(1)
             .asSingle()
     }
@@ -87,7 +93,7 @@ class CoreDataTTRepository : TimetableRepository {
         return false
     }
     
-    func fetchAll() -> Observable<Timetable> {
+    func fetchAll(with timetableDetails: TimetableDetails) -> Observable<Timetable> {
         return Observable.create { [weak self] (observer) -> Disposable in
             guard let self = self else {
                 observer.onError(RxError.unknown)
@@ -97,7 +103,7 @@ class CoreDataTTRepository : TimetableRepository {
             self.context.performAndWait {
                 do {
                     let fetchRequest: NSFetchRequest<Timetable> = Timetable.fetchRequest()
-                    
+                    fetchRequest.predicate = NSPredicate(format: "group_name == %@", timetableDetails.groupName)
                     let count = try self.context.count(for: fetchRequest)
                     logger.debug("Count of Timetables in persistent store: \(count)")
                     

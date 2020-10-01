@@ -6,8 +6,12 @@
 //  Copyright © 2019 Alexandr. All rights reserved.
 //
 
+@testable import SibGUTimetable
+
 import Foundation
 import AcknowList
+
+
 
 class FileLoader {
     

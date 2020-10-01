@@ -21,8 +21,15 @@ class ServerRepository : TimetableRepository {
         jsonDecoder.userInfo[CodingUserInfoKey.context!] = context
     }
     
-    func getTimetable(timetableDetails: TimetableDetails) -> Single<Timetable> {
-        return NativeAPIServer.sharedInstance.fetchTimetable(timetableDetails: timetableDetails, jsonDecoder: jsonDecoder)
+    func getTimetable(_ timetableDetails: TimetableDetails) -> Single<TimetableFetchResult> {
+        return NativeAPIServer.sharedInstance
+            .fetchTimetable(timetableDetails: timetableDetails, jsonDecoder: jsonDecoder)
+            .map { (timetable) -> TimetableFetchResult in
+                return TimetableFetchResult(timetable: timetable, storage: .remote, error: nil)
+            }
+            .catchError { (error) -> Single<TimetableFetchResult> in
+                return .just(TimetableFetchResult(timetable: nil, storage: .remote, error: error))
+            }
     }
     
     func save(timetable: Timetable) -> Completable {

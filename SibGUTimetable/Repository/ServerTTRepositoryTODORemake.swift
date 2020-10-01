@@ -18,8 +18,8 @@ class ServerTTRepositoryTODORemake: TimetableRepository {
         self.loadedTimetable = timetable
     }
     
-    func getTimetable(timetableDetails: TimetableDetails) -> Single<Timetable> {
-        return Single.just(loadedTimetable)
+    func getTimetable(_ timetableDetails: TimetableDetails) -> Single<TimetableFetchResult> {
+        return Single.just(TimetableFetchResult(timetable: loadedTimetable, storage: .remote, error: nil))
     }
     
     func save(timetable: Timetable) -> Completable {

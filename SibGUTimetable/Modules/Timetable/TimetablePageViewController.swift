@@ -8,12 +8,14 @@
 
 import Foundation
 import RxRelay
+import RxSwift
 import UIKit
 
 //TODO: Inherite from CustomizablePageViewController
 class TimetablePageViewController : UIViewController {
     
     let startDate: Date
+    let disposeBag = DisposeBag()
     
     private var pageViewDataSource: CustomizablePageViewDataSource<Date, TimetableLessonListController>!
     
@@ -39,18 +41,15 @@ class TimetablePageViewController : UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public var timetableViewModel: TimetableViewModel? {
+    public var timetable: Timetable? {
         didSet {
-            guard let timetableViewModel = self.timetableViewModel else {
-                logger.error("timetableViewModel set to nil")
-                return
-            }
-            pageViewDataSource = CustomizablePageViewDataSource<Date, TimetableLessonListController>.init(
+            guard let timetable = timetable else { fatalError("self = nil") }
+            let pageViewDataSource = CustomizablePageViewDataSource<Date, TimetableLessonListController>.init(
                 startIterableValue: startDate,
                 contentBuilder: { (date) -> TimetableLessonListController in
                     let vc = TimetableLessonListController()
                     vc.date = date
-                    vc.viewModel = timetableViewModel.getDayViewModel(at: date)
+                    vc.viewModel = timetable.getDayViewModel(at: date)
                     return vc
                 }, nextIterableValue: { (date) -> Date in
                     return date.followingDateByDay()
@@ -60,7 +59,8 @@ class TimetablePageViewController : UIViewController {
                     return viewController.date
                 }
             )
-            pageViewController.dataSource = pageViewDataSource
+            self.pageViewDataSource = pageViewDataSource
+            self.pageViewController.dataSource = self.pageViewDataSource
         }
     }
     
@@ -84,6 +84,21 @@ class TimetablePageViewController : UIViewController {
         
         add(viewController: pageViewController, to: containerView)
         
+    }
+    
+}
+
+private extension Timetable {
+    
+    func getDay(at date: Date) -> Day {
+        let weekIndex = CalendarParser.shared.currentNumberOfWeek(date: date)
+        let dayIndex = CalendarParser.shared.currentDayOfWeek(date: date)
+        let day = (self.weeks![weekIndex] as! Week).days![dayIndex] as! Day
+        return day
+    }
+
+    func getDayViewModel(at date: Date) -> TimetableDayViewModel {
+        return TimetableDayViewModel(day: getDay(at: date), date: date)
     }
     
 }
