@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxCocoa
 
 
 class TimetableDetails : NSObject, Codable {
@@ -23,12 +24,15 @@ class TimetableDetails : NSObject, Codable {
         self.groupId = groupId
     }
     
-}
-
-extension UserDefaults {
+    override var hash: Int {
+        return groupId.hashValue / 10 + groupName.hashValue / 10 + (timestamp?.hashValue ?? 0) / 10
+    }
     
-    @objc dynamic var timetableDetails: Data {
-        return data(forKey: "timetableDetails") ?? Data()
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let object = object as? TimetableDetails else {
+            return false
+        }
+        return object.hashValue == self.hashValue
     }
     
 }
@@ -40,36 +44,26 @@ protocol UserPreferences {
     func isFirstAppOpening() -> Bool
     func setFirstAppOpening()
     func clearTimetableDetails()
-    var timetableDetailsDidChanged: PublishRelay<TimetableDetails?> { get }
+    var timetableDetails: Observable<TimetableDetails?> { get }
 }
 
 class DefaultsUserPreferences : NSObject, UserPreferences {
     
     public static let sharedInstance = DefaultsUserPreferences()
-    public let timetableDetailsDidChanged: PublishRelay<TimetableDetails?> = .init()
-
-    let selectedTimetableDetailsKey = "timetableDetails"
-    let firstAppOpeningKey = "firstOpeningAppKey"
-    var observer: NSKeyValueObservation!
-
+    
     private let defaults = UserDefaults.standard
+    private let timetableDetailsKey = "timetableDetails"
+    private let firstAppOpeningKey = "firstOpeningAppKey"
+    private let decoder = JSONDecoder()
     
-    private override init() {
-        super.init()
-        observer = defaults.observe(\.timetableDetails, options: .new, changeHandler: { (defaults, value) in
-            logger.debug("\(value.newValue), \(value.oldValue)")
-            if let data = value.newValue {
-                let object = try? JSONDecoder().decode(TimetableDetails.self, from: data)
-                logger.debug("\(object?.groupName), \(object?.timestamp)")
+    var timetableDetails: Observable<TimetableDetails?> {
+        return defaults.rx
+            .observe(Data.self, timetableDetailsKey)
+            .map { [weak self] in
+                try? self?.decoder.decode(TimetableDetails.self, from: $0 ?? Data())
             }
-        })
-        timetableDetailsDidChanged.accept(self.getTimetableDetails())
     }
-    
-    deinit {
-        observer.invalidate()
-    }
-   
+
     func saveTimetableDetails(groupId: Int, groupName: String, timestamp: String) {
         let timetableDetails = TimetableDetails(groupId: groupId, groupName: groupName, timestamp: timestamp)
         self.saveTimetableDetails(timetableDetails)
@@ -81,13 +75,11 @@ class DefaultsUserPreferences : NSObject, UserPreferences {
             logger.error("JSON is nil")
             return
         }
-        defaults.set(json, forKey: selectedTimetableDetailsKey)
-        timetableDetailsDidChanged.accept(timetableDetails)
+        defaults.set(json, forKey: timetableDetailsKey)
     }
     
     func getTimetableDetails() -> TimetableDetails? {
-        let decoder = JSONDecoder()
-        guard let data = defaults.data(forKey: selectedTimetableDetailsKey) else {
+        guard let data = defaults.data(forKey: timetableDetailsKey) else {
             logger.error("Data is nil")
             return nil
         }
@@ -95,8 +87,7 @@ class DefaultsUserPreferences : NSObject, UserPreferences {
     }
     
     func clearTimetableDetails() {
-        defaults.removeObject(forKey: selectedTimetableDetailsKey)
-        timetableDetailsDidChanged.accept(nil)
+        defaults.removeObject(forKey: timetableDetailsKey)
     }
     
     func isFirstAppOpening() -> Bool {
@@ -111,6 +102,5 @@ class DefaultsUserPreferences : NSObject, UserPreferences {
         logger.debug("Notification description: \(notification.description)")
         dump(notification)
     }
-    
     
 }

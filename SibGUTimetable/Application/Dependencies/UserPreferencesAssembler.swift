@@ -27,6 +27,8 @@ extension UserPreferencesAssembler {
 
 class FakeUserPreferences : UserPreferences {
     
+    var timetableDetails: Observable<TimetableDetails?> = .empty()
+    
     func isFirstAppOpening() -> Bool {
         return true
     }
