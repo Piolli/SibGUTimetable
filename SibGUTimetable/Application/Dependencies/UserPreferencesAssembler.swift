@@ -27,7 +27,14 @@ extension UserPreferencesAssembler {
 
 class FakeUserPreferences : UserPreferences {
     
-    var timetableDetails: Observable<TimetableDetails?> = .empty()
+    private var timetableDetailsRelay: BehaviorSubject<TimetableDetails?>
+    var timetableDetails: Observable<TimetableDetails?>
+    private let details = TimetableDetails(groupId: 10, groupName: "БПИ16-01", timestamp: nil)
+    
+    init() {
+        timetableDetailsRelay = .init(value: details)
+        timetableDetails = timetableDetailsRelay.asObservable()
+    }
     
     func isFirstAppOpening() -> Bool {
         return true
@@ -46,7 +53,7 @@ class FakeUserPreferences : UserPreferences {
     }
     
     func getTimetableDetails() -> TimetableDetails? {
-        return TimetableDetails(groupId: 10, groupName: "БПИ16-01", timestamp: nil)
+        return details
     }
     
     func clearTimetableDetails() {

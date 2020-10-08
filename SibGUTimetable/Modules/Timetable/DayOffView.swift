@@ -15,7 +15,6 @@ class DayOffView: UIView {
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.image = UIImage(named: "day_off_3")
         view.contentMode = .scaleAspectFit
         view.setContentCompressionResistancePriority(.init(749), for: .vertical)
         view.setContentHuggingPriority(.init(251), for: .vertical)

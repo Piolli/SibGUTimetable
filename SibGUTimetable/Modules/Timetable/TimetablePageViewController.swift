@@ -44,7 +44,7 @@ class TimetablePageViewController : UIViewController {
     public var timetable: Timetable? {
         didSet {
             guard let timetable = timetable else { fatalError("self = nil") }
-            let pageViewDataSource = CustomizablePageViewDataSource<Date, TimetableLessonListController>.init(
+            let dataSource = CustomizablePageViewDataSource<Date, TimetableLessonListController>.init(
                 startIterableValue: startDate,
                 contentBuilder: { (date) -> TimetableLessonListController in
                     let vc = TimetableLessonListController()
@@ -59,7 +59,7 @@ class TimetablePageViewController : UIViewController {
                     return viewController.date
                 }
             )
-            self.pageViewDataSource = pageViewDataSource
+            self.pageViewDataSource = dataSource
             self.pageViewController.dataSource = self.pageViewDataSource
         }
     }

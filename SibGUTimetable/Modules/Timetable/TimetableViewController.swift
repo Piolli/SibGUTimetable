@@ -33,7 +33,7 @@ class TimetableViewController: UIViewController {
     private let timetableDetails: PublishRelay<TimetableDetails?> = .init()
     
     var input: TimetableViewModel.Input {
-        return .init(timetableDetails: timetableDetails.asObservable())
+        return .init(timetableDetails: userPreferences.timetableDetails)
     }
     
     init(viewModel: TimetableViewModel) {
@@ -76,8 +76,6 @@ class TimetableViewController: UIViewController {
         
         initAppearance()
         bind(output: viewModel.transform(input: input))
-        timetableDetails.accept(userPreferences.getTimetableDetails())
-//        checkExistingTimetableDetails()
     }
     
     deinit {
@@ -171,8 +169,6 @@ class TimetableViewController: UIViewController {
             view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
     }
-    
-    
     
     func bind(output: TimetableViewModel.Output) {
         output.timetable.drive(onNext: { [weak self] (timetableResult) in

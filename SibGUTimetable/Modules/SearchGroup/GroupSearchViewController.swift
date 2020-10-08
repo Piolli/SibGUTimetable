@@ -130,6 +130,9 @@ extension GroupSearchViewController : UITableViewDelegate {
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self] timetable in
                     //TODO: --------------------------------------CHECK ON ERRORS
+                    if timetable.timetable == nil {
+                        return
+                    }
                     self?.stopAnimating()
                     self?.viewModelController.save(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name, timestamp: timetable.timetable!.updateTimestamp))
                     self?.navigationController?.popViewController(animated: true)

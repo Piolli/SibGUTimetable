@@ -36,7 +36,13 @@ class TimetableViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let timetable = input
             .timetableDetails
-            .compactMap { $0 }
+            .compactMap {
+                if $0 == nil {
+                    //TODO: show error
+                    logger.error("THERE'S NO TIMETABLE")
+                }
+                return $0
+            }
             .debug()
             //map without error???
             .flatMap { [dataManager] in

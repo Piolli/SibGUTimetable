@@ -26,7 +26,7 @@ class CustomizablePageViewController<T: Comparable, C: UIViewController> : UIPag
     lazy var pageDidMoveDirection: PublishRelay<CustomizablePageViewMoveDirection> = .init()
     lazy var tableViewOffsetDidChange: PublishRelay<CGPoint> = .init()
     
-    weak private (set) var customizableDataSource: CustomizablePageViewDataSource<T, C>? {
+    private (set) var customizableDataSource: CustomizablePageViewDataSource<T, C>? {
         didSet {
             guard let vc = self.customizableDataSource!.select(iterableValue: self.customizableDataSource!.iterableValue) else {
                 logger.error("selected iterable value is nil")
