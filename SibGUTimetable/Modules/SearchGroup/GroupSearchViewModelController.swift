@@ -31,19 +31,6 @@ class GroupSearchViewModelController {
         self.error = .init()
     }
     
-    public func searchGroup(query: String) {
-        loading.accept(true)
-        api.findGroup(queryGroupName: query)
-            .observeOn(MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] (groupPairs) in
-            self?.viewModel.accept(GroupSearchViewModel(groupPairs: groupPairs))
-            self?.loading.accept(false)
-        }) { [weak self] (error) in
-            self?.error.accept(error)
-            self?.loading.accept(false)
-        }.disposed(by: disposeBag)
-    }
-    
     public func save(timetableDetails: TimetableDetails) {
         userPreferences.saveTimetableDetails(timetableDetails)
     }

@@ -35,6 +35,9 @@ target 'SibGUTimetable' do
   # Show message on screen
   pod 'SPAlert'
   
+  # Some utilities (e.g. activity indicator for loading)
+  pod "RxSwiftUtilities"
+  
   target 'SibGUTimetableTests' do
     inherit! :search_paths
     # Pods for testing

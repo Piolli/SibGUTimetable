@@ -29,6 +29,7 @@
 		114C9E4A23D6B72700BED746 /* GroupSearchViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4923D6B72700BED746 /* GroupSearchViewModelController.swift */; };
 		114C9E4C23D6B86000BED746 /* GroupSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */; };
 		116F623F24FFF1FF009AF77D /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F623E24FFF1FF009AF77D /* OnboardingCoordinator.swift */; };
+		1176B251253870570045E4A7 /* NVActivityIndicatorView + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1176B250253870570045E4A7 /* NVActivityIndicatorView + Ext.swift */; };
 		1177059F248E769900483E0A /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 1177059E248E769900483E0A /* Logging */; };
 		117705A1248E7F7700483E0A /* CustomLogHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117705A0248E7F7700483E0A /* CustomLogHandler.swift */; };
 		117F4F5924B8A7DB00FB2384 /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117F4F5824B8A7DB00FB2384 /* UIColor + Ext.swift */; };
@@ -146,6 +147,7 @@
 		114C9E4923D6B72700BED746 /* GroupSearchViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewModelController.swift; sourceTree = "<group>"; };
 		114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewModel.swift; sourceTree = "<group>"; };
 		116F623E24FFF1FF009AF77D /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		1176B250253870570045E4A7 /* NVActivityIndicatorView + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NVActivityIndicatorView + Ext.swift"; sourceTree = "<group>"; };
 		117705A0248E7F7700483E0A /* CustomLogHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogHandler.swift; sourceTree = "<group>"; };
 		117F4F5824B8A7DB00FB2384 /* UIColor + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Ext.swift"; sourceTree = "<group>"; };
 		11845E9324B8434500791186 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 				11B14BEC23E841FA00B44958 /* UIViewController + Ext.swift */,
 				117F4F5824B8A7DB00FB2384 /* UIColor + Ext.swift */,
 				11F1F9D2251A610D006EF7DF /* Acknow + Ext.swift */,
+				1176B250253870570045E4A7 /* NVActivityIndicatorView + Ext.swift */,
 			);
 			name = Extensions;
 			path = Network/Extensions;
@@ -1048,6 +1051,7 @@
 				11FD6645241681ED00844150 /* LessonSubgroupCell.swift in Sources */,
 				60953995244668EE378EFDBF /* TimetableRepository.swift in Sources */,
 				60953CAAB0C4B89192F73D4F /* CoreDataTimetableRepository.swift in Sources */,
+				1176B251253870570045E4A7 /* NVActivityIndicatorView + Ext.swift in Sources */,
 				1141FA5F23CA09BB00796667 /* APIServer.swift in Sources */,
 				60953201621C1FC9AD6239EC /* TimetableViewModelController.swift in Sources */,
 				117705A1248E7F7700483E0A /* CustomLogHandler.swift in Sources */,
