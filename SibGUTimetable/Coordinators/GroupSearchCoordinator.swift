@@ -22,8 +22,7 @@ class GroupSearchCoordinator : Coordinator {
 
     init(appCoordinator: AppCoordinator, dataManager: TimetableDataManager) {
         self.appCoordinator = appCoordinator
-        groupSearchViewController = GroupSearchViewController(timetableManager: dataManager)
-        groupSearchViewController.apiServer = NativeAPIServer.sharedInstance
+        groupSearchViewController = GroupSearchViewController(viewModel: GroupSearchViewModel(api: Assembler.shared.resolve()))
         groupSearchViewController.coordinator = self
     }
     

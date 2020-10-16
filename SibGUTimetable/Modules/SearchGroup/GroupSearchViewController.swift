@@ -16,25 +16,24 @@ import NVActivityIndicatorView
 
 class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
 
-    private static let cellId = "groupPair"
-    private weak var timetableManager: TimetableDataManager?
-    
-    var coordinator: GroupSearchCoordinator!
     let viewModel: GroupSearchViewModel
-    var apiServer: APIServer!
+    var coordinator: GroupSearchCoordinator!
     var disposeBag = DisposeBag()
     var searchController: UISearchController!
-    var activityIndicatorView: NVActivityIndicatorView!
     
     var input: GroupSearchViewModel.Input {
-        return .init(groupName: searchController.searchBar.rx.text.orEmpty.asDriver().debug("input:", trimOutput: false))
+        return .init(
+            groupName: searchController.searchBar.rx.text.orEmpty.asDriver().debug("input:", trimOutput: false),
+            selectedGroup: tableView.rx.modelSelected(GroupPairIDName.self).asDriver()
+        )
     }
     
-    init(timetableManager: TimetableDataManager) {
-        self.timetableManager = timetableManager
-        self.viewModel = .init(api: NativeAPIServer())
-        super.init(nibName: nil, bundle: nil)
-    }
+    var tableView: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
+        return table
+    }()
     
     init(viewModel: GroupSearchViewModel) {
         self.viewModel = viewModel
@@ -45,54 +44,44 @@ class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var tableView: UITableView = {
-        let table = UITableView()
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
-        return table
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.addSubview(tableView)
-//        tableView.dataSource = self
-//        tableView.delegate = self
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
+        
         tableView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview()
         }
+        
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.sizeToFit()
-        
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.hidesSearchBarWhenScrolling = false
-        
         let searchBar = searchController.searchBar
-        
         searchBar.returnKeyType = .done
         searchBar.placeholder = LocalizedStrings.Enter_a_group_name
-        
         navigationItem.searchController = searchController
-        
-        //setup activity indicator
-        activityIndicatorView = .init(frame: CGRect(x: view.bounds.width/2, y: view.bounds.height/2, width: 75, height: 75), type: .lineScaleParty, color: .blue, padding: nil)
-        view.addSubview(activityIndicatorView)
-        
         navigationItem.title = LocalizedStrings.Group_search
-        startAnimating()
+        
         bindViewModel()
     }
     
     func bindViewModel() {
         let output = viewModel.transform(input: input)
-        output.groupsPair.asObservable().bind(to: tableView.rx.items(cellIdentifier: String(describing: UITableViewCell.self), cellType: UITableViewCell.self)) {  (row,item,cell) in
-            cell.textLabel?.text = "\(item.id) – \(item.name)"
-        }.disposed(by: disposeBag)
-        
-        output.isLoading.drive(self.rx.isAnimating).disposed(by: disposeBag)
-    
+        disposeBag.insert([
+            output.groupsPair.asObservable().bind(to: tableView.rx.items(cellIdentifier: String(describing: UITableViewCell.self), cellType: UITableViewCell.self)) {  (row, item, cell) in
+                cell.textLabel?.text = item.description
+            },
+            output.isLoading.drive(self.rx.isAnimating),
+            output.errors.drive(errorBinding)
+        ])
     }
     
+    var errorBinding: Binder<Error> {
+        return Binder(self, binding: { (vc, error) in
+            SPAlert.present(message: error.localizedDescription)
+        })
+    }
 }
 
 //extension GroupSearchViewController : UITableViewDataSource {

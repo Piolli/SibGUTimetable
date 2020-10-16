@@ -11,9 +11,13 @@ import RxSwift
 import RxCocoa
 
 
-struct GroupPairIDName: Decodable {
+struct GroupPairIDName: Decodable, CustomStringConvertible {
     let id: Int
     let name: String
+    
+    var description: String {
+        "\(self.id) – \(self.name)"
+    }
 }
 
 struct UserIssue: Codable {

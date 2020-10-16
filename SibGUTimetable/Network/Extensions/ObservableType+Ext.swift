@@ -8,6 +8,8 @@
 
 import Foundation
 import RxSwift
+import RxRelay
+import RxCocoa
 
 public extension ObservableType {
     /**
@@ -28,5 +30,13 @@ public extension ObservableType where Element: Comparable {
     */
     func toSortedArray(ascending: Bool = true) -> Single<[Element]> {
         return toSortedArray(by: { ascending ? $0 < $1 : $0 > $1 })
+    }
+}
+
+public extension ObservableType {
+    func trackErrors(_ observer: PublishRelay<Error>) -> Observable<Self.Element> {
+        return self.do( onError: { (error) in
+            observer.accept(error)
+        })
     }
 }
