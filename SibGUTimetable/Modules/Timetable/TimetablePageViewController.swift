@@ -47,9 +47,8 @@ class TimetablePageViewController : UIViewController {
             let dataSource = CustomizablePageViewDataSource<Date, TimetableLessonListController>.init(
                 startIterableValue: startDate,
                 contentBuilder: { (date) -> TimetableLessonListController in
-                    let vc = TimetableLessonListController()
+                    let vc = TimetableLessonListController(viewModel: timetable.getDayViewModel(at: date))
                     vc.date = date
-                    vc.viewModel = timetable.getDayViewModel(at: date)
                     return vc
                 }, nextIterableValue: { (date) -> Date in
                     return date.followingDateByDay()

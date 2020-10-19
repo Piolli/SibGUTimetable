@@ -222,7 +222,6 @@ class TimetableViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(containerView)
         makeTimetableConstraints(containerView: containerView)
-        updateTimetableFromSelectedDateCalendarView()
         add(viewController: timetablePageViewController, to: containerView)
     }
     

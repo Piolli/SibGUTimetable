@@ -39,5 +39,12 @@ extension UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    func checkAmbiguousLayout(_ view: UIView) {
+        for subview in view.subviews {
+            _ = subview.hasAmbiguousLayout
+              checkAmbiguousLayout(subview)
+        }
+    }
+    
 }
 

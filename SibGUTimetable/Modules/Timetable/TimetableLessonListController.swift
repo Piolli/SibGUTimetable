@@ -11,14 +11,23 @@ import UIKit
 
 class TimetableLessonListController: UITableViewController {
     
-    var viewModel: TimetableDayViewModel?
+    let viewModel: TimetableDayViewModel
     var contentOffsetDidChange: ((CGPoint) -> ())?
     var date: Date!
     
+    init(viewModel: TimetableDayViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private var contentOffsetObserver: NSKeyValueObservation?
     
-    var isDayOff: Bool? {
-        return viewModel?.countOflessons == 0
+    var isDayOff: Bool {
+        return viewModel.countOflessons == 0
     }
 
     override func viewDidLoad() {
@@ -33,10 +42,6 @@ class TimetableLessonListController: UITableViewController {
         tableView.allowsSelection = false
         tableView.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor
         
-        if let isDayOff = isDayOff, isDayOff {
-            setupDayOffView()
-        }
-        
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100.0
         
@@ -44,6 +49,11 @@ class TimetableLessonListController: UITableViewController {
             guard let newValue = value.newValue else { return }
             self?.contentOffsetDidChange?(newValue)
         }
+        
+        if isDayOff {
+            setupDayOffView()
+        }
+
     }
     
     func setupDayOffView() {
@@ -79,18 +89,20 @@ class TimetableLessonListController: UITableViewController {
         contentOffsetObserver?.invalidate()
     }
     
-    
-    private func checkAmbiguousLayout(_ view: UIView) { for subview in view.subviews {
-        _ = subview.hasAmbiguousLayout
-          checkAmbiguousLayout(subview)
-        }
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        UIView.exerciseAmbiguity(view)
-        checkAmbiguousLayout(view)
-//        print(view.value(forKey: "_autolayoutTrace")!)
+        ///#It produces warnings about 'Ambiguous layout'. But after some researches it works well.
+        ///Notes:
+        ///0. in viewDidAppear DayOffView doesn't have frame (0 0, 0 0)
+        ///1. adding setNeedsLayout() + layoutIfNeeded() after DayOffView's setup eliminates warnings
+        ///2. a check of ambiguous layout after a couple of seconds doesn't show any warnings
+        ///3. after directional swiping this warnings eliminates.
+        ///4. If first added view controller to UIPageViewController contains DayOffView, it produces warnings.
+        ///5. If first added view controller is just table view with lessons - there's no warnings.
+        ///6. In `OnboardingItemViewController` this bug reproduces like in this case.
+        ///# recap: bug might be in CustomizablePageViewController and related classes
+        ///# uncomment code below for bug reproducing
+//         checkAmbiguousLayout(view)
     }
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -102,7 +114,7 @@ class TimetableLessonListController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.countOflessons ?? 0
+        return viewModel.countOflessons
     }
     
     /// Rounds corners for first and last cell
@@ -130,14 +142,14 @@ class TimetableLessonListController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let count = viewModel?.lessonViewModels(at: indexPath)?.count, count > 1 {
+        if let count = viewModel.lessonViewModels(at: indexPath)?.count, count > 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "subgroupCell", for: indexPath) as! LessonSubgroupCell
-            cell.lessonViewModels = viewModel!.lessonViewModels(at: indexPath)!
+            cell.lessonViewModels = viewModel.lessonViewModels(at: indexPath)!
             roundCellCorners(cell, indexPath)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LessonCell
-            cell.viewModel = viewModel?.lessonViewModels(at: indexPath)?[0]
+            cell.viewModel = viewModel.lessonViewModels(at: indexPath)?[0]
             roundCellCorners(cell, indexPath)
             return cell
         }
