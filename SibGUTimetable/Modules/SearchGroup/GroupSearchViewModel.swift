@@ -15,10 +15,12 @@ import RxSwiftUtilities
 class GroupSearchViewModel {
     
     private let api: APIServer
+    private let dataManager: TimetableDataManager
     private let userPreferences: UserPreferences = Assembler.shared.resolve()
     
-    init(api: APIServer) {
+    init(api: APIServer, dataManager: TimetableDataManager) {
         self.api = api
+        self.dataManager = dataManager
     }
     
     func transform(input: Input) -> Output {
@@ -37,27 +39,34 @@ class GroupSearchViewModel {
                 return self.api.findGroup(queryGroupName: groupName)
                     .trackActivity(isLoadingIndicator)
                     .trackErrors(errorsTracker)
-                    .asDriver { (error) -> Driver<[GroupPairIDName]> in
-                        logger.error("SOME RROR")
-                        return .empty()
-                    }
+                    .asDriverOnErrorJustReturnEmpty()
             }
         
-        let preloadTimetable = input
-            .selectedGroup
-            .distinctUntilChanged {
-                $0.description
+        let preloadTimetable = input.selectedGroup
+            .debug()
+            .throttle(.milliseconds(150))
+            .map { $0.toTimetableDetails() }
+            .flatMapLatest { (details) -> Driver<Void> in
+                return self.dataManager.checkTimetableExisting(details)
+                    .debug()
+                    .trackActivity(isLoadingIndicator)
+                    .trackErrors(errorsTracker)
+                    .do(onNext: { () in
+                        self.save(timetableDetails: details)
+                    })
+                    .asDriverOnErrorJustReturnEmpty()
             }
-            .map { _ in return Void() }
             
-        return .init(groupsPair: groupPairs, isLoading: isLoadingIndicator.asDriver(onErrorJustReturn: false), preloadCompleted: preloadTimetable, errors: errorsTracker.asDriver(onErrorRecover: { (error) -> Driver<Error> in
-            logger.critical("Errors emitter got error :)")
-            return .empty()
-        }))
+        return .init(groupsPair: groupPairs,
+                     isLoading: isLoadingIndicator.asDriver(onErrorJustReturn: false),
+                     preloadCompleted: preloadTimetable,
+                     errors: errorsTracker.asDriverOnErrorJustReturnEmpty()
+        )
     }
     
     public func save(timetableDetails: TimetableDetails) {
         userPreferences.saveTimetableDetails(timetableDetails)
+        logger.debug("new timetableDetails was saved")
     }
     
 }

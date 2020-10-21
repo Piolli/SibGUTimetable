@@ -25,10 +25,7 @@ class ServerRepository : TimetableRepository {
         return NativeAPIServer.sharedInstance
             .fetchTimetable(timetableDetails: timetableDetails, jsonDecoder: jsonDecoder)
             .map { (timetable) -> TimetableFetchResult in
-                return TimetableFetchResult(timetable: timetable, storage: .remote, error: nil)
-            }
-            .catchError { (error) -> Single<TimetableFetchResult> in
-                return .just(TimetableFetchResult(timetable: nil, storage: .remote, error: error))
+                return TimetableFetchResult(timetable: timetable, storage: .remote)
             }
     }
     

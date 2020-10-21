@@ -15,12 +15,10 @@ class CoreDataTimetableRepository : TimetableRepository {
     func getTimetable(_ timetableDetails: TimetableDetails) -> Single<TimetableFetchResult> {
         return fetchAll(with: timetableDetails)
             .map({ (timetable) -> TimetableFetchResult in
-                return TimetableFetchResult(timetable: timetable, storage: .local, error: nil)
+                return TimetableFetchResult(timetable: timetable, storage: .local)
             })
-            .catchError { (error) -> Observable<TimetableFetchResult> in
-                return .just(TimetableFetchResult(timetable: nil, storage: .local, error: error))
-            }
-            .ifEmpty(default: TimetableFetchResult(timetable: nil, storage: .local, error: TimetableDataManagerError.emptyStore))
+            .ifEmpty(switchTo: Observable.error(
+                        RxError.noElements))
             .takeLast(1)
             .asSingle()
     }

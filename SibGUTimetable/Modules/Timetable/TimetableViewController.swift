@@ -68,11 +68,6 @@ class TimetableViewController: UIViewController {
         setupLeftBarButton()
         
         setupTimetablePageViewController()
-//        //setup autoupdate
-//        userPreferences.timetableDetailsDidChanged.subscribe(onNext: { (timetableDetails) in
-//            guard let timetableDetails = timetableDetails else { return }
-//            self.dataManager.loadTimetable(timetableDetails: timetableDetails)
-//        }).disposed(by: disposeBag)
         
         initAppearance()
         bind(output: viewModel.transform(input: input))
@@ -81,16 +76,6 @@ class TimetableViewController: UIViewController {
     deinit {
         logger.debug("deinit TimetableViewController")
     }
-    
-//    func checkExistingTimetableDetails() {
-//        if let timetableDetails = userPreferences.getTimetableDetails() {
-//            logger.debug("timetableDetails: \(timetableDetails)")
-//            dataManager.loadTimetable(timetableDetails: timetableDetails)
-//        } else {
-//            //TODO: add localization
-//            showMessage(text: "Choose group from left side menu", title: "Error")
-//        }
-//    }
     
     func setupLeftBarButton() {
         let iconImage = UIImage(named: "side_menu_icon")?.withRenderingMode(.alwaysTemplate)
@@ -172,31 +157,14 @@ class TimetableViewController: UIViewController {
     
     func bind(output: TimetableViewModel.Output) {
         output.timetable.drive(onNext: { [weak self] (timetableResult) in
-            guard let self = self, timetableResult.error == nil else {
-                logger.error("Error on get timetable: \(timetableResult.error?.localizedDescription ?? "")")
+            guard let self = self else {
+                logger.error("self = nil")
                 return
             }
-            //show error
-            self.navigationItem.title = timetableResult.timetable?.group_name ?? ""
+            self.navigationItem.title = timetableResult.timetable.group_name
             self.timetablePageViewController.timetable = timetableResult.timetable
-            
         }, onCompleted: nil, onDisposed: nil)
         .disposed(by: disposeBag)
-//        viewModel.output.timetable
-//            .drive(onNext: { (timetableResult) in
-//                if timetableResult.error != nil {
-//                    //show error
-//                    logger.error("error on get timetable: \(timetableResult.error)")
-//
-//                } else {
-//                    self.timetablePageViewController.timetable = timetableResult.timetable
-//                }
-//            }, onCompleted: nil, onDisposed: nil)
-//            .disposed(by: disposeBag)
-//
-//        userPreferences.timetableDetailsDidChanged.subscribe(viewModel.input.timetableDetailsInput).disposed(by: disposeBag)
-//
-//        viewModel.input.timetableDetailsInput.onNext(TimetableDetails(groupId: 0, groupName: "МПИ20-01"))
     }
     
     func setupTimetablePageViewController() {

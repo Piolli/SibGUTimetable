@@ -21,7 +21,7 @@ class FakeLocalTTRepository: TimetableRepository {
     
     func getTimetable(_ timetableDetails: TimetableDetails) -> Single<TimetableFetchResult> {
         return Single.create { (single) -> Disposable in
-            single(.success(TimetableFetchResult.init(timetable: self.timetable, storage: .local, error: nil)))
+            single(.success(TimetableFetchResult.init(timetable: self.timetable, storage: .local)))
             return Disposables.create()
         }.debug("FakeLocalTTRepository (get)", trimOutput: false)
     }

@@ -23,7 +23,7 @@ class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
     
     var input: GroupSearchViewModel.Input {
         return .init(
-            groupName: searchController.searchBar.rx.text.orEmpty.asDriver().debug("input:", trimOutput: false),
+            groupName: searchController.searchBar.rx.text.orEmpty.asDriver(),
             selectedGroup: tableView.rx.modelSelected(GroupPairIDName.self).asDriver()
         )
     }
@@ -49,6 +49,12 @@ class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
         view.addSubview(tableView)
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
         
+        Observable
+            .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(GroupPairIDName.self))
+            .bind { [weak self] (indexPath, model) in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            }.disposed(by: disposeBag)
+        
         tableView.snp.makeConstraints { (maker) in
             maker.edges.equalToSuperview()
         }
@@ -73,13 +79,20 @@ class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
                 cell.textLabel?.text = item.description
             },
             output.isLoading.drive(self.rx.isAnimating),
-            output.errors.drive(errorBinding)
+            output.errors.drive(errorBinding),
+            output.preloadCompleted.drive(successBinding)
         ])
     }
     
     var errorBinding: Binder<Error> {
         return Binder(self, binding: { (vc, error) in
             SPAlert.present(message: error.localizedDescription)
+        })
+    }
+    
+    var successBinding: Binder<Void> {
+        return Binder(self, binding: { (vc, error) in
+            SPAlert.present(message: "Update timetable!")
         })
     }
 }
@@ -99,8 +112,9 @@ class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
 //
 //}
 //
-//extension GroupSearchViewController : UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension GroupSearchViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
 //        if let pair = viewModel?.groupPairs[indexPath.row], let timetableManager = self.timetableManager {
 //            startAnimating()
 //            let timetableDetails = TimetableDetails(groupId: pair.id, groupName: pair.name)
@@ -134,7 +148,7 @@ class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
 //        }
 //
 //        tableView.deselectRow(at: indexPath, animated: true)
-//    }
-//}
+    }
+}
 
 

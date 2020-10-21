@@ -39,4 +39,13 @@ public extension ObservableType {
             observer.accept(error)
         })
     }
+    
+    func asDriverOnErrorJustReturnEmpty(_ isLogging: Bool = true) -> Driver<Self.Element> {
+        return self.asDriver { (error) -> Driver<Self.Element> in
+            if isLogging {
+                logger.error("Cast Observable to Driver: \(error.localizedDescription). Return .empty()")
+            }
+            return .empty()
+        }
+    }
 }

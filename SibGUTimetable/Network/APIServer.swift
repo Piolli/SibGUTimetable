@@ -18,6 +18,10 @@ struct GroupPairIDName: Decodable, CustomStringConvertible {
     var description: String {
         "\(self.id) – \(self.name)"
     }
+    
+    func toTimetableDetails() -> TimetableDetails {
+        return .init(groupId: id, groupName: name)
+    }
 }
 
 struct UserIssue: Codable {
