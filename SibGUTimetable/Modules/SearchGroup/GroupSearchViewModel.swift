@@ -17,10 +17,12 @@ class GroupSearchViewModel {
     private let api: APIServer
     private let dataManager: TimetableDataManager
     private let userPreferences: UserPreferences = Assembler.shared.resolve()
+    private unowned let coordinator: GroupSearchCoordinator
     
-    init(api: APIServer, dataManager: TimetableDataManager) {
+    init(api: APIServer, dataManager: TimetableDataManager, coordinator: GroupSearchCoordinator) {
         self.api = api
         self.dataManager = dataManager
+        self.coordinator = coordinator
     }
     
     func transform(input: Input) -> Output {
@@ -46,13 +48,19 @@ class GroupSearchViewModel {
             .debug()
             .throttle(.milliseconds(150))
             .map { $0.toTimetableDetails() }
-            .flatMapLatest { (details) -> Driver<Void> in
+            .flatMapLatest { [weak self] (details) -> Driver<Void> in
+                guard let self = self else {
+                    logger.error("self = nil")
+                    return .empty()
+                }
                 return self.dataManager.checkTimetableExisting(details)
                     .debug()
                     .trackActivity(isLoadingIndicator)
                     .trackErrors(errorsTracker)
+                    .observeOn(MainScheduler.instance)
                     .do(onNext: { () in
                         self.save(timetableDetails: details)
+                        self.coordinator.dismissViewController()
                     })
                     .asDriverOnErrorJustReturnEmpty()
             }

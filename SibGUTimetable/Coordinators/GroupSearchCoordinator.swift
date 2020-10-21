@@ -13,7 +13,7 @@ import RxCocoa
 
 class GroupSearchCoordinator : Coordinator {
     
-    let groupSearchViewController: GroupSearchViewController
+    var groupSearchViewController: GroupSearchViewController!
     let appCoordinator: AppCoordinator
     
     var rootViewController: UIViewController {
@@ -22,8 +22,12 @@ class GroupSearchCoordinator : Coordinator {
 
     init(appCoordinator: AppCoordinator, dataManager: TimetableDataManager) {
         self.appCoordinator = appCoordinator
-        groupSearchViewController = GroupSearchViewController(viewModel: GroupSearchViewModel(api: Assembler.shared.resolve(), dataManager: dataManager))
-        groupSearchViewController.coordinator = self
+        let viewModel = GroupSearchViewModel(api: Assembler.shared.resolve(), dataManager: dataManager, coordinator: self)
+        groupSearchViewController = GroupSearchViewController(viewModel: viewModel)
+    }
+    
+    func dismissViewController() {
+        rootViewController.navigationController?.popViewController(animated: true)
     }
     
 //    #if DEBUG

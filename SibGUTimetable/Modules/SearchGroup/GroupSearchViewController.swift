@@ -17,7 +17,6 @@ import NVActivityIndicatorView
 class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
 
     let viewModel: GroupSearchViewModel
-    var coordinator: GroupSearchCoordinator!
     var disposeBag = DisposeBag()
     var searchController: UISearchController!
     
