@@ -12,8 +12,8 @@ import UIKit
 class TimetableLessonListController: UITableViewController {
     
     let viewModel: TimetableDayViewModel
-    var contentOffsetDidChange: ((CGPoint) -> ())?
     var date: Date!
+    private var cellFrames: [IndexPath: CGSize] = [:]
     
     init(viewModel: TimetableDayViewModel) {
         self.viewModel = viewModel
@@ -23,8 +23,6 @@ class TimetableLessonListController: UITableViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private var contentOffsetObserver: NSKeyValueObservation?
     
     var isDayOff: Bool {
         return viewModel.countOflessons == 0
@@ -36,24 +34,13 @@ class TimetableLessonListController: UITableViewController {
         tableView.register(LessonCell.self, forCellReuseIdentifier: "cell")
         tableView.register(LessonSubgroupCell.self, forCellReuseIdentifier: "subgroupCell")
         tableView.separatorStyle = .singleLine
-//        tableView.separatorInsetReference = .fromAutomaticInsets
-//        tableView.separatorInset = .init(top: 18, left: 0, bottom: 18, right: 0)
         tableView.tableFooterView = UIView()
         tableView.allowsSelection = false
         tableView.backgroundColor = ThemeProvider.shared.calendarViewBackgroungColor
         
-        self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.estimatedRowHeight = 100.0
-        
-        contentOffsetObserver = tableView.observe(\UITableView.contentOffset, options: .new) { [weak self](tableView, value) in
-            guard let newValue = value.newValue else { return }
-            self?.contentOffsetDidChange?(newValue)
-        }
-        
         if isDayOff {
             setupDayOffView()
         }
-
     }
     
     func setupDayOffView() {
@@ -85,10 +72,6 @@ class TimetableLessonListController: UITableViewController {
         ])
     }
     
-    deinit {
-        contentOffsetObserver?.invalidate()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         ///#It produces warnings about 'Ambiguous layout'. But after some researches it works well.
@@ -105,12 +88,6 @@ class TimetableLessonListController: UITableViewController {
 //         checkAmbiguousLayout(view)
     }
     
-    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        logger.trace("velocity: \(velocity)")
-        logger.trace("pointee: \(targetContentOffset.pointee)")
-        self.contentOffsetDidChange?(velocity)
-    }
-
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -154,45 +131,33 @@ class TimetableLessonListController: UITableViewController {
             return cell
         }
     }
-    
-//    var cells: [IndexPath: UITableViewCell] = [:]
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.setNeedsLayout()
-        cell.layoutIfNeeded()
-//        cells[indexPath] = cell
-    }
-    
-//    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        guard let cell = cells[indexPath] else {
-//            return super.tableView(tableView, heightForRowAt: indexPath)
-//        }
-//        return cell.frame.height
-//    }
-//    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        guard let cell = cells[indexPath] else {
-//            return super.tableView(tableView, heightForRowAt: indexPath)
-//        }
-//        return cell.frame.height
-//    }
-    
 }
 
-extension UIView {
-    class func exerciseAmbiguity(_ view: UIView) {
-    #if DEBUG
-        if view.hasAmbiguousLayout {
-           Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-                view.exerciseAmbiguityInLayout()
-                logger.debug("Debug layout")
-            }
-          } else {
-            for subview in view.subviews {
-                UIView.exerciseAmbiguity(subview)
-                logger.debug("Debug layout")
-            }
-          }
-          #endif
+// MARK: - Calculate TableView's cells height
+extension TimetableLessonListController {
+    /// This method is called after heightForRow (returned from cellForRowAt).
+    /// Method calculates height for manual layout cell (LessonSubgroupCell)
+    /// Saves calculated cell's frame to `cellFrames`
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cellFrames[indexPath] == nil {
+            cell.setNeedsLayout()
+            cell.layoutIfNeeded()
+            cellFrames[indexPath] = cell.frame.size
         }
+    }
+    
+    /// This method is called after dequeReusableCell and cellForRowAt methods
+    ///#Note: this method also is called if tableView can't guess height for cell
+    /// Call stack:
+    /// -[UISectionRowData heightForRow:inSection:canGuess:] ()
+    /// -[UITableViewRowData heightForRow:inSection:canGuess:adjustForReorderedRow:] ()
+    /// -[UITableViewRowData rectForRow:inSection:heightCanBeGuessed:] ()
+    /// -[UITableViewRowData rectForGlobalRow:heightCanBeGuessed:] ()
+    /// - Returns: cell's height from `cellFrames` dict
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let frame = cellFrames[indexPath] else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+        return frame.height
+    }
 }

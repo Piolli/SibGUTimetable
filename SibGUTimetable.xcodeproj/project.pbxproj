@@ -26,6 +26,7 @@
 		1141FA5F23CA09BB00796667 /* APIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141FA5E23CA09BB00796667 /* APIServer.swift */; };
 		1141FA6523CA0F3300796667 /* NativeServerAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141FA6423CA0F3300796667 /* NativeServerAPITests.swift */; };
 		1149607E24E836B000168303 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1149607D24E836B000168303 /* FeedbackViewController.swift */; };
+		114C4819254807940027E8BD /* UIView + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C4818254807940027E8BD /* UIView + Ext.swift */; };
 		114C9E4A23D6B72700BED746 /* GroupSearchViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4923D6B72700BED746 /* GroupSearchViewModelController.swift */; };
 		114C9E4C23D6B86000BED746 /* GroupSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */; };
 		116F623F24FFF1FF009AF77D /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F623E24FFF1FF009AF77D /* OnboardingCoordinator.swift */; };
@@ -144,6 +145,7 @@
 		1141FA5E23CA09BB00796667 /* APIServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServer.swift; sourceTree = "<group>"; };
 		1141FA6423CA0F3300796667 /* NativeServerAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeServerAPITests.swift; sourceTree = "<group>"; };
 		1149607D24E836B000168303 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		114C4818254807940027E8BD /* UIView + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Ext.swift"; sourceTree = "<group>"; };
 		114C9E4923D6B72700BED746 /* GroupSearchViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewModelController.swift; sourceTree = "<group>"; };
 		114C9E4B23D6B86000BED746 /* GroupSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchViewModel.swift; sourceTree = "<group>"; };
 		116F623E24FFF1FF009AF77D /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
@@ -593,6 +595,7 @@
 				117F4F5824B8A7DB00FB2384 /* UIColor + Ext.swift */,
 				11F1F9D2251A610D006EF7DF /* Acknow + Ext.swift */,
 				1176B250253870570045E4A7 /* NVActivityIndicatorView + Ext.swift */,
+				114C4818254807940027E8BD /* UIView + Ext.swift */,
 			);
 			name = Extensions;
 			path = Network/Extensions;
@@ -1029,6 +1032,7 @@
 				11EA09C623C0507400CA52C2 /* Coordinator.swift in Sources */,
 				111E0D73240E7F4C000F4D4B /* AboutAppViewController.swift in Sources */,
 				114C9E4A23D6B72700BED746 /* GroupSearchViewModelController.swift in Sources */,
+				114C4819254807940027E8BD /* UIView + Ext.swift in Sources */,
 				11B75A6624ED42C6002E188D /* Timetable+CoreDataProperties.swift in Sources */,
 				A8E3BC4C22D1F7A7006E1B65 /* TimetableLessonListController.swift in Sources */,
 				1114AD5923E1982C00E99C84 /* ObservableType+Ext.swift in Sources */,
