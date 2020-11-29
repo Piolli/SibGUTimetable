@@ -11,6 +11,8 @@ protocol TimetableRepository {
     func getTimetable(_ timetableDetails: TimetableDetails) -> Single<TimetableFetchResult>
     
     func save(timetable: Timetable) -> Completable
+    
+    func save(timetable: Timetable, completion: (Result<Void, Error>) -> Void)
  
 }
 

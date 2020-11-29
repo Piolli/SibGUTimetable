@@ -26,4 +26,8 @@ class ServerTTRepositoryTODORemake: TimetableRepository {
         .never()
     }
     
+    func save(timetable: Timetable, completion: (Result<Void, Error>) -> Void) {
+        
+    }
+    
 }

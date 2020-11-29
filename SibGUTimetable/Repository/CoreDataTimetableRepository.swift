@@ -52,34 +52,50 @@ class CoreDataTimetableRepository : TimetableRepository {
     }
     
     func save(timetable: Timetable) -> Completable {
-        return Completable.create { (completed) -> Disposable in
-            guard let groupName = timetable.group_name else {
-                fatalError("Timetable object is invalid")
+        return Completable.create { [weak self] (completed) -> Disposable in
+            guard let self = self else {
+                logger.error("self is nil")
+                completed(.error(TimetableDataManagerError.unknown))
+                return Disposables.create()
             }
-            
-            self.context.performAndWait {
-                do {
-                    let fetchRequest: NSFetchRequest<Timetable> = Timetable.fetchRequest()
-                    fetchRequest.predicate = .init(format: "group_name == %@", groupName)
-                    let count = try self.context.count(for: fetchRequest)
-                    logger.debug("Count of Timetables with duplicate group_name: \(count)")
-                    
-                    let timetables = try self.context.fetch(fetchRequest)
-                    timetables
-                        .sorted(by: <)
-                        //Drop down newest timetable
-                        .dropLast()
-                        .forEach { (timetable) in
-                            try! self.delete(object: timetable)
-                        }
-                    try self.saveContext()
+            self.save(timetable: timetable, completion: { (result) in
+                switch result {
+                case .success(_):
                     completed(.completed)
-                } catch {
-                    logger.error("Fetch timetable from CoreData storage: \(error.localizedDescription)")
+                case .failure(let error):
                     completed(.error(error))
                 }
-            }
+            })
             return Disposables.create()
+        }
+    }
+    
+    func save(timetable: Timetable, completion: (Result<Void, Error>) -> Void) {
+        guard let groupName = timetable.group_name else {
+            fatalError("Timetable object is invalid")
+        }
+        
+        self.context.performAndWait {
+            do {
+                let fetchRequest: NSFetchRequest<Timetable> = Timetable.fetchRequest()
+                fetchRequest.predicate = .init(format: "group_name == %@", groupName)
+                let count = try self.context.count(for: fetchRequest)
+                logger.debug("Count of Timetables with duplicate group_name: \(count)")
+                
+                let timetables = try self.context.fetch(fetchRequest)
+                timetables
+                    .sorted(by: <)
+                    //Drop down newest timetable
+                    .dropLast()
+                    .forEach { (timetable) in
+                        try! self.delete(object: timetable)
+                    }
+                try self.saveContext()
+                completion(.success(()))
+            } catch {
+                logger.error("Fetch timetable from CoreData storage: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
         }
     }
     

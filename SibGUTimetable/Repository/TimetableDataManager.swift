@@ -39,22 +39,15 @@ class TimetableDataManager {
         self.serverRepository = serverRepository
     }
     
-    //TODO: move to NSManagedObject
-    func deleteAll() {
-//        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Timetable")
-//        let deleteReq = NSBatchDeleteRequest(fetchRequest: fetch)
-//        let result = try? AppDelegate.backgroundContext.execute(deleteReq)
-//        try? AppDelegate.backgroundContext.save()
-    }
-    
-    let semaphore = DispatchSemaphore(value: 1)
-    
     func loadTimetable(timetableDetails: TimetableDetails) -> Single<TimetableFetchResult> {
-        
         localRepository.getTimetable(timetableDetails)
             .catchError { (error) in
                 logger.error("Local storage returns error: \(error.localizedDescription)")
                 return self.serverRepository.getTimetable(timetableDetails)
+                    .do(onSuccess: { [weak self] fetchResult in
+                    // persist result to local repository
+                    self?.localRepository.save(timetable: fetchResult.timetable, completion: {_ in })
+                })
             }
     }
     

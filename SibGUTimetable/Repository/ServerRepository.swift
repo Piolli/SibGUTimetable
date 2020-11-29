@@ -33,4 +33,8 @@ class ServerRepository : TimetableRepository {
         fatalError("ServerRepository doesn't support a save method")
     }
     
+    func save(timetable: Timetable, completion: (Result<Void, Error>) -> Void) {
+        fatalError("ServerRepository doesn't support a save method")
+    }
+    
 }

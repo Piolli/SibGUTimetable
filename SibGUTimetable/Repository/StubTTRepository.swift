@@ -17,4 +17,8 @@ class StubTTRepository : TimetableRepository {
     func save(timetable: Timetable) -> Completable {
         return .never()
     }
+    
+    func save(timetable: Timetable, completion: (Result<Void, Error>) -> Void) {
+        
+    }
 }

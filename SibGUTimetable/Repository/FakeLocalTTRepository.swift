@@ -31,4 +31,8 @@ class FakeLocalTTRepository: TimetableRepository {
         return .never()
     }
     
+    func save(timetable: Timetable, completion: (Result<Void, Error>) -> Void) {
+        
+    }
+    
 }
