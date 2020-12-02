@@ -19,14 +19,7 @@ It's the best way to view SibGU's timetable on your iPhone device!
 - For logging is used `swift-log`
 
 ## Screens
-<img src="screenshots/timetable_screen.png" width="49%">
-<img src="screenshots/timetable_dark_theme.png" width="49%">
-
-<img src="screenshots/side_menu.png" width="49%">
-<img src="screenshots/group_searching_screen.png" width="49%">
-
-<img src="screenshots/about_app_screen.png" width="49%">
-<img src="screenshots/day_off_screen.png" width="49%">
-
-<img src="screenshots/feedback_screen.png" width="49%">
-<img src="screenshots/onboarding_screen.png" width="49%">
+![](screenshots/timetable_screen.png) | ![](screenshots/timetable_dark_theme.png)
+![](screenshots/side_menu.png) | ![](screenshots/group_searching_screen.png)
+![](screenshots/about_app_screen.png) | ![](screenshots/day_off_screen.png)
+![](screenshots/feedback_screen.png) | ![](screenshots/onboarding_screen.png)
