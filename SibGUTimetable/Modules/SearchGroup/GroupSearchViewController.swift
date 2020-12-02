@@ -96,58 +96,6 @@ class GroupSearchViewController: UIViewController, NVActivityIndicatorViewable {
     }
 }
 
-//extension GroupSearchViewController : UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return viewModel?.groupPairs.count ?? 0
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cellView = tableView.dequeueReusableCell(withIdentifier: GroupSearchViewController.cellId, for: indexPath)
-//
-//        cellView.textLabel?.text = "\(viewModel?.groupPairs[indexPath.row].id ?? -1) – \(viewModel?.groupPairs[indexPath.row].name ?? "")"
-//
-//        return cellView
-//    }
-//
-//}
-//
-extension GroupSearchViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        if let pair = viewModel?.groupPairs[indexPath.row], let timetableManager = self.timetableManager {
-//            startAnimating()
-//            let timetableDetails = TimetableDetails(groupId: pair.id, groupName: pair.name)
-//            timetableManager.loadTimetable(timetableDetails: timetableDetails)
-//            timetableManager.loadTimetable(timetableDetails: timetableDetails)
-//                .debug("GroupSearchViewController (timetableManager.timetableOutput)", trimOutput: false)
-//                .observeOn(MainScheduler.instance)
-//                .subscribe(onNext: { [weak self] timetable in
-//                    //TODO: --------------------------------------CHECK ON ERRORS
-//                    if timetable.timetable == nil {
-//                        return
-//                    }
-//                    self?.stopAnimating()
-//                    self?.viewModelController.save(timetableDetails: TimetableDetails(groupId: pair.id, groupName: pair.name, timestamp: timetable.timetable!.updateTimestamp))
-//                    self?.navigationController?.popViewController(animated: true)
-//                }).disposed(by: disposeBag)
-//
-////            timetableManager.errorOutput
-////                .debug("GroupSearchViewController (timetableManager.errorOutput)", trimOutput: false)
-////                .observeOn(MainScheduler.instance)
-////                .subscribe(onNext: { [weak self] (error) in
-////                    //Only network error
-////                    if (error as NSError).code == 101 {
-////                        logger.error("\(error.localizedDescription)")
-////                        self?.stopAnimating()
-////                        SPAlert.present(message: LocalizedStrings.Error_occured_while_loading_timetable)
-////                    }
-////            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-//        } else {
-//            fatalError("viewModel is nil")
-//        }
-//
-//        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
+extension GroupSearchViewController : UITableViewDelegate { }
 
 

@@ -42,23 +42,4 @@ class ReusableTableViewDataSource<Model> : NSObject, UITableViewDataSource {
         return cell
     }
     
-    
-//    func tableView(_ tableView: UITableView,
-//                   numberOfRowsInSection section: Int) -> Int {
-//        return models.count
-//    }
-//
-//    func tableView(_ tableView: UITableView,
-//                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let model = models[indexPath.row]
-//        let cell = tableView.dequeueReusableCell(
-//            withIdentifier: reuseIdentifier,
-//            for: indexPath
-//        )
-//
-//        cellConfigurator(model, cell)
-//
-//        return cell
-//    }
-    
 }

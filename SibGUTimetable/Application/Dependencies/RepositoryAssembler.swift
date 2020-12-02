@@ -60,11 +60,11 @@ extension FakeRepositoryAssembler {
     }
     
     func resolveLocal() -> TimetableRepository {
-        return FakeLocalTTRepository(timetable: getFakeTimetable())
+        return FakeLocalTimetableRepository(timetable: getFakeTimetable())
     }
     
     func resolveNetwork() -> TimetableRepository {
-        return ServerTTRepositoryTODORemake(timetable: getFakeTimetable())
+        return FakeServerTimetableRepository(timetable: getFakeTimetable())
     }
     
     func resolve() -> TimetableDataManager {

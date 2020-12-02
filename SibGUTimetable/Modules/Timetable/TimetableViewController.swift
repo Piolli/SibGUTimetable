@@ -106,10 +106,7 @@ class TimetableViewController: UIViewController {
 
         //Set monday for start week
         calendar.firstWeekday = 2
-
         makeCalendarConstraints(calendar: calendar)
-
-//        calendar.dataSource = self
         calendar.delegate = self
 
         self.calendarView = calendar
@@ -177,12 +174,6 @@ class TimetableViewController: UIViewController {
                 self?.updateTodayButtonVisibility()
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-
-//        timetablePageViewController.tableViewOffsetDidChange.subscribe(onNext: { (point) in
-//            if point.y > 0 {
-//                self.calendarView.setScope(.week, animated: true)
-//            }
-//        }).disposed(by: disposeBag)
     }
 
     func addTimetablePageViewController() {
@@ -197,12 +188,7 @@ class TimetableViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-    
+
     fileprivate func initAppearance() {
         calendarView.appearance.titleDefaultColor = ThemeProvider.shared.calendarViewSelectedMonthDaysTextColor
         calendarView.appearance.headerTitleColor = ThemeProvider.shared.calendarViewMonthTitleTextColor
@@ -228,9 +214,7 @@ extension TimetableViewController : FSCalendarDelegate {
         guard let date = date else {
             return
         }
-
         timetablePageViewController.select(date)
-
         updateTodayButtonVisibility()
     }
 

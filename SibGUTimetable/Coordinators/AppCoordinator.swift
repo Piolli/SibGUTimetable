@@ -27,7 +27,6 @@ class AppCoordinator : NSObject, Coordinator {
     }
     
     lazy var sideCoordinator = SideMenuCoordinator(mainCoordinator: TimetableCoordinator(navigationController: nil, timetableDataManager: timetableDataManager), menuSections: [
-        ///Observe for teachers and their lessons
         (LocalizedStrings.Change_group, GroupSearchCoordinator(appCoordinator: self, dataManager: timetableDataManager)),
         (LocalizedStrings.Settings, SimpleCoordinator()),
         (LocalizedStrings.About_app, AboutAppCoordinator(aboutItems: [
@@ -40,15 +39,11 @@ class AppCoordinator : NSObject, Coordinator {
     lazy var onboardingCoordinator = OnboardingCoordinator()
     
     private lazy var rootCoordinator: Coordinator = {
-//        return TestPageView(navigationController: self.navigationController)
-//        return GroupSearchCoordinator(nav: self.navigationController)
         return sideCoordinator
     }()
     
     var rootViewController: UIViewController {
         return rootCoordinator.rootViewController
-//        return navigationController
-//        return tabBarController
     }
     
     internal init(window: UIWindow) {

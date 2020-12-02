@@ -7,11 +7,10 @@
 //
 
 import Foundation
-
 import RxSwift
 import RxCocoa
 
-class FakeLocalTTRepository: TimetableRepository {
+class FakeLocalTimetableRepository: TimetableRepository {
     
     let timetable: Timetable
     

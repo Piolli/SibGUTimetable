@@ -15,17 +15,10 @@ protocol ViewModel {
     associatedtype Input
     associatedtype Output
     
-//    var input: Input { get }
-//    var output: Output { get }
-    
     func transform(input: Input) -> Output
 }
 
 class TimetableViewModel: ViewModel {
-//    let schedule: Timetable
-//    let groupName: String
-//    let dataManager: TimetableDataManager
-    
     private let disposeBag = DisposeBag()
     private let dataManager: TimetableDataManager
     
@@ -44,30 +37,14 @@ class TimetableViewModel: ViewModel {
                 return $0
             }
             .debug()
-            //map without error???
             .flatMap { [dataManager] in
                 dataManager.loadTimetable(timetableDetails: $0)
-//                return Observable.just(TimetableFetchResult(timetable: nil, storage: .remote, error: nil))
             }
-//            .map({ (timetableFetchResult) -> Observable<TimetableFetchResult> in
-//                return
-//            })
             .asDriver { (error) -> Driver<TimetableFetchResult> in
-//                logger.critical("SHOWED ERROR IN VIEWMODEL!!!-----------")
                 return .empty()
             }
         return Output(timetable: timetable)
     }
-    
-//    init?(schedule: Timetable) {
-//        guard let groupName = schedule.group_name, let weeks = schedule.weeks else {
-//            logger.error("Timetable is nil")
-//            return nil
-//        }
-//
-//        self.schedule = schedule
-//        self.groupName = groupName
-//    }
 
     var countOfDays: Int {
         return 30 * 4
