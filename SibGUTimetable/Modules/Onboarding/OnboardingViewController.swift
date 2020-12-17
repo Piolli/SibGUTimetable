@@ -13,7 +13,7 @@ class OnboardingViewController: UIViewController {
     
     lazy var onboardingPageView = CustomizablePageViewController<Int, OnboardingItemViewController>()
     var pageViewDataSource: CustomizablePageViewDataSource<Int, OnboardingItemViewController>!
-    var coordinator: OnboardingCoordinator!
+    unowned var coordinator: OnboardingCoordinator!
     
     override func viewDidLoad() {
         super.viewDidLoad()

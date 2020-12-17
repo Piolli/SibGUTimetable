@@ -16,7 +16,7 @@ import RxRelay
 
 class TimetableViewController: UIViewController {
     
-    var coordinator: TimetableCoordinator!
+    unowned var coordinator: TimetableCoordinator!
     weak var calendarView: FSCalendar!
     var timetablePageViewController: TimetablePageViewController!
     

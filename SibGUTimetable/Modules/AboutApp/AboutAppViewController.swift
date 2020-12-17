@@ -18,7 +18,7 @@ class AboutAppViewController : UITableViewController {
     
     let cellIdentifier = "identifier"
     let headerIconName = "day_off_2"
-    var coordinator: AboutAppCoordinator!
+    unowned var coordinator: AboutAppCoordinator!
     
     var items: [String] = [] {
         didSet {
@@ -49,7 +49,6 @@ class AboutAppViewController : UITableViewController {
         
         let versionLabel = UILabel()
         versionLabel.translatesAutoresizingMaskIntoConstraints = false
-        versionLabel.text = "version 5.x.y"
         versionLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         
         vStackView.addArrangedSubview(iconView)
